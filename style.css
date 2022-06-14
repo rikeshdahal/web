@@ -169,9 +169,12 @@ nav.sticky .menu-btn {
 }
 
 .home .text-three {
-  font-size: 40px;
-  margin: 5px 0;
-  color: rgb(255, 255, 255);
+  overflow: hidden;
+    border-right: .15em solid orange;
+    white-space: nowrap;
+    font-size: 1.6rem;
+    width: 0;
+    animation: typing 10s forwards;
 }
 .home .text-three:hover {
   color: rgb(0, 0, 0);
@@ -632,4 +635,11 @@ footer .text span a:hover {
     font-size: 50px;
     color: rgb(0, 0, 0);
   }
+}
+@keyframes typing {
+  from { width: 0 }
+  to { width: 37% }
+}
+#fb-root{
+  padding-left: 20px;
 }
