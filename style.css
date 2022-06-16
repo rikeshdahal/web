@@ -174,7 +174,9 @@ nav.sticky .menu-btn {
     white-space: nowrap;
     font-size: 1.6rem;
     width: 0;
-    animation: typing 10s forwards;
+    color: rgb(255, 255, 255);
+    animation: typings 5s forwards infinite;
+    
 }
 .home .text-three:hover {
   color: rgb(0, 0, 0);
@@ -636,10 +638,121 @@ footer .text span a:hover {
     color: rgb(0, 0, 0);
   }
 }
-@keyframes typing {
+@keyframes typings {
   from { width: 0 }
-  to { width: 37% }
+  to { width: 48.5% }
 }
 #fb-root{
   padding-left: 20px;
+}
+.bubbles{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: absolute;
+  bottom: -0px;
+}
+.bubbles img {
+  width: 50px;
+  animation: bubbles 7s linear infinite;
+}
+@keyframes bubbles {
+  0%{
+    transform: translateY(0);
+    opacity: 0;
+  }
+  50%{
+    
+    opacity: 1;
+  }
+  70%{
+    
+    opacity: 1;
+  }
+  100%{
+    transform: translateY(-80vh);
+    opacity: 0;
+  }
+  
+}
+.bubbles img:nth-child(1){
+  width: 60px;
+  animation-delay: 2s;
+}
+.bubbles img:nth-child(2){
+  width: 40px;
+  animation-delay: 1s;
+}
+.bubbles img:nth-child(3){
+  width: 55px;
+  animation-delay: 3s;
+}
+.bubbles img:nth-child(4){
+  width: 35px;
+  animation-delay: 4.5s;
+}
+.bubbles img:nth-child(5){
+  width: 30px;
+  animation-delay: 6s;
+  
+}
+.bubbles img:nth-child(6){
+  width: 20px;
+  animation-delay: 7s;
+}
+.bubbles img:nth-child(7){
+  width: 45px;
+  animation-delay: 3.5s;
+}
+.wrapper{
+  display: flex;
+}
+.wrapper .static-txt{
+  color: rgb(0, 0, 0);
+  font-size: 60px;
+  font-weight: 400;
+}
+.wrapper .dynamic-txts{
+  margin-left: 15px;
+  height: 90px;
+  line-height: 90px;
+  overflow: hidden;
+}
+.dynamic-txts li{
+  list-style: none;
+  color: rgb(255, 0, 0);
+  font-size: 60px;
+  font-weight: 500;
+  position: relative;
+  top: 0;
+  animation: slide 12s steps(4) infinite;
+}
+@keyframes slide {
+  100%{
+    top: -360px;
+  }
+}
+.dynamic-txts li span{
+  position: relative;
+  margin: 5px 0;
+  line-height: 90px;
+}
+.dynamic-txts li span::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #ffffff;
+  border-left: 2px solid #ffffff;
+  animation: typing 3s steps(10) infinite;
+}
+@keyframes typing {
+  40%, 60%{
+    left: calc(100% + 30px);
+  }
+  100%{
+    left: 0;
+  }
 }
