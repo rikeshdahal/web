@@ -679,7 +679,7 @@ footer .text span a:hover {
   }
   
 }
-/* @keyframes fish {
+@keyframes fish {
   0%{
     transform: translatex(0);
     opacity: 0;
@@ -739,7 +739,7 @@ footer .text span a:hover {
 .fish img:nth-child(7){
   width: 50px;
   animation-delay: 0.5s;
-} */
+}
 
 
 .bubbles img:nth-child(1){
@@ -822,8 +822,8 @@ footer .text span a:hover {
     left: 0;
   }
 }
-.fishes{
-  width: 3000%;
+.fishes img{
+  width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -845,7 +845,7 @@ footer .text span a:hover {
   right: 0px;
 }
 .fish3 {
-  width: 100%;
+  width: 10%;
   position: absolute;
   bottom: -0px;
   right: 500px;
