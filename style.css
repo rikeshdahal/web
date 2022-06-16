@@ -823,7 +823,7 @@ footer .text span a:hover {
   }
 }
 .fishes{
-  width: 100%;
+  width: 1000%;
   display: flex;
   justify-content: space-around;
   align-items: center;
