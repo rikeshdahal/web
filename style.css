@@ -542,10 +542,18 @@ footer .text span a:hover {
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 9000px) {
   .about .left img {
     height: 350px;
     width: 350px;
+    filter: gray; /* IE5+ */
+      filter: grayscale(1); /* Webkit Nightlies & Chrome Canary */
+      transition: all .8s ease-in-out;
+  }
+  .about .left img:hover {
+    filter: none;
+      filter: grayscale(0);
+      transform: scale(1.01);
   }
 }
 
