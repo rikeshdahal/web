@@ -730,6 +730,7 @@ footer .text span a:hover {
   background: #47aafa;
   clip-path: circle(35% at 0% 100%);
 }
+/* for team */
 .Teams{
   position: relative;
   z-index: 10;
@@ -820,10 +821,6 @@ footer .text span a:hover {
   font-family:cursive;
   margin-right: 10px;
 }
-
-
-
-
 .Teams .card .content a{
   position: relative;
   top: 10px;
@@ -838,4 +835,8 @@ footer .text span a:hover {
 .Teams .card .content a:hover{
   background-color: #ffffff;
   box-shadow: 0 10px 25px rgba(255, 0, 212, 0.2);
+}
+.video{
+  
+  padding-left: 350px;
 }
