@@ -164,6 +164,8 @@ nav.sticky .menu-btn {
   font-weight: 600;
   margin-left: -3px;
 }
+span{ color:#ffae00;
+}
 .home .text-two:hover {
   color: #000000;
 }
@@ -191,10 +193,7 @@ nav.sticky .menu-btn {
 .home .button {
   margin: 14px 0;
 }
-.fish{
-  
-  padding: 100px;
-}
+
 .home .button button {
   outline: none;
   padding: 8px 16px;
@@ -211,20 +210,16 @@ nav.sticky .menu-btn {
 .home .button button:hover {
   border-color: rgb(0, 0, 0);
   background-color: #fff;
-  color: rgb(0, 0, 0);
+  color: rgb(229, 255, 0);
 }
 
-.home a {
-  color: #fff;
-}
+
 
 .home a:hover {
   color: rgb(0, 0, 0);
 }
 
-/* About Section Styling */
-/* Those Elements Where We Have Apply Same CSS,
- I'm Selecting Directly 'Section Tag' and 'Class'  */
+
 section {
   padding-top: 40px;
 }
@@ -311,7 +306,7 @@ section .button button {
   font-size: 25px;
   font-weight: 400;
   background: rgb(0, 0, 0);
-  color: rgb(255, 255, 255);
+  color: rgb(255, 0, 0);
   border: 2px solid transparent;
   cursor: pointer;
   transition: all 0.4s ease;
@@ -321,15 +316,14 @@ section .button button:hover {
   border-color: rgb(0, 0, 0);
   background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
+  box-shadow: 0 10px 25px rgba(255, 0, 212, 0.2);
 }
 
 .about a {
-  color: rgb(255, 255, 255);
+  color: rgba(204, 0, 255, 0.527);
 }
 
-.about a:hover {
-  color: rgb(0, 0, 0);
-}
+
 
 /* My Skills CSS */
 .skills {
@@ -467,12 +461,9 @@ section .button button:hover {
 }
 
 .contact a {
-  color: rgb(255, 255, 255);
+  color: rgba(204, 0, 255, 0.527);
 }
 
-.contact a:hover {
-  color: rgb(0, 0, 0);
-}
 
 /* Footer CSS */
 footer {
@@ -556,6 +547,7 @@ footer .text span a:hover {
       transform: scale(1.01);
   }
 }
+
 
 @media (max-width: 750px) {
   nav .navbar {
@@ -656,129 +648,7 @@ footer .text span a:hover {
 #fb-root{
   padding-left: 20px;
 }
-.bubbles{
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  position: absolute;
-  bottom: -0px;
-}
-.bubbles img {
-  width: 50px;
-  animation: bubbles 7s linear infinite;
-}
-@keyframes bubbles {
-  0%{
-    transform: translateY(0);
-    opacity: 0;
-  }
-  50%{
-    
-    opacity: 1;
-  }
-  70%{
-    
-    opacity: 1;
-  }
-  100%{
-    transform: translateY(-80vh);
-    opacity: 0;
-  }
-  
-}
-@keyframes fish {
-  0%{
-    transform: translatex(0);
-    opacity: 0;
-  }
-  50%{
-    
-    opacity: 1;
-  }
-  70%{
-    
-    opacity: 1;
-  }
-  100%{
-    transform: translatex(-80vh);
-    opacity: 0;
-  }
-  
-}
-.fish img{
-  width: 100%;
-  animation: fish 9s linear infinite;
 
-}
-.fish{
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  position: absolute;
-  bottom: -0px;
-  
-}
-.fish img:nth-child(1){
-  width: 60px;
-  animation-delay: 1.5s;
-}
-.fish img:nth-child(2){
-  width: 80px;
-  animation-delay: 1s;
-}
-.fish img:nth-child(3){
-  width: 90px;
-  animation-delay: 2.5s;
-}
-.fish img:nth-child(4){
-  width: 50px;
-  animation-delay: 0.5s;
-}
-.fish img:nth-child(5){
-  width: 50px;
-  animation-delay: 0.5s;
-}
-.fish img:nth-child(6){
-  width: 50px;
-  animation-delay: 0.5s;
-}
-.fish img:nth-child(7){
-  width: 50px;
-  animation-delay: 0.5s;
-}
-
-
-.bubbles img:nth-child(1){
-  width: 60px;
-  animation-delay: 2s;
-}
-.bubbles img:nth-child(2){
-  width: 40px;
-  animation-delay: 1s;
-}
-.bubbles img:nth-child(3){
-  width: 55px;
-  animation-delay: 3s;
-}
-.bubbles img:nth-child(4){
-  width: 35px;
-  animation-delay: 4.5s;
-}
-.bubbles img:nth-child(5){
-  width: 30px;
-  animation-delay: 6s;
-  
-}
-.bubbles img:nth-child(6){
-  width: 20px;
-  animation-delay: 7s;
-}
-.bubbles img:nth-child(7){
-  width: 45px;
-  animation-delay: 3.5s;
-}
 .wrapper{
   display: flex;
 }
@@ -830,31 +700,142 @@ footer .text span a:hover {
     left: 0;
   }
 }
-.fishes img{
+.section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #232323;
+  overflow: hidden;
+  padding: 100px 20px;
+  box-sizing: border-box;
+}
+.section::before{
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  background: #ffbf00;
+  clip-path: circle(65% at 100% -20%);
+}
+.section::after{
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #47aafa;
+  clip-path: circle(35% at 0% 100%);
+}
+.Teams{
+  position: relative;
+  z-index: 10;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  position: absolute;
-  bottom: -0px;
+  width: 100%;
+  padding-top: 200px;
+
 }
-.fish1 {
-  width: 10%;
+.Teams .card{
+  position: relative;
+  width: 300px;
+  height: 400px;
+  margin: 20px 40px;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  position: absolute;
-  bottom: -0px;
+  flex-direction: column;
+  background: rgb(255, 255, 255);
+  box-shadow: 0 10px 25px rgba(255, 0, 212, 0.2);
+  backdrop-filter: blur(15px);
 }
-.fish2 {
-  width: 10%;
-  position: absolute;
-  bottom: -0px;
-  right: 0px;
+.Teams .card .imgBx{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 50px;
+  transition: .5s ease-in-out;
+  background-color: rgb(0, 0, 0);
 }
-.fish3 {
-  width: 10%;
+.Teams .card:hover .imgBx{
+  transform: translateY(-100px);
+  background-color: rgb(255, 255, 255);
+}
+.Teams .card .imgBx img{
+  max-width: 100%;
+  margin: 0 0 0px;
+  transition: .5s ease-in-out;
+  display: block;
+  margin-top: -50px;
+  
+}
+.Teams .card:hover .imgBx img{
+  transform: translate(-20px, -40px) rotate(-25deg) scale(1.4);
+}
+.Teams .card .content{
   position: absolute;
-  bottom: -0px;
-  right: 500px;
+  bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: .5s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+  
+}
+.Teams .card:hover .content{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50px);
+}
+.Teams .card .content .size,
+.Teams .card .content .color{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 20px;
+}
+.Teams .card .content .size h3{
+  color: rgb(255, 0, 0);
+  font-weight: 300;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family:cursive;
+  margin-right: 10px;
+}
+.Teams .card .content .color h3{
+  color: rgb(255, 238, 0);
+  font-weight: 300;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family:cursive;
+  margin-right: 10px;
+}
+
+
+
+
+.Teams .card .content a{
+  position: relative;
+  top: 10px;
+  display: inline-block;
+  padding: 12px 30px;
+  background: rgb(0, 0, 0);
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.Teams .card .content a:hover{
+  background-color: #ffffff;
+  box-shadow: 0 10px 25px rgba(255, 0, 212, 0.2);
 }
