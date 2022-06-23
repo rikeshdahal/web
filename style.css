@@ -88,7 +88,7 @@ nav .navbar .menu li {
 }
 
 .navbar .menu a:hover {
-  color: rgb(0, 0, 0);
+  color: rgb(255, 0, 0);
 }
 
 nav.sticky .menu a {
@@ -105,7 +105,7 @@ nav.sticky .menu a:hover {
   margin: 0 6px;
 }
 .navbar .media-icons a:hover {
-  color: #000000;
+  color: #380bffd3;
 }
 
 nav.sticky .media-icons a {
@@ -172,7 +172,7 @@ nav.sticky .menu-btn {
 span{ color:#ffae00;
 }
 .home .text-two:hover {
-  color: #000000;
+  color: #ff0000;
 }
 
 .home .text-three {
@@ -187,7 +187,7 @@ span{ color:#ffae00;
     
 }
 .home .text-three:hover {
-  color: rgb(0, 0, 0);
+  color: rgb(0, 38, 255);
 }
 
 .home .text-four {
@@ -605,6 +605,7 @@ footer .text span a:hover {
   .home .text-three {
     font-size: 35px;
   }
+  
 
   .skills .skills-details {
     align-items: center;
@@ -768,6 +769,7 @@ footer .text span a:hover {
   align-items: left;
   flex-direction: column;
   padding: 50px;
+  background-image: url("https://wallpaperaccess.com/full/5652014.jpg");
   transition: .7s ease-in-out;
   background-color: rgb(0, 0, 0);
 }
@@ -839,6 +841,7 @@ footer .text span a:hover {
 }
 
 .video{
+  
   position: relative;
   align-items: center;
   width: 50%;
@@ -852,4 +855,5 @@ footer .text span a:hover {
   display: flex;
   align-items: center;
   margin-left: 600px;
+  
 }
