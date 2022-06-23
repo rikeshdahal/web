@@ -51,22 +51,24 @@ nav .navbar {
   margin: auto;
 }
 
-nav .navbar .logo a {
-  font-weight: 500;
-  font-size: 35px;
-  color: rgb(255, 255, 255);
+nav .navbar .logo img {
+  width: 20%;
+  padding: 0;
+  animation:rotation 2s infinite linear;
 }
-nav .navbar .logo a:hover {
-  color: rgb(0, 0, 0);
+nav .navbar .logo img:hover{
+  width: 20%;
+  padding: 0;
+  animation: stopped;
 }
-
-nav.sticky .navbar .logo a {
-  color: rgb(255, 255, 255);
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
 }
-nav.sticky .navbar .logo a:hover {
-  color: rgb(255, 0, 0);
-}
-
 nav .navbar .menu {
   display: flex;
   position: relative;
@@ -74,7 +76,7 @@ nav .navbar .menu {
 
 nav .navbar .menu li {
   list-style: none;
-  margin: 0 8px;
+  margin: 0 20px;
 }
 
 .navbar .menu a {
@@ -108,6 +110,8 @@ nav.sticky .menu a:hover {
 
 nav.sticky .media-icons a {
   color: rgb(255, 255, 255);
+  font-size: 18px;
+  margin: 0 6px;
 }
 nav.sticky .media-icons a:hover {
   color: rgb(255, 0, 0);
@@ -163,6 +167,7 @@ nav.sticky .menu-btn {
   font-size: 70px;
   font-weight: 600;
   margin-left: -3px;
+  font-family: cursive;
 }
 span{ color:#ffae00;
 }
@@ -176,8 +181,9 @@ span{ color:#ffae00;
     white-space: nowrap;
     font-size: 1.6rem;
     width: 0;
+    font-family: cursive;
     color: rgb(255, 255, 255);
-    animation: typings 5s forwards infinite;
+    animation: typings 3s forwards infinite;
     
 }
 .home .text-three:hover {
@@ -642,8 +648,8 @@ footer .text span a:hover {
   }
 }
 @keyframes typings {
-  from { width: 0 }
-  to { width: 48.5% }
+  from { width: 0%}
+  to { width: 130px }
 }
 #fb-root{
   padding-left: 20px;
@@ -654,7 +660,8 @@ footer .text span a:hover {
 }
 .wrapper .static-txt{
   color: rgb(0, 0, 0);
-  font-size: 60px;
+  font-size: 50px;
+  font-family: cursive;
   font-weight: 400;
 }
 .wrapper .dynamic-txts{
@@ -666,7 +673,7 @@ footer .text span a:hover {
 .dynamic-txts li{
   list-style: none;
   color: rgb(255, 0, 0);
-  font-size: 60px;
+  font-size: 50px;
   font-weight: 500;
   position: relative;
   top: 0;
@@ -681,6 +688,7 @@ footer .text span a:hover {
   position: relative;
   margin: 5px 0;
   line-height: 90px;
+  font-family: cursive;
 }
 .dynamic-txts li span::after{
   content: "";
@@ -738,50 +746,49 @@ footer .text span a:hover {
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding-top: 200px;
+  padding-top: 20px;
 
 }
 .Teams .card{
   position: relative;
-  width: 300px;
-  height: 400px;
+  width: 200px;
+  height: 300px;
   margin: 20px 40px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   background: rgb(255, 255, 255);
-  box-shadow: 0 10px 25px rgba(255, 0, 212, 0.2);
   backdrop-filter: blur(15px);
 }
 .Teams .card .imgBx{
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: left;
   flex-direction: column;
   padding: 50px;
-  transition: .5s ease-in-out;
+  transition: .7s ease-in-out;
   background-color: rgb(0, 0, 0);
 }
 .Teams .card:hover .imgBx{
   transform: translateY(-100px);
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(0, 0, 0);
 }
 .Teams .card .imgBx img{
   max-width: 100%;
   margin: 0 0 0px;
-  transition: .5s ease-in-out;
+  transition: .7s ease-in-out;
   display: block;
   margin-top: -50px;
   
 }
 .Teams .card:hover .imgBx img{
-  transform: translate(-20px, -40px) rotate(-25deg) scale(1.4);
+  transform: translate(-1px, -20px)  scale(.7);
 }
 .Teams .card .content{
   position: absolute;
-  bottom: 20px;
+  bottom: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -796,27 +803,20 @@ footer .text span a:hover {
   visibility: visible;
   transform: translateY(-50px);
 }
-.Teams .card .content .size,
-.Teams .card .content .color{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 8px 20px;
-}
+
 .Teams .card .content .size h3{
-  color: rgb(255, 0, 0);
+  color: rgb(255, 255, 255);
   font-weight: 300;
-  font-size: 14px;
+  font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 2px;
   font-family:cursive;
+  font: bold;
   margin-right: 10px;
 }
 .Teams .card .content .color h3{
-  color: rgb(255, 238, 0);
+  color: rgb(255, 255, 255);
   font-weight: 300;
   font-size: 14px;
-  text-transform: uppercase;
   letter-spacing: 2px;
   font-family:cursive;
   margin-right: 10px;
@@ -831,12 +831,25 @@ footer .text span a:hover {
   letter-spacing: 1px;
   text-decoration: none;
   text-transform: uppercase;
+  box-shadow: 0 10px 25px rgba(255, 0, 212, 0.2);
 }
 .Teams .card .content a:hover{
   background-color: #ffffff;
   box-shadow: 0 10px 25px rgba(255, 0, 212, 0.2);
 }
+
 .video{
-  
-  padding-left: 350px;
+  position: relative;
+  align-items: center;
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+}
+.fb-like{
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: 600px;
 }
