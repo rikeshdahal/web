@@ -5,6 +5,9 @@
   <meta charset="UTF-8">
   <title> Rikeshdahal </title>
   <link rel="stylesheet" href="style.css">
+  <!-- the 3D -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script><script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
   <!-- Fontawesome CDN Link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +15,7 @@
     .home {
       height: 100vh;
       width: 100%;
-      background: url("https://images.unsplash.com/photo-1480506132288-68f7705954bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=920&q=80") no-repeat;
+      background: url("https://img.freepik.com/free-vector/gradient-network-connection-background_23-2148865392.jpg?t=st=1656269057~exp=1656269657~hmac=2cbf428db3b3a8f0a058d7f4580d740c0950a9f3b1c54e406b9d43d13cd425af&w=826") no-repeat;
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -21,6 +24,7 @@
   </style>
 </head>
 <!-- Load Facebook SDK for JavaScript -->
+
 <div id="fb-root"></div>
 <script>
   window.fbAsyncInit = function () {
@@ -89,6 +93,7 @@
     </div>
   </section>
   <section class="about" id="about">
+    
     <div class="content">
       <div class="title"><span><img src="https://www.animatedimages.org/data/media/106/animated-man-image-0320.gif" border="0" alt="animated-man-image-0320" />About Me</span></div>
       <div class="wrapper">
@@ -226,13 +231,40 @@
       </div>
     </div>
   </section>
-  <!--teams section starts -->
+  <!--my project section starts -->
   <section 
     class="project" id="project">
     <div class="title"><span><img src="https://www.animatedimages.org/data/media/56/animated-computer-image-0009.gif" border="0" alt="animated-computer-image-0009" />My Projects</span></div>
     <div class="video">
       <iframe src="https://www.youtube.com/embed/xIuCnKYxCP8?rel=0&modestbranding=1&autohide=1&mute=1&showinfo=0&controls=0&autoplay=1" width="1000" height="500" frameborder="0" allowfullscreen></iframe>
     </div>
+    <div class="Rikesh">
+      <h1>Hi this is my 3D model</h1>
+      <model-viewer id="model" shadow-intensity="1" src="rikesh.glb"
+     auto-rotate camera-controls poster="https://i.postimg.cc/x85D7bbX/Ready-Player-Me-Avatar.png" animation-name="Wave" autoplay></model-viewer>
+    </div>
+    <style>
+      *{margin: 0;
+      padding: 0;
+      
+      }
+      .Rikesh{
+    
+        height: 100vh;
+        width:100%;
+        
+      }
+      .Rikesh model-viewer{
+        height: 100%;
+        width:100%;
+      }
+      .Rikesh h1{
+        margin-left:600px ;
+        padding-top:20px;
+
+      }
+    
+    </style>
 
 
     </section>
