@@ -43,3 +43,8 @@ for (var i = 0; i < navLinks.length; i++) {
     menuBtn.style.pointerEvents = "auto";
   });
 }
+var beepOne = $("#beep")[0];
+$(".menu")
+  .mouseenter(function() {
+beepOne.play();
+  });

@@ -52,12 +52,12 @@ nav .navbar {
 }
 
 nav .navbar .logo img {
-  width: 20%;
+  width: 10%;
   padding: 0;
   animation:rotation 2s infinite linear;
 }
 nav .navbar .logo img:hover{
-  width: 20%;
+  width: 10%;
   padding: 0;
   animation: stopped;
 }
@@ -162,39 +162,24 @@ nav.sticky .menu-btn {
   justify-content: center;
 }
 
-.home .text-two {
-  color: #ffffff;
-  font-size: 70px;
-  font-weight: 600;
-  margin-left: -3px;
-  font-family: cursive;
-}
-span{ color:#ffae00;
-}
-.home .text-two:hover {
-  color: #ff0000;
-}
 
-.home .text-three {
+
+.home .text {
   overflow: hidden;
     border-right: .15em solid orange;
     white-space: nowrap;
-    font-size: 1.6rem;
+    font-size: 2.6rem;
     width: 0;
     font-family: cursive;
     color: rgb(255, 255, 255);
     animation: typings 3s forwards infinite;
     
 }
-.home .text-three:hover {
-  color: rgb(0, 38, 255);
+.home .text:hover {
+  color: rgb(0, 0, 0);
 }
 
-.home .text-four {
-  font-size: 23px;
-  margin: 5px 0;
-  color: #0E2431;
-}
+
 
 .home .button {
   margin: 14px 0;
@@ -650,7 +635,7 @@ footer .text span a:hover {
 }
 @keyframes typings {
   from { width: 0%}
-  to { width: 130px }
+  to { width: 465px }
 }
 #fb-root{
   padding-left: 20px;
@@ -852,8 +837,12 @@ footer .text span a:hover {
 }
 .fb-like{
   position: relative;
-  display: flex;
   align-items: center;
-  margin-left: 600px;
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  margin-left: 720px;
   
 }
