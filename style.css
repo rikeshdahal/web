@@ -25,7 +25,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(255, 255, 255);
+  -webkit-text-stroke: 2px #fff;
 }
 
 /* navbar styling */
@@ -39,7 +39,7 @@ nav {
 }
 
 nav.sticky {
-  background: rgb(0, 0, 0);
+  backdrop-filter: blur(20px);
   padding: 13px 0;
 }
 
@@ -88,7 +88,7 @@ nav .navbar .menu li {
 }
 
 .navbar .menu a:hover {
-  color: rgb(255, 0, 0);
+  -webkit-text-stroke: 1px rgb(0, 0, 0);
 }
 
 nav.sticky .menu a {
@@ -96,7 +96,7 @@ nav.sticky .menu a {
 }
 
 nav.sticky .menu a:hover {
-  color: #ff0000;
+  -webkit-text-stroke: 2px #fff;
 }
 
 .navbar .media-icons a {
@@ -143,15 +143,14 @@ nav.sticky .menu-btn {
 }
 
 /* home section styling */
-/* .home {
+.home {
   height: 100vh;
   width: 100%;
-  background: url("Images/background.png") no-repeat;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   font-family: 'Ubuntu', sans-serif;
-} */
+}
 
 .home .home-content {
   width: 90%;
@@ -166,22 +165,25 @@ nav.sticky .menu-btn {
 
 .home .text {
   overflow: hidden;
-    border-right: .15em solid orange;
+    border-right: .15em solid rgb(255, 255, 255);
     white-space: nowrap;
-    font-size: 2.6rem;
-    width: 0;
-    font-family: cursive;
-    color: rgb(255, 255, 255);
-    animation: typings 3s forwards infinite;
+    font-family:cursive ;
+    font-size: 100px;
+    cursor: pointer;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.226);
+    animation: typings 3.5s forwards infinite;
     
 }
 .home .text:hover {
-  color: rgb(0, 0, 0);
+  -webkit-text-stroke: 2px #fff;
+  color: transparent;
 }
 
 
 
 .home .button {
+  color: #fff;
   margin: 14px 0;
 }
 
@@ -191,26 +193,13 @@ nav.sticky .menu-btn {
   border-radius: 6px;
   font-size: 25px;
   font-weight: 400;
-  background: rgb(0, 0, 0);
-  color: rgb(255, 255, 255);
   cursor: pointer;
   border: 2px solid transparent;
   transition: all 0.4s ease;
 }
-
-.home .button button:hover {
-  border-color: rgb(0, 0, 0);
-  background-color: #fff;
-  color: rgb(229, 255, 0);
-}
-
-
-
 .home a:hover {
-  color: rgb(0, 0, 0);
+  -webkit-text-stroke: 2px rgb(0, 0, 0);
 }
-
-
 section {
   padding-top: 40px;
 }
@@ -234,7 +223,7 @@ section .title {
 }
 
 section .title span {
-  color: #0E2431;
+  color: #ffffff;
   font-size: 30px;
   font-weight: 600;
   position: relative;
@@ -247,7 +236,7 @@ section .title span::after {
   position: absolute;
   height: 3px;
   width: 100%;
-  background: rgb(0, 0, 0);
+  background: rgb(255, 255, 255);
   left: 0;
   bottom: 0;
 }
@@ -275,15 +264,17 @@ section .title span::after {
 }
 
 section .topic {
-  color: #0E2431;
+  color: #ffffff;
   font-size: 25px;
   font-weight: 500;
+  font-family: cursive;
   margin-bottom: 10px;
 }
 
 .about-details .right p {
   text-align: justify;
-  color: #0E2431;
+  color: #ffffff;
+  font-family: cursive;
 }
 
 section .button {
@@ -297,30 +288,18 @@ section .button button {
   font-size: 25px;
   font-weight: 400;
   background: rgb(0, 0, 0);
-  color: rgb(255, 0, 0);
   border: 2px solid transparent;
   cursor: pointer;
   transition: all 0.4s ease;
 }
 
 section .button button:hover {
-  border-color: rgb(0, 0, 0);
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
+  -webkit-text-stroke: 2px rgb(2, 2, 2);
+  background-color: #FFF;
   box-shadow: 0 10px 25px rgba(255, 0, 212, 0.2);
 }
 
-.about a {
-  color: rgba(204, 0, 255, 0.527);
-}
-
-
-
 /* My Skills CSS */
-.skills {
-  background: #F0F8FF;
-}
-
 .skills .content {
   padding: 40px 0;
 }
@@ -336,8 +315,9 @@ section .button button:hover {
 }
 
 .skills-details p {
-  color: #000000;
+  color: #ffffff;
   text-align: justify;
+  font-family: cursive;
 }
 
 .skills .skills-details .experience {
@@ -347,15 +327,17 @@ section .button button:hover {
 }
 
 .skills-details .experience .num {
-  color: #0E2431;
+  color: #fbff00;
   font-size: 80px;
+  font-family:cursive;
 }
 
 .skills-details .experience .exp {
-  color: #0E2431;
+  color: #ffffff;
   margin-left: 20px;
   font-size: 18px;
   font-weight: 500;
+  font-family:cursive;
   margin: 0 6px;
 }
 
@@ -373,8 +355,8 @@ section .button button:hover {
 
 .skills-details .boxes .topic {
   font-size: 20px;
-  color: rgb(12, 12, 12);
-  text-shadow: #ffe7e7;
+  color: rgb(255, 255, 255);
+  text-shadow: #4e4747;
   font-family: cursive;
 }
 
@@ -396,20 +378,20 @@ section .button button:hover {
   text-align: center;
   border-radius: 12px;
   padding: 30px 10px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 5px 10px rgba(153, 153, 153, 0.12);
   cursor: default;
   transition: all 0.4s ease;
 }
 
 .services .boxes .box:hover {
-  background: rgb(0, 0, 0);
+  backdrop-filter: blur(20px);
   color: #fff;
 }
 
 .services .boxes .box .icon {
   height: 50px;
   width: 50px;
-  background: rgb(0, 0, 0);
+  backdrop-filter: blur(60px);
   border-radius: 50%;
   text-align: center;
   line-height: 50px;
@@ -426,7 +408,7 @@ section .button button:hover {
 
 .services .boxes .box:hover .topic,
 .services .boxes .box:hover p {
-  color: #0E2431;
+  color: #ffffff;
   transition: all 0.4s ease;
 }
 
@@ -435,11 +417,33 @@ section .button button:hover {
   color: #fff;
 }
 
-/* Contact Me CSS */
-.contact {
-  background: #F0F8FF;
+/* for projects */
+.Rikesh{
+  height: 1000px;
+  width:50%; 
 }
-
+.Rikesh model-viewer{
+  height: 50%;
+  margin-left:400px ;
+  width:80%;
+}
+.Rikesh h1{
+  margin-left:650px;
+  padding-top:50px;
+  font-family:cursive;
+  color: #fff;
+  
+}
+.video{
+  position: relative;
+  align-items: center;
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+}
+/* Contact Me CSS */
 .contact .content {
   margin: 0 auto;
   padding: 30px 0;
@@ -452,16 +456,19 @@ section .button button:hover {
 }
 
 .contact a {
-  color: rgba(204, 0, 255, 0.527);
+  color: rgb(255, 255, 255);
 }
-
+.contact p {
+  color: rgb(255, 255, 255);
+}
 
 /* Footer CSS */
 footer {
-  background: rgb(0, 0, 0);
+  backdrop-filter: blur(10px);
   padding: 15px 0;
   text-align: center;
   font-family: 'Poppins', sans-serif;
+
 }
 
 footer .text span {
@@ -500,6 +507,37 @@ footer .text span a:hover {
     width: 85%;
   }
 }
+@media (max-width: 190px) {
+.home .text{
+  width:auto;
+    height: 100%;
+}
+}
+@media(max-aspect-ratio:16/9){
+  .backvideo{
+    width:auto;
+    height: 100%;
+  }
+}
+@media(max-width:1000px){
+  .Rikesh model-viewer {
+    width:auto;
+    height: 100%;
+  }
+}
+
+@media (max-width: 1190px) {
+  .backvideo{
+     width:10%;
+     height: auto;
+   }
+ }
+ @media (max-width: 1190px) {
+  .video{
+     width:100%;
+     height: auto;
+   }
+ }
 
 @media (max-width: 1000px) {
   .about .about-details {
@@ -635,64 +673,10 @@ footer .text span a:hover {
 }
 @keyframes typings {
   from { width: 0%}
-  to { width: 465px }
+  to { width: 1000px }
 }
 #fb-root{
   padding-left: 20px;
-}
-
-.wrapper{
-  display: flex;
-}
-.wrapper .static-txt{
-  color: rgb(0, 0, 0);
-  font-size: 50px;
-  font-family: cursive;
-  font-weight: 400;
-}
-.wrapper .dynamic-txts{
-  margin-left: 15px;
-  height: 90px;
-  line-height: 90px;
-  overflow: hidden;
-}
-.dynamic-txts li{
-  list-style: none;
-  color: rgb(255, 0, 0);
-  font-size: 50px;
-  font-weight: 500;
-  position: relative;
-  top: 0;
-  animation: slide 12s steps(4) infinite;
-}
-@keyframes slide {
-  100%{
-    top: -360px;
-  }
-}
-.dynamic-txts li span{
-  position: relative;
-  margin: 5px 0;
-  line-height: 90px;
-  font-family: cursive;
-}
-.dynamic-txts li span::after{
-  content: "";
-  position: absolute;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: #ffffff;
-  border-left: 2px solid #ffffff;
-  animation: typing 3s steps(10) infinite;
-}
-@keyframes typing {
-  40%, 60%{
-    left: calc(100% + 30px);
-  }
-  100%{
-    left: 0;
-  }
 }
 .section{
   display: flex;
@@ -714,16 +698,6 @@ footer .text span a:hover {
   background: #ffbf00;
   clip-path: circle(65% at 100% -20%);
 }
-.section::after{
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #47aafa;
-  clip-path: circle(35% at 0% 100%);
-}
 /* for team */
 .Teams{
   position: relative;
@@ -744,8 +718,7 @@ footer .text span a:hover {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: rgb(255, 255, 255);
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(2px);
 }
 .Teams .card .imgBx{
   position: relative;
@@ -825,16 +798,7 @@ footer .text span a:hover {
   box-shadow: 0 10px 25px rgba(255, 0, 212, 0.2);
 }
 
-.video{
-  
-  position: relative;
-  align-items: center;
-  width: 50%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: auto;
-}
+
 .fb-like{
   position: relative;
   align-items: center;
@@ -845,4 +809,10 @@ footer .text span a:hover {
   margin: auto;
   margin-left: 720px;
   
+}
+.backvideo{
+position:fixed;
+width: 100%;
+bottom:0px;
+z-index: -1;
 }
