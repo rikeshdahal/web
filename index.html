@@ -1,227 +1,338 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="https://i.postimg.cc/Fz8tSBHJ/logo.png"
+      type="image/x-icon"
+    />
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
 
-        <!-- font awesome cdn link  -->
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-        <link rel="icon" href="https://i.postimg.cc/R0H7sPxH/rikesh.png"
-            type="image/x-icon">
-        <link rel="stylesheet" href="style.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
+      rel="stylesheet"
+    />
 
-    </head>
+    <title>Portfolio</title>
+  </head>
+  <body>
+    <header class="l-header">
+      <nav class="nav bd-grid">
+        <div>
+          <img
+            href="#"
+            class="nav__logo"
+            src="https://i.postimg.cc/Fz8tSBHJ/logo.png"
+            alt=""
+          />
+        </div>
 
-    <body>
+        <div class="nav__menu" id="nav-menu">
+          <ul class="nav__list">
+            <li class="nav__item">
+              <a href="#home" class="nav__link active" style="color: aliceblue"
+                >Home</a
+              >
+            </li>
+            <li class="nav__item">
+              <a href="#about" class="nav__link" style="color: aliceblue"
+                >About</a
+              >
+            </li>
+            <li class="nav__item">
+              <a href="#skills" class="nav__link" style="color: aliceblue"
+                >Skills</a
+              >
+            </li>
+            <li class="nav__item">
+              <a href="#work" class="nav__link" style="color: aliceblue"
+                >Work</a
+              >
+            </li>
+            <li class="nav__item">
+              <a href="#contact" class="nav__link" style="color: aliceblue"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </div>
 
-        <!-- header section starts  -->
+        <div class="nav__toggle" id="nav-toggle">
+          <i class="bx bx-menu"></i>
+        </div>
+      </nav>
+    </header>
 
-        <header>
+    <main class="l-main">
+      <section class="home bd-grid" id="home">
+        <div class="home__data">
+          <h1 class="home__title">
+            Hi,<br />I'am <span class="home__title-color">Rikesh</span><br />
+            Game Developer
+          </h1>
 
-            <div class="user">
-                <img src="https://i.postimg.cc/NFw29DFG/Meashacker.png" alt="">
-                <h3 class="name">Rikesh Dahal</h3>
-                <p class="post">Game Developer</p>
+          <a href="#" class="button">Contact</a>
+        </div>
+
+        <div class="home__social">
+          <a
+            href="https://www.facebook.com/rikesh747"
+            target="_blank"
+            class="home__social-icon"
+            ><i class="bx bxl-facebook"></i
+          ></a>
+          <a
+            href="https://twitter.com/RikeshDahal10"
+            target="_blank"
+            class="home__social-icon"
+            ><i class="bx bxl-twitter"></i
+          ></a>
+          <a
+            href="https://www.instagram.com/_rikesh_dahal/"
+            target="_blank"
+            class="home__social-icon"
+            ><i class="bx bxl-instagram"></i
+          ></a>
+          <a
+            href="https://github.com/rikeshdahal"
+            target="_blank"
+            class="home__social-icon"
+            ><i class="bx bxl-github"></i
+          ></a>
+        </div>
+
+        <div class="home__img">
+          <svg
+            class="home__blob"
+            viewBox="0 0 479 467"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <mask id="mask0" mask-type="alpha">
+              <path
+                d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"
+              />
+            </mask>
+            <g mask="url(#mask0)">
+              <path
+                d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"
+              />
+              <image
+                class="home__blob-img"
+                x="50"
+                y="60"
+                href="https://i.postimg.cc/DzYy5F5S/perfil.png"
+              />
+            </g>
+          </svg>
+        </div>
+      </section>
+
+      <section class="about section" id="about">
+        <h2 class="section-title">About</h2>
+
+        <div class="about__container bd-grid">
+          <div class="about__img">
+            <img src="https://i.postimg.cc/Nf1Ft3Gn/about.jpg" alt="" />
+          </div>
+
+          <div>
+            <h2 class="about__subtitle">I'am Rikesh</h2>
+            <p class="about__text">
+              Hey, I'm from Sinamangal, Kathmandu, and my name is Rikesh Dahal,
+              though I would prefer if you called me Mr. Mad Hacker. Right now,
+              I'm pursuing a BCA at Patan College. In addition to exploring
+              ethical hacking, I'm interested in website development and Unity
+              game development.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="skills section" id="skills">
+        <h2 class="section-title">Skills</h2>
+
+        <div class="skills__container bd-grid">
+          <div>
+            <h2 class="skills__subtitle">Profesional Skills</h2>
+            <p class="skills__text">
+              I like creating 3D and 2D games because I am more of a developer
+              than a designer. I also code in C# and do 3D design and animation.
+              I adore hacking.
+            </p>
+            <div class="skills__data">
+              <div class="skills__names">
+                <i class="bx bxl-html5 skills__icon"></i>
+                <span class="skills__name">HTML5</span>
+              </div>
+              <div class="skills__bar skills__html"></div>
+              <div>
+                <span class="skills__percentage">95%</span>
+              </div>
             </div>
+            <div class="skills__data">
+              <div class="skills__names">
+                <i class="bx bxl-css3 skills__icon"></i>
+                <span class="skills__name">CSS3</span>
+              </div>
+              <div class="skills__bar skills__css"></div>
+              <div>
+                <span class="skills__percentage">85%</span>
+              </div>
+            </div>
+            <div class="skills__data">
+              <div class="skills__names">
+                <i class="bx bxl-javascript skills__icon"></i>
+                <span class="skills__name">JAVASCRIPT</span>
+              </div>
+              <div class="skills__bar skills__js"></div>
+              <div>
+                <span class="skills__percentage">65%</span>
+              </div>
+            </div>
+            <div class="skills__data">
+              <div class="skills__names">
+                <i class="bx bxs-game skills__icon"></i>
+                <span class="skills__name">Game Development</span>
+              </div>
+              <div class="skills__bar skills__ux"></div>
+              <div>
+                <span class="skills__percentage">85%</span>
+              </div>
+            </div>
+          </div>
 
-            <nav class="navbar">
-                <ul>
-                    <li><a href="#home">home</a></li>
-                    <li><a href="#about">about</a></li>
-                    <li><a href="#service">service</a></li>
-                    <li><a href="#contact">contact</a></li>
-                </ul>
-            </nav>
-
-        </header>
-
-        <!-- header section ends -->
-
-        <!-- content section starts  -->
-
-        <div class="container">
-
-            <section class="home" id="home">
-
-                <h3>hi there...</h3>
-                <h3 class="name">I am<span>Rikesh Dahal</span></h3>
-                <h3 class="post">i am a <span class="typing-text"> Game
-                        Developer</span></h3>
-
-                <a href="https://www.facebook.com/rikesh747"><button class="btn">hire me</button></a>
-
-                <div class="share">
-                    <a href="https://www.facebook.com/rikesh747" class="fab fa-facebook-f"></a>
-                    <a href="https://twitter.com/RikeshDahal10" class="fab fa-twitter"></a>
-                     <a href="https://www.instagram.com/_rikesh_dahal/" class="fab fa-instagram"></a>
-                    <a href="https://github.com/rikeshdahal" class="fab fa-github"></a>
-                    <a href="https://www.linkedin.com/in/mr-mad-hacker-61894520a/" class="fab fa-linkedin"></a>
-                </div>
-
-            </section>
-
-            <!-- about section  -->
-
-            <section class="about" id="about">
-
-                <h1 class="heading">about me</h1>
-
-                <div class="content">
-                    <h3 class="name">my name is <span>Rikesh Dahal</span></h3>
-                    <p>Hello, my name is Rikesh Dahal (but I would prefer if you
-                        would call me Mr.mad_Hacker) and I'm from
-                        Sinamangal, Kathmandu. At Patan College, I am currently
-                        pursuing BCA. I'm interested in website
-                        development, Unity Game Development and right now I'm
-                        exploring Ethical-Hacking.</p>
-                </div>
-
-                <div class="skills">
-                    <div class="progress">
-                        <h3>html <span>95%</span></h3>
-                        <div class="bar"><span></span></div>
-                    </div>
-                    <div class="progress">
-                        <h3>css <span>85%</span></h3>
-                        <div class="bar"><span></span></div>
-                    </div>
-                    <div class="progress">
-                        <h3>javascript <span>65%</span></h3>
-                        <div class="bar"><span></span></div>
-                    </div>
-                    <div class="progress">
-                        <h3>Game Development<span>80%</span></h3>
-                        <div class="bar"><span></span></div>
-                    </div>
-                </div>
-
-            </section>
-
-            <!-- service section  -->
-            <section class="service" id="service">
-
-                <h1 class="heading">my services</h1>
-
-                <div class="box-container">
-
-                    <div class="box">
-                        <i class="fas fa-desktop"></i>
-                        <div class="text">Game Development</div>
-                        <p>Since, I am more of a developer than the Designer, I
-                            enjoy making 3D & 2D games. I do C# codes, 3D design
-                            and Animation also.</p>
-                    </div>
-
-                    <div class="box">
-                        <i class="fas fa-paint-brush"></i>
-                        <div class="text">3D-Desig</div>
-                        <p>3D-Design is the first thing I learned after dipping
-                            my toes into the field of designing. I also do
-                            blender Animations and VFX when i was free.</p>
-                    </div>
-
-                    <div class="box">
-                        <i class="fab fa-android"></i>
-                        <div class="text">Icon Design</div>
-                        <p>Have not learned specifically but have a minor
-                            knowledge regarding it.</p>
-                    </div>
-
-
-                    <div class="box">
-                        <i class="fas fa-tablet-alt"></i>
-                        <div class="text">E-Hacking</div>
-                        <p>I am exploring More and planning to pursue my career
-                            in the field of Hacking .</p>
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- contact section  -->
-            <section class="contact" id="contact">
-
-                <h1 class="heading">contact me</h1>
-
-                <div class="row">
-
-                    <form action="">
-                        <input type="text" class="box" placeholder="first name">
-                        <input type="text" class="box" placeholder="last name">
-                        <input type="email" class="box" placeholder="your
-                            email">
-                        <input type="text" class="box" placeholder="your
-                            project">
-                        <textarea name="" id="" cols="30" rows="10" class="box
-                            message" placeholder="message"></textarea>
-                        <input type="submit" value="message" class="btn">
-                    </form>
-
-                    <div class="content">
-                        <div class="icons">
-                            <h3><i class="fas fa-map-marker-alt"></i> address
-                            </h3>
-                            <p>
-                                kathmandu, Nepal</p>
-                        </div>
-                        <div class="icons">
-                            <h3><i class="fas fa-envelope"></i> email </h3>
-                            <p>dahalrikesh747@gmail.com</p>
-                        </div>
-                        <div class="icons">
-                            <h3><i class="fas fa-phone"></i> phone </h3>
-                            <p>+977 9841255549</p>
-                        </div>
-                    </div>
-
-                </div>
-
-            </section>
-
+          <div>
+            <img src="assets/img/work3.jpg" alt="" class="skills__img" />
+          </div>
         </div>
+      </section>
 
-        <!-- content section ends -->
+      <section class="work section" id="work">
+        <h2 class="section-title">Work</h2>
 
-        <!-- theme toggler  -->
-
-        <div class="theme-toggler">
-            <span style="background: linear-gradient(rgb(0, 0, 0), purple);"></span>
-            <span style="background: linear-gradient(lightgreen, crimson);"></span>
-            <span style="background:linear-gradient(rgb(255, 251, 0),
-                deeppink)"></span>
-            <span style="background:linear-gradient(coral, blueviolet)"></span>
-            <span style="background:linear-gradient(rgb(19, 19, 19), rgb(255, 0,
-                0))"></span>
+        <div class="work__container bd-grid">
+          <a href="" class="work__img">
+            <img src="https://i.postimg.cc/44cNvDc3/work1.jpg" alt="" />
+          </a>
+          <a href="" class="work__img">
+            <img src="https://i.postimg.cc/DyKfxxQP/work2.jpg" alt="" />
+          </a>
+          <a href="" class="work__img">
+            <img src="https://i.postimg.cc/Y0QrpF7F/work3.jpg" alt="" />
+          </a>
+          <a href="" class="work__img">
+            <img src="https://i.postimg.cc/YqfrZQbK/work4.jpg" alt="" />
+          </a>
+          <a href="" class="work__img">
+            <img src="https://i.postimg.cc/2S0z8ms0/work5.jpg" alt="" />
+          </a>
+          <a href="" class="work__img">
+            <img src="https://i.postimg.cc/xdq9XhYn/work6.jpg" alt="" />
+          </a>
         </div>
+      </section>
 
+      <section class="contact section" id="contact">
+        <h2 class="section-title">Contact</h2>
 
-        <!-- type.js cdn link  -->
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.11/typed.min.js"></script>
-        <script>
-
-        var type = new Typed('.typing-text', {
-            strings: [ 'front end developer', 'E- Hacker', 'Game developer'],
-            typeSpeed: 120,
-            loop: true
+        <div class="contact__container bd-grid">
+          <form name="submit-to-google-sheet" action="" class="contact__form">
+            <input
+              name="name"
+              type="text"
+              placeholder="Name"
+              class="contact__input"
+            />
+            <input
+              name="email"
+              type="mail"
+              placeholder="Email"
+              class="contact__input"
+            />
+            <textarea
+              name="message"
+              id=""
+              cols="0"
+              rows="10"
+              class="contact__input"
+            ></textarea>
+            <button class="contact__button button" type="submit">Send</button>
+          </form>
+          <span style="color: green" id="msg"></span>
+        </div>
+      </section>
+      <script>
+        const scriptURL =
+          "https://script.google.com/macros/s/AKfycbzon019UYvQfF6Tzzru3ArMkWeM68SvQJjVnuzn9ll-lUvONUIu_gcsW8FNxmHylhs5/exec";
+        const form = document.forms["submit-to-google-sheet"];
+        const msg = document.getElementById("msg");
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          fetch(scriptURL, { method: "POST", body: new FormData(form) });
+          msg.innerHTML = "Message sent successfully!";
+          setTimeout(function () {
+            msg.innerHTML = "";
+          }, 5000);
+          form.reset();
         });
 
-        let themeColor = document.querySelectorAll('.theme-toggler span');
-        themeColor.forEach(color => color.addEventListener('click', () => {
-            let background = color.style.background;
-            document.querySelector('body').style.background = background;
-        }));
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          fetch(scriptURL, { method: "POST", body: new FormData(form) })
+            .then((response) => console.log("Success!", response))
+            .catch((error) => console.error("Error!", error.message));
+        });
+      </script>
+    </main>
 
-    </script>
-        <audio loop autoplay>
-            <source src="backmusic.ogg" type="audio/ogg">
-            <source src="backmusic.mp3" type="audio/mpeg">
-        </audio>
-    </body>
+    <footer class="footer">
+      <img
+        class="footer_logo"
+        href="#"
+        src="https://i.postimg.cc/Fz8tSBHJ/logo.png"
+        alt=""
+      />
+      <div class="footer__social">
+        <a
+          href="https://www.facebook.com/rikesh747"
+          class="footer__icon"
+          target="_blank"
+          ><i class="bx bxl-facebook"></i
+        ></a>
+        <a
+          href="https://www.instagram.com/_rikesh_dahal/"
+          class="footer__icon"
+          target="_blank"
+          ><i class="bx bxl-instagram"></i
+        ></a>
+        <a
+          href="https://twitter.com/RikeshDahal10"
+          class="footer__icon"
+          target="_blank"
+          ><i class="bx bxl-twitter"></i
+        ></a>
+        <a
+          href="https://github.com/rikeshdahal"
+          target="_blank"
+          class="footer__icon"
+          ><i class="bx bxl-github"></i
+        ></a>
+      </div>
+      <p class="footer__copy">
+        &#169;Created By Rikesh | © 2023 All Rights Reserved
+      </p>
+    </footer>
 
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <script src="main.js"></script>
+    <audio loop autoplay>
+      <source src="backmusic.ogg" type="audio/ogg" />
+      <source src="backmusic.mp3" type="audio/mpeg" />
+    </audio>
+  </body>
 </html>
