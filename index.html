@@ -1,78 +1,346 @@
-<header>
-	<style>:root {
-    /* Base font size */
-    font-size: 10px;
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="https://i.postimg.cc/Fz8tSBHJ/logo.png"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Portfolio</title>
+  </head>
+  <body>
+    <header class="l-header">
+      <nav class="nav bd-grid">
+        <div>
+          <img
+            href="#"
+            class="nav__logo"
+            src="https://i.postimg.cc/Fz8tSBHJ/logo.png"
+            alt=""
+          />
+        </div>
 
-    /* Full grid area variable */
-    --fullGrid: 1 / 1 / -1 / -1;
-}
+        <div class="nav__menu" id="nav-menu">
+          <ul class="nav__list">
+            <li class="nav__item">
+              <a href="#home" class="nav__link active" style="color: aliceblue"
+                >Home</a
+              >
+            </li>
+            <li class="nav__item">
+              <a href="#about" class="nav__link" style="color: aliceblue"
+                >About</a
+              >
+            </li>
+            <li class="nav__item">
+              <a href="#skills" class="nav__link" style="color: aliceblue"
+                >Skills</a
+              >
+            </li>
+            <li class="nav__item">
+              <a href="#work" class="nav__link" style="color: aliceblue"
+                >Work</a
+              >
+            </li>
+            <li class="nav__item">
+              <a href="#contact" class="nav__link" style="color: aliceblue"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </div>
 
-body {
-    font-family: "Montserrat", Arial, sans-serif;
-    background-color: #fcfcfc;
-}
+        <div class="nav__toggle" id="nav-toggle">
+          <i class="bx bx-menu"></i>
+        </div>
+      </nav>
+    </header>
 
-header {
-    /* Create grid spanning viewport width & height */
-    display: grid;
-    grid-template-rows: 100vh;
-    overflow: hidden;
-    box-shadow: 0 0.2em 0.5em rgba(0, 0, 0, 0.5);
-}
+    <main class="l-main">
+      <section class="home bd-grid" id="home">
+        <div class="home__data">
+          <h1 class="home__title">
+            Hi,<br />I'am <span class="home__title-color">Rikesh</span><br />
+            Game Developer
+          </h1>
 
-.video-bg {
-    /* Span the full grid */
-    grid-area: var(--fullGrid);
+          <a href="#" class="button">Contact</a>
+        </div>
 
-    /* Re-size video to cover full screen while maintaining aspect ratio */
-    min-width: 100%;
-    min-height: 100%;
-    object-fit: cover;
+        <div class="home__social">
+          <a
+            href="https://www.facebook.com/rikesh747"
+            target="_blank"
+            class="home__social-icon"
+            ><i class="bx bxl-facebook"></i
+          ></a>
+          <a
+            href="https://twitter.com/RikeshDahal10"
+            target="_blank"
+            class="home__social-icon"
+            ><i class="bx bxl-twitter"></i
+          ></a>
+          <a
+            href="https://www.instagram.com/_rikesh_dahal/"
+            target="_blank"
+            class="home__social-icon"
+            ><i class="bx bxl-instagram"></i
+          ></a>
+          <a
+            href="https://github.com/rikeshdahal"
+            target="_blank"
+            class="home__social-icon"
+            ><i class="bx bxl-github"></i
+          ></a>
+        </div>
 
-    /* Display video below overlay */
-    z-index: -1;
-}
+        <div class="home__img">
+          <svg
+            class="home__blob"
+            viewBox="0 0 479 467"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <mask id="mask0" mask-type="alpha">
+              <path
+                d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"
+              />
+            </mask>
+            <g mask="url(#mask0)">
+              <path
+                d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"
+              />
+              <image
+                class="home__blob-img"
+                x="70"
+                y="20"
+                href="https://i.postimg.cc/9M2YqZ4H/out-removebg-preview.png"
+              />
+            </g>
+          </svg>
+        </div>
+      </section>
 
-.video-bg::-webkit-media-controls {
-    display: none !important;
-}
+      <section class="about section" id="about">
+        <h2 class="section-title">About</h2>
 
-.video-overlay {
-    /* Span the full grid */
-    grid-area: var(--fullGrid);
+        <div class="about__container bd-grid">
+          <div class="about__img">
+            <img
+              src="https://avatars.githubusercontent.com/u/85576731?s=400&u=9975aa087cb25efd9aa96352d2b0134bdc86a5b0&v=4"
+              alt=""
+            />
+          </div>
 
-    /* Center Content */
-    display: grid;
-    justify-content: center;
-    align-content: center;
-    text-align: center;
+          <div>
+            <h2 class="about__subtitle">I'am Rikesh</h2>
+            <p class="about__text">
+              Hello! My name is Rikesh Dahal, and although I would prefer it if
+              you called me Mr. Mad Hacker, I'm from Sinamangal Kathmandu. I'm
+              night owl and a big fan of Technology. I'm currently a Patan
+              College student pursuing a BCA. Let me now describe what I do. I
+              work in a variety of fields, including Web Development, App
+              Development, Game Development, 3D Modeling and Animation, Graphic
+              Design, and Ethical Hacking.<br /><span
+                >Fun fact:- In General, Programmers don't have girlfriends, but
+                I do:)</span
+              >
+            </p>
+          </div>
+        </div>
+      </section>
 
-    /* Semi-transparent background */
-    background-color: rgba(0, 0, 0, 0.55);
-}
+      <section class="skills section" id="skills">
+        <h2 class="section-title">Skills</h2>
 
-h1 {
-    font-size: calc(1.8em + 2.5vw);
-    font-weight: 700;
-    line-height: 1.5;
-    letter-spacing: 0.02em;
-    color: #fff;
-    text-shadow: 0.05em 0.05em 0.05em rgba(0, 0, 0, 0.4);
-}
+        <div class="skills__container bd-grid">
+          <div>
+            <h2 class="skills__subtitle">Profesional Skills</h2>
+            <p class="skills__text">
+              As a Developer, I prefer making both 3D and 2D Games. I work with
+              3D design and animation in addition to C# coding. Hacking is my
+              absolute favorite.
+            </p>
+            <div class="skills__data">
+              <div class="skills__names">
+                <i class="bx bxl-html5 skills__icon"></i>
+                <span class="skills__name">HTML</span>
+              </div>
+              <div class="skills__bar skills__html"></div>
+              <div>
+                <span class="skills__percentage">95%</span>
+              </div>
+            </div>
+            <div class="skills__data">
+              <div class="skills__names">
+                <i class="bx bxl-css3 skills__icon"></i>
+                <span class="skills__name">CSS</span>
+              </div>
+              <div class="skills__bar skills__css"></div>
+              <div>
+                <span class="skills__percentage">85%</span>
+              </div>
+            </div>
+            <div class="skills__data">
+              <div class="skills__names">
+                <i class="bx bxl-javascript skills__icon"></i>
+                <span class="skills__name">JAVASCRIPT</span>
+              </div>
+              <div class="skills__bar skills__js"></div>
+              <div>
+                <span class="skills__percentage">65%</span>
+              </div>
+            </div>
+            <div class="skills__data">
+              <div class="skills__names">
+                <i class="bx bxs-game skills__icon"></i>
+                <span class="skills__name">Game Development</span>
+              </div>
+              <div class="skills__bar skills__ux"></div>
+              <div>
+                <span class="skills__percentage">85%</span>
+              </div>
+            </div>
+          </div>
 
+          <div>
+            <img src="assets/img/work3.jpg" alt="" class="skills__img" />
+          </div>
+        </div>
+      </section>
 
+      <section class="work section" id="work">
+        <h2 class="section-title">Work</h2>
 
-</style>
-	<video class="video-bg" autoplay muted loop>
-		<source src="http://www.georgewpark.com/video/blurred-street.mp4" type="video/mp4" />
-		<source src="http://www.georgewpark.com/video/blurred-street.webm" type="video/webm" />
-	</video>
+        <div class="work__container bd-grid">
+          <a href="" class="work__img">
+            <img src="https://i.postimg.cc/44cNvDc3/work1.jpg" alt="" />
+          </a>
+          <a href="" class="work__img">
+            <img src="https://i.postimg.cc/DyKfxxQP/work2.jpg" alt="" />
+          </a>
+          <a href="" class="work__img">
+            <img src="https://i.postimg.cc/Y0QrpF7F/work3.jpg" alt="" />
+          </a>
+          <a href="" class="work__img">
+            <img src="https://i.postimg.cc/YqfrZQbK/work4.jpg" alt="" />
+          </a>
+          <a href="" class="work__img">
+            <img src="https://i.postimg.cc/2S0z8ms0/work5.jpg" alt="" />
+          </a>
+          <a href="" class="work__img">
+            <img src="https://i.postimg.cc/xdq9XhYn/work6.jpg" alt="" />
+          </a>
+        </div>
+      </section>
 
-	<div class="video-overlay">
-		<h1>Coming Soon..<br></h1>
-	</div>
+      <section class="contact section" id="contact">
+        <h2 class="section-title">Contact</h2>
 
-</header>
+        <div class="contact__container bd-grid">
+          <form name="submit-to-google-sheet" action="" class="contact__form">
+            <input
+              required
+              name="name"
+              type="text"
+              placeholder="Name"
+              class="contact__input"
+            />
+            <input
+              required
+              name="email"
+              type="email"
+              placeholder="Email"
+              class="contact__input"
+            />
+            <textarea
+              required
+              name="message"
+              id=""
+              cols="0"
+              rows="10"
+              class="contact__input"
+            ></textarea>
+            <button class="contact__button button" type="submit">Send</button>
+          </form>
+          <span style="color: green" id="msg"></span>
+        </div>
+      </section>
+      <script>
+        const scriptURL =
+          "https://script.google.com/macros/s/AKfycbzon019UYvQfF6Tzzru3ArMkWeM68SvQJjVnuzn9ll-lUvONUIu_gcsW8FNxmHylhs5/exec";
+        const form = document.forms["submit-to-google-sheet"];
+        const msg = document.getElementById("msg");
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          fetch(scriptURL, { method: "POST", body: new FormData(form) });
+          msg.innerHTML = "Message sent successfully!";
+          setTimeout(function () {
+            msg.innerHTML = "";
+          }, 5000);
+          form.reset();
+        });
 
-<main>
-</main>
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          fetch(scriptURL, { method: "POST", body: new FormData(form) })
+            .then((response) => console.log("Success!", response))
+            .catch((error) => console.error("Error!", error.message));
+        });
+      </script>
+    </main>
+
+    <footer class="footer">
+      <img
+        class="footer_logo"
+        href="#"
+        src="https://i.postimg.cc/Fz8tSBHJ/logo.png"
+        alt=""
+      />
+      <div class="footer__social">
+        <a
+          href="https://www.facebook.com/rikesh747"
+          class="footer__icon"
+          target="_blank"
+          ><i class="bx bxl-facebook"></i
+        ></a>
+        <a
+          href="https://www.instagram.com/mr.mad.h4ck3r/"
+          class="footer__icon"
+          target="_blank"
+          ><i class="bx bxl-instagram"></i
+        ></a>
+        <a
+          href="https://twitter.com/RikeshDahal10"
+          class="footer__icon"
+          target="_blank"
+          ><i class="bx bxl-twitter"></i
+        ></a>
+        <a
+          href="https://github.com/rikeshdahal"
+          target="_blank"
+          class="footer__icon"
+          ><i class="bx bxl-github"></i
+        ></a>
+      </div>
+      <p class="footer__copy">
+        © Created By Rikesh | © 2023 All Rights Reserved
+      </p>
+    </footer>
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <script src="main.js"></script>
+    <audio loop autoplay>
+      <source src="backmusic.ogg" type="audio/ogg" />
+      <source src="backmusic.mp3" type="audio/mpeg" />
+    </audio>
+  </body>
+</html>
