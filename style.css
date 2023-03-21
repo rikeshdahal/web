@@ -220,11 +220,11 @@ img {
 .home__title {
   font-size: var(--big-font-size);
   margin-bottom: var(--mb-5);
+  color: rgb(71, 31, 192);
 }
 .home__title:hover {
-  font-size: var(--big-font-size);
-  margin-bottom: var(--mb-5);
-  animation: headShake;
+  
+  animation: pulse;
   animation-duration: 3s; 
   cursor: pointer;
 }
