@@ -127,6 +127,7 @@ img {
   position: fixed;
   top: 0;
   left: 0;
+  
   z-index: var(--z-fixed);
   background-color: rgb(0, 0, 0);
   color: #fff;
@@ -196,6 +197,9 @@ img {
   margin: 0 0.5rem;
   animation: hinge;
   animation-duration: 10s;
+}
+.nav__logo{
+  height: 50px;
 }
 
 .nav__toggle {
@@ -495,7 +499,16 @@ img {
 .footer__copy {
   font-size: var(--smaller-font-size);
 }
-
+.footer_logo{
+  width: 200px;
+  bottom: 25%;
+  display: inline-block;
+  align-items: center;
+}
+.footer_logo:hover{
+  animation: tada;
+  animation-duration: 3s; 
+}
 @media screen and (max-width: 320px) {
   .home {
     row-gap: 2rem;
@@ -503,11 +516,7 @@ img {
   #home__img {
     width: 1000px;
   }
-  .footer_logo{
-    width: 300px;
-    bottom: 25%;
-    margin-left: 300px;
-  }
+  
   .static-txt{
     margin-top: 20px;
   }
@@ -534,11 +543,6 @@ img {
   .home__social-icon {
     margin-bottom: 0;
     margin-right: var(--mb-4);
-  }
-  .footer_logo{
-    width: 300px;
-    bottom: 25%;
-    margin-left: 500px;
   }
   #home__img {
     width: 100px;
