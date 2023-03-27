@@ -334,7 +334,7 @@ img {
 
 .dynamic-txts li {
   list-style: none;
-  color: #6d83fc;
+  color: blue;
   font-size: var(--big-font-size);
   position: relative;
   top: 0;
