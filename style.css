@@ -254,7 +254,7 @@ img {
 .home__title {
   font-size: var(--big-font-size);
   margin-bottom: var(--mb-5);
-  color: rgb(71, 31, 192);
+  color: blue;
 }
 
 .home__title:hover {
@@ -282,7 +282,7 @@ img {
 }
 
 .home__social-icon:hover {
-  color: rgba(0, 128, 255, 0.753);
+  color: blue;
 }
 
 #home__img {
