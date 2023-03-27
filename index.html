@@ -34,33 +34,153 @@
           </li>
         </ul>
       </div>
+      <label for="night-light-checkbox" class="night-light-label">
+        <input type="checkbox" id="night-light-checkbox">
+        <span class="night-light-ball"></span>
+        <svg viewBox="0 0 512 512" class="sun-svg">
+          <path id="sun-svg"
+            d="M256 160c-52.9 0-96 43.1-96 96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.3 94.7c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3c13-6.5 13-24.7.2-31.1zm-155.9 106c-49.9 49.9-131.1 49.9-181 0-49.9-49.9-49.9-131.1 0-181 49.9-49.9 131.1-49.9 181 0 49.9 49.9 49.9 131.1 0 181z">
+          </path>
+        </svg>
+        <svg viewBox="0 0 512 512" class="moon-svg">
+          <path id="moon-svg"
+            d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z">
+          </path>
+        </svg>
+      </label>
+      <style>
+        .night-light-label #night-light-checkbox {
+          position: absolute;
+          visibility: hidden;
+          
+        }
 
-      <div class="nav__toggle" id="nav-toggle">
-        <i class="bx bx-menu"></i>
-      </div>
+        .night-light-label {
+          display: block;
+          margin: 20px 0;
+          height: 31px;
+          width: 60px;
+          border: 2px solid #4672fe;
+          border-radius: 30px;
+          position: relative;
+          cursor: pointer;
+        }
+
+        .night-light-label .night-light-ball {
+          position: absolute;
+          width: 25px;
+          height: 25px;
+          top: 1px;
+          left: 1px;
+          border-radius: 50%;
+          background: #4672fe;
+          z-index: 99;
+          transition: 300ms;
+        }
+
+        .night-light-label #night-light-checkbox:checked+.night-light-ball {
+          transform: translateX(28px);
+        }
+
+        .moon-svg,
+        .sun-svg {
+          width: 16px;
+          height: 16px;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        .moon-svg {
+          right: 5px;
+        }
+
+        .sun-svg {
+          left: 5px;
+        }
+
+        .dark #moon-svg,
+        .dark #sun-svg {
+          fill: #e0e0e0 !important;
+        }
+
+        .dark {
+          background-color: #111;
+          color: #e0e0e0;
+        }
+
+        .dark .intro {
+          background: #111;
+        }
+
+        .dark .animation-list,
+        .dark .sidebar {
+          background: #15151d;
+        }
+
+        .dark .button.button-animations,
+        .dark .callout-hideList.button {
+          color: #e0e0e0;
+          border-color: rgba(255, 255, 255, 0.7);
+          outline: none;
+        }
+
+        .dark .copy-icon,
+        .dark .copy-icon:hover {
+          background: #15151d;
+          border-color: #e0e0e0;
+        }
+
+        .dark .copy-icon::before,
+        .dark .copy-icon:hover::before {
+          border-color: #e0e0e0;
+        }
+
+        .dark code {
+          color: #111;
+        }
+
+        .dark h2,
+        .dark h3,
+        .dark h4,
+        .dark a[title='Documentation'],
+        .dark pre * {
+          color: #e0e0e0;
+        }
+
+        .dark section {
+          border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .dark h1,
+        .dark a {
+          color: #4672fe;
+        }
+      </style>
     </nav>
   </header>
+  
 
   <main class="l-main ">
     <section class="home bd-grid" id="home">
-      
+
       <div class="home__data">
         <h1 class="home__title">राधे-राधे।</h1>
-          <div class="home__data">
-            <div class="wrapper">
-              <div class="static-txt">I'm a</div>
-              <ul class="dynamic-txts">
-                <li><span>YouTuber.</span></li>
-                <li><span>UI Designer.</span></li>
-                <li><span>Developer.</span></li>
-                <li><span>E-Hacker.</span></li>
-              </ul>
-            </div>
-            <br>
-            
+        <div class="home__data">
+          <div class="wrapper">
+            <div class="static-txt">I'm a</div>
+            <ul class="dynamic-txts">
+              <li><span>YouTuber.</span></li>
+              <li><span>UI Designer.</span></li>
+              <li><span>Developer.</span></li>
+              <li><span>E-Hacker.</span></li>
+            </ul>
           </div>
-          <a href="#" class="button">Download CV</a>
-          </div>
+          <br>
+
+        </div>
+        <a href="#" class="button">Download CV</a>
+      </div>
       <div class="home__social">
         <a href="https://www.facebook.com/rikesh747" target="_blank" class="home__social-icon"><i
             class="bx bxl-facebook"></i></a>
@@ -72,7 +192,7 @@
             class="bx bxl-github"></i></a>
       </div>
 
-      <div id="home__img"  >
+      <div id="home__img">
         <svg class="home__blob" viewBox="0 0 479 467" xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink">
           <mask id="mask0" mask-type="alpha">
@@ -82,7 +202,8 @@
           <g mask="url(#mask0)">
             <path
               d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z" />
-            <image class="home__blob-img  animate__animated  animate__headShake animate__slower  animate__repeat-3" x="70" y="20" href="https://i.postimg.cc/9M2YqZ4H/out-removebg-preview.png" />
+            <image class="home__blob-img  animate__animated  animate__shakeY animate__slower  animate__infinite" x="70"
+              y="20" href="https://i.postimg.cc/9M2YqZ4H/out-removebg-preview.png" />
           </g>
         </svg>
       </div>
@@ -92,7 +213,7 @@
       <h2 class="section-title">About</h2>
 
       <div class="about__container bd-grid">
-        <div  class="about__img  animate__animated  animate__pulse animate__slower  animate__infinite ">
+        <div class="about__img  animate__animated  animate__pulse animate__slower  animate__infinite ">
           <img
             src="https://avatars.githubusercontent.com/u/85576731?s=400&u=9975aa087cb25efd9aa96352d2b0134bdc86a5b0&v=4"
             alt="" />
@@ -108,7 +229,7 @@
             work in a variety of fields, including Web Development, App
             Development, Game Development, 3D Modeling and Animation, Graphic
             Design, and Ethical Hacking.<br /><span>Fun fact:- In General, Programmers don't have girlfriends, but
-              I do;)</span>
+              I do:)</span>
           </p>
         </div>
       </div>
@@ -158,7 +279,7 @@
           <div class="skills__data">
             <div class="skills__names">
               <i class="bx bxs-game skills__icon"></i>
-              <span class="skills__name " >Game Development</span>
+              <span class="skills__name ">Game Development</span>
             </div>
             <div class="skills__bar skills__ux"></div>
             <div>
@@ -170,28 +291,69 @@
     </section>
 
     <section class="work section" id="work">
-      <h2 class="section-title">Work</h2>
-
-      <div class="work__container bd-grid ">
-        <a href="" class="work__img ">
-          <img src="https://i.postimg.cc/44cNvDc3/work1.jpg" alt="" />
-        </a>
-        <a href="" class="work__img ">
-          <img src="https://i.postimg.cc/DyKfxxQP/work2.jpg" alt="" />
-        </a>
-        <a href="" class="work__img ">
-          <img src="https://i.postimg.cc/Y0QrpF7F/work3.jpg" alt="" />
-        </a>
-        <a href="" class="work__img ">
-          <img src="https://i.postimg.cc/YqfrZQbK/work4.jpg" alt="" />
-        </a>
-        <a href="" class="work__img ">
-          <img src="https://i.postimg.cc/2S0z8ms0/work5.jpg" alt="" />
-        </a>
-        <a href="" class="work__img ">
-          <img src="https://i.postimg.cc/xdq9XhYn/work6.jpg" alt="" />
-        </a>
+      <h2 class="section-title">My Recent Projects</h2>
+      <div class="container">
+        <div class="card">
+          <div class="img">
+            <img src="https://i.postimg.cc/fTymLPry/image.png">
+          </div>
+          <div class="top-text">
+            <div class="name">
+              DrumSet
+            </div>
+          </div>
+          <div class="bottom-text">
+            <div class="text">
+              This is my drum set website it is allow you to play with keyboard keys.
+            </div>
+            <div class="btn">
+              <a href="https://rikeshdahal.github.io/Drum-Set/" target="_blank">Live View</a>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="img">
+            <img src="https://i.postimg.cc/K8MNcY9J/image.png">
+          </div>
+          <div class="top-text">
+            <div class="name">
+              Ripple
+            </div>
+          </div>
+          <div class="bottom-text">
+            <div class="text">
+              This is my Ripple website which is allow you to get ripple effect on mouse hover.
+            </div>
+            <div class="btn">
+              <a href="https://rikeshdahal.github.io/Ripple/" target="_blank">Live View</a>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="img">
+            <img src="https://i.postimg.cc/GpSwmVC1/image.png">
+          </div>
+          <div class="top-text">
+            <div class="name">
+              Touch Typing practice Keyboards
+            </div>
+          </div>
+          <div class="bottom-text">
+            <div class="text">
+              My Touch Typing Keyboard website help you to practice touch typing on the keyboard.
+            </div>
+            <div class="btn">
+              <a href="https://rikeshdahal.github.io/Touch_Typing_Keyboards/" target="_blank">Live View</a>
+            </div>
+          </div>
+        </div>
       </div>
+    </section>
+
+    <section>
+
+    </section>
+    </div>
     </section>
 
     <section class="contact section" id="contact">
@@ -208,7 +370,7 @@
       </div>
     </section>
     <script>
-      const scriptURL ="https://script.google.com/macros/s/AKfycbzon019UYvQfF6Tzzru3ArMkWeM68SvQJjVnuzn9ll-lUvONUIu_gcsW8FNxmHylhs5/exec";
+      const scriptURL = "https://script.google.com/macros/s/AKfycbzon019UYvQfF6Tzzru3ArMkWeM68SvQJjVnuzn9ll-lUvONUIu_gcsW8FNxmHylhs5/exec";
       const form = document.forms["submit-to-google-sheet"];
       const msg = document.getElementById("msg");
       form.addEventListener("submit", (e) => {
@@ -248,7 +410,7 @@
 
   <script src="https://unpkg.com/scrollreveal"></script>
 
-  <script src="main.js"></script>
+  <script src="mains.js"></script>
   <audio loop autoplay>
     <source src="backmusic.ogg" type="audio/ogg" />
     <source src="backmusic.mp3" type="audio/mpeg" />
