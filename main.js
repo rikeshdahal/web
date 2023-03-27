@@ -48,3 +48,51 @@ const sr = ScrollReveal({
     delay: 200,
 });
 
+
+const cards = document.querySelectorAll('.img');
+
+let tl = new gsap.timeline({
+    scrollTrigger: {
+            trigger: ".work",
+            start: "top bottom",
+            end: "+=700",
+            scrub: 1
+    },
+})
+
+
+cards.forEach((img) => {
+let rotation = Math.floor(Math.random() * 40) - 20;
+    positionX = Math.floor(Math.random() * 300) - 150;
+    positionY = Math.floor(Math.random() * 300) - 150;
+
+    tl.from(img, {
+        rotation: rotation,
+        x: positionX,
+        y: positionY,
+    }, "-=1")
+    tl.to(img, {
+        backgroundSize: '100%',
+    }, .2);
+})
+
+const darkModeControl = () => {
+    const darkCheck = document.getElementById('night-light-checkbox');
+  
+    darkCheck.addEventListener('click', () => {
+      if (darkCheck.checked) {
+        document.body.classList.add('dark');
+        localStorage.setItem('animate-css', 'dark');
+      } else {
+        document.body.classList.remove('dark');
+        localStorage.removeItem('animate-css');
+      }
+    })
+  
+    if (localStorage.getItem('animate-css')) {
+      document.body.className = 'dark';
+      darkCheck.checked = true;
+    }
+  }
+  
+  export default darkModeControl;
