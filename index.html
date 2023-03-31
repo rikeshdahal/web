@@ -14,23 +14,24 @@
 <body>
   <header class="l-header">
     <nav class="nav bd-grid">
-      <img href="#" class="nav__logo" src="https://i.postimg.cc/NGP7swjw/logo.png" alt="" />
-      <div class="nav__menu" id="nav-menu">
-        <ul class="nav__list">
-          <li class="nav__item">
-            <a href="#home" class="nav__link active" style="color: blue">Home</a>
+      <img href="#" class="nav-logo" src="https://i.postimg.cc/NGP7swjw/logo.png" alt="" />
+      <div class="nav-menu" id="nav-menu">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="javascript:void()" onclick="location.href='#home'" class="nav-link active"
+              style="color: blue">Home</a>
           </li>
-          <li class="nav__item">
-            <a href="#about" class="nav__link" style="color: blue">About</a>
+          <li class="nav-item">
+            <a href="#about" class="nav-link" style="color: blue">About</a>
           </li>
-          <li class="nav__item">
-            <a href="#skills" class="nav__link" style="color: blue">Skills</a>
+          <li class="nav-item">
+            <a href="#skills" class="nav-link" style="color: blue">Skills</a>
           </li>
-          <li class="nav__item">
-            <a href="#work" class="nav__link" style="color: blue">Work</a>
+          <li class="nav-item">
+            <a href="#work" class="nav-link" style="color: blue">Work</a>
           </li>
-          <li class="nav__item">
-            <a href="#contact" class="nav__link" style="color: blue">Contact</a>
+          <li class="nav-item">
+            <a href="#contact" class="nav-link" style="color: blue">Contact</a>
           </li>
         </ul>
       </div>
@@ -164,11 +165,11 @@
   <main class="l-main ">
     <section class="home bd-grid" id="home">
 
-      <div class="home__data">
-        <h1 class="home__title">राधे-राधे।</h1>
-        <div class="home__data">
+      <div class="home-data">
+        <h1 class="home-title">राधे-राधे।</h1>
+        <div class="home-data">
           <div class="wrapper">
-            <div class="static-txt">I'm a</div>
+            <div class="static-txt" id="stxt">I'm a</div>
             <ul class="dynamic-txts">
               <li><span>YouTuber.</span></li>
               <li><span>UI Designer.</span></li>
@@ -178,22 +179,23 @@
           </div>
           <br>
 
+
         </div>
-        <a href="#" class="button">Download CV</a>
+        <a href="#" class="button" id="button">Download CV</a>
       </div>
-      <div class="home__social">
-        <a href="https://www.facebook.com/rikesh747" target="_blank" class="home__social-icon"><i
+      <div class="home-social">
+        <a href="https://www.facebook.com/rikesh747" target="_blank" class="home-social-icon" id="home-social-icon"><i
             class="bx bxl-facebook"></i></a>
-        <a href="https://twitter.com/RikeshDahal10" target="_blank" class="home__social-icon"><i
+        <a href="https://twitter.com/RikeshDahal10" target="_blank" class="home-social-icon" id="home-social-icon"><i
             class="bx bxl-twitter"></i></a>
-        <a href="https://www.instagram.com/mr.mad.h4ck3r/" target="_blank" class="home__social-icon"><i
-            class="bx bxl-instagram"></i></a>
-        <a href="https://github.com/rikeshdahal" target="_blank" class="home__social-icon"><i
+        <a href="https://www.instagram.com/mr.mad.h4ck3r/" target="_blank" class="home-social-icon"
+          id="home-social-icon"><i class="bx bxl-instagram"></i></a>
+        <a href="https://github.com/rikeshdahal" target="_blank" class="home-social-icon" id="home-social-icon"><i
             class="bx bxl-github"></i></a>
       </div>
 
-      <div id="home__img">
-        <svg class="home__blob" viewBox="0 0 479 467" xmlns="http://www.w3.org/2000/svg"
+      <div id="home-img">
+        <svg class="home-blob" viewBox="0 0 479 467" xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink">
           <mask id="mask0" mask-type="alpha">
             <path
@@ -202,7 +204,7 @@
           <g mask="url(#mask0)">
             <path
               d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z" />
-            <image class="home__blob-img  animate__animated  animate__shakeY animate__slower  animate__infinite" x="70"
+            <image class="home-blob-img  animate-animated  animate-shakeY animate-slower  animate-infinite" x="70"
               y="20" href="https://i.postimg.cc/9M2YqZ4H/out-removebg-preview.png" />
           </g>
         </svg>
@@ -212,16 +214,16 @@
     <section class="about section" id="about">
       <h2 class="section-title">About</h2>
 
-      <div class="about__container bd-grid">
-        <div class="about__img  animate__animated  animate__pulse animate__slower  animate__infinite ">
+      <div class="about-container bd-grid">
+        <div class="about-img  animate-animated  animate-pulse animate-slower  animate-infinite ">
           <img
             src="https://avatars.githubusercontent.com/u/85576731?s=400&u=9975aa087cb25efd9aa96352d2b0134bdc86a5b0&v=4"
             alt="" />
         </div>
 
         <div>
-          <h2 class="about__subtitle">I'am Rikesh</h2>
-          <p class="about__text">
+          <h2 class="about-subtitle">I'am Rikesh</h2>
+          <p class="about-text">
             Hello! My name is Rikesh Dahal, and although I would prefer it if
             you called me Mr. Mad Hacker, I'm from Sinamangal Kathmandu. I'm
             night owl and a big fan of Technology. I'm currently a Patan
@@ -238,65 +240,65 @@
     <section class="skills section" id="skills">
       <h2 class="section-title">Skills</h2>
 
-      <div class="skills__container bd-grid">
+      <div class="skills-container bd-grid">
         <div>
-          <h2 class="skills__subtitle">Profesional Skills</h2>
-          <p class="skills__text">
+          <h2 class="skills-subtitle">Profesional Skills</h2>
+          <p class="skills-text">
             As a Developer, I prefer making both 3D and 2D Games. I work with
             3D design and animation in addition to C# coding. Hacking is my
             absolute favorite.
           </p>
-          <div class="skills__data">
-            <div class="skills__names">
-              <i class="bx bxs-game skills__icon"></i>
-              <span class="skills__name ">Game Development</span>
+          <div class="skills-data">
+            <div class="skills-names">
+              <i class="bx bxs-game skills-icon"></i>
+              <span class="skills-name ">Game Development</span>
             </div>
-            <div class="skills__bar skills__Game"></div>
+            <div class="skills-bar skills-Game"></div>
             <div>
-              <span class="skills__percentage">95%</span>
+              <span class="skills-percentage">95%</span>
             </div>
           </div>
-          <div class="skills__data">
-            <div class="skills__names">
-              <i class="bx bxl-html5 skills__icon"></i>
-              <span class="skills__name">HTML</span>
+          <div class="skills-data">
+            <div class="skills-names">
+              <i class="bx bxl-html5 skills-icon"></i>
+              <span class="skills-name">HTML</span>
             </div>
-            <div class="skills__bar skills__html"></div>
+            <div class="skills-bar skills-html"></div>
             <div>
-              <span class="skills__percentage">89%</span>
+              <span class="skills-percentage">89%</span>
             </div>
           </div>
-          <div class="skills__data">
-            <div class="skills__names">
-              <i class="bx bxl-css3 skills__icon"></i>
-              <span class="skills__name">CSS</span>
+          <div class="skills-data">
+            <div class="skills-names">
+              <i class="bx bxl-css3 skills-icon"></i>
+              <span class="skills-name">CSS</span>
             </div>
-            <div class="skills__bar skills__css"></div>
+            <div class="skills-bar skills-css"></div>
             <div>
-              <span class="skills__percentage">85%</span>
+              <span class="skills-percentage">85%</span>
             </div>
           </div>
-          <div class="skills__data">
-            <div class="skills__names">
-              <i class="bx bxl-javascript skills__icon"></i>
-              <span class="skills__name">JAVASCRIPT</span>
+          <div class="skills-data">
+            <div class="skills-names">
+              <i class="bx bxl-javascript skills-icon"></i>
+              <span class="skills-name">JAVASCRIPT</span>
             </div>
-            <div class="skills__bar skills__js"></div>
+            <div class="skills-bar skills-js"></div>
             <div>
-              <span class="skills__percentage">65%</span>
+              <span class="skills-percentage">65%</span>
             </div>
           </div>
-          <div class="skills__data">
-            <div class="skills__names">
-              <i class="bx bxl-python skills__icon"></i>
-              <span class="skills__name">Python</span>
+          <div class="skills-data">
+            <div class="skills-names">
+              <i class="bx bxl-python skills-icon"></i>
+              <span class="skills-name">Python</span>
             </div>
-            <div class="skills__bar skills__python"></div>
+            <div class="skills-bar skills-python"></div>
             <div>
-              <span class="skills__percentage">50%</span>
+              <span class="skills-percentage">50%</span>
             </div>
+          </div>
         </div>
-      </div>
     </section>
 
     <section class="work section" id="work">
@@ -337,9 +339,29 @@
               Whether you're looking to add a subtle touch of interactivity or want to create eye-catching
               effect, Ripple is the perfect for you. So why wait? Head over to our website and start creating your
               own ripples today!
-            </div> 
+            </div>
             <div class="btn">
               <a href="https://rikeshdahal.github.io/Ripple/" target="_blank">Live View</a>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="img">
+            <img src="https://i.postimg.cc/SxgpjzmY/image.png">
+          </div>
+          <div class="top-text">
+            <div class="name">
+              Window Updating Prank Website
+            </div>
+          </div>
+          <div class="bottom-text">
+            <div class="text">
+              With just a few clicks, you can create a fake Windows update screen that will trick your friends and
+              family into thinking their computer is undergoing a critical update. Watch as they panic and scramble to
+              save their work, only to realize that they've been pranked.
+            </div>
+            <div class="btn">
+              <a href="https://rikeshdahal.github.io/Window-Updating-Prank-Website/" target="_blank">Live View</a>
             </div>
           </div>
         </div>
@@ -377,12 +399,13 @@
     <section class="contact section" id="contact">
       <h2 class="section-title">Contact</h2>
 
-      <div class="contact__container bd-grid">
-        <form name="submit-to-google-sheet" action="" class="contact__form">
-          <input required name="name" type="text" placeholder="Name" class="contact__input" />
-          <input required name="email" type="email" placeholder="Email" class="contact__input" />
-          <textarea required name="message" id="" cols="0" rows="10" class="contact__input" placeholder="Enter Message"></textarea>
-          <button class="contact__button button" type="submit">Send</button>
+      <div class="contact-container bd-grid">
+        <form name="submit-to-google-sheet" action="" class="contact-form">
+          <input required name="name" type="text" placeholder="Name" class="contact-input" />
+          <input required name="email" type="email" placeholder="Email" class="contact-input" />
+          <textarea required name="message" id="" cols="0" rows="10" class="contact-input"
+            placeholder="Enter Message"></textarea>
+          <button class="contact-button button" id="button" type="submit">Send</button>
         </form>
         <span style="color: green" id="msg"></span>
       </div>
@@ -412,29 +435,28 @@
 
   <footer class="footer">
     <img class="footer_logo" href="#" src="https://i.postimg.cc/Fz8tSBHJ/logo.png" alt="" />
-    <div class="footer__social">
-      <a href="https://www.facebook.com/rikesh747" class="footer__icon" target="_blank"><i
+    <div class="footer-social">
+      <a href="https://www.facebook.com/rikesh747" class="footer-icon" target="_blank"><i
           class="bx bxl-facebook"></i></a>
-      <a href="https://www.instagram.com/mr.mad.h4ck3r/" class="footer__icon" target="_blank"><i
+      <a href="https://www.instagram.com/mr.mad.h4ck3r/" class="footer-icon" target="_blank"><i
           class="bx bxl-instagram"></i></a>
-      <a href="https://twitter.com/RikeshDahal10" class="footer__icon" target="_blank"><i
-          class="bx bxl-twitter"></i></a>
-      <a href="https://github.com/rikeshdahal" target="_blank" class="footer__icon"><i class="bx bxl-github"></i></a>
+      <a href="https://twitter.com/RikeshDahal10" class="footer-icon" target="_blank"><i class="bx bxl-twitter"></i></a>
+      <a href="https://github.com/rikeshdahal" target="_blank" class="footer-icon"><i class="bx bxl-github"></i></a>
     </div>
-    <p class="footer__copy animate__animated  animate__bounce animate__slower  animate__infinite ">
+    <p class="footer-copy animate-animated  animate-bounce animate-slower  animate-infinite ">
       © Created By Rikesh | © 2023 All Rights Reserved
     </p>
   </footer>
-  
+
 
   <script src="https://unpkg.com/scrollreveal"></script>
 
   <script src="main.js"></script>
-  <audio loop autoplay>
+  <!-- <audio loop autoplay>
     <source src="backmusic.ogg" type="audio/ogg" />
     <source src="backmusic.mp3" type="audio/mpeg" />
     Your browser does not support the audio element.
-  </audio>
+  </audio> -->
 </body>
 
 </html>
