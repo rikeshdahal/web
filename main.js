@@ -12,7 +12,7 @@ const showMenu = (toggleId, navId) =>{
 showMenu('nav-toggle','nav-menu')
 
 
-const navLink = document.querySelectorAll('.nav__link')
+const navLink = document.querySelectorAll('.nav-link')
 
 function linkAction(){
     const navMenu = document.getElementById('nav-menu')
@@ -32,9 +32,9 @@ function scrollActive(){
         sectionId = current.getAttribute('id')
 
         if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
-            document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.add('active')
+            document.querySelector('.nav-menu a[href*=' + sectionId + ']').classList.add('active')
         }else{
-            document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.remove('active')
+            document.querySelector('.nav-menu a[href*=' + sectionId + ']').classList.remove('active')
         }
     })
 }
@@ -55,18 +55,39 @@ const cards = document.querySelectorAll('.img');
 function dark(){
     alert("test");
 }
-const darkModeControl = () => {
-    const darkCheck = document.getElementById('night-light-checkbox');
-  
-    darkCheck.addEventListener('click', () => {
-      if (darkCheck.checked) {
-        alert("test")
-      } else {
-        alert("test")
-      }
-    })
-  
+const checkbox = document.getElementById('night-light-checkbox');
+var stxt = document.getElementById('stxt');
+var body = document.body;
+const  button = document.querySelectorAll('button');
+var social = document.getElementById('home-social-icon');
+var h1 =document.h1;
+var span = document.getElementsByTagName("span")
+
+checkbox.addEventListener('click', function() {
+  if (checkbox.checked) {
+
+
     
+    body.style.backgroundColor = 'black';
+    body.style.color = 'white';
+    stxt.style.color = 'white';
+    social.style.color = 'white';
+    span.classList.toggle("red");
+    button.style.color = 'black';
+    button.style.backgroundColor = 'white';
+    span.style.backgroundColor = 'black';
+
+    
+    // dark.style.backgroundColor = 'red';
+
+    console.log('Checkbox is checked!');
+  } else {
+    body.style.backgroundColor = 'white';
+    console.log('Checkbox is unchecked!');
+    social.style.color = 'black';
+    button.style.color = 'white';
+    button.style.backgroundColor = 'black';
   }
+});
   
   
