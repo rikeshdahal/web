@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="https://i.postimg.cc/Fz8tSBHJ/logo.png" type="image/x-icon" />
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Portfolio</title>
+</head>
+
+<body>
+  <header class="l-header">
+    <nav class="nav bd-grid">
+      <img href="#" class="nav-logo" src="https://i.postimg.cc/NGP7swjw/logo.png" alt="" />
+      <div class="nav-menu" id="nav-menu">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="javascript:void()" onclick="location.href='#home'" class="nav-link active"
+              style="color: blue">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="#about" class="nav-link" style="color: blue">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="#skills" class="nav-link" style="color: blue">Skills</a>
+          </li>
+          <li class="nav-item">
+            <a href="#work" class="nav-link" style="color: blue">Work</a>
+          </li>
+          <li class="nav-item">
+            <a href="#contact" class="nav-link" style="color: blue">Contact</a>
+          </li>
+        </ul>
+      </div>
+      <label for="night-light-checkbox" class="night-light-label">
+        <input type="checkbox" id="night-light-checkbox">
+        <span class="night-light-ball"></span>
+        <svg viewBox="0 0 512 512" class="sun-svg">
+          <path id="sun-svg"
+            d="M256 160c-52.9 0-96 43.1-96 96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.3 94.7c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3c13-6.5 13-24.7.2-31.1zm-155.9 106c-49.9 49.9-131.1 49.9-181 0-49.9-49.9-49.9-131.1 0-181 49.9-49.9 131.1-49.9 181 0 49.9 49.9 49.9 131.1 0 181z">
+          </path>
+        </svg>
+        <svg viewBox="0 0 512 512" class="moon-svg">
+          <path id="moon-svg"
+            d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z">
+          </path>
+        </svg>
+      </label>
+    </nav>
+  </header>
+
+
+  <main class="l-main ">
+    <section class="home bd-grid" id="home">
+
+      <div class="home-data">
+        <h1 class="home-title">राधे-राधे।</h1>
+        <div class="home-data">
+          <div class="wrapper">
+            <div class="static-txt" id="stxt">I'm a</div>
+            <ul class="dynamic-txts">
+              <li><span>YouTuber.</span></li>
+              <li><span>UI Designer.</span></li>
+              <li><span>Developer.</span></li>
+              <li><span>E-Hacker.</span></li>
+            </ul>
+          </div>
+          <br>
+
+
+        </div>
+        <a href="#" class="button" id="button">Download CV</a>
+      </div>
+      <div class="home-social">
+        <a href="https://www.facebook.com/rikesh747" target="_blank" class="home-social-icon" id="home-social-icon"><i
+            class="bx bxl-facebook"></i></a>
+        <a href="https://twitter.com/RikeshDahal10" target="_blank" class="home-social-icon" id="home-social-icon"><i
+            class="bx bxl-twitter"></i></a>
+        <a href="https://www.instagram.com/mr.mad.h4ck3r/" target="_blank" class="home-social-icon"
+          id="home-social-icon"><i class="bx bxl-instagram"></i></a>
+        <a href="https://github.com/rikeshdahal" target="_blank" class="home-social-icon" id="home-social-icon"><i
+            class="bx bxl-github"></i></a>
+      </div>
+
+      <div id="home-img">
+        <svg class="home-blob" viewBox="0 0 479 467" xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink">
+          <mask id="mask0" mask-type="alpha">
+            <path
+              d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z" />
+          </mask>
+          <g mask="url(#mask0)">
+            <path
+              d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z" />
+            <image class="home-blob-img  animate-animated  animate-shakeY animate-slower  animate-infinite" x="70"
+              y="20" href="https://i.postimg.cc/9M2YqZ4H/out-removebg-preview.png" />
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <section class="about section" id="about">
+      <h2 class="section-title">About</h2>
+
+      <div class="about-container bd-grid">
+        <div class="about-img  animate-animated  animate-pulse animate-slower  animate-infinite ">
+          <img
+            src="https://avatars.githubusercontent.com/u/85576731?s=400&u=9975aa087cb25efd9aa96352d2b0134bdc86a5b0&v=4"
+            alt="" />
+        </div>
+
+        <div>
+          <h2 class="about-subtitle">I'am Rikesh</h2>
+          <p class="about-text">
+            Hello! My name is Rikesh Dahal, and although I would prefer it if
+            you called me Mr. Mad Hacker, I'm from Sinamangal Kathmandu. I'm
+            night owl and a big fan of Technology. I'm currently a Patan
+            College student pursuing a BCA. Let me now describe what I do. I
+            work in a variety of fields, including Web Development, App
+            Development, Game Development, 3D Modeling and Animation, Graphic
+            Design, and Ethical Hacking.<br /><span>Fun fact:- In General, Programmers don't have girlfriends, but
+              I do;)</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="skills section" id="skills">
+      <h2 class="section-title">Skills</h2>
+
+      <div class="skills-container bd-grid">
+        <div>
+          <h2 class="skills-subtitle">Profesional Skills</h2>
+          <p class="skills-text">
+            As a Developer, I prefer making both 3D and 2D Games. I work with
+            3D design and animation in addition to C# coding. Hacking is my
+            absolute favorite.
+          </p>
+          <div class="skills-data">
+            <div class="skills-names">
+              <i class="bx bxs-game skills-icon"></i>
+              <span class="skills-name ">Game Development</span>
+            </div>
+            <div class="skills-bar skills-Game"></div>
+            <div>
+              <span class="skills-percentage">95%</span>
+            </div>
+          </div>
+          <div class="skills-data">
+            <div class="skills-names">
+              <i class="bx bxl-html5 skills-icon"></i>
+              <span class="skills-name">HTML</span>
+            </div>
+            <div class="skills-bar skills-html"></div>
+            <div>
+              <span class="skills-percentage">89%</span>
+            </div>
+          </div>
+          <div class="skills-data">
+            <div class="skills-names">
+              <i class="bx bxl-css3 skills-icon"></i>
+              <span class="skills-name">CSS</span>
+            </div>
+            <div class="skills-bar skills-css"></div>
+            <div>
+              <span class="skills-percentage">85%</span>
+            </div>
+          </div>
+          <div class="skills-data">
+            <div class="skills-names">
+              <i class="bx bxl-javascript skills-icon"></i>
+              <span class="skills-name">JAVASCRIPT</span>
+            </div>
+            <div class="skills-bar skills-js"></div>
+            <div>
+              <span class="skills-percentage">65%</span>
+            </div>
+          </div>
+          <div class="skills-data">
+            <div class="skills-names">
+              <i class="bx bxl-python skills-icon"></i>
+              <span class="skills-name">Python</span>
+            </div>
+            <div class="skills-bar skills-python"></div>
+            <div>
+              <span class="skills-percentage">50%</span>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <section class="work section" id="work">
+      <h2 class="section-title">My Recent Projects</h2>
+      <div class="container">
+        <div class="card">
+          <div class="img">
+            <img src="https://i.postimg.cc/fTymLPry/image.png">
+          </div>
+          <div class="top-text">
+            <div class="name">
+              DrumSet
+            </div>
+          </div>
+          <div class="bottom-text">
+            <div class="text">
+              The website where you can make your own beats with just a keyboard using a drum set!<br>
+              So why are you still waiting? Visit our drum set website now to get started making your own beats!
+            </div>
+            <div class="btn">
+              <a href="https://rikeshdahal.github.io/Drum-Set/" target="_blank">Live View</a>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="img">
+            <img src="https://i.postimg.cc/K8MNcY9J/image.png">
+          </div>
+          <div class="top-text">
+            <div class="name">
+              Ripple
+            </div>
+          </div>
+          <div class="bottom-text">
+            <div class="text">
+              The website that lets you add a unique touch to your user experience! With ripple, you can create a ripple
+              effect on mouse hover that adds a visually engaging element to your website.<br>
+              Whether you're looking to add a subtle touch of interactivity or want to create eye-catching
+              effect, Ripple is the perfect for you. So why wait? Head over to our website and start creating your
+              own ripples today!
+            </div>
+            <div class="btn">
+              <a href="https://rikeshdahal.github.io/Ripple/" target="_blank">Live View</a>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="img">
+            <img src="https://i.postimg.cc/SxgpjzmY/image.png">
+          </div>
+          <div class="top-text">
+            <div class="name">
+              Window Updating Prank Website
+            </div>
+          </div>
+          <div class="bottom-text">
+            <div class="text">
+              With just a few clicks, you can create a fake Windows update screen that will trick your friends and
+              family into thinking their computer is undergoing a critical update. Watch as they panic and scramble to
+              save their work, only to realize that they've been pranked.
+            </div>
+            <div class="btn">
+              <a href="https://rikeshdahal.github.io/Window-Updating-Prank-Website/" target="_blank">Live View</a>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="img">
+            <img src="https://i.postimg.cc/GpSwmVC1/image.png">
+          </div>
+          <div class="top-text">
+            <div class="name">
+              Touch Typing practice Keyboards
+            </div>
+          </div>
+          <div class="bottom-text">
+            <div class="text">
+              The website that helps you improve your typing skills and increase your speed and accuracy! With our
+              easy-to-use platform, you can practice touch typing on the keyboard and master the art of typing without
+              looking at the keys.<br>
+              So if you're ready to take your typing skills to the next level, head over to our Touch Typing Keyboard
+              website and start practicing today!
+            </div>
+            <div class="btn">
+              <a href="https://rikeshdahal.github.io/Touch_Typing_Keyboards/" target="_blank">Live View</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+
+    </section>
+    </div>
+    </section>
+
+    <section class="contact section" id="contact">
+      <h2 class="section-title">Contact</h2>
+
+      <div class="contact-container bd-grid">
+        <form name="submit-to-google-sheet" action="" class="contact-form">
+          <input required name="name" type="text" placeholder="Name" class="contact-input" />
+          <input required name="email" type="email" placeholder="Email" class="contact-input" />
+          <textarea required name="message" id="" cols="0" rows="10" class="contact-input"
+            placeholder="Enter Message"></textarea>
+          <button class="contact-button button" id="button" type="submit">Send</button>
+        </form>
+        <span style="color: green" id="msg"></span>
+      </div>
+    </section>
+    <script>
+      const scriptURL = "https://script.google.com/macros/s/AKfycbzon019UYvQfF6Tzzru3ArMkWeM68SvQJjVnuzn9ll-lUvONUIu_gcsW8FNxmHylhs5/exec";
+      const form = document.forms["submit-to-google-sheet"];
+      const msg = document.getElementById("msg");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        fetch(scriptURL, { method: "POST", body: new FormData(form) });
+        msg.innerHTML = "Message sent successfully!";
+        setTimeout(function () {
+          msg.innerHTML = "";
+        }, 5000);
+        form.reset();
+      });
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          .then((response) => console.log("Success!", response))
+          .catch((error) => console.error("Error!", error.message));
+      });
+    </script>
+  </main>
+
+  <footer class="footer">
+    <img class="footer_logo" href="#" src="https://i.postimg.cc/Fz8tSBHJ/logo.png" alt="" />
+    <div class="footer-social">
+      <a href="https://www.facebook.com/rikesh747" class="footer-icon" target="_blank"><i
+          class="bx bxl-facebook"></i></a>
+      <a href="https://www.instagram.com/mr.mad.h4ck3r/" class="footer-icon" target="_blank"><i
+          class="bx bxl-instagram"></i></a>
+      <a href="https://twitter.com/RikeshDahal10" class="footer-icon" target="_blank"><i class="bx bxl-twitter"></i></a>
+      <a href="https://github.com/rikeshdahal" target="_blank" class="footer-icon"><i class="bx bxl-github"></i></a>
+    </div>
+    <p class="footer-copy animate-animated  animate-bounce animate-slower  animate-infinite ">
+      © Created By Rikesh | © 2023 All Rights Reserved
+    </p>
+  </footer>
+
+
+  <script src="https://unpkg.com/scrollreveal"></script>
+
+  <script src="main.js"></script>
+  <!-- <audio loop autoplay>
+    <source src="backmusic.ogg" type="audio/ogg" />
+    <source src="backmusic.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio> -->
+</body>
+
+</html>
