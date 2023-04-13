@@ -4,7 +4,6 @@
   background-color: #333;
   color: #fff;
 }
-
 :root[data-theme="light"] {
   background-color: #fff;
   color: #333;
