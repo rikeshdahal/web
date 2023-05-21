@@ -64,29 +64,56 @@ var span = document.getElementsByTagName("span")
 
 checkbox.addEventListener('click', function() {
   if (checkbox.checked) {
-
-
-    
-    body.style.backgroundColor = 'black';
-    body.style.color = 'white';
-    stxt.style.color = 'white';
-    social.style.color = 'white';
-    span.classList.toggle("red");
-    button.style.color = 'black';
-    button.style.backgroundColor = 'white';
-    span.style.backgroundColor = 'black';
-
-    
-    // dark.style.backgroundColor = 'red';
-
+    var root = document.documentElement;
+    root.style.setProperty('--first-color', 'white');
+    root.style.setProperty('--second-color', 'black');
+    root.style.setProperty('--third-color', 'white');
+    root.style.setProperty('--forth-color', 'blue');
     console.log('Checkbox is checked!');
   } else {
-    body.style.backgroundColor = 'white';
-    console.log('Checkbox is unchecked!');
-    social.style.color = 'black';
-    button.style.color = 'white';
+    var root = document.documentElement;
+    root.style.setProperty('--first-color', 'black');
+    root.style.setProperty('--second-color', 'white');
+    root.style.setProperty('--third-color', 'blue');
+    root.style.setProperty('--forth-color', 'black');
+
     button.style.backgroundColor = 'black';
   }
 });
   
   
+// typing effect
+
+const words = ["YouTuber", "Hacker", "Game Developer", "Programmer"];
+    let wordIndex = 0;
+    let charIndex = 0;
+    const speed = 100; // Adjust typing speed (milliseconds)
+
+    function type() {
+      const typingText = document.querySelector(".typing-text");
+      typingText.textContent += words[wordIndex].charAt(charIndex);
+      charIndex++;
+
+      if (charIndex < words[wordIndex].length) {
+        setTimeout(type, speed);
+      } else {
+        // Move to the next word
+        setTimeout(erase, speed * 2);
+      }
+    }
+
+    function erase() {
+      const typingText = document.querySelector(".typing-text");
+      typingText.textContent = words[wordIndex].substring(0, charIndex);
+      charIndex--;
+
+      if (charIndex >= 0) {
+        setTimeout(erase, speed);
+      } else {
+        // Move to the next word
+        wordIndex = (wordIndex + 1) % words.length;
+        setTimeout(type, speed);
+      }
+    }
+
+    type();
