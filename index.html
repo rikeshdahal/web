@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,15 +32,63 @@
         }
     </script>
     <style type="text/css">
+        .logo-container {
+            position: relative;
+            width: 40px;
+            /* Reduced size to match navbar height */
+            height: 40px;
+        }
+
+        .logo-container svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .eye {
+            width: 4px;
+            /* Scaled down proportionally */
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pupil {
+            width: 2px;
+            /* Scaled down proportionally */
+            height: 2px;
+            background: #000;
+            border-radius: 50%;
+            position: relative;
+            transition: transform 0.1s;
+        }
+
+        .eye-left {
+            top: 21px;
+            /* Adjusted for new logo size */
+            left: 11px;
+        }
+
+        .eye-right {
+            top: 21px;
+            left: 25px;
+        }
+
         .carousel-container {
             position: relative;
             overflow: hidden;
             width: 100%;
         }
+
         .carousel-track {
             display: flex;
             transition: transform 0.5s ease-in-out;
         }
+
         .project-card {
             flex: 0 0 100%;
             max-width: 100%;
@@ -49,23 +97,27 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
+
         @media (min-width: 640px) {
             .project-card {
                 flex: 0 0 50%;
                 max-width: calc(50% - 16px);
             }
         }
+
         @media (min-width: 1024px) {
             .project-card {
                 flex: 0 0 33.333%;
                 max-width: calc(33.333% - 16px);
             }
         }
+
         .project-card:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
         .blog-card,
         .skill-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -73,11 +125,13 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
+
         .blog-card:hover,
         .skill-card:hover {
             transform: translateY(-8px) rotate(1deg);
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
         }
+
         .swap-button {
             position: absolute;
             top: 50%;
@@ -96,33 +150,46 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
         }
+
         .swap-button:hover {
             background: rgba(255, 255, 255, 0.2);
         }
-        .next-button { right: 8px; }
-        .prev-button { left: 8px; }
+
+        .next-button {
+            right: 8px;
+        }
+
+        .prev-button {
+            left: 8px;
+        }
+
         .hero-image {
             background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url('https://i.postimg.cc/2SKh2yTp/out-removebg-preview.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
         }
+
         .dark .hero-image {
             background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url('https://i.postimg.cc/2SKh2yTp/out-removebg-preview.png');
         }
+
         .mobile-menu {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
         }
+
         .mobile-menu.open {
             max-height: 500px;
         }
+
         .nav-button {
             position: relative;
             overflow: hidden;
             transition: color 0.3s;
         }
+
         .nav-button::after {
             content: '';
             position: absolute;
@@ -133,22 +200,41 @@
             background: #000000;
             transition: left 0.3s ease-in-out;
         }
+
         .nav-button:hover::after {
             left: 0;
         }
+
         .shake-button {
             position: relative;
         }
+
         .shake-button:hover {
             animation: simple-shake 0.5s infinite;
         }
+
         @keyframes simple-shake {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-2px); }
-            50% { transform: translateX(2px); }
-            75% { transform: translateX(-2px); }
-            100% { transform: translateX(0); }
+            0% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-2px);
+            }
+
+            50% {
+                transform: translateX(2px);
+            }
+
+            75% {
+                transform: translateX(-2px);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
         }
+
         .switch {
             font-size: 16px;
             position: relative;
@@ -156,11 +242,13 @@
             width: 60px;
             height: 32px;
         }
+
         .switch input {
             opacity: 0;
             width: 0;
             height: 0;
         }
+
         .slider {
             position: absolute;
             cursor: pointer;
@@ -172,6 +260,7 @@
             transition: .4s;
             border-radius: 32px;
         }
+
         .slider:before {
             position: absolute;
             content: "";
@@ -184,6 +273,7 @@
             background-color: #ffffff;
             transition: .4s;
         }
+
         .sun svg {
             position: absolute;
             top: 6px;
@@ -192,6 +282,7 @@
             width: 20px;
             height: 20px;
         }
+
         .moon svg {
             fill: #000000;
             position: absolute;
@@ -201,52 +292,89 @@
             width: 20px;
             height: 20px;
         }
+
         .sun svg {
             animation: rotate 15s linear infinite;
         }
+
         @keyframes rotate {
-            0% { transform: rotate(0); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
+
         .moon svg {
             animation: tilt 5s linear infinite;
         }
+
         @keyframes tilt {
-            0% { transform: rotate(0deg); }
-            25% { transform: rotate(-10deg); }
-            75% { transform: rotate(10deg); }
-            100% { transform: rotate(0deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(-10deg);
+            }
+
+            75% {
+                transform: rotate(10deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
         }
+
         .input:checked+.slider {
             background-color: #333333;
         }
+
         .input:focus+.slider {
             box-shadow: 0 0 1px #333333;
         }
+
         .input:checked+.slider:before {
             transform: translateX(28px);
         }
+
         .wave-text span {
             display: inline-block;
             animation: softBhajan 2.5s ease-in-out infinite;
             animation-delay: calc(var(--i) * 0.2s);
             text-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
         }
+
         @keyframes softBhajan {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.05); opacity: 0.85; }
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 0.85;
+            }
         }
+
         .progress-bar {
             height: 6px;
             background: #e5e7eb;
             border-radius: 3px;
             overflow: hidden;
         }
+
         .progress-bar-fill {
             height: 100%;
             background: #000000;
             transition: width 2s ease-in-out;
         }
+
         .about-image-container {
             position: relative;
             width: 100%;
@@ -255,9 +383,11 @@
             border-radius: 10px;
             border: 2px solid rgba(229, 231, 235, 0.5);
         }
+
         .dark .about-image-container {
             border: 2px solid rgba(55, 65, 81, 0.5);
         }
+
         .about-image-container img {
             width: 100%;
             height: 100%;
@@ -265,63 +395,160 @@
             object-position: center;
             border-radius: 8px;
         }
+
         .show-more-btn {
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
+
         .show-more-btn:hover {
             background-color: #1f2937;
             transform: scale(1.05);
         }
+
         @media (max-width: 768px) {
             .hero-image {
                 background-attachment: scroll;
             }
+
             .text-6xl {
                 font-size: calc(2rem + 2vw);
             }
+
             .text-4xl {
                 font-size: calc(1.5rem + 1.5vw);
             }
+
             .text-3xl {
                 font-size: calc(1.25rem + 1vw);
             }
+
             .switch {
                 transform: scale(0.9);
             }
+
+            .logo-container {
+                width: 36px;
+                /* Slightly smaller for tablets */
+                height: 36px;
+            }
+
+            .eye {
+                width: 3.5px;
+                height: 3.5px;
+            }
+
+            .pupil {
+                width: 1.8px;
+                height: 1.8px;
+            }
+
+            .eye-left {
+                top: 19px;
+                left: 10px;
+            }
+
+            .eye-right {
+                top: 19px;
+                left: 23px;
+            }
+
             .blog-card,
             .project-card,
             .skill-card {
                 margin: 0 8px;
             }
+
             .about-image-container {
                 height: 60vw;
                 max-height: 360px;
             }
         }
+
         @media (max-width: 640px) {
+
             .blog-grid,
             .skill-grid {
                 grid-template-columns: 1fr;
             }
+
+            .logo-container {
+                width: 32px;
+                /* Even smaller for mobile */
+                height: 32px;
+            }
+
+            .eye {
+                width: 3px;
+                height: 3px;
+            }
+
+            .pupil {
+                width: 1.5px;
+                height: 1.5px;
+            }
+
+            .eye-left {
+                top: 17px;
+                left: 9px;
+            }
+
+            .eye-right {
+                top: 17px;
+                left: 21px;
+            }
+
             .about-image-container {
                 height: 70vw;
                 max-height: 320px;
             }
+
             .text-6xl {
                 font-size: calc(1.75rem + 1.5vw);
             }
+
             .text-4xl {
                 font-size: calc(1.25rem + 1vw);
             }
+
             .text-3xl {
                 font-size: calc(1rem + 0.8vw);
             }
         }
+
+        @media (max-width: 480px) {
+            .logo-container {
+                width: 28px;
+                /* Smallest size for very small screens */
+                height: 28px;
+            }
+
+            .eye {
+                width: 2.5px;
+                height: 2.5px;
+            }
+
+            .pupil {
+                width: 1.2px;
+                height: 1.2px;
+            }
+
+            .eye-left {
+                top: 15px;
+                left: 8px;
+            }
+
+            .eye-right {
+                top: 15px;
+                left: 19px;
+            }
+        }
+
         #kimiIframeWrapper {
             background-color: #001f3d;
             max-width: 90vw;
             max-height: 90vh;
         }
+
         img:hover {
             filter: brightness(1.1) drop-shadow(0 0 8px #ff66cc);
         }
@@ -341,12 +568,12 @@
             cursor: default;
             z-index: 9999;
             opacity: 1;
-            transition: opacity 0.8s ease; 
+            transition: opacity 0.8s ease;
             background: rgba(243, 244, 246, 0.9);
         }
 
         .dark #load {
-            background: rgba(17, 24, 39, 0.9); 
+            background: rgba(17, 24, 39, 0.9);
         }
 
         #load.hidden {
@@ -363,19 +590,36 @@
             font-weight: 600;
             animation: move 2s linear infinite;
             transform: rotate(180deg);
-            color: #000000; 
+            color: #000000;
         }
 
         .dark #load div {
-            color: #ffffff; 
+            color: #ffffff;
         }
 
-        #load div:nth-child(2) { animation-delay: 0.2s; }
-        #load div:nth-child(3) { animation-delay: 0.4s; }
-        #load div:nth-child(4) { animation-delay: 0.6s; }
-        #load div:nth-child(5) { animation-delay: 0.8s; }
-        #load div:nth-child(6) { animation-delay: 1.0s; }
-        #load div:nth-child(7) { animation-delay: 1.2s; }
+        #load div:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        #load div:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        #load div:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+
+        #load div:nth-child(5) {
+            animation-delay: 0.8s;
+        }
+
+        #load div:nth-child(6) {
+            animation-delay: 1.0s;
+        }
+
+        #load div:nth-child(7) {
+            animation-delay: 1.2s;
+        }
 
         @keyframes move {
             0% {
@@ -383,16 +627,19 @@
                 opacity: 0;
                 transform: rotate(180deg);
             }
+
             35% {
                 left: 41%;
                 transform: rotate(0deg);
                 opacity: 1;
             }
+
             65% {
                 left: 59%;
                 transform: rotate(0deg);
                 opacity: 1;
             }
+
             100% {
                 left: 100%;
                 transform: rotate(-180deg);
@@ -422,7 +669,7 @@
         body.loading .fixed.bottom-20 {
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.8s ease, visibility 0s linear 0.8s; 
+            transition: opacity 0.8s ease, visibility 0s linear 0.8s;
         }
 
         body:not(.loading) main,
@@ -437,7 +684,9 @@
         }
     </style>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 font-sans transition-colors duration-300 loading">
+
+<body
+    class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 font-sans transition-colors duration-300 loading">
     <div id="load">
         <div>G</div>
         <div>N</div>
@@ -451,17 +700,50 @@
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
                 <div class="flex items-center">
-                    <a href="#home" class="flex items-center">
-                        <span class="text-xl font-bold text-gray-800 dark:text-gray-200 transform -rotate-12">MR.MAD</span>
-                    </a>
+                    <div class="logo-container">
+                        <div class="face">
+                            <a class="elementor-icon" href="https://rikeshdahal.com.np"
+                                aria-label="Rikesh Dahal Website">
+                                <svg xmlns="http://www.w3.org/2000/svg" id="uuid-9a7a8dc2-799a-4ff8-9fa3-2e3ce63c700d"
+                                    viewBox="0 0 315.08 335">
+                                    <text transform="translate(49.38 275.95) scale(1.04 1)"
+                                        style="fill:#ffffff; font-family:cursive, Poppins; font-size:65px; font-weight:700; letter-spacing:-.08em;">
+                                        <tspan x="49" y="0">MR</tspan>
+                                    </text>
+                                    <text transform="translate(0 312.21) scale(1.07 1)"
+                                        style="fill:#000000; font-family:cursive, Poppins; font-size:37px; font-weight:700; letter-spacing:-.05em;">
+                                        <tspan x="100" y="0">MAD</tspan>
+                                    </text>
+                                    <path
+                                        d="m269.29,154.32c-.02-3.02-2.67-5.43-6.73-6.14-3.56-.62-34.22-1.55-50.16-1.44-17.97.14-28.43,2.63-38.05,5.44-6.86,2-12.79,3.74-20.27,4.16-7.48-.42-13.41-2.15-20.27-4.16-9.62-2.81-20.08-5.31-38.05-5.44-15.94-.11-46.59.81-50.16,1.44-4.06.71-6.71,3.12-6.73,6.14l-.09,10.95c0,.78.53,1.46,1.3,1.65,2.67.65,5.69,1.39,8.24,21.02,2.87,22.12,16.42,33.42,40.27,33.6,21.22,0,46.05-7.75,54.15-28.66,5.81-14.98,8.54-18.62,11.33-18.75,2.78.13,5.52,3.77,11.33,18.75,8.1,20.91,32.93,28.66,54.15,28.66,23.85-.18,37.4-11.49,40.27-33.6,2.55-19.63,5.57-20.37,8.24-21.02.77-.19,1.31-.87,1.3-1.65l-.09-10.95Zm-136.65,38.76c-8.42,13.55-29.97,20.46-40.48,20.36-12.96-.11-22.99-3.55-28.25-10-6.2-7.61-7.19-34.33-1.52-41.33,2.29-2.83,16.82-8.18,34.96-7.53,20.6.74,33.55,4.13,38.45,11.81,4.98,7.81,1.73,18.78-3.18,26.67Zm111.6,10.36c-5.25,6.45-15.28,9.88-28.25,10-10.5.09-32.06-6.82-40.48-20.36-4.9-7.89-8.16-18.87-3.18-26.67,4.9-7.68,17.85-11.07,38.45-11.81,18.15-.65,32.67,4.7,34.96,7.53,5.67,6.99,4.68,33.72-1.52,41.33Z"
+                                        style="fill:#000000;"></path>
+                                    <path
+                                        d="m196.1,100.5c-15.69-3.26-49.13-23.16-46.85-31.01,8.47,13.47,28.46,18.69,30.98,18.53l2.66-.45c13.75-.64,28.31,1,34.99,7.68,6.07,6.07,15.43,27,15.08,47.7,5.1.17,9.55.36,12.36.54,4.08-14.28,7.15-30.28,3.67-41.14,0,0-2.09,5.57-4.52,6.72.28-6.17,1.68-26.65,6.17-27.22-4.32-4.12-8.98-3.09-10.38,0-1.4-3.65-1.4-14.87,3.65-16.55-5.05-5.05-11.5-4.21-13.47-1.96-4.21-8.42-13.75-29.74-33.39-33.67,3.85,6.33,6.17,13.75,6.17,17.68-4.28-11.17-18.43-23.79-31.83-20.73-17.31,3.95-40.09-1.25-41.68-9.01-2.81,3.37-1.41,11.83,3.37,14.87-9.82.84-47.02-15.11-49.33-32.48-9.76,13.82-.91,44.16,10.33,45.1-3.73,3.25-14.29-1.71-16.83-7.86-5.83,4.57-5.96,18.31-.84,24.97-7.09-2.14-13.86-13.21-11.05-17.98-12.39,7.31-18.1,36.77-9.15,53.33,5.59,10.34,5.17,31.97,7.74,45.85,1.93-.11,4.43-.22,7.25-.33-2.3-27.14,5.81-54.72,24.75-57.57,17.82-2.67,36.55,2.61,51.58,4.5-4.16-3.51-6.79-7.63-5.57-11.83,6.39,10.75,27.37,22.57,54.14,22.31Z"
+                                        style="fill:#ffffff;"></path>
+                                </svg>
+                            </a>
+                            <div class="eye eye-left">
+                                <div class="pupil" id="pupil-left"></div>
+                            </div>
+                            <div class="eye eye-right">
+                                <div class="pupil" id="pupil-right"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <nav class="hidden md:flex space-x-6">
-                    <a href="#home" class="nav-button text-base font-medium text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400">Home</a>
-                    <a href="#about" class="nav-button text-base font-medium text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400">About</a>
-                    <a href="#skills" class="nav-button text-base font-medium text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400">Skills</a>
-                    <a href="#work" class="nav-button text-base font-medium text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400">Work</a>
-                    <a href="#blog" class="nav-button text-base font-medium text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400">Blog</a>
-                    <a href="#contact" class="nav-button text-base font-medium text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400">Contact</a>
+                    <a href="#home"
+                        class="nav-button text-base font-medium text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400">Home</a>
+                    <a href="#about"
+                        class="nav-button text-base font-medium text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400">About</a>
+                    <a href="#skills"
+                        class="nav-button text-base font-medium text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400">Skills</a>
+                    <a href="#work"
+                        class="nav-button text-base font-medium text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400">Work</a>
+                    <a href="#blog"
+                        class="nav-button text-base font-medium text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400">Blog</a>
+                    <a href="#contact"
+                        class="nav-button text-base font-medium text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400">Contact</a>
                 </nav>
                 <div class="flex items-center space-x-3">
                     <label class="switch" id="theme-toggle-label" aria-label="Toggle dark mode">
@@ -469,33 +751,45 @@
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <g fill="#ffd43b">
                                     <circle r="5" cy="12" cx="12"></circle>
-                                    <path d="m21 13h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm-17 0h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm13.66-5.66a1 1 0 0 1 -.66-.29 1 1 0 0 1 0-1.41l.71-.71a1 1 0 1 1 1.41 1.41l-.71.71a1 1 0 0 1 -.75.29zm-12.02 12.02a1 1 0 0 1 -.71-.29 1 1 0 0 1 0-1.41l.71-.66a1 1 0 0 1 1.41 1.41l-.71.71a1 1 0 0 1 -.7.24zm6.36-14.36a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm0 17a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm-5.66-14.66a1 1 0 0 1 -.7-.29l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.29zm12.02 12.02a1 1 0 0 1 -.7-.29l-.66-.71a1 1 0 0 1 1.36-1.36l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.24z"></path>
+                                    <path
+                                        d="m21 13h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm-17 0h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm13.66-5.66a1 1 0 0 1 -.66-.29 1 1 0 0 1 0-1.41l.71-.71a1 1 0 1 1 1.41 1.41l-.71.71a1 1 0 0 1 -.75.29zm-12.02 12.02a1 1 0 0 1 -.71-.29 1 1 0 0 1 0-1.41l.71-.66a1 1 0 0 1 1.41 1.41l-.71.71a1 1 0 0 1 -.7.24zm6.36-14.36a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm0 17a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm-5.66-14.66a1 1 0 0 1 -.7-.29l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.29zm12.02 12.02a1 1 0 0 1 -.7-.29l-.66-.71a1 1 0 0 1 1.36-1.36l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.24z">
+                                    </path>
                                 </g>
                             </svg>
                         </span>
                         <span class="moon">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                                <path d="m223.5 32c-123.5 0-223.5 100.3-223.5 224s100 224 223.5 224c60.6 0 115.5-24.2 155.8-63.4 5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6-96.9 0-175.5-78.8-175.5-176 0-65.8 36-123.1 89.3-153.3 6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path>
+                                <path
+                                    d="m223.5 32c-123.5 0-223.5 100.3-223.5 224s100 224 223.5 224c60.6 0 115.5-24.2 155.8-63.4 5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6-96.9 0-175.5-78.8-175.5-176 0-65.8 36-123.1 89.3-153.3 6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z">
+                                </path>
                             </svg>
                         </span>
                         <input type="checkbox" id="theme-toggle" class="input">
                         <span class="slider"></span>
                     </label>
                     <button id="mobile-menu-button" class="md:hidden p-2 rounded-full focus:outline-none">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
                     </button>
                 </div>
             </div>
             <div id="mobile-menu" class="mobile-menu md:hidden bg-gray-100 dark:bg-gray-900">
                 <div class="px-2 pt-2 pb-4 space-y-1">
-                    <a href="#home" class="nav-button block px-3 py-2 rounded-md text-sm font-medium text-gray-800 dark:text-gray-200 dark:hover:bg-gray-800">Home</a>
-                    <a href="#about" class="nav-button block px-3 py-2 rounded-md text-sm font-medium text-gray-800 dark:text-gray-200 dark:hover:bg-gray-800">About</a>
-                    <a href="#skills" class="nav-button block px-3 py-2 rounded-md text-sm font-medium text-gray-800 dark:text-gray-200 dark:hover:bg-gray-800">Skills</a>
-                    <a href="#work" class="nav-button block px-3 py-2 rounded-md text-sm font-medium text-gray-800 dark:text-gray-200 dark:hover:bg-gray-800">Work</a>
-                    <a href="#blog" class="nav-button block px-3 py-2 rounded-md text-sm font-medium text-gray-800 dark:text-gray-200 dark:hover:bg-gray-800">Blog</a>
-                    <a href="#contact" class="nav-button block px-3 py-2 rounded-md text-sm font-medium text-gray-800 dark:text-gray-200 dark:hover:bg-gray-800">Contact</a>
+                    <a href="#home"
+                        class="nav-button block px-3 py-2 rounded-md text-sm font-medium text-gray-800 dark:text-gray-200 dark:hover:bg-gray-800">Home</a>
+                    <a href="#about"
+                        class="nav-button block px-3 py-2 rounded-md text-sm font-medium text-gray-800 dark:text-gray-200 dark:hover:bg-gray-800">About</a>
+                    <a href="#skills"
+                        class="nav-button block px-3 py-2 rounded-md text-sm font-medium text-gray-800 dark:text-gray-200 dark:hover:bg-gray-800">Skills</a>
+                    <a href="#work"
+                        class="nav-button block px-3 py-2 rounded-md text-sm font-medium text-gray-800 dark:text-gray-200 dark:hover:bg-gray-800">Work</a>
+                    <a href="#blog"
+                        class="nav-button block px-3 py-2 rounded-md text-sm font-medium text-gray-800 dark:text-gray-200 dark:hover:bg-gray-800">Blog</a>
+                    <a href="#contact"
+                        class="nav-button block px-3 py-2 rounded-md text-sm font-medium text-gray-800 dark:text-gray-200 dark:hover:bg-gray-800">Contact</a>
                 </div>
             </div>
         </div>
@@ -510,10 +804,15 @@
                     <span style="--i:11">!</span>
                 </h1>
                 <p class="text-lg sm:text-xl md:text-2xl mb-6 max-w-3xl mx-auto">Hey! It's Me Rikesh ;)</p>
-                <p class="text-lg sm:text-xl md:text-2xl mb-8 max-w-3xl mx-auto">I am a <span class="typing-text"></span></p>
+                <p class="text-lg sm:text-xl md:text-2xl mb-8 max-w-3xl mx-auto">I am a <span
+                        class="typing-text"></span></p>
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="https://drive.google.com/file/d/1G6-E4KQUMgtEI_2eS77aYUM7MkICjfXk/view?usp=sharing" class="shake-button bg-gray-200 text-gray-800 hover:bg-gray-300 font-semibold py-2 px-6 rounded-lg transition duration-300">Download CV</a>
-                    <a href="https://rikeshdahal.github.io/Terminal-Portfolio/" class="shake-button bg-transparent border-2 border-gray-200 hover:bg-gray-200 hover:text-gray-800 font-semibold py-2 px-6 rounded-lg transition duration-300">Developer Mode</a>
+                    <a href="https://drive.google.com/file/d/1G6-E4KQUMgtEI_2eS77aYUM7MkICjfXk/view?usp=sharing"
+                        class="shake-button bg-gray-200 text-gray-800 hover:bg-gray-300 font-semibold py-2 px-6 rounded-lg transition duration-300">Download
+                        CV</a>
+                    <a href="https://rikeshdahal.github.io/Terminal-Portfolio/"
+                        class="shake-button bg-transparent border-2 border-gray-200 hover:bg-gray-200 hover:text-gray-800 font-semibold py-2 px-6 rounded-lg transition duration-300">Developer
+                        Mode</a>
                 </div>
                 <div class="mt-12 scroll-indicator">
                     <a href="#about" class="text-gray-200 animate-bounce inline-block">
@@ -527,7 +826,8 @@
                 <div class="text-center mb-12">
                     <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-gray-800 dark:text-gray-200">About Me</h2>
                     <div class="w-16 h-1 bg-gray-800 mx-auto mb-4"></div>
-                    <p class="text-base sm:text-lg max-w-3xl mx-auto text-gray-600 dark:text-gray-300">I'm a passionate developer and tech enthusiast dedicated to creating innovative solutions.</p>
+                    <p class="text-base sm:text-lg max-w-3xl mx-auto text-gray-600 dark:text-gray-300">I'm a passionate
+                        developer and tech enthusiast dedicated to creating innovative solutions.</p>
                 </div>
                 <div class="grid md:grid-cols-2 gap-8 items-center">
                     <div class="relative">
@@ -535,19 +835,34 @@
                             <img src="https://rikeshdahal.com.np/rikesh.png" alt="Rikesh" loading="lazy">
                             <div id="rippleContainerAbout" class="absolute inset-0 pointer-events-none"></div>
                         </div>
-                        <div class="absolute -bottom-4 -right-4 bg-gray-200 dark:bg-gray-700 p-4 rounded-lg shadow-lg w-2/3 sm:w-1/2">
-                            <h3 class="font-semibold text-base mb-1 text-gray-800 dark:text-gray-200">Tech Enthusiast</h3>
+                        <div
+                            class="absolute -bottom-4 -right-4 bg-gray-200 dark:bg-gray-700 p-4 rounded-lg shadow-lg w-2/3 sm:w-1/2">
+                            <h3 class="font-semibold text-base mb-1 text-gray-800 dark:text-gray-200">Tech Enthusiast
+                            </h3>
                             <p class="text-sm text-gray-600 dark:text-gray-300">Skilled in multiple domains</p>
                         </div>
                     </div>
                     <div>
                         <h3 class="text-xl sm:text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">Who I Am</h3>
-                        <p class="mb-4 text-sm sm:text-base text-gray-600 dark:text-gray-300">Hello! My name is Rikesh Dahal, from Sinamangal, Kathmandu. I'm a BCA student at Patan College and a tech enthusiast. I completed a 2-month internship at Insight Workshop, specializing in Django (DRF) and Data Engineering. My expertise spans Web Development, App Development, Game Development, 3D Modeling, Graphic Design, and Ethical Hacking.<br><span class="font-semibold">Fun fact: Programmers often don't have girlfriends, but I do ;)</span></p>
+                        <p class="mb-4 text-sm sm:text-base text-gray-600 dark:text-gray-300">Hello! My name is Rikesh
+                            Dahal, from Sinamangal, Kathmandu. I'm a BCA student at Patan College and a tech enthusiast.
+                            I completed a 2-month internship at Insight Workshop, specializing in Django (DRF) and Data
+                            Engineering. My expertise spans Web Development, App Development, Game Development, 3D
+                            Modeling, Graphic Design, and Ethical Hacking.<br><span class="font-semibold">Fun fact:
+                                Programmers often don't have girlfriends, but I do ;)</span></p>
                         <div class="flex space-x-3">
-                            <a href="https://www.facebook.com/rikesh747" target="_blank" class="text-gray-600 hover:text-gray-800 dark:hover:text-gray-400 text-xl" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                            <a href="https://twitter.com/RikeshDahal10" target="_blank" class="text-gray-600 hover:text-gray-800 dark:hover:text-gray-400 text-xl" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                            <a href="https://www.instagram.com/mr.mad.h4ck3r/" target="_blank" class="text-gray-600 hover:text-gray-800 dark:hover:text-gray-400 text-xl" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="https://github.com/rikeshdahal" target="_blank" class="text-gray-600 hover:text-gray-800 dark:hover:text-gray-400 text-xl" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="https://www.facebook.com/rikesh747" target="_blank"
+                                class="text-gray-600 hover:text-gray-800 dark:hover:text-gray-400 text-xl"
+                                aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                            <a href="https://twitter.com/RikeshDahal10" target="_blank"
+                                class="text-gray-600 hover:text-gray-800 dark:hover:text-gray-400 text-xl"
+                                aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/mr.mad.h4ck3r/" target="_blank"
+                                class="text-gray-600 hover:text-gray-800 dark:hover:text-gray-400 text-xl"
+                                aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://github.com/rikeshdahal" target="_blank"
+                                class="text-gray-600 hover:text-gray-800 dark:hover:text-gray-400 text-xl"
+                                aria-label="GitHub"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                 </div>
@@ -558,14 +873,16 @@
                 <div class="text-center mb-12">
                     <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-gray-200 mb-4">My Skills</h2>
                     <div class="w-16 h-1 bg-gray-800 mx-auto mb-4"></div>
-                    <p class="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">A showcase of my technical expertise across various domains.</p>
+                    <p class="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">A showcase of my
+                        technical expertise across various domains.</p>
                 </div>
                 <div id="skills-grid" class="skill-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     <noscript>
                         <div class="skill-card p-5 rounded-lg border border-gray-200 dark:border-gray-700">
                             <div class="flex items-center mb-3">
                                 <i class="fas fa-info-circle text-2xl mr-2"></i>
-                                <h3 class="text-md font-semibold text-gray-800 dark:text-gray-200">Skill Unavailable</h3>
+                                <h3 class="text-md font-semibold text-gray-800 dark:text-gray-200">Skill Unavailable
+                                </h3>
                             </div>
                             <p class="text-sm text-gray-600 dark:text-gray-300">Enable JavaScript to view skills.</p>
                         </div>
@@ -576,30 +893,39 @@
         <section id="work" class="py-16 bg-gray-50 dark:bg-gray-800">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-gray-200 mb-4">My Recent Projects</h2>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-gray-200 mb-4">My Recent Projects
+                    </h2>
                     <div class="w-16 h-1 bg-gray-800 mx-auto mb-4"></div>
-                    <p class="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">Explore some of my latest work showcasing creativity and technical expertise.</p>
+                    <p class="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">Explore some of
+                        my latest work showcasing creativity and technical expertise.</p>
                 </div>
                 <div class="carousel-container">
                     <div class="carousel-track" id="carouselTrack">
                         <noscript>
                             <div class="project-card rounded-lg shadow-md overflow-hidden">
-                                <img src="https://via.placeholder.com/400x200" alt="Fallback Project" class="w-full h-40 sm:h-48 object-cover" loading="lazy">
+                                <img src="https://via.placeholder.com/400x200" alt="Fallback Project"
+                                    class="w-full h-40 sm:h-48 object-cover" loading="lazy">
                                 <div class="p-5">
-                                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-2">Project Unavailable</h3>
-                                    <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">Enable JavaScript to view projects.</p>
+                                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-2">Project
+                                        Unavailable</h3>
+                                    <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">Enable JavaScript to view
+                                        projects.</p>
                                 </div>
                             </div>
                         </noscript>
                     </div>
                     <button class="swap-button prev-button" onclick="prevSlide()">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                            </path>
                         </svg>
                     </button>
                     <button class="swap-button next-button" onclick="nextSlide()">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
                         </svg>
                     </button>
                 </div>
@@ -610,21 +936,27 @@
                 <div class="text-center mb-12">
                     <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-gray-200 mb-4">My Blog</h2>
                     <div class="w-16 h-1 bg-gray-800 mx-auto mb-4"></div>
-                    <p class="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">Insights, tutorials, and updates from my tech journey.</p>
+                    <p class="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">Insights,
+                        tutorials, and updates from my tech journey.</p>
                 </div>
                 <div id="blog-posts" class="blog-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     <noscript>
                         <div class="blog-card rounded-lg shadow-md overflow-hidden">
-                            <img src="https://via.placeholder.com/400x200" alt="Fallback Blog" class="w-full h-40 object-cover" loading="lazy">
+                            <img src="https://via.placeholder.com/400x200" alt="Fallback Blog"
+                                class="w-full h-40 object-cover" loading="lazy">
                             <div class="p-5">
-                                <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-2">Blog Post Unavailable</h3>
-                                <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">Enable JavaScript to view blog posts.</p>
+                                <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-2">Blog Post
+                                    Unavailable</h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">Enable JavaScript to view blog
+                                    posts.</p>
                             </div>
                         </div>
                     </noscript>
                 </div>
                 <div id="show-more-container" class="text-center mt-8">
-                    <button id="show-more-btn" class="show-more-btn bg-gray-800 text-gray-200 font-semibold py-2 px-6 rounded-lg transition duration-300 hidden">Show More</button>
+                    <button id="show-more-btn"
+                        class="show-more-btn bg-gray-800 text-gray-200 font-semibold py-2 px-6 rounded-lg transition duration-300 hidden">Show
+                        More</button>
                 </div>
             </div>
         </section>
@@ -633,31 +965,46 @@
                 <div class="text-center mb-12">
                     <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-gray-200 mb-4">Contact Me</h2>
                     <div class="w-16 h-1 bg-gray-800 mx-auto mb-4"></div>
-                    <p class="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">Get in touch for collaboration, projects, or just to say hi!</p>
+                    <p class="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">Get in touch for
+                        collaboration, projects, or just to say hi!</p>
                 </div>
                 <div class="flex flex-col lg:flex-row gap-8">
                     <div class="lg:w-1/2">
                         <form id="contact-form" class="space-y-5">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                 <div>
-                                    <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
-                                    <input type="text" id="name" name="name" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 dark:bg-gray-800 dark:text-gray-200 text-sm" required>
+                                    <label for="name"
+                                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
+                                    <input type="text" id="name" name="name"
+                                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 dark:bg-gray-800 dark:text-gray-200 text-sm"
+                                        required>
                                 </div>
                                 <div>
-                                    <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
-                                    <input type="email" id="email" name="email" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 dark:bg-gray-800 dark:text-gray-200 text-sm" required>
+                                    <label for="email"
+                                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+                                    <input type="email" id="email" name="email"
+                                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 dark:bg-gray-800 dark:text-gray-200 text-sm"
+                                        required>
                                 </div>
                             </div>
                             <div>
-                                <label for="subject" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Subject</label>
-                                <input type="text" id="subject" name="subject" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 dark:bg-gray-800 dark:text-gray-200 text-sm" required>
+                                <label for="subject"
+                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Subject</label>
+                                <input type="text" id="subject" name="subject"
+                                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 dark:bg-gray-800 dark:text-gray-200 text-sm"
+                                    required>
                             </div>
                             <div>
-                                <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message</label>
-                                <textarea id="message" name="message" rows="4" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 dark:bg-gray-800 dark:text-gray-200 text-sm" required></textarea>
+                                <label for="message"
+                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message</label>
+                                <textarea id="message" name="message" rows="4"
+                                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 dark:bg-gray-800 dark:text-gray-200 text-sm"
+                                    required></textarea>
                             </div>
                             <div>
-                                <button type="submit" class="shake-button bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold py-2 px-6 rounded-lg transition duration-300 w-full text-sm">Send Message</button>
+                                <button type="submit"
+                                    class="shake-button bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold py-2 px-6 rounded-lg transition duration-300 w-full text-sm">Send
+                                    Message</button>
                             </div>
                         </form>
                         <span id="msg" class="block text-center text-green-400 mt-3 text-sm"></span>
@@ -668,23 +1015,33 @@
                             <div class="space-y-4">
                                 <div class="flex items-start">
                                     <div class="flex-shrink-0 mt-1">
-                                        <div class="flex items-center justify-center h-8 w-8 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        <div
+                                            class="flex items-center justify-center h-8 w-8 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                                </path>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                             </svg>
                                         </div>
                                     </div>
                                     <div class="ml-3">
                                         <h4 class="text-sm font-medium text-gray-800 dark:text-gray-200">Address</h4>
-                                        <p class="text-sm text-gray-600 dark:text-gray-300">Sinamangal, Kathmandu, Nepal</p>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">Sinamangal, Kathmandu, Nepal
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="flex items-start">
                                     <div class="flex-shrink-0 mt-1">
-                                        <div class="flex items-center justify-center h-8 w-8 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                        <div
+                                            class="flex items-center justify-center h-8 w-8 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                                                </path>
                                             </svg>
                                         </div>
                                     </div>
@@ -695,15 +1052,20 @@
                                 </div>
                                 <div class="flex items-start">
                                     <div class="flex-shrink-0 mt-1">
-                                        <div class="flex items-center justify-center h-8 w-8 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                        <div
+                                            class="flex items-center justify-center h-8 w-8 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                                </path>
                                             </svg>
                                         </div>
                                     </div>
                                     <div class="ml-3">
                                         <h4 class="text-sm font-medium text-gray-800 dark:text-gray-200">Email</h4>
-                                        <p class="text-sm text-gray-600 dark:text-gray-300">rikeshhacker747@gmail.com</p>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">rikeshhacker747@gmail.com
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -718,34 +1080,39 @@
             <p class="text-sm">© 2025 Rikesh Dahal. All rights reserved.</p>
         </div>
     </footer>
-    <button id="back-to-top" class="shake-button fixed bottom-6 right-6 w-10 h-10 bg-gray-800 text-gray-200 rounded-full shadow-lg hidden items-center justify-center transition-opacity">
+    <button id="back-to-top"
+        class="shake-button fixed bottom-6 right-6 w-10 h-10 bg-gray-800 text-gray-200 rounded-full shadow-lg hidden items-center justify-center transition-opacity">
         <i class="fas fa-arrow-up text-sm"></i>
     </button>
     <div class="fixed bottom-20 right-6 z-50">
         <div class="group relative">
-            <img src="https://i.postimg.cc/sx4CRMC4/image.png" alt="Chat with Kimi" class="w-16 h-16 rounded-full border-4 border-pink-500 shadow-lg cursor-pointer hover:scale-110 hover:shadow-xl" onclick="toggleKimiChat()" title="किमी सँग कुरा गर्नुहोस्" />
-            <div class="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-white rounded-full animate-pulse"></div>
+            <img src="https://i.postimg.cc/sx4CRMC4/image.png" alt="Chat with Kimi"
+                class="w-16 h-16 rounded-full border-4 border-pink-500 shadow-lg cursor-pointer hover:scale-110 hover:shadow-xl"
+                onclick="toggleKimiChat()" title="किमी सँग कुरा गर्नुहोस्" />
+            <div
+                class="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-white rounded-full animate-pulse">
+            </div>
         </div>
     </div>
-    <div id="kimiIframeWrapper" class="fixed bottom-20 right-6 w-[400px] h-[450px] z-50 shadow-xl rounded-2xl overflow-hidden hidden border-4 border-[#001f3d] bg-white">
+    <div id="kimiIframeWrapper"
+        class="fixed bottom-20 right-6 w-[400px] h-[450px] z-50 shadow-xl rounded-2xl overflow-hidden hidden border-4 border-[#001f3d] bg-white">
         <div class="absolute top-2 right-2 z-10">
-            <button onclick="toggleKimiChat()" class="text-white bg-[#001f3d] hover:bg-red-600 rounded-full w-8 h-8 text-sm font-bold shadow-md">✖</button>
+            <button onclick="toggleKimiChat()"
+                class="text-white bg-[#001f3d] hover:bg-red-600 rounded-full w-8 h-8 text-sm font-bold shadow-md">✖</button>
         </div>
         <iframe src="https://mordern-kimi.onrender.com/" class="w-full h-full border-none rounded-2xl"></iframe>
     </div>
     <script>
-       
         const startTime = Date.now();
-        const minDisplayTime = 3350; 
-        const maxDisplayTime = 10000; 
-        const fadeDuration = 20; 
+        const minDisplayTime = 3350;
+        const maxDisplayTime = 10000;
+        const fadeDuration = 20;
 
         function hideLoader() {
             const loader = document.getElementById('load');
             if (loader) {
                 loader.classList.add('hidden');
                 document.body.classList.remove('loading');
-                
                 setTimeout(() => {
                     if (loader.parentNode) {
                         loader.parentNode.removeChild(loader);
@@ -929,8 +1296,7 @@
                 image: "https://i.postimg.cc/GpSwmVC1/image.png",
                 description: "Improve typing skills with practice keyboards to master touch typing.",
                 link: "https://rikeshdahal.github.io/Touch_Typing_Keyboards/"
-            }
-            ,
+            },
             {
                 title: "Django Blog Site",
                 image: "https://i.postimg.cc/SKRdmdxr/image.png",
@@ -1099,12 +1465,27 @@
             const kimiIframeWrapper = document.getElementById('kimiIframeWrapper');
             kimiIframeWrapper.classList.toggle('hidden');
         }
+        document.addEventListener("mousemove", (e) => {
+            const pupils = [
+                document.getElementById("pupil-left"),
+                document.getElementById("pupil-right"),
+            ];
+            const eyes = document.querySelectorAll(".eye");
+
+            pupils.forEach((pupil, i) => {
+                const eye = eyes[i].getBoundingClientRect();
+                const centerX = eye.left + eye.width / 2;
+                const centerY = eye.top + eye.height / 2;
+                const rad = Math.atan2(e.clientY - centerY, e.clientX - centerX);
+                const x = Math.cos(rad) * 1; /* Adjusted for smaller eye size */
+                const y = Math.sin(rad) * 1;
+                pupil.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
         renderProjects();
         renderSkills();
         renderBlogPosts();
     </script>
 </body>
+
 </html>
-
-
-
