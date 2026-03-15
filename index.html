@@ -15,6 +15,7 @@
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://unpkg.com/@emailjs/browser@4/dist/email.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <style>
     :root {
       --bg: #020611;
@@ -3616,8 +3617,9 @@
         </div>
         <div>
           <div class="footer-col-title">Contact</div>
-          <a href="mailto:rikeshdahal0526@gmail.com" class="footer-ci">
-            <div class="footer-ci-ico"><i class="fas fa-envelope"></i></div>rikeshdahal0526@gmail.com
+          <a href="/cdn-cgi/l/email-protection#285a41434d5b404c49404944181d1a1e684f45494144064b4745" class="footer-ci">
+            <div class="footer-ci-ico"><i class="fas fa-envelope"></i></div><span class="__cf_email__"
+              data-cfemail="6113080a041209050009000d5154535721060c00080d4f020e0c">[email&#160;protected]</span>
           </a>
           <a href="tel:+9779841255549" class="footer-ci">
             <div class="footer-ci-ico"><i class="fas fa-phone"></i></div>+977 984 125 5549
@@ -3659,19 +3661,86 @@
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    /* ════ CONFIG ════ */
+    /* ═══════════════════════════════════════════
+       ██████╗ ██╗██╗  ██╗███████╗███████╗██╗  ██╗
+       ██╔══██╗██║██║ ██╔╝██╔════╝██╔════╝██║  ██║
+       ██████╔╝██║█████╔╝ █████╗  ███████╗███████║
+       ██╔══██╗██║██╔═██╗ ██╔══╝      ╚══╝██╔══██║
+       ██║  ██║██║██║  ██╗███████╗███████╗██║  ██║
+       ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝
+    ══════════════════════════════════════════════
+
+    ╔══════════════════════════════════════════════════════════════╗
+    ║  STEP 1 — SUPABASE SETUP                                    ║
+    ║  1. Go to https://supabase.com → Sign up → New Project      ║
+    ║  2. Settings → API → copy Project URL + anon public key     ║
+    ║  3. SQL Editor → run this:                                  ║
+    ║                                                              ║
+    ║  create table testimonials (                                 ║
+    ║    id uuid default gen_random_uuid() primary key,           ║
+    ║    name text not null,                                       ║
+    ║    role text, company text, email text,                      ║
+    ║    stars int2 not null check(stars between 1 and 5),        ║
+    ║    text text not null,                                       ║
+    ║    avatar_seed int4,                                         ║
+    ║    approved bool default false,                              ║
+    ║    created_at timestamptz default now()                      ║
+    ║  );                                                          ║
+    ║  alter table testimonials enable row level security;         ║
+    ║  create policy "pub insert" on testimonials                  ║
+    ║    for insert to anon with check (true);                     ║
+    ║  create policy "pub read approved" on testimonials           ║
+    ║    for select to anon using (approved = true);               ║
+    ║                                                              ║
+    ║  STEP 2 — EMAILJS SETUP                                     ║
+    ║  1. https://emailjs.com → Email Services → Gmail            ║
+    ║     Connect rikeshdahal0526@gmail.com → copy Service ID     ║
+    ║  2. Email Templates → Create Template "contact_form":       ║
+    ║     Subject: New message from {{from_name}} — {{subject}}   ║
+    ║     Body: Name:{{from_name}} Email:{{from_email}}           ║
+    ║           Subject:{{subject}} Message:{{message}}           ║
+    ║  3. Create Template "testi_alert":                          ║
+    ║     Subject: ⭐ New Testimonial from {{tname}} ({{stars}}★) ║
+    ║     Body: {{tname}} | {{trole}} @ {{tcompany}}              ║
+    ║           Stars: {{stars}} | Review: {{ttext}}              ║
+    ║  4. Account → API Keys → copy Public Key                    ║
+    ║                                                              ║
+    ║  STEP 3 — PASTE YOUR CREDENTIALS BELOW ↓                   ║
+    ╚══════════════════════════════════════════════════════════════╝ */
+
     const CFG = {
-      ejKey: '7QIFT0tmPAtuQq7aP',
-      ejSvc: 'service_ll45omp',
-      ejTpl: 'template_uuqancb',
+      /* ── EmailJS ─────────────────────────────────────────────── */
+      ejKey: 'RqsCDhU2n0Ej7-P8j',       // EmailJS Public Key
+      ejSvc: 'service_99bwjsx',          // Gmail Service ID (connected to rikeshdahal0526@gmail.com)
+      ejTpl: 'template_ris6d79',         // Contact form template ID
+      ejTplTesti: 'template_hw5il78',         // ← REPLACE with your testimonial alert template ID
+
+      /* ── Supabase ────────────────────────────────────────────── */
+      sbUrl: 'https://ylfadchxihawbhgciket.supabase.co',  // ← REPLACE with your Supabase Project URL
+      sbKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlsZmFkY2h4aWhhd2JoZ2Npa2V0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1NjAyNTcsImV4cCI6MjA4OTEzNjI1N30.PiKAxYxkv9H5ejaZ8o_-2dHVhZT4oHG9dsLYE6m34aI',               // ← REPLACE with your anon/public key
+
       secs: ['home', 'about', 'skills', 'de-section', 'work', 'experience', 'blog', 'contact'],
     };
 
-    /* ── EMAILJS ── */
-    (function () { const i = () => { if (typeof emailjs !== 'undefined') emailjs.init(CFG.ejKey) }; document.readyState === 'loading' ? window.addEventListener('load', i) : i() })();
+    /* ── EMAILJS INIT ── */
+    (function () {
+      function init() { if (typeof emailjs !== 'undefined') emailjs.init(CFG.ejKey); }
+      document.readyState === 'loading' ? window.addEventListener('load', init) : init();
+    })();
+
+    /* ── SUPABASE CLIENT ── */
+    const _sb = (typeof supabase !== 'undefined' && CFG.sbUrl.indexOf('YOUR_PROJECT_ID') === -1)
+      ? supabase.createClient(CFG.sbUrl, CFG.sbKey)
+      : null;
 
     /* ── LOADER ── */
-    window.addEventListener('load', () => { setTimeout(() => { const L = document.getElementById('loader'); L.style.opacity = '0'; L.style.visibility = 'hidden'; setTimeout(() => L.remove(), 700) }, 900) });
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const L = document.getElementById('loader');
+        L.style.opacity = '0'; L.style.visibility = 'hidden';
+        setTimeout(() => L.remove(), 700);
+      }, 900);
+    });
 
     /* ── THEME ── */
     const htmlEl = document.documentElement;
@@ -3679,52 +3748,67 @@
     function applyTheme(dark) {
       htmlEl.classList.toggle('dark', dark); htmlEl.classList.toggle('light', !dark);
       const ico = dark ? 'fas fa-sun' : 'fas fa-moon';
-      ['pill-theme-icon', 'mob-theme-icon', 'mob-sheet-theme-icon'].forEach(id => { const e = document.getElementById(id); if (e) e.className = ico });
+      ['pill-theme-icon', 'mob-theme-icon', 'mob-sheet-theme-icon'].forEach(id => {
+        const e = document.getElementById(id); if (e) e.className = ico;
+      });
       localStorage.setItem('theme', dark ? 'dark' : 'light');
     }
-    function toggleTheme(e) { if (e) e.stopPropagation(); isDark = !isDark; applyTheme(isDark) }
+    function toggleTheme(e) { if (e) e.stopPropagation(); isDark = !isDark; applyTheme(isDark); }
     applyTheme(isDark);
-    ['pill-theme-btn', 'mob-theme-btn', 'mob-sheet-theme-btn'].forEach(id => { const e = document.getElementById(id); if (e) e.addEventListener('click', toggleTheme) });
+    ['pill-theme-btn', 'mob-theme-btn', 'mob-sheet-theme-btn'].forEach(id => {
+      const e = document.getElementById(id); if (e) e.addEventListener('click', toggleTheme);
+    });
 
     /* ── CLOCK ── */
     (function () {
       const el = document.getElementById('MyClockDisplay'); if (!el) return;
-      function tick() { const d = new Date(); let h = d.getHours(), m = d.getMinutes(), s = d.getSeconds(), ap = h >= 12 ? 'PM' : 'AM'; h = h % 12 || 12; el.textContent = [h, m, s].map(n => String(n).padStart(2, '0')).join(':') + '\u00a0' + ap; setTimeout(tick, 1000) }
+      function tick() {
+        const d = new Date(); let h = d.getHours(), m = d.getMinutes(), s = d.getSeconds(), ap = h >= 12 ? 'PM' : 'AM';
+        h = h % 12 || 12;
+        el.textContent = [h, m, s].map(n => String(n).padStart(2, '0')).join(':') + '\u00a0' + ap;
+        setTimeout(tick, 1000);
+      }
       tick();
     })();
 
-    /* ── NAVBAR ── */
+    /* ── NAVBAR + BACK TO TOP ── */
     const hdr = document.getElementById('hdr');
     const navCenter = document.getElementById('nav-center');
     const navTagline = document.getElementById('nav-tagline');
-    function updateNav() { const s = window.scrollY; hdr.classList.toggle('scrolled', s > 30); navCenter && navCenter.classList.toggle('visible', s > 60); navTagline && navTagline.classList.toggle('hide', s > 60) }
-
-    /* ── BACK TO TOP — using addEventListener, NOT window.onscroll ── */
     const btt = document.getElementById('btt');
     function handleScroll() {
-      updateNav();
-      if (window.scrollY > 300) {
-        if (!btt.classList.contains('visible')) { btt.classList.add('visible') }
-      } else {
-        btt.classList.remove('visible');
-      }
+      const s = window.scrollY;
+      hdr.classList.toggle('scrolled', s > 30);
+      navCenter && navCenter.classList.toggle('visible', s > 60);
+      navTagline && navTagline.classList.toggle('hide', s > 60);
+      if (s > 300) { if (!btt.classList.contains('visible')) btt.classList.add('visible'); }
+      else { btt.classList.remove('visible'); }
     }
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // run once on load
-    btt.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }) });
+    handleScroll();
+    btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
     /* ── ACTIVE SECTION ── */
     const cLinks = document.querySelectorAll('.c-link[data-sec]');
     const mobLinks = document.querySelectorAll('.mob-link[data-mob-sec]');
-    const secObs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { cLinks.forEach(l => l.classList.toggle('active', l.dataset.sec === e.target.id)); mobLinks.forEach(l => l.classList.toggle('active', l.dataset.mobSec === e.target.id)) } }) }, { rootMargin: '-35% 0px -60% 0px' });
+    const secObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          cLinks.forEach(l => l.classList.toggle('active', l.dataset.sec === e.target.id));
+          mobLinks.forEach(l => l.classList.toggle('active', l.dataset.mobSec === e.target.id));
+        }
+      });
+    }, { rootMargin: '-35% 0px -60% 0px' });
     CFG.secs.forEach(id => { const el = document.getElementById(id); if (el) secObs.observe(el) });
 
     /* ── MOBILE NAV ── */
     const mobSheet = document.getElementById('mob-sheet');
     let mobOpen = false;
-    function openMobNav() { mobOpen = true; mobSheet.classList.add('open'); document.body.style.overflow = 'hidden' }
-    function closeMobNav() { mobOpen = false; mobSheet.classList.remove('open'); document.body.style.overflow = '' }
-    document.getElementById('nav-name-pill').addEventListener('click', () => { if (window.innerWidth <= 767) { mobOpen ? closeMobNav() : openMobNav() } });
+    function openMobNav() { mobOpen = true; mobSheet.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeMobNav() { mobOpen = false; mobSheet.classList.remove('open'); document.body.style.overflow = ''; }
+    document.getElementById('nav-name-pill').addEventListener('click', () => {
+      if (window.innerWidth <= 767) { mobOpen ? closeMobNav() : openMobNav(); }
+    });
 
     /* ── CURSOR ── */
     (function () {
@@ -3733,24 +3817,40 @@
       if (!dot || !ring) return;
       let mx = 0, my = 0, rx = 0, ry = 0;
       document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.left = mx + 'px'; dot.style.top = my + 'px' });
-      (function tick() { rx += (mx - rx) * .13; ry += (my - ry) * .13; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(tick) })();
-      document.querySelectorAll('a,button').forEach(el => { el.addEventListener('mouseenter', () => ring.classList.add('big')); el.addEventListener('mouseleave', () => ring.classList.remove('big')) });
+      (function tick() { rx += (mx - rx) * .13; ry += (my - ry) * .13; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(tick); })();
+      document.querySelectorAll('a,button').forEach(el => {
+        el.addEventListener('mouseenter', () => ring.classList.add('big'));
+        el.addEventListener('mouseleave', () => ring.classList.remove('big'));
+      });
     })();
 
     /* ── SMOOTH SCROLL ── */
-    document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => { const t = document.querySelector(a.getAttribute('href')); if (t) { e.preventDefault(); window.scrollTo({ top: t.offsetTop - 56, behavior: 'smooth' }) } }));
+    document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); window.scrollTo({ top: t.offsetTop - 56, behavior: 'smooth' }); }
+    }));
 
     /* ── REVEAL ── */
-    const revObs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on') }) }, { threshold: .1 });
+    const revObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+    }, { threshold: .1 });
     document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el => revObs.observe(el));
 
     /* ── LIVE VIEWER ── */
     (function () {
       const el = document.getElementById('lvc-count'); if (!el) return;
-      function display(n) { el.textContent = n; el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); setTimeout(() => el.classList.remove('bump'), 350) }
+      function display(n) {
+        el.textContent = n; el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump');
+        setTimeout(() => el.classList.remove('bump'), 350);
+      }
       fetch('https://api.countapi.xyz/hit/rikeshdahal-portfolio/pageviews-2025')
-        .then(r => r.json()).then(d => { if (d && d.value) { let s = Math.max(1, Math.round(d.value / 40)); display(s); function tick() { const dv = (Math.random() < .5 ? 1 : -1) * (Math.random() < .3 ? 2 : 1); s = Math.max(1, s + dv); display(s); setTimeout(tick, Math.floor(Math.random() * 9000) + 6000) } setTimeout(tick, 8000) } })
-        .catch(() => display(Math.floor(Math.random() * 8) + 3));
+        .then(r => r.json()).then(d => {
+          if (d && d.value) {
+            let s = Math.max(1, Math.round(d.value / 40)); display(s);
+            function tick() { const dv = (Math.random() < .5 ? 1 : -1) * (Math.random() < .3 ? 2 : 1); s = Math.max(1, s + dv); display(s); setTimeout(tick, Math.floor(Math.random() * 9000) + 6000); }
+            setTimeout(tick, 8000);
+          }
+        }).catch(() => display(Math.floor(Math.random() * 8) + 3));
     })();
 
     /* ── HERO CANVAS ── */
@@ -3758,10 +3858,22 @@
       const canvas = document.getElementById('hero-canvas'); if (!canvas) return;
       const ctx = canvas.getContext('2d'); let W, H, pts = [];
       const COLS = ['#6d27d9', '#8f5cdf', '#b48ef5'];
-      function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight }
-      class P { constructor() { this.reset(true) } reset(init) { this.x = Math.random() * W; this.y = init ? Math.random() * H : H + 8; this.r = Math.random() * 1.5 + .3; this.vx = (Math.random() - .5) * .22; this.vy = -(Math.random() * .4 + .1); this.a = 0; this.ta = Math.random() * .35 + .06; this.col = COLS[Math.floor(Math.random() * COLS.length)]; this.life = 0; this.max = Math.random() * 280 + 180 } update() { this.x += this.vx; this.y += this.vy; this.life++; if (this.life < 28) this.a = this.ta * (this.life / 28); else if (this.life > this.max - 28) this.a = this.ta * ((this.max - this.life) / 28); else this.a = this.ta; if (this.life >= this.max) this.reset(false) } draw() { ctx.save(); ctx.globalAlpha = this.a * .75; ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2); ctx.fillStyle = this.col; ctx.fill(); ctx.restore() } }
+      function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
+      class P {
+        constructor() { this.reset(true); }
+        reset(init) { this.x = Math.random() * W; this.y = init ? Math.random() * H : H + 8; this.r = Math.random() * 1.5 + .3; this.vx = (Math.random() - .5) * .22; this.vy = -(Math.random() * .4 + .1); this.a = 0; this.ta = Math.random() * .35 + .06; this.col = COLS[Math.floor(Math.random() * COLS.length)]; this.life = 0; this.max = Math.random() * 280 + 180; }
+        update() { this.x += this.vx; this.y += this.vy; this.life++; if (this.life < 28) this.a = this.ta * (this.life / 28); else if (this.life > this.max - 28) this.a = this.ta * ((this.max - this.life) / 28); else this.a = this.ta; if (this.life >= this.max) this.reset(false); }
+        draw() { ctx.save(); ctx.globalAlpha = this.a * .75; ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2); ctx.fillStyle = this.col; ctx.fill(); ctx.restore(); }
+      }
       resize(); pts = Array.from({ length: 65 }, () => new P());
-      function frame() { ctx.clearRect(0, 0, W, H); pts.forEach(p => { p.update(); p.draw() }); for (let i = 0; i < pts.length; i++)for (let j = i + 1; j < pts.length; j++) { const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y, d = Math.sqrt(dx * dx + dy * dy); if (d < 72) { ctx.save(); ctx.globalAlpha = .05 * (1 - d / 72); ctx.strokeStyle = '#8f5cdf'; ctx.lineWidth = .4; ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y); ctx.stroke(); ctx.restore() } } requestAnimationFrame(frame) }
+      function frame() {
+        ctx.clearRect(0, 0, W, H); pts.forEach(p => { p.update(); p.draw() });
+        for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) {
+          const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y, d = Math.sqrt(dx * dx + dy * dy);
+          if (d < 72) { ctx.save(); ctx.globalAlpha = .05 * (1 - d / 72); ctx.strokeStyle = '#8f5cdf'; ctx.lineWidth = .4; ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y); ctx.stroke(); ctx.restore(); }
+        }
+        requestAnimationFrame(frame);
+      }
       frame(); window.addEventListener('resize', resize, { passive: true });
     })();
 
@@ -3769,8 +3881,11 @@
     (function () {
       const spot = document.getElementById('hero-spot'), sec = document.getElementById('home');
       if (!spot || !sec) return;
-      sec.addEventListener('mousemove', e => { const r = sec.getBoundingClientRect(); spot.style.background = `radial-gradient(580px circle at ${((e.clientX - r.left) / r.width * 100).toFixed(1)}% ${((e.clientY - r.top) / r.height * 100).toFixed(1)}%,rgba(109,39,217,.1) 0%,transparent 65%)` }, { passive: true });
-      sec.addEventListener('mouseleave', () => { spot.style.background = '' }, { passive: true });
+      sec.addEventListener('mousemove', e => {
+        const r = sec.getBoundingClientRect();
+        spot.style.background = `radial-gradient(580px circle at ${((e.clientX - r.left) / r.width * 100).toFixed(1)}% ${((e.clientY - r.top) / r.height * 100).toFixed(1)}%,rgba(109,39,217,.1) 0%,transparent 65%)`;
+      }, { passive: true });
+      sec.addEventListener('mouseleave', () => { spot.style.background = ''; }, { passive: true });
     })();
 
     /* ── TYPING ── */
@@ -3778,15 +3893,25 @@
       const words = ["YouTuber.", "Ethical Hacker.", "Game Developer.", "Programmer.", "UI/UX Designer.", "Data Engineer.", "Django DRF Developer.", "Databricks Engineer."];
       let wi = 0, ci = 0, del = false;
       const el = document.getElementById('typed-el'); if (!el) return;
-      function type() { const w = words[wi]; el.textContent = del ? w.slice(0, --ci) : w.slice(0, ++ci); let s = del ? 45 : 90; if (!del && ci === w.length) { s = 2000; del = true } else if (del && ci === 0) { del = false; wi = (wi + 1) % words.length; s = 350 } setTimeout(type, s) }
+      function type() {
+        const w = words[wi]; el.textContent = del ? w.slice(0, --ci) : w.slice(0, ++ci);
+        let s = del ? 45 : 90;
+        if (!del && ci === w.length) { s = 2000; del = true; }
+        else if (del && ci === 0) { del = false; wi = (wi + 1) % words.length; s = 350; }
+        setTimeout(type, s);
+      }
       setTimeout(type, 1400);
     })();
 
-    /* ── STARS ── */
+    /* ── HERO STARS ── */
     (function () {
       const el = document.getElementById('hero-stars'); if (!el) return;
       const f = document.createDocumentFragment();
-      for (let i = 0; i < 75; i++) { const s = document.createElement('div'); const sz = (Math.random() * 1.7 + .5).toFixed(1); s.style.cssText = `position:absolute;background:#fff;border-radius:50%;width:${sz}px;height:${sz}px;left:${Math.random() * 100}%;top:${Math.random() * 100}%;animation:starTwinkle ${(Math.random() * 4 + 2).toFixed(1)}s ease-in-out infinite ${-(Math.random() * 6).toFixed(1)}s;`; f.appendChild(s) }
+      for (let i = 0; i < 75; i++) {
+        const s = document.createElement('div'); const sz = (Math.random() * 1.7 + .5).toFixed(1);
+        s.style.cssText = `position:absolute;background:#fff;border-radius:50%;width:${sz}px;height:${sz}px;left:${Math.random() * 100}%;top:${Math.random() * 100}%;animation:starTwinkle ${(Math.random() * 4 + 2).toFixed(1)}s ease-in-out infinite ${-(Math.random() * 6).toFixed(1)}s;`;
+        f.appendChild(s);
+      }
       el.appendChild(f);
     })();
 
@@ -3794,10 +3919,14 @@
     (function () {
       const el = document.getElementById('devotion-particles'); if (!el) return;
       const f = document.createDocumentFragment();
-      for (let i = 0; i < 16; i++) { const p = document.createElement('div'); p.style.cssText = `position:absolute;width:3px;height:3px;border-radius:50%;background:#fbbf24;left:${Math.random() * 100}%;bottom:0;opacity:0;animation:particleRise ${(Math.random() * 4 + 4).toFixed(1)}s ease-in ${(Math.random() * 6).toFixed(1)}s infinite;--drift:${(Math.random() * 40 - 20).toFixed(0)}px;`; f.appendChild(p) }
+      for (let i = 0; i < 16; i++) {
+        const p = document.createElement('div');
+        p.style.cssText = `position:absolute;width:3px;height:3px;border-radius:50%;background:#fbbf24;left:${Math.random() * 100}%;bottom:0;opacity:0;animation:particleRise ${(Math.random() * 4 + 4).toFixed(1)}s ease-in ${(Math.random() * 6).toFixed(1)}s infinite;--drift:${(Math.random() * 40 - 20).toFixed(0)}px;`;
+        f.appendChild(p);
+      }
       el.appendChild(f);
     })();
-    function tryPlayFlute() { document.getElementById('flute-audio').play().catch(() => { }) }
+    function tryPlayFlute() { document.getElementById('flute-audio').play().catch(() => { }); }
 
     /* ── SKILLS ── */
     const SKILLS = [
@@ -3825,12 +3954,19 @@
     }
     const sg = document.getElementById('skills-grid');
     SKILLS.forEach((s, i) => sg.appendChild(buildSkillCard(s, i)));
-    new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.querySelectorAll('.skill-bar-fill').forEach(b => setTimeout(() => { b.style.width = b.dataset.w }, 200)) }) }, { threshold: .15 }).observe(sg);
+    new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.querySelectorAll('.skill-bar-fill').forEach(b => setTimeout(() => { b.style.width = b.dataset.w; }, 200));
+      });
+    }, { threshold: .15 }).observe(sg);
     document.getElementById('sk-tabs').addEventListener('click', e => {
       const btn = e.target.closest('.sk-tab'); if (!btn) return;
       document.querySelectorAll('.sk-tab').forEach(t => t.classList.remove('active')); btn.classList.add('active');
       const cat = btn.dataset.cat;
-      document.querySelectorAll('#skills-grid .card').forEach(c => { const show = cat === 'all' || c.dataset.cat === cat; c.style.display = show ? '' : 'none'; if (show) { const b = c.querySelector('.skill-bar-fill'); if (b) { b.style.width = '0'; setTimeout(() => { b.style.width = b.dataset.w }, 80) } } });
+      document.querySelectorAll('#skills-grid .card').forEach(c => {
+        const show = cat === 'all' || c.dataset.cat === cat; c.style.display = show ? '' : 'none';
+        if (show) { const b = c.querySelector('.skill-bar-fill'); if (b) { b.style.width = '0'; setTimeout(() => { b.style.width = b.dataset.w; }, 80); } }
+      });
     });
 
     /* ── PROJECTS ── */
@@ -3847,7 +3983,7 @@
       el.innerHTML = `<div class="card" style="overflow:hidden;"><div style="overflow:hidden;height:170px;"><img src="${p.i}" alt="${p.t}" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .5s;" onerror="this.src='https://placehold.co/285x170/0a1020/6d27d9?text=${encodeURIComponent(p.t)}'" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''"></div><div style="padding:15px 17px;"><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:7px;">${p.tg.map(x => `<span class="tag">${x}</span>`).join('')}</div><h3 style="font-family:'Cabinet Grotesk',sans-serif;font-weight:800;font-size:.92rem;margin-bottom:5px;color:var(--text);">${p.t}</h3><p style="font-size:.76rem;color:var(--muted);margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${p.d}</p><a href="${p.l}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;font-size:.76rem;font-weight:700;color:var(--accent2);transition:gap .22s,color .22s;" onmouseover="this.style.gap='9px';this.style.color='var(--accent)'" onmouseout="this.style.gap='5px';this.style.color='var(--accent2)'">View Project <i class="fas fa-arrow-right" style="font-size:.6rem;"></i></a></div></div>`;
       return el;
     }
-    (function () { const ct = document.getElementById('carousel-track');[...PROJECTS, ...PROJECTS].forEach(p => ct.appendChild(buildProjectCard(p))) })();
+    (function () { const ct = document.getElementById('carousel-track');[...PROJECTS, ...PROJECTS].forEach(p => ct.appendChild(buildProjectCard(p))); })();
 
     /* ── EXPERIENCE ── */
     const EXP = [
@@ -3863,28 +3999,68 @@
         list.appendChild(card);
       });
     })();
-
-    /* ── TESTIMONIALS ── */
     const QSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent2);opacity:.55;margin-bottom:11px;flex-shrink:0;"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/></svg>`;
-    let testimonials = [
-      { name: "Sneha Gupta", role: "Client", company: "", date: "Oct 2025", avatar: "https://picsum.photos/200/200?random=101", stars: 5, text: "Hired for a complete website redesign. The results exceeded my expectations! The site loads fast, looks professional, and has significantly improved my conversion rates." },
-      { name: "Vikram Singh", role: "Client", company: "TechCorp", date: "Oct 2025", avatar: "https://picsum.photos/200/200?random=512", stars: 5, text: "Exceptional full-stack development work. Built a complex dashboard with real-time data visualization. The technical expertise and problem-solving skills are top-notch." },
-      { name: "Priya Sharma", role: "Project Manager", company: "DataHub", date: "Sep 2025", avatar: "https://picsum.photos/200/200?random=220", stars: 5, text: "Rikesh delivered a data pipeline project ahead of schedule. His knowledge of Databricks and PySpark is impressive. Highly recommend for any data engineering work." },
-      { name: "Arjun Khadka", role: "Startup Founder", company: "KhadkaTech", date: "Aug 2025", avatar: "https://picsum.photos/200/200?random=330", stars: 5, text: "The Django REST API Rikesh built is clean, well-documented, and scales beautifully. Great communicator and very professional throughout." },
-      { name: "Meera Joshi", role: "UI Designer", company: "CreativeStudio", date: "Jul 2025", avatar: "https://picsum.photos/200/200?random=441", stars: 5, text: "Collaborated on a game dev project. His creativity and attention to detail are remarkable. The game mechanics he implemented were exactly what we envisioned." },
-      { name: "Rahul Thapa", role: "CTO", company: "NepTech", date: "Jun 2025", avatar: "https://picsum.photos/200/200?random=667", stars: 5, text: "Rikesh helped us set up our entire data infrastructure from scratch. ETL pipelines running smoothly. One of the most dedicated developers I've worked with." },
-      { name: "Sita Adhikari", role: "Product Lead", company: "Innovate.np", date: "May 2025", avatar: "https://picsum.photos/200/200?random=789", stars: 5, text: "Outstanding work on our Django project. Delivered clean, maintainable code with excellent documentation. Our team was truly impressed." },
+
+    const SEED_TESTIMONIALS = [
+      { name: "Sneha Gupta", role: "Client", company: "", created_at: "2025-10-01", avatar_seed: 101, stars: 5, text: "Hired for a complete website redesign. The results exceeded my expectations! The site loads fast, looks professional, and has significantly improved my conversion rates." },
+      { name: "Vikram Singh", role: "Client", company: "TechCorp", created_at: "2025-10-01", avatar_seed: 512, stars: 5, text: "Exceptional full-stack development work. Built a complex dashboard with real-time data visualization. The technical expertise and problem-solving skills are top-notch." },
+      { name: "Priya Sharma", role: "Project Manager", company: "DataHub", created_at: "2025-09-01", avatar_seed: 220, stars: 5, text: "Rikesh delivered a data pipeline project ahead of schedule. His knowledge of Databricks and PySpark is impressive. Highly recommend for any data engineering work." },
+      { name: "Arjun Khadka", role: "Startup Founder", company: "KhadkaTech", created_at: "2025-08-01", avatar_seed: 330, stars: 5, text: "The Django REST API Rikesh built is clean, well-documented, and scales beautifully. Great communicator and very professional throughout." },
+      { name: "Meera Joshi", role: "UI Designer", company: "CreativeStudio", created_at: "2025-07-01", avatar_seed: 441, stars: 5, text: "Collaborated on a game dev project. His creativity and attention to detail are remarkable. The game mechanics he implemented were exactly what we envisioned." },
+      { name: "Rahul Thapa", role: "CTO", company: "NepTech", created_at: "2025-06-01", avatar_seed: 667, stars: 5, text: "Rikesh helped us set up our entire data infrastructure from scratch. ETL pipelines running smoothly. One of the most dedicated developers I've worked with." },
+      { name: "Sita Adhikari", role: "Product Lead", company: "Innovate.np", created_at: "2025-05-01", avatar_seed: 789, stars: 5, text: "Outstanding work on our Django project. Delivered clean, maintainable code with excellent documentation. Our team was truly impressed." },
     ];
+
+    let testimonials = [...SEED_TESTIMONIALS];
     let tIdx = 0, tAuto = true, tTimer = null, tRating = 0, mAvSeed = Math.floor(Math.random() * 1000) + 100;
     const tGetVis = () => window.innerWidth <= 580 ? 1 : window.innerWidth <= 900 ? 2 : 3;
+    function fmtDate(iso) { try { return new Date(iso).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) } catch (e) { return '' } }
+
+    /* Load approved testimonials from Supabase */
+    async function loadTestimonialsFromDB() {
+      if (!_sb) {
+        console.info('Supabase not configured — showing seed testimonials. Add your credentials to CFG to enable persistence.');
+        tBuildCards(); requestAnimationFrame(() => { tUpdate(false); resetTT() });
+        return;
+      }
+      try {
+        const { data, error } = await _sb.from('testimonials').select('*').eq('approved', true).order('created_at', { ascending: false });
+        if (error) throw error;
+        if (data && data.length > 0) testimonials = data;
+        // else keep seed data as placeholder
+      } catch (err) {
+        console.error('Supabase load error — using seed data:', err);
+      }
+      tBuildCards(); requestAnimationFrame(() => { tUpdate(false); resetTT() });
+    }
+
     function tBuildCards() {
       const track = document.getElementById('t-carousel-track'); track.innerHTML = '';
+      if (!testimonials.length) {
+        track.innerHTML = `<div style="padding:40px;text-align:center;color:var(--muted);font-size:.88rem;width:100%;">No testimonials yet. Be the first!</div>`;
+        return;
+      }
       testimonials.forEach(t => {
+        const avatarUrl = `https://picsum.photos/200/200?random=${t.avatar_seed || Math.floor(Math.random() * 999) + 100}`;
+        const dateStr = t.created_at ? fmtDate(t.created_at) : (t.date || '');
         const c = document.createElement('div'); c.className = 't-card'; c.style.cssText = 'display:flex;flex-direction:column;';
-        c.innerHTML = `${QSVG}<blockquote style="font-size:.85rem;color:var(--text);line-height:1.75;font-style:italic;margin-bottom:14px;flex:1;">"${t.text}"</blockquote><div style="display:flex;gap:2px;margin-bottom:12px;">${'★'.repeat(t.stars).split('').map(() => `<span style="color:var(--accent2);font-size:.95rem;">★</span>`).join('')}</div><div style="display:flex;align-items:center;gap:11px;"><img src="${t.avatar}" alt="${t.name}" loading="lazy" style="width:42px;height:42px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(109,39,217,.3);flex-shrink:0;" onerror="this.src='https://placehold.co/42x42/0a1020/6d27d9?text=${encodeURIComponent(t.name[0])}'"><div><div style="font-weight:800;font-size:.86rem;color:var(--text);">${t.name}</div>${t.company ? `<div style="font-size:.7rem;color:var(--accent2);font-weight:600;">${t.company}</div>` : ''}<div style="font-size:.7rem;color:var(--muted);">${t.role} · <span style="font-family:'JetBrains Mono',monospace;">${t.date}</span></div></div></div>`;
+        c.innerHTML = `${QSVG}
+<blockquote style="font-size:.85rem;color:var(--text);line-height:1.75;font-style:italic;margin-bottom:14px;flex:1;">"${t.text}"</blockquote>
+<div style="display:flex;gap:2px;margin-bottom:12px;">
+  ${Array(t.stars).fill(0).map(() => '<span style="color:var(--accent2);font-size:.95rem;">★</span>').join('')}${Array(5 - t.stars).fill(0).map(() => '<span style="color:rgba(109,39,217,.2);font-size:.95rem;">★</span>').join('')}
+</div>
+<div style="display:flex;align-items:center;gap:11px;">
+  <img src="${avatarUrl}" alt="${t.name}" loading="lazy" style="width:42px;height:42px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(109,39,217,.3);flex-shrink:0;" onerror="this.src='https://placehold.co/42x42/0a1020/6d27d9?text=${encodeURIComponent((t.name || '?')[0])}'">
+  <div>
+    <div style="font-weight:800;font-size:.86rem;color:var(--text);">${t.name}</div>
+    ${t.company ? `<div style="font-size:.7rem;color:var(--accent2);font-weight:600;">${t.company}</div>` : ''}
+    <div style="font-size:.7rem;color:var(--muted);">${t.role || ''}${dateStr ? ` · <span style="font-family:'JetBrains Mono',monospace;">${dateStr}</span>` : ''}</div>
+  </div>
+</div>`;
         track.appendChild(c);
       });
     }
+
     function tUpdate(animate = true) {
       const track = document.getElementById('t-carousel-track');
       const vis = tGetVis(), cards = track.querySelectorAll('.t-card');
@@ -3892,32 +4068,162 @@
       const max = Math.max(0, testimonials.length - vis);
       tIdx = Math.min(Math.max(0, tIdx), max);
       const gap = 20, cw = cards[0].offsetWidth;
-      if (!animate) { track.style.transition = 'none' }
+      if (!animate) { track.style.transition = 'none'; }
       track.style.transform = `translateX(-${tIdx * (cw + gap)}px)`;
-      if (!animate) { void track.offsetWidth; track.style.transition = '' }
+      if (!animate) { void track.offsetWidth; track.style.transition = ''; }
       cards.forEach((c, i) => c.classList.toggle('inactive', i < tIdx || i >= tIdx + vis));
       const dots = document.getElementById('tdots'); dots.innerHTML = '';
-      for (let i = 0; i <= max; i++) { const d = document.createElement('button'); d.className = 't-dot' + (i === tIdx ? ' active' : ''); d.addEventListener('click', () => { tIdx = i; tUpdate(); resetTT() }); dots.appendChild(d) }
+      for (let i = 0; i <= max; i++) {
+        const d = document.createElement('button'); d.className = 't-dot' + (i === tIdx ? ' active' : '');
+        d.addEventListener('click', () => { tIdx = i; tUpdate(); resetTT() });
+        dots.appendChild(d);
+      }
       const p = document.getElementById('tprev'), n = document.getElementById('tnext');
       if (p) p.disabled = tIdx === 0; if (n) n.disabled = tIdx >= max;
     }
-    function tSlide(d) { tIdx += d; tUpdate(); resetTT() }
-    function resetTT() { if (tTimer) clearInterval(tTimer); if (tAuto) tTimer = setInterval(() => { const mx = Math.max(0, testimonials.length - tGetVis()); tIdx = tIdx >= mx ? 0 : tIdx + 1; tUpdate() }, 4000) }
-    function toggleTAutoplay() { tAuto = !tAuto; const b = document.getElementById('tpause-btn'); b.innerHTML = tAuto ? '<i class="fas fa-pause" style="font-size:.62rem;margin-right:4px;"></i>Pause' : '<i class="fas fa-play" style="font-size:.62rem;margin-right:4px;"></i>Resume'; if (tAuto) resetTT(); else clearInterval(tTimer) }
-    (function () { let sx = 0; const o = document.getElementById('t-carousel-outer'); if (!o) return; o.addEventListener('touchstart', e => { sx = e.touches[0].clientX }, { passive: true }); o.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 40) tSlide(dx < 0 ? 1 : -1) }, { passive: true }) })();
+    function tSlide(d) { tIdx += d; tUpdate(); resetTT(); }
+    function resetTT() {
+      if (tTimer) clearInterval(tTimer);
+      if (tAuto) tTimer = setInterval(() => {
+        const mx = Math.max(0, testimonials.length - tGetVis());
+        tIdx = tIdx >= mx ? 0 : tIdx + 1; tUpdate();
+      }, 4000);
+    }
+    function toggleTAutoplay() {
+      tAuto = !tAuto;
+      const b = document.getElementById('tpause-btn');
+      b.innerHTML = tAuto ? '<i class="fas fa-pause" style="font-size:.62rem;margin-right:4px;"></i>Pause' : '<i class="fas fa-play" style="font-size:.62rem;margin-right:4px;"></i>Resume';
+      if (tAuto) resetTT(); else clearInterval(tTimer);
+    }
+    (function () {
+      let sx = 0; const o = document.getElementById('t-carousel-outer'); if (!o) return;
+      o.addEventListener('touchstart', e => { sx = e.touches[0].clientX }, { passive: true });
+      o.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 40) tSlide(dx < 0 ? 1 : -1); }, { passive: true });
+    })();
     document.getElementById('tprev').addEventListener('click', () => tSlide(-1));
     document.getElementById('tnext').addEventListener('click', () => tSlide(1));
-    tBuildCards(); requestAnimationFrame(() => { tUpdate(false); resetTT() });
-    let tRT; window.addEventListener('resize', () => { clearTimeout(tRT); tRT = setTimeout(() => tUpdate(false), 120) }, { passive: true });
+    let tRT; window.addEventListener('resize', () => { clearTimeout(tRT); tRT = setTimeout(() => tUpdate(false), 120); }, { passive: true });
+    loadTestimonialsFromDB(); // ← fetches from Supabase on page load
 
     /* ── TESTIMONIAL MODAL ── */
-    function openTestiModal() { document.getElementById('tmodal').style.display = 'flex'; document.body.style.overflow = 'hidden'; refreshModalAvatar(); tRating = 0; document.querySelectorAll('.modal-star').forEach(s => { s.style.color = 'var(--muted)'; s.textContent = '☆' }) }
-    function closeTestiModal() { document.getElementById('tmodal').style.display = 'none'; document.body.style.overflow = ''; document.getElementById('testi-form').reset(); document.getElementById('t-cc').textContent = '0/500' }
-    function refreshModalAvatar() { mAvSeed = Math.floor(Math.random() * 9000) + 1000; const img = document.getElementById('m-av-img'), ico = document.getElementById('m-av-icon'); img.src = `https://picsum.photos/200/200?random=${mAvSeed}`; img.style.display = 'block'; ico.style.display = 'none'; img.onerror = () => { img.style.display = 'none'; ico.style.display = 'block' } }
-    function setRating(v) { tRating = v; document.querySelectorAll('.modal-star').forEach(s => { const sv = parseInt(s.dataset.v); s.style.color = sv <= v ? 'var(--accent2)' : 'var(--muted)'; s.textContent = sv <= v ? '★' : '☆' }) }
-    document.querySelectorAll('.modal-star').forEach(s => { s.addEventListener('mouseover', () => { const v = parseInt(s.dataset.v); document.querySelectorAll('.modal-star').forEach(ss => { const sv = parseInt(ss.dataset.v); ss.style.color = sv <= v ? 'var(--accent2)' : 'var(--muted)'; ss.textContent = sv <= v ? '★' : '☆' }) }); s.addEventListener('mouseout', () => setRating(tRating)) });
-    function submitTestimonial(e) { e.preventDefault(); if (!tRating) { alert('Please select a rating!'); return } testimonials.push({ name: document.getElementById('t-name').value, role: document.getElementById('t-role').value, company: document.getElementById('t-company').value, date: new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' }), avatar: `https://picsum.photos/200/200?random=${mAvSeed}`, stars: tRating, text: document.getElementById('t-content').value }); tIdx = Math.max(0, testimonials.length - tGetVis()); closeTestiModal(); tBuildCards(); tUpdate(); resetTT(); alert('Thank you! Testimonial added.') }
-    document.getElementById('tmodal').addEventListener('click', function (e) { if (e.target === this) closeTestiModal() });
+    function openTestiModal() {
+      document.getElementById('tmodal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      refreshModalAvatar(); tRating = 0;
+      document.querySelectorAll('.modal-star').forEach(s => { s.style.color = 'var(--muted)'; s.textContent = '☆'; });
+    }
+    function closeTestiModal() {
+      document.getElementById('tmodal').style.display = 'none';
+      document.body.style.overflow = '';
+      document.getElementById('testi-form').reset();
+      document.getElementById('t-cc').textContent = '0/500';
+    }
+    function refreshModalAvatar() {
+      mAvSeed = Math.floor(Math.random() * 9000) + 1000;
+      const img = document.getElementById('m-av-img'), ico = document.getElementById('m-av-icon');
+      img.src = `https://picsum.photos/200/200?random=${mAvSeed}`;
+      img.style.display = 'block'; ico.style.display = 'none';
+      img.onerror = () => { img.style.display = 'none'; ico.style.display = 'block'; };
+    }
+    function setRating(v) {
+      tRating = v;
+      document.querySelectorAll('.modal-star').forEach(s => {
+        const sv = parseInt(s.dataset.v);
+        s.style.color = sv <= v ? 'var(--accent2)' : 'var(--muted)';
+        s.textContent = sv <= v ? '★' : '☆';
+      });
+    }
+    document.querySelectorAll('.modal-star').forEach(s => {
+      s.addEventListener('mouseover', () => {
+        const v = parseInt(s.dataset.v);
+        document.querySelectorAll('.modal-star').forEach(ss => {
+          const sv = parseInt(ss.dataset.v); ss.style.color = sv <= v ? 'var(--accent2)' : 'var(--muted)'; ss.textContent = sv <= v ? '★' : '☆';
+        });
+      });
+      s.addEventListener('mouseout', () => setRating(tRating));
+    });
+
+    async function submitTestimonial(e) {
+      e.preventDefault();
+      if (!tRating) { alert('Please select a rating!'); return; }
+      const submitBtn = document.querySelector('#testi-form button[type="submit"]');
+      const origTxt = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation:spin .8s linear infinite"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Saving…';
+      submitBtn.disabled = true;
+
+      const payload = {
+        name: document.getElementById('t-name').value.trim(),
+        email: document.getElementById('t-email').value.trim(),
+        role: document.getElementById('t-role').value.trim(),
+        company: document.getElementById('t-company').value.trim(),
+        stars: tRating,
+        text: document.getElementById('t-content').value.trim(),
+        avatar_seed: mAvSeed,
+        approved: false,
+      };
+
+      let savedToSupabase = false;
+
+      /* 1️⃣ Save to Supabase */
+      if (_sb) {
+        try {
+          const { error } = await _sb.from('testimonials').insert([payload]);
+          if (error) throw error;
+          savedToSupabase = true;
+        } catch (err) {
+          console.error('Supabase insert failed:', err);
+        }
+      }
+
+      /* 2️⃣ Send email notification via EmailJS */
+      if (typeof emailjs !== 'undefined') {
+        try {
+          await emailjs.send(CFG.ejSvc, CFG.ejTplTesti, {
+            tname: payload.name,
+            temail: payload.email,
+            trole: payload.role,
+            tcompany: payload.company,
+            stars: '★'.repeat(payload.stars) + '☆'.repeat(5 - payload.stars) + ' (' + payload.stars + '/5)',
+            ttext: payload.text,
+          });
+        } catch (err) {
+          console.warn('EmailJS notification failed (non-critical):', err);
+        }
+      }
+
+      submitBtn.innerHTML = origTxt; submitBtn.disabled = false;
+      closeTestiModal();
+
+      if (savedToSupabase) {
+        showToast('✓ Thank you! Your testimonial will appear after review.', 'success');
+      } else {
+        /* Fallback: show locally this session only */
+        testimonials = [{ ...payload, created_at: new Date().toISOString() }, ...testimonials];
+        tIdx = 0; tBuildCards(); tUpdate(); resetTT();
+        showToast(_sb ? '✕ Save failed — check console. Showing locally this session.' : '✓ Showing locally. Add Supabase credentials to persist.', 'info');
+      }
+    }
+    document.getElementById('tmodal').addEventListener('click', function (e) { if (e.target === this) closeTestiModal(); });
+
+    /* ── TOAST ── */
+    function showToast(msg, type = 'success') {
+      let t = document.getElementById('rd-toast');
+      if (!t) {
+        t = document.createElement('div'); t.id = 'rd-toast';
+        t.style.cssText = 'position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);z-index:9999;padding:13px 22px;border-radius:12px;font-size:.86rem;font-weight:600;font-family:"Cabinet Grotesk",sans-serif;max-width:90vw;text-align:center;pointer-events:none;opacity:0;transition:opacity .3s,transform .3s;box-shadow:0 8px 32px rgba(0,0,0,.5);';
+        document.body.appendChild(t);
+      }
+      const colors = {
+        success: 'background:#0f2a1a;border:1px solid rgba(34,197,94,.35);color:#4ade80;',
+        info: 'background:#0d1a30;border:1px solid rgba(109,39,217,.35);color:#a78bfa;',
+        error: 'background:#2a0f0f;border:1px solid rgba(239,68,68,.35);color:#f87171;'
+      };
+      t.setAttribute('style', t.style.cssText + (colors[type] || colors.info));
+      t.textContent = msg;
+      requestAnimationFrame(() => { t.style.opacity = '1'; t.style.transform = 'translateX(-50%) translateY(0)'; });
+      clearTimeout(t._tmr);
+      t._tmr = setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateX(-50%) translateY(20px)'; }, 4500);
+    }
 
     /* ── BLOG ── */
     const BLOGS = [
@@ -3935,24 +4241,59 @@
       el.innerHTML = `<div class="card" style="overflow:hidden;height:100%;display:flex;flex-direction:column;"><div style="overflow:hidden;height:166px;"><img src="${b.i}" alt="${b.t}" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .5s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''"></div><div style="padding:15px 17px;flex:1;display:flex;flex-direction:column;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;"><span class="blog-cat">${b.g}</span><span style="font-size:.66rem;color:var(--muted);font-family:'JetBrains Mono',monospace;">${b.d}</span></div><h3 style="font-family:'Cabinet Grotesk',sans-serif;font-weight:800;font-size:.9rem;margin-bottom:6px;line-height:1.35;color:var(--text);">${b.t}</h3><p style="font-size:.76rem;color:var(--muted);margin-bottom:11px;flex:1;">${b.e}</p><div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);padding-top:10px;margin-top:auto;"><div style="display:flex;align-items:center;gap:6px;"><img src="https://i.postimg.cc/MZhwPc85/rikesh.png" loading="lazy" alt="Rikesh" style="width:22px;height:22px;border-radius:50%;object-fit:cover;"><span style="font-size:.68rem;color:var(--muted);">Rikesh Dahal</span></div><a href="${b.l}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;font-size:.74rem;font-weight:700;color:var(--accent2);transition:gap .22s,color .22s;" onmouseover="this.style.gap='9px';this.style.color='var(--accent)'" onmouseout="this.style.gap='5px';this.style.color='var(--accent2)'">Read <i class="fas fa-arrow-right" style="font-size:.6rem;"></i></a></div></div></div>`;
       return el;
     }
-    function renderBlogs() { blogGrid.innerHTML = ''; BLOGS.slice(0, blogVis).forEach((b, i) => { const el = buildBlogCard(b, i); blogGrid.appendChild(el); revObs.observe(el) }); lmBtn.style.display = blogVis >= BLOGS.length ? 'none' : 'inline-flex' }
+    function renderBlogs() { blogGrid.innerHTML = ''; BLOGS.slice(0, blogVis).forEach((b, i) => { const el = buildBlogCard(b, i); blogGrid.appendChild(el); revObs.observe(el); }); lmBtn.style.display = blogVis >= BLOGS.length ? 'none' : 'inline-flex'; }
     renderBlogs();
-    lmBtn.addEventListener('click', () => { blogVis += 3; renderBlogs() });
+    lmBtn.addEventListener('click', () => { blogVis += 3; renderBlogs(); });
 
-    /* ── CONTACT FORM ── */
+    /* ══════════════════════════════════════════════════════════════
+       CONTACT FORM — EmailJS → rikeshdahal0526@gmail.com
+       Template variables used: from_name, from_email, subject,
+                                 message, to_email, reply_to
+    ══════════════════════════════════════════════════════════════ */
     document.getElementById('contact-form').addEventListener('submit', function (e) {
       e.preventDefault();
-      const btn = this.querySelector('button[type="submit"]'), msg = document.getElementById('form-msg');
-      if (typeof emailjs === 'undefined') { msg.textContent = 'Email service unavailable. Please email: rikeshhacker747@gmail.com'; msg.style.color = '#f87171'; return }
-      btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation:spin .8s linear infinite"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Sending…'; btn.disabled = true;
-      emailjs.send(CFG.ejSvc, CFG.ejTpl, { name: document.getElementById('form-name').value, email: document.getElementById('form-email').value, subject: document.getElementById('form-subject').value, message: document.getElementById('form-message').value })
-        .then(() => { msg.textContent = '✓ Message sent!'; msg.style.color = 'var(--accent2)'; this.reset() })
-        .catch(() => { msg.textContent = '✕ Error. Email: rikeshhacker747@gmail.com'; msg.style.color = '#f87171' })
-        .finally(() => { btn.innerHTML = '<i class="fas fa-paper-plane"></i>Send Message'; btn.disabled = false; setTimeout(() => msg.textContent = '', 6000) });
+      const self = this;
+      const btn = self.querySelector('button[type="submit"]'), msg = document.getElementById('form-msg');
+
+      if (typeof emailjs === 'undefined') {
+        msg.textContent = 'Email service unavailable. Please email: rikeshdahal0526@gmail.com';
+        msg.style.color = '#f87171'; return;
+      }
+
+      const origHtml = btn.innerHTML;
+      btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation:spin .8s linear infinite"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Sending…';
+      btn.disabled = true;
+
+      const params = {
+        from_name: document.getElementById('form-name').value.trim(),
+        from_email: document.getElementById('form-email').value.trim(),
+        subject: document.getElementById('form-subject').value.trim() || 'Portfolio Contact',
+        message: document.getElementById('form-message').value.trim(),
+        to_email: 'rikeshdahal0526@gmail.com',
+        reply_to: document.getElementById('form-email').value.trim(),
+      };
+
+      emailjs.send(CFG.ejSvc, CFG.ejTpl, params)
+        .then(function () {
+          msg.textContent = "✓ Message sent! I'll reply within 24 hours.";
+          msg.style.color = 'var(--accent2)';
+          self.reset();
+          showToast('Message sent successfully! 🎉', 'success');
+        })
+        .catch(function (err) {
+          console.error('EmailJS contact error:', err);
+          msg.textContent = '✕ Failed to send. Please email: rikeshdahal0526@gmail.com';
+          msg.style.color = '#f87171';
+          showToast('Send failed — please email directly.', 'error');
+        })
+        .finally(function () {
+          btn.innerHTML = origHtml; btn.disabled = false;
+          setTimeout(() => { msg.textContent = ''; }, 7000);
+        });
     });
 
     /* ── KIMI ── */
-    function toggleKimi() { const w = document.getElementById('kimi-win'); w.style.display = w.style.display === 'block' ? 'none' : 'block' }
+    function toggleKimi() { const w = document.getElementById('kimi-win'); w.style.display = w.style.display === 'block' ? 'none' : 'block'; }
 
     /* ── BHAJAN PLAYER ── */
     (function () {
@@ -3965,26 +4306,43 @@
       let cur = 0;
       const audio = new Audio(); audio.volume = 0.7;
       const waveEl = document.getElementById('bp-wave');
-      if (waveEl) { const heights = [10, 16, 22, 18, 26, 14, 20, 24, 12, 18, 22, 16, 10, 20, 16, 24, 18, 12]; const durs = [.55, .7, .48, .82, .65, .58, .75, .5, .68, .6, .72, .53, .8, .62, .57, .78, .66, .52]; const frag = document.createDocumentFragment(); heights.forEach((h, i) => { const b = document.createElement('div'); b.className = 'bp-wave-bar'; b.style.cssText = `height:${h}px;--d:${durs[i]}s;`; frag.appendChild(b) }); waveEl.appendChild(frag) }
-      function syncUI() { const playing = !audio.paused && !audio.ended && audio.readyState > 2; const btn = document.getElementById('bp-play'); if (btn) btn.innerHTML = playing ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>'; const vinyl = document.getElementById('bp-vinyl'); if (vinyl) vinyl.classList.toggle('spinning', playing); if (waveEl) { waveEl.querySelectorAll('.bp-wave-bar').forEach(b => { if (playing) { b.classList.remove('active'); void b.offsetWidth; b.classList.add('active') } else { b.classList.remove('active') } }) } }
+      if (waveEl) {
+        const heights = [10, 16, 22, 18, 26, 14, 20, 24, 12, 18, 22, 16, 10, 20, 16, 24, 18, 12];
+        const durs = [.55, .7, .48, .82, .65, .58, .75, .5, .68, .6, .72, .53, .8, .62, .57, .78, .66, .52];
+        const frag = document.createDocumentFragment();
+        heights.forEach((h, i) => { const b = document.createElement('div'); b.className = 'bp-wave-bar'; b.style.cssText = `height:${h}px;--d:${durs[i]}s;`; frag.appendChild(b); });
+        waveEl.appendChild(frag);
+      }
+      function syncUI() {
+        const playing = !audio.paused && !audio.ended && audio.readyState > 2;
+        const btn = document.getElementById('bp-play'); if (btn) btn.innerHTML = playing ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
+        const vinyl = document.getElementById('bp-vinyl'); if (vinyl) vinyl.classList.toggle('spinning', playing);
+        if (waveEl) { waveEl.querySelectorAll('.bp-wave-bar').forEach(b => { if (playing) { b.classList.remove('active'); void b.offsetWidth; b.classList.add('active'); } else { b.classList.remove('active'); } }); }
+      }
       audio.addEventListener('play', syncUI);
       audio.addEventListener('pause', syncUI);
-      audio.addEventListener('ended', () => { cur = (cur + 1) % tracks.length; loadTrack(cur); audio.play().catch(() => { }); updatePills() });
-      audio.addEventListener('timeupdate', () => { if (!audio.duration) return; const pct = (audio.currentTime / audio.duration) * 100; const pf = document.getElementById('bp-progressFill'); if (pf) pf.style.width = pct + '%'; const pt = document.getElementById('bp-progressThumb'); if (pt) pt.style.left = `calc(${pct}% - 6px)`; const ct = document.getElementById('bp-currentTime'); if (ct) ct.textContent = fmt(audio.currentTime) });
-      audio.addEventListener('loadedmetadata', () => { const d = document.getElementById('bp-duration'); if (d) d.textContent = fmt(audio.duration) });
+      audio.addEventListener('ended', () => { cur = (cur + 1) % tracks.length; loadTrack(cur); audio.play().catch(() => { }); updatePills(); });
+      audio.addEventListener('timeupdate', () => {
+        if (!audio.duration) return;
+        const pct = (audio.currentTime / audio.duration) * 100;
+        const pf = document.getElementById('bp-progressFill'); if (pf) pf.style.width = pct + '%';
+        const pt = document.getElementById('bp-progressThumb'); if (pt) pt.style.left = `calc(${pct}% - 6px)`;
+        const ct = document.getElementById('bp-currentTime'); if (ct) ct.textContent = fmt(audio.currentTime);
+      });
+      audio.addEventListener('loadedmetadata', () => { const d = document.getElementById('bp-duration'); if (d) d.textContent = fmt(audio.duration); });
       const tlEl = document.getElementById('bp-trackList');
-      if (tlEl) { tracks.forEach((t, i) => { const pill = document.createElement('button'); pill.className = 'bp-track-pill' + (i === 0 ? ' active' : ''); pill.textContent = t.name; pill.addEventListener('click', () => { const wp = !audio.paused; cur = i; loadTrack(i); if (wp) audio.play().catch(() => { }); updatePills() }); tlEl.appendChild(pill) }) }
-      const updatePills = () => { if (tlEl) tlEl.querySelectorAll('.bp-track-pill').forEach((p, i) => p.classList.toggle('active', i === cur)) };
+      if (tlEl) { tracks.forEach((t, i) => { const pill = document.createElement('button'); pill.className = 'bp-track-pill' + (i === 0 ? ' active' : ''); pill.textContent = t.name; pill.addEventListener('click', () => { const wp = !audio.paused; cur = i; loadTrack(i); if (wp) audio.play().catch(() => { }); updatePills(); }); tlEl.appendChild(pill); }); }
+      const updatePills = () => { if (tlEl) tlEl.querySelectorAll('.bp-track-pill').forEach((p, i) => p.classList.toggle('active', i === cur)); };
       const fmt = s => Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0');
-      function loadTrack(i) { cur = i; audio.src = tracks[i].src; const tn = document.getElementById('bp-trackName'); if (tn) tn.textContent = tracks[i].name; const pf = document.getElementById('bp-progressFill'); if (pf) pf.style.width = '0%'; const pt = document.getElementById('bp-progressThumb'); if (pt) pt.style.left = '0%'; const ct = document.getElementById('bp-currentTime'); if (ct) ct.textContent = '0:00'; const dur = document.getElementById('bp-duration'); if (dur) dur.textContent = '—'; updatePills() }
-      function bindBtn(id, fn) { const el = document.getElementById(id); if (el) el.addEventListener('click', fn) }
-      bindBtn('bp-play', () => { if (!audio.src || audio.src === '') loadTrack(0); audio.paused ? audio.play().catch(() => { }) : audio.pause() });
-      bindBtn('bp-prev', () => { cur = (cur - 1 + tracks.length) % tracks.length; const wp = !audio.paused; loadTrack(cur); if (wp) audio.play().catch(() => { }); updatePills() });
-      bindBtn('bp-next', () => { cur = (cur + 1) % tracks.length; const wp = !audio.paused; loadTrack(cur); if (wp) audio.play().catch(() => { }); updatePills() });
-      bindBtn('bp-back', () => { audio.currentTime = Math.max(0, audio.currentTime - 10) });
-      bindBtn('bp-fwd', () => { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 10) });
-      const vol = document.getElementById('bp-vol'); if (vol) vol.addEventListener('input', () => { audio.volume = parseFloat(vol.value) });
-      const pw = document.getElementById('bp-progressWrap'); if (pw) pw.addEventListener('click', e => { if (!audio.duration) return; const r = pw.getBoundingClientRect(); audio.currentTime = ((e.clientX - r.left) / r.width) * audio.duration });
+      function loadTrack(i) { cur = i; audio.src = tracks[i].src; const tn = document.getElementById('bp-trackName'); if (tn) tn.textContent = tracks[i].name; const pf = document.getElementById('bp-progressFill'); if (pf) pf.style.width = '0%'; const pt = document.getElementById('bp-progressThumb'); if (pt) pt.style.left = '0%'; const ct = document.getElementById('bp-currentTime'); if (ct) ct.textContent = '0:00'; const dur = document.getElementById('bp-duration'); if (dur) dur.textContent = '—'; updatePills(); }
+      function bindBtn(id, fn) { const el = document.getElementById(id); if (el) el.addEventListener('click', fn); }
+      bindBtn('bp-play', () => { if (!audio.src || audio.src === '') loadTrack(0); audio.paused ? audio.play().catch(() => { }) : audio.pause(); });
+      bindBtn('bp-prev', () => { cur = (cur - 1 + tracks.length) % tracks.length; const wp = !audio.paused; loadTrack(cur); if (wp) audio.play().catch(() => { }); updatePills(); });
+      bindBtn('bp-next', () => { cur = (cur + 1) % tracks.length; const wp = !audio.paused; loadTrack(cur); if (wp) audio.play().catch(() => { }); updatePills(); });
+      bindBtn('bp-back', () => { audio.currentTime = Math.max(0, audio.currentTime - 10); });
+      bindBtn('bp-fwd', () => { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 10); });
+      const vol = document.getElementById('bp-vol'); if (vol) vol.addEventListener('input', () => { audio.volume = parseFloat(vol.value); });
+      const pw = document.getElementById('bp-progressWrap'); if (pw) pw.addEventListener('click', e => { if (!audio.duration) return; const r = pw.getBoundingClientRect(); audio.currentTime = ((e.clientX - r.left) / r.width) * audio.duration; });
       loadTrack(0); syncUI();
     })();
 
@@ -4001,31 +4359,25 @@
         items.forEach((_, i) => {
           const dot = document.createElement('div');
           dot.style.cssText = 'width:12px;height:12px;background:rgba(109,39,217,.22);border-radius:50%;border:2px solid rgba(109,39,217,.18);box-shadow:none;transition:background .3s,box-shadow .3s,border-color .3s;flex-shrink:0;';
-          dot.dataset.index = i;
-          dotsWrap.appendChild(dot);
+          dot.dataset.index = i; dotsWrap.appendChild(dot);
         });
         const dots = dotsWrap.querySelectorAll('div');
         function update() {
           const section = document.getElementById('experience'); if (!section) return;
-          const secRect = section.getBoundingClientRect();
-          const secH = section.offsetHeight;
-          const winH = window.innerHeight;
+          const secRect = section.getBoundingClientRect(), secH = section.offsetHeight, winH = window.innerHeight;
           const scrolled = Math.min(1, Math.max(0, (-secRect.top + winH * 0.55) / (secH - winH * 0.45)));
           trackFill.style.height = (scrolled * 100) + '%';
           items.forEach((item, i) => {
-            const r = item.getBoundingClientRect();
-            const active = r.top < winH * 0.6;
-            const dot = dots[i]; if (!dot) return;
-            if (active) { dot.style.background = 'var(--accent)'; dot.style.borderColor = 'rgba(109,39,217,.4)'; dot.style.boxShadow = '0 0 9px var(--glow)' }
-            else { dot.style.background = 'rgba(109,39,217,.22)'; dot.style.borderColor = 'rgba(109,39,217,.18)'; dot.style.boxShadow = 'none' }
+            const r = item.getBoundingClientRect(), active = r.top < winH * 0.6, dot = dots[i]; if (!dot) return;
+            if (active) { dot.style.background = 'var(--accent)'; dot.style.borderColor = 'rgba(109,39,217,.4)'; dot.style.boxShadow = '0 0 9px var(--glow)'; }
+            else { dot.style.background = 'rgba(109,39,217,.22)'; dot.style.borderColor = 'rgba(109,39,217,.18)'; dot.style.boxShadow = 'none'; }
           });
         }
-        window.addEventListener('scroll', update, { passive: true });
-        update();
+        window.addEventListener('scroll', update, { passive: true }); update();
       }
       const expList = document.getElementById('exp-list');
-      if (expList && expList.children.length > 0) { initTimeline() }
-      else { const obs = new MutationObserver(() => { if (expList.children.length > 0) { obs.disconnect(); initTimeline() } }); if (expList) obs.observe(expList, { childList: true }) }
+      if (expList && expList.children.length > 0) { initTimeline(); }
+      else { const obs = new MutationObserver(() => { if (expList.children.length > 0) { obs.disconnect(); initTimeline(); } }); if (expList) obs.observe(expList, { childList: true }); }
     })();
   </script>
 </body>
