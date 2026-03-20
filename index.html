@@ -6126,7 +6126,95 @@
         font-size: .78rem
       }
     }
-  </style>
+
+    /* FOOTER LIKE SECTION */
+    .footer-like-section{
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      padding:40px 24px 36px;
+      border-top:1px solid var(--border);
+      position:relative;overflow:hidden;
+      background:linear-gradient(to bottom,transparent,rgba(109,39,217,.04));
+    }
+    .footer-like-section::before{
+      content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+      width:200px;height:1px;
+      background:linear-gradient(90deg,transparent,var(--accent),transparent);
+    }
+    .footer-like-text{
+      font-family:"Special Elite",cursive;
+      font-size:clamp(1rem,2.5vw,1.3rem);
+      color:var(--text);
+      margin-bottom:6px;
+      text-align:center;
+      line-height:1.5;
+    }
+    .footer-like-sub{
+      font-family:"Patrick Hand",cursive;
+      font-size:.82rem;
+      color:var(--muted);
+      margin-bottom:22px;
+      text-align:center;
+    }
+    .footer-like-btn-wrap{
+      display:flex;flex-direction:column;align-items:center;gap:10px;
+    }
+    #footer-like-btn{
+      display:flex;align-items:center;gap:10px;
+      padding:13px 28px;
+      border-radius:100px;
+      border:1.5px solid rgba(239,68,68,.35);
+      background:rgba(239,68,68,.07);
+      color:var(--text);
+      font-family:"Cabinet Grotesk",sans-serif;
+      font-size:.92rem;font-weight:700;
+      cursor:pointer;
+      transition:all .3s cubic-bezier(.34,1.56,.64,1);
+      position:relative;overflow:hidden;
+    }
+    #footer-like-btn:hover{
+      border-color:rgba(239,68,68,.7);
+      background:rgba(239,68,68,.14);
+      transform:translateY(-2px) scale(1.03);
+      box-shadow:0 8px 32px rgba(239,68,68,.25);
+    }
+    #footer-like-btn.liked{
+      background:linear-gradient(135deg,rgba(239,68,68,.25),rgba(249,115,22,.2));
+      border-color:rgba(239,68,68,.6);
+      box-shadow:0 4px 24px rgba(239,68,68,.3);
+    }
+    #footer-like-btn.pop{animation:flbPop .45s cubic-bezier(.34,1.56,.64,1) both}
+    .flb-heart{
+      font-size:1.35rem;
+      transition:transform .3s cubic-bezier(.34,1.56,.64,1),filter .3s;
+      display:inline-block;line-height:1;
+    }
+    #footer-like-btn.liked .flb-heart{
+      filter:drop-shadow(0 0 6px rgba(239,68,68,.7));
+      transform:scale(1.15);
+    }
+    .flb-label{pointer-events:none}
+    #footer-like-count{
+      font-family:"JetBrains Mono",monospace;
+      font-size:.72rem;font-weight:700;
+      color:var(--muted);
+      letter-spacing:.06em;
+      transition:color .3s;
+      display:flex;align-items:center;gap:5px;
+    }
+    #footer-like-count.liked{color:#f87171}
+    #footer-like-count .flc-dot{
+      width:5px;height:5px;border-radius:50%;
+      background:#f87171;
+      animation:pulse 2s ease infinite;
+      display:none;
+    }
+    #footer-like-count.liked .flc-dot{display:inline-block}
+    .like-float{position:fixed;pointer-events:none;z-index:9999;font-size:1.1rem;animation:likeFloat 1s ease-out forwards}
+    @keyframes likeFloat{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-90px) scale(1.5)}}
+    @keyframes flbPop{0%{transform:scale(1)}25%{transform:scale(.88) translateY(-2px)}55%{transform:scale(1.12) translateY(-4px)}80%{transform:scale(.97) translateY(-1px)}100%{transform:scale(1.03) translateY(-2px)}}
+    @keyframes likeRingF{0%{transform:translate(-50%,-50%) scale(.4);opacity:.9}100%{transform:translate(-50%,-50%) scale(2.6);opacity:0}}
+    .like-ring-footer{position:fixed;pointer-events:none;z-index:9998;width:56px;height:56px;border-radius:50%;border:2px solid #ef4444;animation:likeRingF .6s ease-out forwards;margin-left:0}
+    </style>
   <style>
     #nav-goo-blob {
       position: absolute;
@@ -6144,7 +6232,95 @@
         width .38s cubic-bezier(.34, 1.56, .64, 1),
         opacity .22s ease;
     }
-  </style>
+
+    /* FOOTER LIKE SECTION */
+    .footer-like-section{
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      padding:40px 24px 36px;
+      border-top:1px solid var(--border);
+      position:relative;overflow:hidden;
+      background:linear-gradient(to bottom,transparent,rgba(109,39,217,.04));
+    }
+    .footer-like-section::before{
+      content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+      width:200px;height:1px;
+      background:linear-gradient(90deg,transparent,var(--accent),transparent);
+    }
+    .footer-like-text{
+      font-family:"Special Elite",cursive;
+      font-size:clamp(1rem,2.5vw,1.3rem);
+      color:var(--text);
+      margin-bottom:6px;
+      text-align:center;
+      line-height:1.5;
+    }
+    .footer-like-sub{
+      font-family:"Patrick Hand",cursive;
+      font-size:.82rem;
+      color:var(--muted);
+      margin-bottom:22px;
+      text-align:center;
+    }
+    .footer-like-btn-wrap{
+      display:flex;flex-direction:column;align-items:center;gap:10px;
+    }
+    #footer-like-btn{
+      display:flex;align-items:center;gap:10px;
+      padding:13px 28px;
+      border-radius:100px;
+      border:1.5px solid rgba(239,68,68,.35);
+      background:rgba(239,68,68,.07);
+      color:var(--text);
+      font-family:"Cabinet Grotesk",sans-serif;
+      font-size:.92rem;font-weight:700;
+      cursor:pointer;
+      transition:all .3s cubic-bezier(.34,1.56,.64,1);
+      position:relative;overflow:hidden;
+    }
+    #footer-like-btn:hover{
+      border-color:rgba(239,68,68,.7);
+      background:rgba(239,68,68,.14);
+      transform:translateY(-2px) scale(1.03);
+      box-shadow:0 8px 32px rgba(239,68,68,.25);
+    }
+    #footer-like-btn.liked{
+      background:linear-gradient(135deg,rgba(239,68,68,.25),rgba(249,115,22,.2));
+      border-color:rgba(239,68,68,.6);
+      box-shadow:0 4px 24px rgba(239,68,68,.3);
+    }
+    #footer-like-btn.pop{animation:flbPop .45s cubic-bezier(.34,1.56,.64,1) both}
+    .flb-heart{
+      font-size:1.35rem;
+      transition:transform .3s cubic-bezier(.34,1.56,.64,1),filter .3s;
+      display:inline-block;line-height:1;
+    }
+    #footer-like-btn.liked .flb-heart{
+      filter:drop-shadow(0 0 6px rgba(239,68,68,.7));
+      transform:scale(1.15);
+    }
+    .flb-label{pointer-events:none}
+    #footer-like-count{
+      font-family:"JetBrains Mono",monospace;
+      font-size:.72rem;font-weight:700;
+      color:var(--muted);
+      letter-spacing:.06em;
+      transition:color .3s;
+      display:flex;align-items:center;gap:5px;
+    }
+    #footer-like-count.liked{color:#f87171}
+    #footer-like-count .flc-dot{
+      width:5px;height:5px;border-radius:50%;
+      background:#f87171;
+      animation:pulse 2s ease infinite;
+      display:none;
+    }
+    #footer-like-count.liked .flc-dot{display:inline-block}
+    .like-float{position:fixed;pointer-events:none;z-index:9999;font-size:1.1rem;animation:likeFloat 1s ease-out forwards}
+    @keyframes likeFloat{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-90px) scale(1.5)}}
+    @keyframes flbPop{0%{transform:scale(1)}25%{transform:scale(.88) translateY(-2px)}55%{transform:scale(1.12) translateY(-4px)}80%{transform:scale(.97) translateY(-1px)}100%{transform:scale(1.03) translateY(-2px)}}
+    @keyframes likeRingF{0%{transform:translate(-50%,-50%) scale(.4);opacity:.9}100%{transform:translate(-50%,-50%) scale(2.6);opacity:0}}
+    .like-ring-footer{position:fixed;pointer-events:none;z-index:9998;width:56px;height:56px;border-radius:50%;border:2px solid #ef4444;animation:likeRingF .6s ease-out forwards;margin-left:0}
+    </style>
 </head>
 
 <body>
@@ -6300,7 +6476,7 @@
                 style="font-family:'Instrument Serif',serif;font-size:clamp(1rem,2vw,1.3rem);color:var(--accent2);font-style:italic;display:block;margin-bottom:4px;opacity:.88;">Hey,
                 it's me</span>
               <span
-                style="font-family:'Cabinet Grotesk',sans-serif;font-weight:900;font-size:clamp(2.6rem,6.5vw,5.2rem);letter-spacing:-.04em;line-height:.95;display:block;"><span
+                style="font-family: 'Special Elite', cursive;font-weight:900;font-size:clamp(2.6rem,6.5vw,5.2rem);letter-spacing:-.04em;line-height:.95;display:block;"><span
                   class="grad-text">Rikesh</span></span>
               <span
                 style="display:block;font-size:clamp(.62rem,1.2vw,.8rem);font-weight:600;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin-top:10px;font-family:'JetBrains Mono',monospace;">—
@@ -7283,6 +7459,22 @@ End with a key takeaway." oninput="wpmUpdateCount();wpeAutoPreview();wpeSyncScro
           </a>
           <div class="footer-ci">
             <div class="footer-ci-ico"><i class="fas fa-location-dot"></i></div>Sinamangal, Kathmandu
+          </div>
+        </div>
+      </div>
+
+      <!-- FOOTER LIKE SECTION -->
+      <div class="footer-like-section">
+        <p class="footer-like-text">Did you enjoy my portfolio?</p>
+        <p class="footer-like-sub">If this work inspired you, a like means the world to me — it keeps me building. ✨</p>
+        <div class="footer-like-btn-wrap">
+          <button id="footer-like-btn" aria-label="Like this portfolio">
+            <span class="flb-heart">♥</span>
+            <span class="flb-label" id="flb-label">Like my Portfolio</span>
+          </button>
+          <div id="footer-like-count">
+            <span class="flc-dot"></span>
+            <span id="flc-num">...</span> people liked this
           </div>
         </div>
       </div>
@@ -10398,6 +10590,110 @@ End with a key takeaway." oninput="wpmUpdateCount();wpeAutoPreview();wpeSyncScro
       }
 
       window.addEventListener('scroll', () => requestAnimationFrame(snap), { passive: true });
+    })();
+  
+    /* FOOTER LIKE JS */
+    (function(){
+      var LIKED_KEY='rd_portfolio_liked';
+      var TABLE='portfolio_likes';
+      var btn=document.getElementById('footer-like-btn');
+      var numEl=document.getElementById('flc-num');
+      var countWrap=document.getElementById('footer-like-count');
+      var lbl=document.getElementById('flb-label');
+      if(!btn)return;
+      var liked=localStorage.getItem(LIKED_KEY)==='1';
+      function setLikedUI(v){
+        liked=v;
+        btn.classList.toggle('liked',v);
+        if(countWrap)countWrap.classList.toggle('liked',v);
+        if(lbl)lbl.textContent=v?'You liked this! ♥':'Like my Portfolio';
+      }
+      setLikedUI(liked);
+      async function fetchCount(){
+        if(!_sb){if(numEl)numEl.textContent='--';return;}
+        try{
+          var res=await _sb.from(TABLE).select('count',{count:'exact',head:true});
+          var c=res.count||0;
+          animCount(c);
+        }catch(err){if(numEl)numEl.textContent='--';}
+      }
+      function animCount(val){
+        if(!numEl)return;
+        var old=parseInt(numEl.dataset.val)||0;
+        numEl.dataset.val=val;
+        if(old===val){numEl.textContent=fmt(val);return;}
+        var start=null;
+        function step(ts){
+          if(!start)start=ts;
+          var p=Math.min((ts-start)/500,1);
+          numEl.textContent=fmt(Math.round(old+(val-old)*p));
+          if(p<1)requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+      function fmt(n){
+        if(n>=1000)return(n/1000).toFixed(1)+'k';
+        return String(n);
+      }
+      function spawnHearts(x,y){
+        var e=['♥','❤','♥','U0001f9e1','♥','❤'];
+        for(var i=0;i<6;i++){
+          (function(i){
+            setTimeout(function(){
+              var el=document.createElement('div');
+              el.className='like-float';
+              el.textContent=e[i%e.length];
+              el.style.left=(x+Math.random()*60-30)+'px';
+              el.style.top=(y+Math.random()*10)+'px';
+              el.style.animationDelay=(i*0.07)+'s';
+              el.style.fontSize=(0.8+Math.random()*0.8)+'rem';
+              document.body.appendChild(el);
+              setTimeout(function(){el.remove();},1200);
+            },i*60);
+          })(i);
+        }
+        var ring=document.createElement('div');
+        ring.className='like-ring-footer';
+        ring.style.left=x+'px';
+        ring.style.top=y+'px';
+        document.body.appendChild(ring);
+        setTimeout(function(){ring.remove();},700);
+      }
+      btn.addEventListener('click',async function(){
+        var rect=btn.getBoundingClientRect();
+        var cx=rect.left+rect.width/2;
+        var cy=rect.top+rect.height/2;
+        btn.classList.remove('pop');
+        void btn.offsetWidth;
+        btn.classList.add('pop');
+        if(liked){
+          setLikedUI(false);
+          localStorage.removeItem(LIKED_KEY);
+          if(_sb){
+            try{await _sb.from(TABLE).delete().eq('session',getSess());}
+            catch(e){}
+          }
+          var cv=parseInt(numEl&&numEl.dataset.val)||1;
+          animCount(Math.max(0,cv-1));
+        } else {
+          setLikedUI(true);
+          localStorage.setItem(LIKED_KEY,'1');
+          spawnHearts(cx,cy);
+          if(_sb){
+            try{await _sb.from(TABLE).insert({session:getSess()});}
+            catch(e){}
+          }
+          var cv2=parseInt(numEl&&numEl.dataset.val)||0;
+          animCount(cv2+1);
+        }
+      });
+      function getSess(){
+        var k='rd_sess';
+        var s=localStorage.getItem(k);
+        if(!s){s=Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem(k,s);}
+        return s;
+      }
+      fetchCount();
     })();
   </script>
 </body>
