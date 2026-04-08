@@ -1492,6 +1492,15 @@ End with a key takeaway." oninput="wpmUpdateCount();wpeAutoPreview();wpeSyncScro
                         class="footer-bl">Terminal Mode</a>
                     <a href="https://rikeshdahal.github.io/Hacker-cv/Hacker-CV" target="_blank" rel="noopener"
                         class="footer-bl">Download CV</a>
+                    <!-- Now Playing button-->
+                    <button class="footer-music-btn" onclick="openMusicModal()" aria-label="Now Playing on Spotify">
+                        <div class="sp-btn-dot"></div>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" />
+                        </svg>
+                        Now Playing
+                    </button>
                     <!-- ── MANIFEST LINK ── -->
                     <button class="footer-manifest-btn" onclick="openManifestModal()" aria-label="Open Manifest List">
                         <i class="fas fa-list-check"></i> Manifest
@@ -1505,6 +1514,7 @@ End with a key takeaway." oninput="wpmUpdateCount();wpeAutoPreview();wpeSyncScro
                         <i class="fas fa-microchip"></i> My Gear
                     </button>
                     <div class="footer-badge"><i class="fas fa-circle" style="font-size:.4rem;"></i>Open to Work</div>
+
                 </div>
             </div>
         </div>
@@ -1585,6 +1595,7 @@ End with a key takeaway." oninput="wpmUpdateCount();wpeAutoPreview();wpeSyncScro
                                 style="animation:spin .8s linear infinite;margin-right:7px;"></i>Loading gear…</div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -1969,8 +1980,6 @@ End with a key takeaway." oninput="wpmUpdateCount();wpeAutoPreview();wpeSyncScro
         src="https://image2url.com/r2/default/audio/1775570627891-7a2e5e8d-22bc-46b6-a94e-f5c55decba95.mp3"
         preload="auto">
     </audio>
-
-
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -4762,7 +4771,7 @@ End with a key takeaway." oninput="wpmUpdateCount();wpeAutoPreview();wpeSyncScro
             document.addEventListener('DOMContentLoaded', function () {
                 preload();
                 document.body.addEventListener('click', function (e) {
-                    var t = e.target.closest('a,button,[role="button"],.btn-primary,.btn-outline,.c-link,.mob-link,.footer-link,.footer-soc,.soc-icon,.sk-tab,.t-nav-btn,.t-dot,.bp-btn,.nud-item,.auth-tab,.admin-tab,.wpe-tab,.gb-oauth-btn,.auth-oauth-btn,.footer-manifest-btn,.footer-guestbook-btn,.footer-gear-btn,.kimi-btn,.nav-name-pill,#footer-like-btn,#btt,.c-theme,.nnp-theme,.mob-sun,.m-dl-btn,.bp-track-pill');
+                    var t = e.target.closest('a,button,[role="button"],.btn-primary,.btn-outline,.c-link,.mob-link,.footer-link,.footer-soc,.soc-icon,.sk-tab,.t-nav-btn,.t-dot,.bp-btn,.nud-item,.auth-tab,.admin-tab,.wpe-tab,.gb-oauth-btn,.auth-oauth-btn,.footer-manifest-btn,.footer-guestbook-btn,.footer-music-btn,.footer-gear-btn,.kimi-btn,.nav-name-pill,#footer-like-btn,#btt,.c-theme,.nnp-theme,.mob-sun,.m-dl-btn,.bp-track-pill');
                     if (t) play();
                 }, true);
             });
@@ -5366,6 +5375,82 @@ End with a key takeaway." oninput="wpmUpdateCount();wpeAutoPreview();wpeSyncScro
 
         // <!-- ═══ REAL-TIME ADMIN NOTIFICATIONS ═══ -->
 
+
+
+        // Now playing 
+        /* ── open modal ── */
+        function openMusicModal() {
+            const modal = document.getElementById('music-modal');
+            const loader = document.getElementById('mm-loader');
+            const content = document.getElementById('mm-content');
+            const img = document.getElementById('sp-now-img');
+
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+
+            /* reset UI */
+            loader.style.display = 'flex';
+            content.style.display = 'none';
+
+            /* animated dots while loading */
+            let d = 0;
+            const dotsEl = document.getElementById('mm-dots');
+            const dotsTmr = setInterval(() => {
+                d = (d + 1) % 4;
+                if (dotsEl) dotsEl.textContent = '.'.repeat(d || 1);
+            }, 400);
+            modal._dotsTmr = dotsTmr;
+
+            /* fresh URL — cache busted so it always fetches latest */
+            const BASE = 'https://spotify-github-profile.kittinanx.com/api/view';
+            const UID = '31b23zmv73oakaogde5va5dcbdg4';
+            img.src = `${BASE}?uid=${UID}&cover_image=true&theme=default&show_offline=true&background_color=000000&interchange=true&profanity=false&bar_color=000000&bar_color_cover=true&_t=${Date.now()}`;
+        }
+
+        /* ── close modal ── */
+        function closeMusicModal() {
+            const modal = document.getElementById('music-modal');
+            modal.classList.remove('open');
+            document.body.style.overflow = '';
+            clearInterval(modal._dotsTmr);
+        }
+
+        /* ── image loaded ── */
+        function onSpotifyLoad() {
+            const modal = document.getElementById('music-modal');
+            const loader = document.getElementById('mm-loader');
+            const content = document.getElementById('mm-content');
+            clearInterval(modal._dotsTmr);
+            loader.style.display = 'none';
+            content.style.display = 'block';
+        }
+
+        /* ── image error ── */
+        function onSpotifyError() {
+            const modal = document.getElementById('music-modal');
+            const loader = document.getElementById('mm-loader');
+            clearInterval(modal._dotsTmr);
+            loader.innerHTML = `
+            <div class="mm-error">
+                <i class="fas fa-circle-exclamation" style="font-size:1.4rem;margin-bottom:8px;display:block;"></i>
+                Could not load Spotify data.<br>
+                <span style="font-size:.68rem;opacity:.7;">Check UID or try refreshing.</span>
+                <br><br>
+                <button onclick="openMusicModal()" style="
+                    padding:7px 18px;border-radius:8px;
+                    background:rgba(30,215,96,.1);border:1px solid rgba(30,215,96,.25);
+                    color:#1db954;font-family:'Cabinet Grotesk',sans-serif;
+                    font-size:.8rem;font-weight:700;cursor:pointer;">
+                    Retry
+                </button>
+            </div>`;
+        }
+
+        /* ── ESC to close ── */
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeMusicModal();
+        });
+
     </script>
     <!-- ═══ SEARCH MODAL ═══ -->
     <div id="search-modal" style="display:none;position:fixed;inset:0;z-index:9500;
@@ -5416,6 +5501,63 @@ End with a key takeaway." oninput="wpmUpdateCount();wpeAutoPreview();wpeSyncScro
                     <span><kbd style="padding:1px 5px;border-radius:3px;background:rgba(255,255,255,.06);
           border:1px solid var(--border);">ESC</kbd> Close</span>
                 </div>
+            </div>
+        </div>
+    </div>
+    <!-- ═══ NOW PLAYING MODAL ═══ -->
+    <div id="music-modal" onclick="if(event.target===this)closeMusicModal()">
+        <div class="music-modal-inner">
+
+            <!-- Header -->
+            <div class="mm-header">
+                <div style="display:flex;align-items:center;gap:11px;">
+                    <div class="mm-icon-wrap">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="#1db954">
+                            <path
+                                d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="mm-title">Now Playing</div>
+                        <div class="mm-sub">Rikesh's Spotify · Live</div>
+                    </div>
+                </div>
+                <button class="mm-close" onclick="closeMusicModal()">
+                    <i class="fas fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Body -->
+            <div class="mm-body">
+
+                <!-- Loader -->
+                <div class="mm-loader" id="mm-loader">
+                    <div class="mm-spinner"></div>
+                    <div class="mm-loader-txt">Fetching track info<span id="mm-dots">.</span></div>
+                </div>
+
+                <!-- Content -->
+                <div class="mm-content" id="mm-content">
+                    <div class="sp-img-card">
+                        <a href="https://open.spotify.com/user/31b23zmv73oakaogde5va5dcbdg4"
+                            target="_blank" rel="noopener">
+                            <img id="sp-now-img" src="" alt="Now Playing on Spotify" onload="onSpotifyLoad()"
+                                onerror="onSpotifyError()">
+                        </a>
+                    </div>
+
+                    <div class="mm-footer">
+                        <a href="https://open.spotify.com/user/31b23zmv73oakaogde5va5dcbdg4"
+                            target="_blank" rel="noopener" class="sp-open-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" />
+                            </svg>
+                            Open on Spotify
+                        </a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
