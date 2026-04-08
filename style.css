@@ -6512,3 +6512,126 @@ html.light #bhajan-standalone {
     animation: likeRingF .6s ease-out forwards;
     margin-left: 0
 }
+
+/* ═══ NAVIGATION WHEEL ═══  */
+.nww-container {
+    position: fixed;
+    bottom: 84px;
+    left: 22px;
+    width: 0;
+    height: 0;
+    z-index: 500;
+    touch-action: none;
+}
+
+.nww-ring {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    transform: scale(0);
+    opacity: 0;
+    transition: transform .38s cubic-bezier(.34, 1.4, .64, 1), opacity .25s;
+}
+
+.nww-ring.open {
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: all;
+}
+
+.nww-trigger {
+    position: absolute;
+    width: 52px;
+    height: 52px;
+    left: -26px;
+    top: -26px;
+    border-radius: 50%;
+    background: var(--accent, #6d27d9);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    font-size: 18px;
+    z-index: 10;
+    transition: background .25s, transform .3s;
+    box-shadow: 0 4px 16px rgba(109, 39, 217, .35);
+}
+
+.nww-trigger:hover {
+    background: var(--accent2, #8f5cdf);
+}
+
+.nww-trigger.open {
+    transform: rotate(45deg);
+    background: #040814;
+}
+
+.nww-item {
+    position: absolute;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(4, 8, 20, .92);
+    border: 1.5px solid rgba(109, 39, 217, .35);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    cursor: pointer;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    transition: transform .38s cubic-bezier(.34, 1.4, .64, 1), opacity .25s, background .15s, border-color .15s;
+    backdrop-filter: blur(8px);
+}
+
+.nww-ring.open .nww-item {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.nww-item:hover,
+.nww-item.active {
+    background: rgba(109, 39, 217, .28);
+    border-color: rgba(143, 92, 223, .8);
+}
+
+.nww-item .ni-icon {
+    font-size: 15px;
+    line-height: 1;
+    color: #fff;
+}
+
+.nww-item .ni-label {
+    font-size: 9px;
+    font-family: 'JetBrains Mono', monospace;
+    color: rgba(143, 92, 223, .9);
+    letter-spacing: .04em;
+}
+
+.nww-item svg.narc {
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    transform: rotate(-90deg);
+    pointer-events: none;
+}
+
+.nww-tooltip {
+    position: fixed;
+    white-space: nowrap;
+    background: #040814;
+    border: 1px solid rgba(109, 39, 217, .38);
+    border-radius: 8px;
+    padding: 5px 14px;
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    color: #b48ef5;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .18s;
+    z-index: 600;
+    transform: translateX(-50%);
+}
