@@ -2,11 +2,65 @@
 <html lang="en" class="dark">
 
 <head>
+    <!-- ═══ SEO + OPEN GRAPH ═══ -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <meta name="description" content="Rikesh Dahal — Data Engineer &amp; Full-Stack Developer from Kathmandu, Nepal.">
-    <meta property="og:title" content="Rikesh Dahal — Data Engineer &amp; Developer">
-    <meta property="og:image" content="https://i.postimg.cc/5tTNWYqp/rd.png">
+
+    <!-- Primary Meta -->
+    <title>Rikesh Dahal — Data Engineer & Full-Stack Developer | Kathmandu, Nepal</title>
+    <meta name="description"
+        content="Rikesh Dahal is a Data Engineer & Full-Stack Developer from Kathmandu, Nepal. Specializing in Databricks, PySpark, Django DRF, Unity Game Dev, and Ethical Hacking.">
+    <meta name="keywords"
+        content="Rikesh Dahal, Data Engineer, Django Developer, Game Developer, Databricks, PySpark, Kathmandu Nepal, Full Stack Developer, Ethical Hacking, BCA Patan College">
+    <meta name="author" content="Rikesh Dahal">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#6d27d9">
+    <link rel="canonical" href="https://rikeshdahal.github.io/">
+
+    <!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rikeshdahal.github.io/">
+    <meta property="og:title" content="Rikesh Dahal — Data Engineer & Developer">
+    <meta property="og:description"
+        content="Data Engineer & Full-Stack Developer from Kathmandu. Building pipelines, games, and web apps.">
+    <meta property="og:image" content="https://i.postimg.cc/MZhwPc85/rikesh.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Rikesh Dahal Portfolio">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@RikeshDahal10">
+    <meta name="twitter:creator" content="@RikeshDahal10">
+    <meta name="twitter:title" content="Rikesh Dahal — Data Engineer & Developer">
+    <meta name="twitter:description"
+        content="Data Engineer & Full-Stack Developer from Kathmandu. Building pipelines, games, and web apps.">
+    <meta name="twitter:image" content="https://i.postimg.cc/MZhwPc85/rikesh.png">
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Rikesh Dahal",
+  "url": "https://rikeshdahal.github.io/",
+  "image": "https://i.postimg.cc/MZhwPc85/rikesh.png",
+  "jobTitle": "Data Engineer & Full-Stack Developer",
+  "worksFor": { "@type": "Organization", "name": "Insight Workshop" },
+  "address": { "@type": "PostalAddress", "addressLocality": "Kathmandu", "addressCountry": "NP" },
+  "email": "rikeshdahal0526@gmail.com",
+  "telephone": "+977-9841255549",
+  "sameAs": [
+    "https://github.com/rikeshdahal",
+    "https://www.linkedin.com/in/rikeshdahal/",
+    "https://twitter.com/RikeshDahal10",
+    "https://www.instagram.com/mr.mad.h4ck3r/",
+    "https://www.facebook.com/rikesh747"
+  ],
+  "knowsAbout": ["Data Engineering", "Databricks", "PySpark", "Django", "Python", "Unity Game Development", "Ethical Hacking"]
+}
+</script>
+    <link rel="icon" href="https://i.postimg.cc/5tTNWYqp/rd.png" type="image/x-icon">
     <title>Rikesh Dahal — Data Engineer &amp; Developer</title>
     <link rel="icon" href="https://i.postimg.cc/5tTNWYqp/rd.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -89,6 +143,13 @@
                 </svg>
                 Book a Call
             </a>
+            <!-- Search trigger button (nav bhatara) -->
+            <button class="c-theme" id="search-trigger-btn" onclick="openSearchModal()" title="Search (Ctrl+/)"
+                style="position:relative;z-index:1;">
+                <i class="fas fa-search" style="font-size:.68rem;"></i>
+            </button>
+
+            <!-- Also add a keyboard shortcut hint in hero or navbar area -->
             <button class="c-theme" id="pill-theme-btn" aria-label="Toggle theme"
                 style="position: relative; z-index: 1;"><i id="pill-theme-icon" class="fas fa-moon"></i></button>
             <div id="nav-goo-blob"></div>
@@ -101,6 +162,46 @@
                 <span id="nav-auth-label">Sign In</span>
             </button>
             <div id="nav-user-dropdown"><!-- filled by JS --></div>
+            <!-- notification pannel -->
+            <div id="notif-bell-wrap" style="position:relative;display:none;">
+                <button id="notif-bell" onclick="toggleNotifPanel()" style="
+    width:34px;height:34px;border-radius:50%;
+    background:rgba(109,39,217,.1);border:1px solid rgba(109,39,217,.25);
+    color:var(--muted);font-size:.85rem;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:all .25s;position:relative;"
+                    onmouseover="this.style.background='rgba(109,39,217,.22)';this.style.color='var(--accent2)'"
+                    onmouseout="this.style.background='rgba(109,39,217,.1)';this.style.color='var(--muted)'">
+                    <i class="fas fa-bell"></i>
+                    <span id="notif-badge" style="
+      position:absolute;top:-3px;right:-3px;
+      min-width:16px;height:16px;border-radius:100px;
+      background:#ef4444;color:#fff;
+      font-size:.55rem;font-weight:800;
+      display:none;align-items:center;justify-content:center;
+      font-family:'JetBrains Mono',monospace;padding:0 4px;
+      border:2px solid var(--bg);animation:pulse 2s ease infinite;">0</span>
+                </button>
+                <div id="notif-panel" style="
+    display:none;position:absolute;top:calc(100% + 8px);right:0;
+    width:320px;background:var(--modal-bg);
+    border:1px solid rgba(109,39,217,.25);border-radius:16px;
+    box-shadow:0 16px 48px rgba(0,0,0,.6);z-index:920;overflow:hidden;
+    animation:liftIn .2s ease both;">
+                    <div style="padding:14px 16px 10px;border-bottom:1px solid var(--border);
+      display:flex;align-items:center;justify-content:space-between;">
+                        <span style="font-family:'Special Elite',cursive;font-size:.95rem;">Notifications</span>
+                        <button onclick="clearAllNotifs()" style="
+        font-size:.65rem;color:var(--muted);background:none;border:none;cursor:pointer;
+        font-family:'JetBrains Mono',monospace;letter-spacing:.06em;">Clear all</button>
+                    </div>
+                    <div id="notif-list" style="max-height:320px;overflow-y:auto;
+      scrollbar-width:thin;scrollbar-color:var(--accent) transparent;">
+                        <div style="padding:24px;text-align:center;color:var(--muted);font-size:.78rem;">No
+                            notifications</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </header>
@@ -255,6 +356,7 @@
                             </div>
                             <div class="bp-tracks" id="bp-trackList"></div>
                         </div>
+
                     </div>
                     <div class="fu5" id="devotion-col">
                         <div id="devotion-card-wrap">
@@ -284,8 +386,7 @@
                                         style="position:absolute;inset:-4px;border-radius:50%;border:1.5px solid rgba(251,191,36,.3);box-shadow:0 0 18px rgba(251,191,36,.18);">
                                     </div>
                                     <audio id="flute-audio" preload="auto">
-                                        <source
-                                            src="https://cdn.pixabay.com/audio/2025/01/26/audio_3f5c09b7be.mp3"
+                                        <source src="https://cdn.pixabay.com/audio/2025/01/26/audio_3f5c09b7be.mp3"
                                             type="audio/mpeg">
                                     </audio>
                                     <img src="https://i.postimg.cc/L4LgXnLk/radhakrisha.png" alt="Radha Krishna"
@@ -311,6 +412,7 @@
                                     onclick="new Audio('https://cdn.pixabay.com/audio/2025/05/18/audio_776e18642c.mp3').play()"
                                     style="font-size:1.9rem;color:#fbbf24;display:block;filter:drop-shadow(0 0 9px rgba(251,191,36,.55));animation:omPulse 4s ease-in-out infinite;cursor:pointer;">ॐ</span>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -392,7 +494,106 @@
                 </div>
             </div>
         </section>
+        <!-- ═══ GITHUB ACTIVITY ═══ -->
+        <section id="github-activity" style="padding:60px 0;" class="s-mid">
+            <div class="max-w-6xl mx-auto px-4 sm:px-5">
+                <div class="reveal text-center mb-10">
+                    <div class="sec-label">GitHub Activity</div>
+                    <h2 class="sec-title" style="font-size:clamp(1.5rem,4vw,2.4rem);">Contribution Graph</h2>
+                </div>
+                <div class="reveal"
+                    style="background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;">
+                    <!-- Header -->
+                    <div style="padding:18px 22px;border-bottom:1px solid var(--border);
+        display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+                        <div style="display:flex;align-items:center;gap:11px;">
+                            <div style="width:38px;height:38px;border-radius:50%;overflow:hidden;
+            border:2px solid rgba(109,39,217,.35);">
+                                <img src="https://github.com/rikeshdahal.png?size=80" alt="GitHub"
+                                    style="width:100%;height:100%;object-fit:cover;">
+                            </div>
+                            <div>
+                                <div style="font-weight:800;font-size:.9rem;color:var(--text);">rikeshdahal</div>
+                                <div
+                                    style="font-size:.68rem;color:var(--muted);font-family:'JetBrains Mono',monospace;">
+                                    github.com/rikeshdahal</div>
+                            </div>
+                        </div>
+                        <a href="https://github.com/rikeshdahal" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:9px;
+          background:rgba(109,39,217,.1);border:1px solid rgba(109,39,217,.25);color:var(--accent2);
+          font-family:'Cabinet Grotesk',sans-serif;font-weight:700;font-size:.78rem;text-decoration:none;">
+                            <i class="fab fa-github"></i> View Profile
+                        </a>
+                    </div>
+                    <picture>
+                        <source media="(prefers-color-scheme: dark)"
+                            srcset="https://raw.githubusercontent.com/rikeshdahal/github-snake/output/github-contribution-grid-snake-dark.svg">
+                        <img src="https://raw.githubusercontent.com/rikeshdahal/github-snake/output/github-contribution-grid-snake.svg"
+                            style="width:100%;min-width:600px;border-radius:10px;">
+                    </picture>
+                    <!-- Contribution graph image (GitHub provides this publicly) -->
+                    <div style="padding:20px;overflow-x:auto;">
+                        <!-- ghchart.rshah.org (works, no API needed) -->
+                        <img src="https://ghchart.rshah.org/6d27d9/rikeshdahal" alt="Rikesh Dahal GitHub Contributions"
+                            style="width:100%;min-width:600px;display:block;border-radius:8px;"
+                            onerror="this.parentElement.innerHTML='<div style=padding:30px;text-align:center;color:var(--muted);font-size:.82rem;>⚠ GitHub chart temporarily unavailable</div>'">
 
+
+                        <!-- activity-graph.vercel.app (more detailed) -->
+                        <img src="https://github-readme-activity-graph.vercel.app/graph?username=rikeshdahal&bg_color=020611&color=8f5cdf&line=6d27d9&point=a78bfa&area=true&hide_border=true"
+                            alt="GitHub Activity Graph"
+                            style="width:100%;display:block;border-radius:8px;margin-top:12px;"
+                            onerror="this.style.display='none'">
+                    </div>
+
+                    <!-- Stats row -->
+                    <div id="github-stats-row" style="display:grid;grid-template-columns:repeat(4,1fr);
+        border-top:1px solid var(--border);">
+                        <!-- Filled by JS -->
+                        <div style="padding:16px;text-align:center;border-right:1px solid var(--border);">
+                            <div class="stat-num">30+</div>
+                            <div class="stat-lbl">Repos</div>
+                        </div>
+                        <div style="padding:16px;text-align:center;border-right:1px solid var(--border);">
+                            <div class="stat-num">500+</div>
+                            <div class="stat-lbl">Commits</div>
+                        </div>
+                        <div style="padding:16px;text-align:center;border-right:1px solid var(--border);">
+                            <div class="stat-num">3+</div>
+                            <div class="stat-lbl">Stars</div>
+                        </div>
+                        <div style="padding:16px;text-align:center;">
+                            <div class="stat-num">2+</div>
+                            <div class="stat-lbl">Following</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Language Stats Card (GitHub Readme Stats) -->
+                <div class="reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;">
+                    <div
+                        style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:4px;overflow:hidden;">
+                        <img src="https://github-readme-stats.vercel.app/api?username=rikeshdahal&show_icons=true&theme=transparent&title_color=8f5cdf&text_color=9ca2ae&icon_color=6d27d9&border_color=1f2937&hide_border=false&bg_color=0a1020"
+                            style="width:100%;display:block;border-radius:12px;" alt="GitHub Stats"
+                            onerror="this.parentElement.style.display='none'">
+                    </div>
+                    <div
+                        style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:4px;overflow:hidden;">
+                        <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=rikeshdahal&layout=compact&theme=transparent&title_color=8f5cdf&text_color=9ca2ae&icon_color=6d27d9&border_color=1f2937&bg_color=0a1020"
+                            style="width:100%;display:block;border-radius:12px;" alt="Top Languages"
+                            onerror="this.parentElement.style.display='none'">
+                    </div>
+                </div>
+
+                <!-- Streak Stats -->
+                <div class="reveal"
+                    style="margin-top:16px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:4px;overflow:hidden;">
+                    <img src="https://github-readme-streak-stats.herokuapp.com?user=rikeshdahal&theme=dark&background=0a1020&ring=6d27d9&fire=8f5cdf&currStreakLabel=a78bfa&sideLabels=9ca2ae&dates=9ca2ae&border=1f2937"
+                        style="width:100%;display:block;border-radius:12px;" alt="GitHub Streak"
+                        onerror="this.parentElement.style.display='none'">
+                </div>
+            </div>
+        </section>
         <!-- ═══ SKILLS ═══ -->
         <section id="skills" style="padding:80px 0;" class="s-dark">
             <div class="max-w-6xl mx-auto px-4 sm:px-5">
@@ -600,6 +801,19 @@
                 </div>
             </div>
         </section>
+        <!-- ═══ CERTIFICATES ═══ -->
+        <section id="certificates" style="padding:80px 0;" class="s-dark">
+            <div class="max-w-6xl mx-auto px-4 sm:px-5">
+                <div class="reveal text-center mb-12">
+                    <div class="sec-label">05.5 — Credentials</div>
+                    <h2 class="sec-title">Certificates</h2>
+                    <p style="color:var(--muted);margin-top:10px;font-size:.9rem;">
+                        Verified credentials & achievements</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 reveal" id="certs-grid"></div>
+            </div>
+        </section>
+
 
         <!-- ═══ CTA ═══ -->
         <section style="padding:0 0 72px;" class="s-mid">
@@ -1738,6 +1952,25 @@ End with a key takeaway." oninput="wpmUpdateCount();wpeAutoPreview();wpeSyncScro
         <iframe src="https://rikeshdahal.github.io/my-kimi/" loading="lazy"
             allow="microphone; camera; autoplay"></iframe>
     </div>
+    <!-- ═══  NAVIGATION WHEEL ═══ -->
+    <div class="nww-container" id="navWheel">
+        <div class="nww-ring" id="nww-ring"></div>
+        <button class="nww-trigger" id="nww-trigger" aria-label="Navigation wheel">
+            <i class="fas fa-compass"></i>
+        </button>
+    </div>
+    <div class="nww-tooltip" id="nww-tooltip"></div>
+
+    <audio id="nww-scroll-sound"
+        src="https://image2url.com/r2/default/audio/1775572148896-7f0f0750-34d6-4d21-9408-c6d32d0d55af.mp3"
+        preload="auto">
+    </audio>
+    <audio id="nww-select-sound"
+        src="https://image2url.com/r2/default/audio/1775570627891-7a2e5e8d-22bc-46b6-a94e-f5c55decba95.mp3"
+        preload="auto">
+    </audio>
+
+
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -3540,7 +3773,7 @@ End with a key takeaway." oninput="wpmUpdateCount();wpeAutoPreview();wpeSyncScro
             authUpdateNav();
             // Now that we know admin status, reload testimonials with correct filter
             loadTestimonialsFromDB();
-
+            subscribeAdminRealtime();
             _sb.auth.onAuthStateChange((_event, session) => {
                 siteUser = session?.user ?? null;
                 siteIsAdmin = AUTH_CFG.adminIds.includes(siteUser?.id);
@@ -3548,9 +3781,11 @@ End with a key takeaway." oninput="wpmUpdateCount();wpeAutoPreview();wpeSyncScro
                 syncAuthToModules();
                 // keep guestbook gbUser in sync
                 gbUser = siteUser;
+                subscribeAdminRealtime();
             });
         }
         authBoot();
+
 
         /* also allow Enter key on auth inputs */
         ['auth-email', 'auth-password', 'auth-confirm', 'auth-name', 'auth-admin-key'].forEach(id => {
@@ -3558,6 +3793,9 @@ End with a key takeaway." oninput="wpmUpdateCount();wpeAutoPreview();wpeSyncScro
                 if (e.key === 'Enter') authSubmit();
             });
         });
+
+
+
         /* ══════════════════════════════════════════
            TESTIMONIAL ADMIN ACTIONS
         ══════════════════════════════════════════ */
@@ -4358,7 +4596,7 @@ End with a key takeaway." oninput="wpmUpdateCount();wpeAutoPreview();wpeSyncScro
             adminLoadWritings();
             loadBlogsFromDB();
         }
-   
+
         /* GOOEY_BLOB_JS */
         (function () {
             var nav = document.getElementById('nav-center');
@@ -4531,8 +4769,656 @@ End with a key takeaway." oninput="wpmUpdateCount();wpeAutoPreview();wpeSyncScro
 
             window.__clickSoundEnabled = function (v) { enabled = v; };
         })();
-    </script>
+        // <!-- ═══ NAVIGATION WHEEL ═══ -->
 
+
+        (function () {
+            var SECTIONS = [
+                { icon: '⌂', label: 'Home', href: '#home' },
+                { icon: '◉', label: 'About', href: '#about' },
+                { icon: '⚡', label: 'Skills', href: '#skills' },
+                { icon: '◈', label: 'Data', href: '#de-section' },
+                { icon: '◼', label: 'Work', href: '#work' },
+                { icon: '◎', label: 'Exp', href: '#experience' },
+                { icon: '✦', label: 'Blog', href: '#blog' },
+                { icon: '✉', label: 'Contact', href: '#contact' }
+            ];
+            var RADIUS = 95;
+            var HOLD_MS = 1600;
+            var open = false, selIdx = -1, holdRAF = null;
+            var container = document.getElementById('navWheel');
+            var ring = document.getElementById('nww-ring');
+            var trigger = document.getElementById('nww-trigger');
+            var tooltip = document.getElementById('nww-tooltip');
+            var scrollSound = document.getElementById('nww-scroll-sound');
+            var selectSound = document.getElementById('nww-select-sound');
+            var items = [];
+            var D = (RADIUS + 30) * 2;
+            ring.style.width = D + 'px'; ring.style.height = D + 'px';
+            ring.style.left = (-D / 2) + 'px'; ring.style.top = (-D / 2) + 'px';
+
+            SECTIONS.forEach(function (s, i) {
+                var n = SECTIONS.length;
+                var angle = 2 * Math.PI * i / n - Math.PI / 2;
+                var cx = D / 2 + RADIUS * Math.cos(angle);
+                var cy = D / 2 + RADIUS * Math.sin(angle);
+                var el = document.createElement('div');
+                el.className = 'nww-item';
+                el.style.left = cx + 'px'; el.style.top = cy + 'px';
+                var circ = 2 * Math.PI * 24;
+                el.setAttribute('aria-label', s.label);
+                el.innerHTML = '<svg class="narc" width="58" height="58"><circle cx="29" cy="29" r="24" stroke="rgba(109,39,217,.15)" stroke-width="3" fill="none"/><circle class="narc-fill" cx="29" cy="29" r="24" stroke="#8f5cdf" stroke-width="3" fill="none" stroke-dasharray="' + circ + '" stroke-dashoffset="' + circ + '" stroke-linecap="round"/></svg><span class="ni-icon">' + s.icon + '</span><span class="ni-label">' + s.label + '</span>';
+                el.addEventListener('mouseenter', function () { showItem(i, true); });
+                el.addEventListener('mouseleave', function () { cancelHold(); items.forEach(function (e) { e.classList.remove('active'); }); tooltip.style.opacity = '0'; });
+                el.addEventListener('click', function () { navigate(i); });
+                el.addEventListener('touchstart', function () { showItem(i, true); }, { passive: true });
+                el.addEventListener('touchend', function () { navigate(i); });
+                ring.appendChild(el);
+                items.push(el);
+            });
+
+            function showItem(idx, doHold) {
+                selIdx = idx;
+                items.forEach(function (el, i) { el.classList.toggle('active', i === idx); });
+                var rect = items[idx].getBoundingClientRect();
+                tooltip.textContent = SECTIONS[idx].label;
+                tooltip.style.left = (rect.left + rect.width / 2) + 'px';
+                tooltip.style.top = (rect.top - 36) + 'px';
+                tooltip.style.opacity = '1';
+                cancelHold();
+                if (doHold) startHold(idx);
+            }
+
+            function startHold(idx) {
+                var el = items[idx];
+                var arc = el.querySelector('.narc-fill');
+                var circ = 2 * Math.PI * 24;
+                arc.style.strokeDashoffset = circ;
+                var start = null;
+                function anim(t) {
+                    if (!start) start = t;
+                    var p = Math.min((t - start) / HOLD_MS, 1);
+                    arc.style.strokeDashoffset = circ * (1 - p);
+                    if (p < 1) holdRAF = requestAnimationFrame(anim);
+                    else navigate(idx);
+                }
+                holdRAF = requestAnimationFrame(anim);
+            }
+
+            function cancelHold() {
+                if (holdRAF) cancelAnimationFrame(holdRAF); holdRAF = null;
+                items.forEach(function (el) {
+                    var arc = el.querySelector('.narc-fill');
+                    if (arc) arc.style.strokeDashoffset = 2 * Math.PI * 24 + '';
+                });
+            }
+
+            function openWheel() {
+                open = true; selIdx = -1;
+                ring.classList.add('open'); trigger.classList.add('open');
+            }
+            function closeWheel() {
+                open = false; selIdx = -1; cancelHold();
+                ring.classList.remove('open'); trigger.classList.remove('open');
+                items.forEach(function (el) { el.classList.remove('active'); });
+                tooltip.style.opacity = '0';
+            }
+
+            function navigate(idx) {
+                selectSound.currentTime = 0; selectSound.play().catch(function () { });
+                var target = document.querySelector(SECTIONS[idx].href);
+                if (target) {
+                    var offset = target.offsetTop - 56;
+                    window.scrollTo({ top: offset, behavior: 'smooth' });
+                } else {
+                    window.location.hash = SECTIONS[idx].href;
+                }
+                closeWheel();
+            }
+
+            trigger.addEventListener('click', function () { open ? closeWheel() : openWheel(); });
+
+            window.addEventListener('wheel', function (e) {
+                if (!open) return;
+                e.preventDefault();
+                var n = SECTIONS.length;
+                var nx = selIdx < 0 ? 0 : (e.deltaY > 0 ? (selIdx + 1) % n : (selIdx - 1 + n) % n);
+                cancelHold(); showItem(nx, true);
+                scrollSound.currentTime = 0; scrollSound.play().catch(function () { });
+            }, { passive: false });
+
+            var dragging = false, dsx, dsy, dox, doy;
+            trigger.addEventListener('pointerdown', function (e) {
+                dragging = true;
+                var r = container.getBoundingClientRect();
+                dox = r.left; doy = r.top;
+                dsx = e.clientX; dsy = e.clientY;
+                e.preventDefault();
+            });
+            window.addEventListener('pointermove', function (e) {
+                if (!dragging) return;
+                var nx = dox + (e.clientX - dsx);
+                var ny = doy + (e.clientY - dsy);
+                nx = Math.max(26, Math.min(window.innerWidth - 26, nx));
+                ny = Math.max(26, Math.min(window.innerHeight - 26, ny));
+                container.style.left = nx + 'px';
+                container.style.top = ny + 'px';
+                container.style.bottom = 'auto';
+                container.style.right = 'auto';
+            });
+            window.addEventListener('pointerup', function () { dragging = false; });
+        })();
+        // <!-- ═══ END NAVIGATION WHEEL ═══ -->
+        let notifList = JSON.parse(localStorage.getItem('rd_notifs') || '[]');
+        let notifUnread = 0;
+        let _realtimeSubs = [];
+
+        function notifAdd(type, data) {
+            const icons = { testimonial: '★', guestbook: '💬', post: '📝' };
+            const n = {
+                id: Date.now(),
+                type,
+                icon: icons[type] || '🔔',
+                title: type === 'testimonial'
+                    ? `New testimonial from ${data.name}`
+                    : type === 'guestbook'
+                        ? `${data.name} signed the guestbook`
+                        : `New post submitted: ${data.title}`,
+                time: new Date().toISOString(),
+                read: false
+            };
+            notifList.unshift(n);
+            if (notifList.length > 30) notifList = notifList.slice(0, 30);
+            localStorage.setItem('rd_notifs', JSON.stringify(notifList));
+            notifRender();
+            notifToastShow(n);
+        }
+
+        function notifRender() {
+            const list = document.getElementById('notif-list');
+            const badge = document.getElementById('notif-badge');
+            const bellWrap = document.getElementById('notif-bell-wrap');
+            if (!list) return;
+            notifUnread = notifList.filter(n => !n.read).length;
+            if (badge) {
+                badge.textContent = notifUnread;
+                badge.style.display = notifUnread > 0 ? 'flex' : 'none';
+            }
+            if (bellWrap) bellWrap.style.display = siteIsAdmin ? 'block' : 'none';
+            if (!notifList.length) {
+                list.innerHTML = `<div style="padding:24px;text-align:center;color:var(--muted);font-size:.78rem;">No notifications</div>`;
+                return;
+            }
+            list.innerHTML = notifList.map(n => `
+    <div onclick="notifMarkRead('${n.id}')" style="
+      display:flex;gap:11px;padding:12px 16px;cursor:pointer;
+      border-bottom:1px solid var(--border);transition:background .15s;
+      background:${n.read ? 'transparent' : 'rgba(109,39,217,.06)'};"
+      onmouseover="this.style.background='rgba(109,39,217,.1)'"
+      onmouseout="this.style.background='${n.read ? 'transparent' : 'rgba(109,39,217,.06)'}'">
+      <span style="font-size:1.1rem;flex-shrink:0;margin-top:2px;">${n.icon}</span>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:.8rem;color:var(--text);line-height:1.4;
+          ${n.read ? '' : 'font-weight:700;'}">${escHtml(n.title)}</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.62rem;
+          color:var(--muted);margin-top:3px;">${timeAgoNotif(n.time)}</div>
+      </div>
+      ${!n.read ? `<div style="width:7px;height:7px;border-radius:50%;
+        background:var(--accent);flex-shrink:0;margin-top:6px;"></div>` : ''}
+    </div>`).join('');
+        }
+
+        function notifMarkRead(id) {
+            notifList = notifList.map(n => n.id == id ? { ...n, read: true } : n);
+            localStorage.setItem('rd_notifs', JSON.stringify(notifList));
+            notifRender();
+        }
+
+        function clearAllNotifs() {
+            notifList = [];
+            localStorage.removeItem('rd_notifs');
+            notifRender();
+        }
+
+        function toggleNotifPanel() {
+            const p = document.getElementById('notif-panel');
+            if (!p) return;
+            const open = p.style.display === 'block';
+            p.style.display = open ? 'none' : 'block';
+            if (!open) { notifList.forEach(n => n.read = true); localStorage.setItem('rd_notifs', JSON.stringify(notifList)); notifRender(); }
+        }
+
+        function timeAgoNotif(iso) {
+            const d = (Date.now() - new Date(iso)) / 1000;
+            if (d < 60) return 'just now';
+            if (d < 3600) return Math.floor(d / 60) + 'm ago';
+            if (d < 86400) return Math.floor(d / 3600) + 'h ago';
+            return Math.floor(d / 86400) + 'd ago';
+        }
+
+        function notifToastShow(n) {
+            const t = document.createElement('div');
+            t.style.cssText = `position:fixed;top:74px;right:20px;z-index:9999;
+    max-width:300px;padding:13px 16px;background:var(--modal-bg);
+    border:1px solid rgba(109,39,217,.35);border-radius:14px;
+    box-shadow:0 12px 40px rgba(0,0,0,.6);
+    display:flex;gap:10px;align-items:flex-start;
+    font-family:'Cabinet Grotesk',sans-serif;
+    animation:liftIn .3s ease both;`;
+            t.innerHTML = `
+    <span style="font-size:1.2rem;flex-shrink:0;">${n.icon}</span>
+    <div>
+      <div style="font-weight:700;font-size:.82rem;color:var(--text);margin-bottom:3px;">New Notification</div>
+      <div style="font-size:.76rem;color:var(--muted);">${escHtml(n.title)}</div>
+    </div>
+    <button onclick="this.parentElement.remove()" style="
+      background:none;border:none;color:var(--muted);cursor:pointer;
+      font-size:.75rem;padding:2px;flex-shrink:0;margin-left:4px;">✕</button>`;
+            document.body.appendChild(t);
+            setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateX(20px)'; t.style.transition = 'all .4s'; setTimeout(() => t.remove(), 400); }, 5000);
+        }
+
+        /* ── Subscribe to realtime (call after authBoot confirms admin) ── */
+        function subscribeAdminRealtime() {
+            if (!_sb || !siteIsAdmin || _realtimeSubs.length) return;
+
+            const testiSub = _sb.channel('admin-testi-notif')
+                .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'testimonials' }, payload => {
+                    notifAdd('testimonial', payload.new);
+                }).subscribe();
+
+            const gbSub = _sb.channel('admin-gb-notif')
+                .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'guestbook' }, payload => {
+                    notifAdd('guestbook', payload.new);
+                }).subscribe();
+
+            const postSub = _sb.channel('admin-post-notif')
+                .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'writings' }, payload => {
+                    if (!payload.new.approved) notifAdd('post', payload.new);
+                }).subscribe();
+
+            _realtimeSubs = [testiSub, gbSub, postSub];
+        }
+
+        // Close notif panel on outside click
+        document.addEventListener('click', e => {
+            const wrap = document.getElementById('notif-bell-wrap');
+            if (wrap && !wrap.contains(e.target)) {
+                const p = document.getElementById('notif-panel');
+                if (p) p.style.display = 'none';
+            }
+        });
+
+        notifRender();
+        /* ═══════════════════════════════════════
+   SEARCH SYSTEM
+═══════════════════════════════════════ */
+        let searchFilter = 'all';
+        let searchSelectedIdx = -1;
+
+        function openSearchModal() {
+            document.getElementById('search-modal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => document.getElementById('search-input')?.focus(), 80);
+            renderSearchResults([]);
+        }
+
+        function closeSearchModal() {
+            document.getElementById('search-modal').style.display = 'none';
+            document.body.style.overflow = '';
+            const inp = document.getElementById('search-input');
+            if (inp) inp.value = '';
+            searchSelectedIdx = -1;
+        }
+
+        function searchSetFilter(f, btn) {
+            searchFilter = f;
+            document.querySelectorAll('.search-filter-tab').forEach(b => {
+                b.style.color = 'var(--muted)'; b.style.background = 'none';
+            });
+            if (btn) { btn.style.color = 'var(--accent2)'; btn.style.background = 'rgba(109,39,217,.1)'; }
+            const val = document.getElementById('search-input')?.value || '';
+            runSearch(val);
+        }
+
+        function hlText(text, query) {
+            if (!query) return escHtml(text);
+            const re = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+            return escHtml(text).replace(re, `<mark style="background:rgba(109,39,217,.35);color:#c4b5fd;border-radius:2px;padding:0 1px;">$1</mark>`);
+        }
+
+        function runSearch(query) {
+            query = (query || '').trim();
+            const empty = document.getElementById('search-empty');
+            if (!query) {
+                renderSearchResults([]);
+                if (empty) { empty.style.display = 'block'; empty.innerHTML = '<i class="fas fa-search" style="font-size:1.5rem;opacity:.3;display:block;margin-bottom:10px;"></i>Start typing to search…'; }
+                return;
+            }
+            if (empty) empty.style.display = 'none';
+            const q = query.toLowerCase();
+            let results = [];
+
+            // Search blogs
+            if (searchFilter === 'all' || searchFilter === 'blog') {
+                const blogResults = (blogsData || []).filter(b =>
+                    (b.title || '').toLowerCase().includes(q) ||
+                    (b.excerpt || '').toLowerCase().includes(q) ||
+                    (b.category || '').toLowerCase().includes(q) ||
+                    (b.tags || []).some(t => t.toLowerCase().includes(q))
+                ).map(b => ({ type: 'blog', id: b.id, title: b.title, sub: b.category || 'Blog', excerpt: b.excerpt, icon: 'fas fa-pen-nib' }));
+                results = results.concat(blogResults);
+            }
+
+            // Search projects
+            if (searchFilter === 'all' || searchFilter === 'project') {
+                const projResults = (projectsData || []).filter(p =>
+                    (p.title || p.t || '').toLowerCase().includes(q) ||
+                    (p.description || p.d || '').toLowerCase().includes(q) ||
+                    (p.tags || p.tg || []).some(t => t.toLowerCase().includes(q))
+                ).map(p => ({
+                    type: 'project', id: p.id, title: p.title || p.t, sub: 'Project',
+                    excerpt: p.description || p.d, link: p.link_url || p.l, icon: 'fas fa-rocket'
+                }));
+                results = results.concat(projResults);
+            }
+
+            searchSelectedIdx = results.length ? 0 : -1;
+            renderSearchResults(results, query);
+        }
+
+        function renderSearchResults(results, query) {
+            const el = document.getElementById('search-results');
+            const empty = document.getElementById('search-empty');
+            if (!el) return;
+            if (!results.length && query) {
+                el.innerHTML = '';
+                if (empty) { empty.style.display = 'block'; empty.innerHTML = `<i class="fas fa-search" style="font-size:1.5rem;opacity:.3;display:block;margin-bottom:10px;"></i>No results for "<strong style="color:var(--text);">${escHtml(query)}</strong>"<br><span style="font-size:.72rem;margin-top:6px;display:block;">Try different keywords</span>`; }
+                return;
+            }
+            if (empty) empty.style.display = 'none';
+            el.innerHTML = results.map((r, i) => `
+    <div class="search-result-item" data-idx="${i}" data-type="${r.type}" data-id="${escHtml(r.id || '')}" data-link="${escHtml(r.link || '')}"
+      onclick="searchOpenResult(${i})"
+      onmouseover="searchSelectIdx(${i})"
+      style="display:flex;align-items:flex-start;gap:12px;padding:13px 18px;
+        cursor:pointer;border-bottom:1px solid var(--border);transition:background .13s;
+        background:${i === searchSelectedIdx ? 'rgba(109,39,217,.12)' : 'transparent'};">
+      <div style="width:34px;height:34px;border-radius:9px;flex-shrink:0;
+        background:rgba(109,39,217,.1);border:1px solid rgba(109,39,217,.2);
+        display:flex;align-items:center;justify-content:center;color:var(--accent2);font-size:.76rem;">
+        <i class="${r.icon}"></i>
+      </div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-weight:700;font-size:.86rem;color:var(--text);margin-bottom:2px;">${hlText(r.title || '', query)}</div>
+        ${r.excerpt ? `<div style="font-size:.73rem;color:var(--muted);display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;">${hlText(r.excerpt, query)}</div>` : ''}
+      </div>
+      <span style="flex-shrink:0;padding:2px 8px;border-radius:100px;font-size:.6rem;font-weight:700;
+        letter-spacing:.07em;background:rgba(109,39,217,.1);border:1px solid rgba(109,39,217,.2);
+        color:var(--accent2);font-family:'JetBrains Mono',monospace;">${r.sub}</span>
+    </div>`).join('');
+        }
+
+        function searchSelectIdx(idx) {
+            searchSelectedIdx = idx;
+            document.querySelectorAll('.search-result-item').forEach((el, i) => {
+                el.style.background = i === idx ? 'rgba(109,39,217,.12)' : 'transparent';
+            });
+        }
+
+        function searchOpenResult(idx) {
+            const items = document.querySelectorAll('.search-result-item');
+            const item = items[idx];
+            if (!item) return;
+            closeSearchModal();
+            if (item.dataset.type === 'blog') {
+                setTimeout(() => openBlogReader(item.dataset.id), 100);
+            } else if (item.dataset.link) {
+                window.open(item.dataset.link, '_blank');
+            } else {
+                document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', e => {
+            // Ctrl+/ to open
+            if ((e.ctrlKey || e.metaKey) && e.key === '/') { e.preventDefault(); openSearchModal(); return; }
+            const modal = document.getElementById('search-modal');
+            if (!modal || modal.style.display === 'none') return;
+            const items = document.querySelectorAll('.search-result-item');
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                searchSelectedIdx = Math.min(searchSelectedIdx + 1, items.length - 1);
+                searchSelectIdx(searchSelectedIdx);
+                items[searchSelectedIdx]?.scrollIntoView({ block: 'nearest' });
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                searchSelectedIdx = Math.max(searchSelectedIdx - 1, 0);
+                searchSelectIdx(searchSelectedIdx);
+                items[searchSelectedIdx]?.scrollIntoView({ block: 'nearest' });
+            } else if (e.key === 'Enter' && searchSelectedIdx >= 0) {
+                e.preventDefault();
+                searchOpenResult(searchSelectedIdx);
+            } else if (e.key === 'Escape') {
+                closeSearchModal();
+            }
+        });
+        /* ═══════════════════════════════════════
+   CERTIFICATES
+═══════════════════════════════════════ */
+
+        // ── Edit yo array ma afno certificates add gara ──
+        const CERTIFICATES = [
+            {
+                title: 'Data Engineering Internship',
+                issuer: 'Insight Workshop',
+                date: 'March 2025',
+                image: 'https://i.postimg.cc/MZhwPc85/rikesh.png', // 👈 Replace with your cert image URL
+                tags: ['Databricks', 'PySpark', 'ETL'],
+                color: '#6d27d9',
+                icon: 'fas fa-database',
+                verify_url: '' // optional: link to verify
+            },
+            {
+                title: 'BCA — Bachelor of Computer Application',
+                issuer: 'Patan Multiple Campus',
+                date: '2022 – Present',
+                image: '', // leave empty to show icon
+                tags: ['Computer Science', 'Programming'],
+                color: '#8f5cdf',
+                icon: 'fas fa-graduation-cap',
+                verify_url: ''
+            },
+            {
+                title: 'Unity Game Development',
+                issuer: 'Self-Certified Project',
+                date: '2024',
+                image: '',
+                tags: ['Unity', 'C#', 'Game Dev'],
+                color: '#a78bfa',
+                icon: 'fas fa-gamepad',
+                verify_url: ''
+            },
+            // 👆 Add more certificates here!
+        ];
+
+        function buildCertCard(c, i) {
+            const el = document.createElement('div');
+            el.className = 'reveal card';
+            el.style.transitionDelay = `${i * .07}s`;
+            el.innerHTML = `
+    <div style="position:relative;overflow:hidden;border-radius:14px;">
+      <!-- Top accent -->
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;
+        background:linear-gradient(90deg,${c.color},var(--accent2));border-radius:14px 14px 0 0;"></div>
+      
+      <!-- Certificate image or placeholder -->
+      <div style="height:170px;background:rgba(31,41,55,.4);overflow:hidden;position:relative;cursor:pointer;"
+        onclick="${c.image ? `openCertViewer('${c.image}','${c.title.replace(/'/g, "\\'")}')` : ''}${c.verify_url ? `; window.open('${c.verify_url}','_blank')` : ''}">
+        ${c.image
+                    ? `<img src="${c.image}" alt="${c.title}" loading="lazy"
+              style="width:100%;height:100%;object-fit:cover;transition:transform .5s;"
+              onmouseover="this.style.transform='scale(1.05)'"
+              onmouseout="this.style.transform=''">
+             <div style="position:absolute;inset:0;background:rgba(0,0,0,.3);display:flex;align-items:center;
+               justify-content:center;opacity:0;transition:opacity .3s;"
+               onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+               <span style="background:rgba(109,39,217,.8);color:#fff;padding:8px 16px;border-radius:100px;
+                 font-size:.76rem;font-weight:700;font-family:'Cabinet Grotesk',sans-serif;">
+                 <i class="fas fa-expand"></i> View Certificate
+               </span>
+             </div>`
+                    : `<div style="width:100%;height:100%;display:flex;align-items:center;
+               justify-content:center;background:linear-gradient(135deg,rgba(109,39,217,.15),rgba(31,41,55,.4));">
+               <i class="${c.icon}" style="font-size:3rem;color:${c.color};opacity:.6;"></i>
+             </div>`
+                }
+        <!-- Issuer badge overlay -->
+        <div style="position:absolute;bottom:10px;left:10px;padding:3px 10px;border-radius:100px;
+          background:rgba(2,6,17,.85);border:1px solid rgba(255,255,255,.1);
+          font-size:.62rem;font-weight:700;font-family:'JetBrains Mono',monospace;
+          color:var(--accent2);letter-spacing:.06em;">
+          <i class="fas fa-certificate" style="margin-right:4px;"></i>${c.issuer}
+        </div>
+      </div>
+      
+      <div style="padding:15px 17px;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px;">
+          <h3 style="font-family:'Cabinet Grotesk',sans-serif;font-weight:800;
+            font-size:.9rem;color:var(--text);line-height:1.3;">${c.title}</h3>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:.62rem;
+            color:var(--muted);white-space:nowrap;flex-shrink:0;">${c.date}</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px;">
+          ${c.tags.map(t => `<span class="tag" style="font-size:.58rem;">${t}</span>`).join('')}
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          ${c.image ? `
+          <button onclick="openCertViewer('${c.image}','${c.title.replace(/'/g, "\\'")}')"
+            style="flex:1;padding:8px;border-radius:8px;background:rgba(109,39,217,.1);
+            border:1px solid rgba(109,39,217,.25);color:var(--accent2);
+            font-family:'Cabinet Grotesk',sans-serif;font-size:.76rem;font-weight:700;
+            cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;"
+            onmouseover="this.style.background='rgba(109,39,217,.22)'"
+            onmouseout="this.style.background='rgba(109,39,217,.1)'">
+            <i class="fas fa-eye" style="font-size:.68rem;"></i> View
+          </button>` : ''}
+          ${c.verify_url ? `
+          <a href="${c.verify_url}" target="_blank" rel="noopener"
+            style="padding:8px 12px;border-radius:8px;background:rgba(34,197,94,.08);
+            border:1px solid rgba(34,197,94,.22);color:#4ade80;
+            font-family:'Cabinet Grotesk',sans-serif;font-size:.76rem;font-weight:700;
+            display:flex;align-items:center;gap:5px;transition:all .2s;"
+            onmouseover="this.style.background='rgba(34,197,94,.18)'"
+            onmouseout="this.style.background='rgba(34,197,94,.08)'">
+            <i class="fas fa-external-link-alt" style="font-size:.62rem;"></i> Verify
+          </a>` : ''}
+        </div>
+      </div>
+    </div>`;
+            return el;
+        }
+
+        function openCertViewer(imgUrl, title) {
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `position:fixed;inset:0;z-index:9600;background:rgba(0,0,0,.94);
+    backdrop-filter:blur(12px);display:flex;flex-direction:column;
+    align-items:center;justify-content:center;padding:20px;cursor:zoom-out;`;
+            overlay.onclick = () => overlay.remove();
+            overlay.innerHTML = `
+    <div style="max-width:800px;width:100%;text-align:center;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <span style="font-family:'Special Elite',cursive;font-size:1rem;color:var(--text);">${escHtml(title)}</span>
+        <button onclick="event.stopPropagation();this.closest('div.fixed,div[style*=position]')?.remove()??document.body.lastElementChild.remove()"
+          style="width:32px;height:32px;border-radius:8px;background:rgba(248,113,113,.1);
+          border:1px solid rgba(248,113,113,.25);color:#f87171;font-size:.8rem;
+          cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
+      </div>
+      <img src="${escHtml(imgUrl)}" alt="${escHtml(title)}" onclick="event.stopPropagation()"
+        style="max-width:100%;max-height:75vh;object-fit:contain;border-radius:14px;
+        border:1px solid rgba(109,39,217,.3);box-shadow:0 24px 80px rgba(0,0,0,.7);">
+      <div style="margin-top:14px;display:flex;gap:10px;justify-content:center;">
+        <a href="${escHtml(imgUrl)}" download
+          onclick="event.stopPropagation()"
+          style="display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border-radius:9px;
+          background:var(--accent);color:#fff;font-family:'Cabinet Grotesk',sans-serif;
+          font-weight:700;font-size:.82rem;text-decoration:none;">
+          <i class="fas fa-download"></i> Download
+        </a>
+      </div>
+    </div>`;
+            document.body.appendChild(overlay);
+        }
+
+        // Render certificates
+        (function () {
+            const grid = document.getElementById('certs-grid');
+            if (!grid) return;
+            CERTIFICATES.forEach((c, i) => {
+                const el = buildCertCard(c, i);
+                grid.appendChild(el);
+                revObs.observe(el);
+            });
+        })();
+
+
+
+        // <!-- ═══ REAL-TIME ADMIN NOTIFICATIONS ═══ -->
+
+    </script>
+    <!-- ═══ SEARCH MODAL ═══ -->
+    <div id="search-modal" style="display:none;position:fixed;inset:0;z-index:9500;
+  background:rgba(0,0,0,.88);backdrop-filter:blur(16px);" onclick="if(event.target===this)closeSearchModal()">
+        <div style="max-width:620px;margin:80px auto 0;padding:0 16px;">
+            <div style="background:var(--modal-bg);border:1px solid rgba(109,39,217,.3);
+      border-radius:18px;overflow:hidden;animation:manifestSlideIn .25s cubic-bezier(.34,1.4,.64,1) both;">
+                <!-- search bar -->
+                <div style="display:flex;align-items:center;gap:12px;padding:16px 20px;
+        border-bottom:1px solid var(--border);">
+                    <i class="fas fa-search" style="color:var(--muted);font-size:.9rem;flex-shrink:0;"></i>
+                    <input type="text" id="search-input" placeholder="Search blog posts, projects…" style="flex:1;background:none;border:none;outline:none;color:var(--text);
+          font-family:'Cabinet Grotesk',sans-serif;font-size:1rem;" oninput="runSearch(this.value)" autocomplete="off">
+                    <kbd style="padding:2px 8px;border-radius:5px;background:rgba(255,255,255,.06);
+          border:1px solid var(--border);font-size:.58rem;color:var(--muted);
+          font-family:'JetBrains Mono',monospace;flex-shrink:0;">ESC</kbd>
+                </div>
+                <!-- filter tabs -->
+                <div style="display:flex;gap:0;border-bottom:1px solid var(--border);">
+                    <button class="search-filter-tab active" data-filter="all" onclick="searchSetFilter('all',this)"
+                        style="flex:1;padding:9px;border:none;background:none;color:var(--muted);
+          font-family:'Cabinet Grotesk',sans-serif;font-size:.76rem;font-weight:700;
+          cursor:pointer;transition:all .2s;border-right:1px solid var(--border);">All</button>
+                    <button class="search-filter-tab" data-filter="blog" onclick="searchSetFilter('blog',this)" style="flex:1;padding:9px;border:none;background:none;color:var(--muted);
+          font-family:'Cabinet Grotesk',sans-serif;font-size:.76rem;font-weight:700;
+          cursor:pointer;transition:all .2s;border-right:1px solid var(--border);">✍ Blog</button>
+                    <button class="search-filter-tab" data-filter="project" onclick="searchSetFilter('project',this)"
+                        style="flex:1;padding:9px;border:none;background:none;color:var(--muted);
+          font-family:'Cabinet Grotesk',sans-serif;font-size:.76rem;font-weight:700;
+          cursor:pointer;transition:all .2s;">🚀 Projects</button>
+                </div>
+                <!-- results -->
+                <div id="search-results" style="max-height:400px;overflow-y:auto;
+        scrollbar-width:thin;scrollbar-color:var(--accent) transparent;">
+                    <div id="search-empty" style="padding:40px;text-align:center;color:var(--muted);font-size:.84rem;">
+                        <i class="fas fa-search"
+                            style="font-size:1.5rem;opacity:.3;display:block;margin-bottom:10px;"></i>
+                        Start typing to search…
+                    </div>
+                </div>
+                <!-- footer -->
+                <div style="padding:10px 16px;border-top:1px solid var(--border);display:flex;gap:14px;
+        font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--muted);">
+                    <span><kbd style="padding:1px 5px;border-radius:3px;background:rgba(255,255,255,.06);
+          border:1px solid var(--border);">↑↓</kbd> Navigate</span>
+                    <span><kbd style="padding:1px 5px;border-radius:3px;background:rgba(255,255,255,.06);
+          border:1px solid var(--border);">↵</kbd> Open</span>
+                    <span><kbd style="padding:1px 5px;border-radius:3px;background:rgba(255,255,255,.06);
+          border:1px solid var(--border);">ESC</kbd> Close</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 
