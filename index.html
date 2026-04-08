@@ -569,22 +569,6 @@
                     </div>
                 </div>
 
-                <!-- Language Stats Card (GitHub Readme Stats) -->
-                <div class="reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;">
-                    <div
-                        style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:4px;overflow:hidden;">
-                        <img src="https://github-readme-stats.vercel.app/api?username=rikeshdahal&show_icons=true&theme=transparent&title_color=8f5cdf&text_color=9ca2ae&icon_color=6d27d9&border_color=1f2937&hide_border=false&bg_color=0a1020"
-                            style="width:100%;display:block;border-radius:12px;" alt="GitHub Stats"
-                            onerror="this.parentElement.style.display='none'">
-                    </div>
-                    <div
-                        style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:4px;overflow:hidden;">
-                        <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=rikeshdahal&layout=compact&theme=transparent&title_color=8f5cdf&text_color=9ca2ae&icon_color=6d27d9&border_color=1f2937&bg_color=0a1020"
-                            style="width:100%;display:block;border-radius:12px;" alt="Top Languages"
-                            onerror="this.parentElement.style.display='none'">
-                    </div>
-                </div>
-
                 <!-- Streak Stats -->
                 <div class="reveal"
                     style="margin-top:16px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:4px;overflow:hidden;">
@@ -2044,7 +2028,7 @@ End with a key takeaway." oninput="wpmUpdateCount();wpeAutoPreview();wpeSyncScro
         document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el => revObs.observe(el));
 
         /* ── LIVE VIEWER ── */
-        (function () { const el = document.getElementById('lvc-count'); if (!el) return; function display(n) { el.textContent = n; el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); setTimeout(() => el.classList.remove('bump'), 350); } fetch('https://api.countapi.xyz/hit/rikeshdahal-portfolio/pageviews-2025').then(r => r.json()).then(d => { if (d && d.value) { let s = Math.max(1, Math.round(d.value / 40)); display(s); function tick() { const dv = (Math.random() < .5 ? 1 : -1) * (Math.random() < .3 ? 2 : 1); s = Math.max(1, s + dv); display(s); setTimeout(tick, Math.floor(Math.random() * 9000) + 6000); } setTimeout(tick, 8000); } }).catch(() => display(Math.floor(Math.random() * 8) + 3)); })();
+        (function () { const el = document.getElementById('lvc-count'); if (!el) return; function display(n) { el.textContent = n; el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); setTimeout(() => el.classList.remove('bump'), 350); } fetch('https://api.counterapi.dev/v1/rikeshdahal/portfolio/up').then(r => r.json()).then(d => { if (d && d.value) { let s = Math.max(1, Math.round(d.value / 40)); display(s); function tick() { const dv = (Math.random() < .5 ? 1 : -1) * (Math.random() < .3 ? 2 : 1); s = Math.max(1, s + dv); display(s); setTimeout(tick, Math.floor(Math.random() * 9000) + 6000); } setTimeout(tick, 8000); } }).catch(() => display(Math.floor(Math.random() * 8) + 3)); })();
 
         /* ── HERO CANVAS ── */
         (function () { const canvas = document.getElementById('hero-canvas'); if (!canvas) return; const ctx = canvas.getContext('2d'); let W, H, pts = []; const COLS = ['#6d27d9', '#8f5cdf', '#b48ef5']; function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; } class P { constructor() { this.reset(true); } reset(init) { this.x = Math.random() * W; this.y = init ? Math.random() * H : H + 8; this.r = Math.random() * 1.5 + .3; this.vx = (Math.random() - .5) * .22; this.vy = -(Math.random() * .4 + .1); this.a = 0; this.ta = Math.random() * .35 + .06; this.col = COLS[Math.floor(Math.random() * COLS.length)]; this.life = 0; this.max = Math.random() * 280 + 180; } update() { this.x += this.vx; this.y += this.vy; this.life++; if (this.life < 28) this.a = this.ta * (this.life / 28); else if (this.life > this.max - 28) this.a = this.ta * ((this.max - this.life) / 28); else this.a = this.ta; if (this.life >= this.max) this.reset(false); } draw() { ctx.save(); ctx.globalAlpha = this.a * .75; ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2); ctx.fillStyle = this.col; ctx.fill(); ctx.restore(); } } resize(); pts = Array.from({ length: 65 }, () => new P()); function frame() { ctx.clearRect(0, 0, W, H); pts.forEach(p => { p.update(); p.draw(); }); for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) { const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y, d = Math.sqrt(dx * dx + dy * dy); if (d < 72) { ctx.save(); ctx.globalAlpha = .05 * (1 - d / 72); ctx.strokeStyle = '#8f5cdf'; ctx.lineWidth = .4; ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y); ctx.stroke(); ctx.restore(); } } requestAnimationFrame(frame); } frame(); window.addEventListener('resize', resize, { passive: true }); })();
