@@ -4,7 +4,7 @@
 <head>
     <!-- ═══ THEME — must run before any CSS to prevent flash ═══ -->
     <script>
-        (function(){
+        (function () {
             var t = localStorage.getItem('theme');
             var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             var isDark = t ? t !== 'light' : prefersDark;
@@ -77,7 +77,9 @@
         href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+Devanagari:wght@400;600;700&family=Special+Elite&family=DM+Mono:wght@400;500&family=Patrick+Hand&display=swap"
         rel="stylesheet" media="print" onload="this.media='all'">
     <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+Devanagari:wght@400;600;700&family=Special+Elite&family=DM+Mono:wght@400;500&family=Patrick+Hand&display=swap" rel="stylesheet">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+Devanagari:wght@400;600;700&family=Special+Elite&family=DM+Mono:wght@400;500&family=Patrick+Hand&display=swap"
+            rel="stylesheet">
     </noscript>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://unpkg.com/@emailjs/browser@4/dist/email.min.js" crossorigin="anonymous"></script>
@@ -117,19 +119,20 @@
 
     <!-- HEADER -->
     <header id="hdr">
-       <a id="nav-name-pill" href="https://rikeshdahal.com.np/" aria-label="Open navigation" class="nnp-container">
+        <div class="nav-left">
+            <div id="nav-name-pill" role="button" aria-label="Open navigation">
                 <img src="https://i.postimg.cc/5tTNWYqp/rd.png" alt="Rikesh Dahal" class="nnp-img">
                 <div class="nnp-sep"></div>
-                <span class="nnp-name">Rikesh Dahal</span>
+                <a href="https://rikeshdahal.com.np/"><span class="nnp-name">Rikesh Dahal</span></a>
+                
                 <button class="nnp-theme" id="mob-theme-btn" aria-label="Toggle theme"
                     onclick="event.stopPropagation()"><i id="mob-theme-icon" class="fas fa-sun"></i></button>
             </div>
-            
             <div id="nav-tagline">
                 <span class="nav-tl-top">Data Engineer</span>
                 <span class="nav-tl-bot">Building the Future</span>
             </div>
-        </a>
+        </div>
         <div id="nav-center" style="isolation: isolate;">
             <div id="nav-clock-wrap" style="position: relative; z-index: 1;">
                 <div id="nav-clock" aria-label="Current time" style="position: relative; z-index: 1;">
@@ -1311,7 +1314,8 @@ End with a key takeaway." oninput="wpmUpdateCount();wpeAutoPreview();wpeSyncScro
                             Send me a message</h3>
                         <form id="contact-form">
                             <!-- Honeypot field — hidden from real users, bots fill it in -->
-                            <div style="position:absolute;left:-9999px;top:-9999px;opacity:0;height:0;overflow:hidden;" aria-hidden="true">
+                            <div style="position:absolute;left:-9999px;top:-9999px;opacity:0;height:0;overflow:hidden;"
+                                aria-hidden="true">
                                 <label for="form-website">Website (leave blank)</label>
                                 <input type="text" id="form-website" name="website" tabindex="-1" autocomplete="off">
                             </div>
@@ -1544,7 +1548,8 @@ End with a key takeaway." oninput="wpmUpdateCount();wpeAutoPreview();wpeSyncScro
                             style="margin-right:5px;font-size:.72rem;"></i>Manifest</button>
                     <button class="admin-tab" onclick="adminSwitchTab('gear',this)"><i class="fas fa-microchip"
                             style="margin-right:5px;font-size:.72rem;"></i>Gear</button>
-                    <button class="admin-tab" onclick="adminSwitchTab('certificates',this)"><i class="fas fa-certificate"
+                    <button class="admin-tab" onclick="adminSwitchTab('certificates',this)"><i
+                            class="fas fa-certificate"
                             style="margin-right:5px;font-size:.72rem;"></i>Certificates</button>
                 </div>
                 <!-- Users -->
@@ -1602,7 +1607,8 @@ End with a key takeaway." oninput="wpmUpdateCount();wpeAutoPreview();wpeSyncScro
                 <div class="admin-tab-panel" id="ap-certificates">
                     <div id="ap-certs-content">
                         <div class="admin-loading"><i class="fas fa-spinner"
-                                style="animation:spin .8s linear infinite;margin-right:7px;"></i>Loading certificates…</div>
+                                style="animation:spin .8s linear infinite;margin-right:7px;"></i>Loading certificates…
+                        </div>
                     </div>
                 </div>
 
