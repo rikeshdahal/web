@@ -88,13 +88,10 @@
           setMeta('twitter:image', img);
           document.querySelector('meta[name="description"]')?.setAttribute('content', desc);
 
-          // Redirect to main portfolio with blog hash after a tiny delay
-          // (so crawlers that render JS can read the updated meta)
-          setTimeout(() => {
-            window.location.replace(
-              `https://rikeshdahal.com.np/#blog-post-${data.id}`
-            );
-          }, 300);
+          // Redirect immediately — meta tags are already updated synchronously above
+          window.location.replace(
+            `https://rikeshdahal.com.np/#blog-post-${data.id}`
+          );
         });
     }
 
