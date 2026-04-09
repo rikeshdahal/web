@@ -522,11 +522,23 @@ ${siteIsAdmin && b.approved === false ? `
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
     history.replaceState(null, '', 'blog.html?id=' + id);
+
+    // inject comment section
+    setTimeout(() => {
+        const readerContent = document.getElementById('blog-reader-content');
+        if (readerContent) {
+            const existing = readerContent.querySelector('#bc-comments-wrap');
+            if (existing) existing.remove();
+            readerContent.appendChild(bcRenderSection(b.id));
+            bcLoad(b.id);
+        }
+    }, 50);
 }
 
 function closeBlogReader() {
     document.getElementById('blog-reader-modal').style.display = 'none';
     document.body.style.overflow = '';
+    if (bcRealtime) { try { _sb?.removeChannel(bcRealtime); } catch(e){} bcRealtime = null; }
     history.replaceState(null, '', window.location.pathname + window.location.search);
 }
 
@@ -3937,3 +3949,237 @@ function copyBlogLink(id) {
     try { if (sessionStorage.getItem(DISMISS_KEY)) return; } catch (e) {}
     setTimeout(inject, 30000);
 })();
+/* ══════════════════════════════════════════
+   BLOG COMMENT SYSTEM
+══════════════════════════════════════════ */
+const BC = {
+    table: 'blog_comments',
+    likes_table: 'blog_comment_likes',
+};
+let bcCurrentPostId = null;
+let bcAllComments = [];
+let bcUserLikes = new Set();
+let bcReplyingTo = null;
+let bcRealtime = null;
+
+function bcTimeAgo(iso) {
+    const d = (Date.now() - new Date(iso)) / 1000;
+    if (d < 60) return 'just now';
+    if (d < 3600) return Math.floor(d / 60) + 'm ago';
+    if (d < 86400) return Math.floor(d / 3600) + 'h ago';
+    if (d < 86400 * 30) return Math.floor(d / 86400) + 'd ago';
+    return Math.floor(d / 86400 / 30) + 'mo ago';
+}
+
+function bcInitials(name) {
+    return (name || '?').split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+}
+
+async function bcLoadUserLikes() {
+    bcUserLikes = new Set();
+    if (!_sb || !siteUser) return;
+    try {
+        const { data } = await _sb.from(BC.likes_table).select('comment_id').eq('user_id', siteUser.id);
+        if (data) data.forEach(r => bcUserLikes.add(r.comment_id));
+    } catch (e) {}
+}
+
+async function bcLoad(postId) {
+    bcCurrentPostId = postId;
+    bcAllComments = [];
+    if (!_sb) return;
+    await bcLoadUserLikes();
+    const { data } = await _sb.from(BC.table).select('*').eq('post_id', postId).order('created_at', { ascending: true });
+    if (data) bcAllComments = data;
+    bcRender();
+    if (bcRealtime) { try { _sb.removeChannel(bcRealtime); } catch(e){} bcRealtime = null; }
+    bcRealtime = _sb.channel('bc-' + postId)
+        .on('postgres_changes', { event: '*', schema: 'public', table: BC.table, filter: `post_id=eq.${postId}` }, () => {
+            bcLoad(postId);
+        }).subscribe();
+}
+
+function bcBuildEntry(c, all, depth) {
+    depth = depth || 0;
+    const isLiked = bcUserLikes.has(c.id);
+    const isMine = siteUser && siteUser.id === c.user_id;
+    const replies = all.filter(r => r.parent_id === c.id);
+    const av = c.avatar_url
+        ? `<img src="${escHtml(c.avatar_url)}" alt="${escHtml(c.name)}" onerror="this.remove()" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`
+        : `<span style="font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;color:#fff;">${bcInitials(c.name)}</span>`;
+
+    const el = document.createElement('div');
+    el.id = 'bc-' + c.id;
+    el.style.cssText = `display:flex;gap:10px;padding:14px 0;border-bottom:1px solid var(--border);animation:fadeUp .3s ease both;${depth > 0 ? 'margin-left:' + Math.min(depth * 36, 72) + 'px;' : ''}`;
+
+    el.innerHTML = `
+<div style="width:34px;height:34px;border-radius:50%;flex-shrink:0;background:var(--accent);display:flex;align-items:center;justify-content:center;border:1.5px solid rgba(109,39,217,.3);overflow:hidden;">${av}</div>
+<div style="flex:1;min-width:0;">
+  <div style="display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:4px;">
+    <span style="font-weight:700;font-size:.84rem;color:var(--text);">${escHtml(c.name)}</span>
+    ${depth > 0 ? `<span style="font-size:.6rem;font-weight:700;background:rgba(109,39,217,.1);border:1px solid rgba(109,39,217,.2);color:var(--accent2);padding:1px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;">replied</span>` : ''}
+    <span style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--muted);margin-left:auto;">${bcTimeAgo(c.created_at)}</span>
+  </div>
+  <p style="font-size:.84rem;color:var(--text);line-height:1.65;margin-bottom:8px;word-break:break-word;">${escHtml(c.message)}</p>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+    <button onclick="bcToggleLike('${c.id}',this)" style="display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:100px;border:1px solid ${isLiked ? 'rgba(239,68,68,.5)' : 'var(--border)'};background:${isLiked ? 'rgba(239,68,68,.1)' : 'transparent'};color:${isLiked ? '#ef4444' : 'var(--muted)'};font-size:.72rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Cabinet Grotesk',sans-serif;" data-liked="${isLiked}">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="${isLiked ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <span class="bc-like-n">${c.like_count > 0 ? c.like_count : ''}</span>
+    </button>
+    <button onclick="bcStartReply('${c.id}','${escHtml(c.name).replace(/'/g,"\\'")}' )" style="display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:100px;border:1px solid transparent;background:transparent;color:var(--muted);font-size:.72rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Cabinet Grotesk',sans-serif;" onmouseover="this.style.borderColor='rgba(109,39,217,.3)';this.style.color='var(--accent2)'" onmouseout="this.style.borderColor='transparent';this.style.color='var(--muted)'">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 0 0-4-4H4"/></svg> Reply
+    </button>
+    ${isMine ? `<button onclick="bcDelete('${c.id}')" style="font-size:.65rem;color:var(--muted);background:none;border:none;cursor:pointer;font-family:'JetBrains Mono',monospace;padding:2px 5px;border-radius:3px;transition:color .2s;" onmouseover="this.style.color='#f87171'" onmouseout="this.style.color='var(--muted)'">delete</button>` : ''}
+    ${siteIsAdmin && !isMine ? `<button onclick="bcAdminDelete('${c.id}')" style="font-size:.65rem;color:#f87171;background:none;border:none;cursor:pointer;font-family:'JetBrains Mono',monospace;padding:2px 5px;">del</button>` : ''}
+  </div>
+  ${replies.length > 0 ? `<div id="bc-replies-${c.id}"></div>` : ''}
+</div>`;
+
+    if (replies.length > 0) {
+        const repliesEl = el.querySelector('#bc-replies-' + c.id);
+        if (repliesEl) replies.forEach(r => repliesEl.appendChild(bcBuildEntry(r, all, depth + 1)));
+    }
+    return el;
+}
+
+function bcRender() {
+    const list = document.getElementById('bc-list');
+    if (!list) return;
+    const topLevel = bcAllComments.filter(c => !c.parent_id);
+    const countEl = document.getElementById('bc-count');
+    if (countEl) countEl.textContent = bcAllComments.length + (bcAllComments.length === 1 ? ' comment' : ' comments');
+    list.innerHTML = '';
+    if (!topLevel.length) {
+        list.innerHTML = `<div style="padding:24px 0;text-align:center;color:var(--muted);font-size:.82rem;font-family:'JetBrains Mono',monospace;">No comments yet. Be the first!</div>`;
+        return;
+    }
+    topLevel.forEach(c => list.appendChild(bcBuildEntry(c, bcAllComments, 0)));
+}
+
+function bcStartReply(id, name) {
+    if (!siteUser) { openAuthModal(); return; }
+    bcReplyingTo = { id, name };
+    const banner = document.getElementById('bc-reply-banner');
+    const bannerText = document.getElementById('bc-reply-text');
+    if (banner && bannerText) { bannerText.textContent = `\u21a9 Replying to ${name}`; banner.style.display = 'flex'; }
+    const inp = document.getElementById('bc-input');
+    if (inp) { inp.placeholder = `Reply to ${name}\u2026`; inp.focus(); }
+    document.getElementById('bc-compose')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function bcCancelReply() {
+    bcReplyingTo = null;
+    const banner = document.getElementById('bc-reply-banner');
+    if (banner) banner.style.display = 'none';
+    const inp = document.getElementById('bc-input');
+    if (inp) inp.placeholder = 'Write a comment\u2026';
+}
+
+async function bcSubmit() {
+    if (!siteUser) { openAuthModal(); return; }
+    const inp = document.getElementById('bc-input');
+    const msg = (inp?.value || '').trim();
+    if (!msg) return;
+    const btn = document.getElementById('bc-submit-btn');
+    if (btn) btn.disabled = true;
+    const meta = siteUser.user_metadata || {};
+    const name = meta.full_name || meta.name || meta.user_name || siteUser.email?.split('@')[0] || 'Anonymous';
+    const avatar = meta.avatar_url || meta.picture || null;
+    const { error } = await _sb.from(BC.table).insert({
+        post_id: bcCurrentPostId,
+        user_id: siteUser.id,
+        parent_id: bcReplyingTo ? bcReplyingTo.id : null,
+        name, avatar_url: avatar, message: msg, like_count: 0,
+    });
+    if (btn) btn.disabled = false;
+    if (error) { showToast(error.message, 'error'); return; }
+    if (inp) inp.value = '';
+    bcCancelReply();
+    await bcLoad(bcCurrentPostId);
+}
+
+async function bcToggleLike(id, btn) {
+    if (!siteUser) { openAuthModal(); return; }
+    const isLiked = bcUserLikes.has(id);
+    const nEl = btn.querySelector('.bc-like-n');
+    const current = bcAllComments.find(c => c.id === id);
+    if (isLiked) {
+        bcUserLikes.delete(id);
+        btn.style.borderColor = 'var(--border)'; btn.style.background = 'transparent'; btn.style.color = 'var(--muted)';
+        btn.querySelector('svg').setAttribute('fill', 'none');
+        if (nEl) { const n = Math.max(0, parseInt(nEl.textContent || '0') - 1); nEl.textContent = n > 0 ? n : ''; }
+        if (_sb && current) {
+            await _sb.from(BC.likes_table).delete().eq('user_id', siteUser.id).eq('comment_id', id);
+            await _sb.from(BC.table).update({ like_count: Math.max(0, (current.like_count || 0) - 1) }).eq('id', id);
+        }
+    } else {
+        bcUserLikes.add(id);
+        btn.style.borderColor = 'rgba(239,68,68,.5)'; btn.style.background = 'rgba(239,68,68,.1)'; btn.style.color = '#ef4444';
+        btn.querySelector('svg').setAttribute('fill', 'currentColor');
+        btn.classList.remove('bc-pop'); void btn.offsetWidth; btn.classList.add('bc-pop');
+        if (nEl) { const n = parseInt(nEl.textContent || '0') + 1; nEl.textContent = n; }
+        if (_sb && current) {
+            await _sb.from(BC.likes_table).insert({ user_id: siteUser.id, comment_id: id });
+            await _sb.from(BC.table).update({ like_count: (current.like_count || 0) + 1 }).eq('id', id);
+        }
+    }
+}
+
+async function bcDelete(id) {
+    if (!siteUser || !_sb) return;
+    if (!confirm('Delete your comment?')) return;
+    await _sb.from(BC.table).delete().eq('id', id).eq('user_id', siteUser.id);
+    await bcLoad(bcCurrentPostId);
+}
+
+async function bcAdminDelete(id) {
+    if (!siteIsAdmin || !_sb) return;
+    if (!confirm('Delete this comment?')) return;
+    await _sb.from(BC.table).delete().eq('id', id);
+    await bcLoad(bcCurrentPostId);
+}
+
+function bcRenderSection(postId) {
+    const wrap = document.createElement('div');
+    wrap.id = 'bc-comments-wrap';
+    wrap.style.cssText = 'margin-top:28px;padding-top:24px;border-top:1px solid var(--border);';
+
+    const authHtml = siteUser ? (() => {
+        const meta = siteUser.user_metadata || {};
+        const name = meta.full_name || meta.name || siteUser.email?.split('@')[0] || 'You';
+        const av = meta.avatar_url || meta.picture;
+        return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+<div style="width:28px;height:28px;border-radius:50%;flex-shrink:0;background:var(--accent);display:flex;align-items:center;justify-content:center;overflow:hidden;border:1.5px solid rgba(109,39,217,.3);">
+  ${av ? `<img src="${escHtml(av)}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.remove()">` : `<span style="font-size:.6rem;font-weight:700;color:#fff;font-family:'JetBrains Mono',monospace;">${bcInitials(name)}</span>`}
+</div>
+<span style="font-size:.78rem;color:var(--muted);">Commenting as <strong style="color:var(--text);">${escHtml(name)}</strong></span>
+</div>`;
+    })() : `<div style="padding:14px;background:rgba(109,39,217,.06);border:1px solid rgba(109,39,217,.14);border-radius:10px;margin-bottom:10px;text-align:center;">
+  <p style="font-size:.82rem;color:var(--muted);margin-bottom:8px;">Sign in to comment</p>
+  <button onclick="openAuthModal()" style="padding:7px 18px;border-radius:8px;background:var(--accent);border:none;color:#fff;font-family:'Cabinet Grotesk',sans-serif;font-weight:700;font-size:.8rem;cursor:pointer;">Sign In</button>
+</div>`;
+
+    wrap.innerHTML = `
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+  <div style="font-family:'Special Elite',cursive;font-size:1.05rem;color:var(--text);display:flex;align-items:center;gap:8px;">
+    <i class="fas fa-comments" style="color:var(--accent2);font-size:.9rem;"></i>
+    Comments <span id="bc-count" style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted);font-weight:400;margin-left:4px;"></span>
+  </div>
+</div>
+<div id="bc-compose" style="background:rgba(31,41,55,.35);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:20px;">
+  ${authHtml}
+  <div id="bc-reply-banner" style="display:none;align-items:center;justify-content:space-between;gap:8px;padding:6px 10px;margin-bottom:8px;background:rgba(109,39,217,.08);border:1px solid rgba(109,39,217,.22);border-radius:8px;font-size:.76rem;color:var(--accent2);font-weight:600;">
+    <span id="bc-reply-text"></span>
+    <button onclick="bcCancelReply()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:.65rem;font-family:'JetBrains Mono',monospace;transition:color .15s;" onmouseover="this.style.color='#f87171'" onmouseout="this.style.color='var(--muted)'">&#x2715; Cancel</button>
+  </div>
+  <div style="display:flex;gap:8px;">
+    <textarea id="bc-input" placeholder="Write a comment\u2026" maxlength="1000" rows="2" style="flex:1;background:var(--input-bg);border:1.5px solid var(--border);border-radius:9px;color:var(--text);font-family:'Cabinet Grotesk',sans-serif;font-size:.84rem;padding:9px 12px;outline:none;resize:none;transition:border-color .22s,box-shadow .22s;line-height:1.5;" onfocus="this.style.borderColor='var(--accent)';this.style.boxShadow='0 0 0 3px rgba(109,39,217,.12)'" onblur="this.style.borderColor='var(--border)';this.style.boxShadow='none'" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();bcSubmit();}"></textarea>
+    <button id="bc-submit-btn" onclick="bcSubmit()" style="padding:0 16px;border-radius:9px;background:var(--accent);border:none;color:#fff;font-family:'Cabinet Grotesk',sans-serif;font-weight:700;font-size:.82rem;cursor:pointer;transition:all .22s;flex-shrink:0;align-self:flex-end;height:40px;" onmouseover="this.style.background='var(--accent2)'" onmouseout="this.style.background='var(--accent)'">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+</div>
+<div id="bc-list"></div>`;
+
+    return wrap;
+}
