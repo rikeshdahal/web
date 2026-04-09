@@ -1374,42 +1374,28 @@ async function gbToggleLike(entryId, btn) {
     if (isLiked) {
         gbUserLikes.delete(entryId);
         btn.classList.remove('liked');
-        if (countEl) countEl.textContent = Math.max(0, parseInt(countEl.textContent || '0') - 1);
-    } else {
-        gbUserLikes.add(entryId);
-        btn.classList.add('liked');
-        // Heart pop animation
-        btn.classList.remove('like-pop');
-        void btn.offsetWidth;
-        btn.classList.add('like-pop');
-        if (countEl) countEl.textContent = parseInt(countEl.textContent || '0') + 1;
-    }
-
-    if (isLiked) {
-        // Unlike: delete from likes table
+        if (countEl) {
+            const newCount = Math.max(0, parseInt(countEl.textContent || '0') - 1);
+            countEl.textContent = newCount > 0 ? newCount : '';
+        }
         await _sb.from(GB_CFG.likes_table)
             .delete()
             .eq('user_id', gbUser.id)
             .eq('entry_id', entryId);
-        // Decrement like_count on entry
-        const current = gbAllEntries.find(e => e.id === entryId);
-        if (current) {
-            await _sb.from(GB_CFG.table)
-                .update({ like_count: Math.max(0, (current.like_count || 0) - 1) })
-                .eq('id', entryId);
-        }
     } else {
-        // Like: insert into likes table
+        gbUserLikes.add(entryId);
+        btn.classList.add('liked');
+        btn.classList.remove('like-pop');
+        void btn.offsetWidth;
+        btn.classList.add('like-pop');
+        if (countEl) {
+            const newCount = parseInt(countEl.textContent || '0') + 1;
+            countEl.textContent = newCount;
+        }
         await _sb.from(GB_CFG.likes_table)
             .insert({ user_id: gbUser.id, entry_id: entryId });
-        // Increment like_count
-        const current = gbAllEntries.find(e => e.id === entryId);
-        if (current) {
-            await _sb.from(GB_CFG.table)
-                .update({ like_count: (current.like_count || 0) + 1 })
-                .eq('id', entryId);
-        }
     }
+
 }
 
 /* ── Load user's liked entries ── */
@@ -1526,7 +1512,6 @@ function gbRenderEntries() {
         btn.addEventListener('click', () => gbDelete(btn.dataset.id));
     });
 }
-
 async function gbLoadEntries() {
     if (!_sb) {
         gbAllEntries = [];
@@ -1535,10 +1520,18 @@ async function gbLoadEntries() {
     }
     const { data, error } = await _sb
         .from(GB_CFG.table)
-        .select('id, user_id, name, avatar_url, message, image_url, created_at, parent_id, like_count')
+        .select(`
+            id, user_id, name, avatar_url, message, image_url, created_at, parent_id,
+            like_count:guestbook_likes(count)
+        `)
         .order('created_at', { ascending: true });
     if (error) { showToast(error.message, 'error'); return; }
-    gbAllEntries = data || [];
+    
+    // Supabase returns count as [{count: N}], normalize it
+    gbAllEntries = (data || []).map(e => ({
+        ...e,
+        like_count: Array.isArray(e.like_count) ? (e.like_count[0]?.count ?? 0) : (e.like_count ?? 0)
+    }));
     gbRenderEntries();
 }
 
