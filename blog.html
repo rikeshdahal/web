@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  
+  <!-- These get replaced by JS before redirect -->
+  <title>Blog — Rikesh Dahal</title>
+  <meta name="description" content="Read this blog post by Rikesh Dahal.">
+  
+  <!-- OG tags (filled dynamically) -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Rikesh Dahal">
+  <meta property="og:title" content="Blog — Rikesh Dahal">
+  <meta property="og:description" content="Read this blog post by Rikesh Dahal.">
+  <meta property="og:image" content="https://i.postimg.cc/MZhwPc85/rikesh.png">
+  <meta property="og:url" content="https://rikeshdahal.github.io/blog.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Blog — Rikesh Dahal">
+  <meta name="twitter:description" content="Read this blog post by Rikesh Dahal.">
+  <meta name="twitter:image" content="https://i.postimg.cc/MZhwPc85/rikesh.png">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #020611;
+      font-family: sans-serif;
+      color: #fff;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .loader {
+      width: 40px; height: 40px;
+      border: 2px solid rgba(109,39,217,.2);
+      border-top-color: #6d27d9;
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    p { color: #9ca2ae; font-size: .85rem; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="loader"></div>
+  <p>Loading post…</p>
+
+  <script>
+    const SUPABASE_URL = 'https://ylfadchxihawbhgciket.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlsZmFkY2h4aWhhd2JoZ2Npa2V0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1NjAyNTcsImV4cCI6MjA4OTEzNjI1N30.PiKAxYxkv9H5ejaZ8o_-2dHVhZT4oHG9dsLYE6m34aI';
+
+    const params = new URLSearchParams(window.location.search);
+    const postId = params.get('id');
+
+    if (!postId) {
+      window.location.href = 'https://rikeshdahal.github.io/#blog';
+    } else {
+      const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+      _sb.from('writings')
+        .select('id, title, excerpt, image_url, category, author_name')
+        .eq('id', postId)
+        .eq('approved', true)
+        .single()
+        .then(({ data, error }) => {
+          if (error || !data) {
+            window.location.href = 'https://rikeshdahal.github.io/#blog';
+            return;
+          }
+
+          // Update OG meta tags dynamically
+          const title = data.title || 'Blog Post';
+          const desc = data.excerpt || 'Read this post by Rikesh Dahal.';
+          const img = data.image_url || 'https://i.postimg.cc/MZhwPc85/rikesh.png';
+          const url = `https://rikeshdahal.github.io/blog.html?id=${data.id}`;
+
+          document.title = `${title} — Rikesh Dahal`;
+          setMeta('og:title', title);
+          setMeta('og:description', desc);
+          setMeta('og:image', img);
+          setMeta('og:url', url);
+          setMeta('twitter:title', title);
+          setMeta('twitter:description', desc);
+          setMeta('twitter:image', img);
+          document.querySelector('meta[name="description"]')?.setAttribute('content', desc);
+
+          // Redirect to main portfolio with blog hash after a tiny delay
+          // (so crawlers that render JS can read the updated meta)
+          setTimeout(() => {
+            window.location.replace(
+              `https://rikeshdahal.github.io/#blog-post-${data.id}`
+            );
+          }, 300);
+        });
+    }
+
+    function setMeta(property, content) {
+      let el = document.querySelector(`meta[property="${property}"]`);
+      if (!el) el = document.querySelector(`meta[name="${property}"]`);
+      if (el) el.setAttribute('content', content);
+    }
+  </script>
+</body>
+</html>
