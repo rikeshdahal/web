@@ -3,12 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  
-  <!-- These get replaced by JS before redirect -->
   <title>Blog — Rikesh Dahal</title>
   <meta name="description" content="Read this blog post by Rikesh Dahal.">
-  
-  <!-- OG tags (filled dynamically) -->
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Rikesh Dahal">
   <meta property="og:title" content="Blog — Rikesh Dahal">
@@ -71,8 +67,6 @@
             window.location.href = 'https://rikeshdahal.com.np/#blog';
             return;
           }
-
-          // Update OG meta tags dynamically
           const title = data.title || 'Blog Post';
           const desc = data.excerpt || 'Read this post by Rikesh Dahal.';
           const img = data.image_url || 'https://i.postimg.cc/MZhwPc85/rikesh.png';
@@ -87,8 +81,6 @@
           setMeta('twitter:description', desc);
           setMeta('twitter:image', img);
           document.querySelector('meta[name="description"]')?.setAttribute('content', desc);
-
-          // Redirect immediately — meta tags are already updated synchronously above
           window.location.replace(
             `https://rikeshdahal.com.np/#blog-post-${data.id}`
           );
