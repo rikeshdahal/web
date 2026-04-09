@@ -14,7 +14,7 @@
   <meta property="og:title" content="Blog — Rikesh Dahal">
   <meta property="og:description" content="Read this blog post by Rikesh Dahal.">
   <meta property="og:image" content="https://i.postimg.cc/MZhwPc85/rikesh.png">
-  <meta property="og:url" content="https://rikeshdahal.github.io/blog.html">
+  <meta property="og:url" content="https://rikeshdahal.com.np/blog.html">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Blog — Rikesh Dahal">
   <meta name="twitter:description" content="Read this blog post by Rikesh Dahal.">
@@ -57,7 +57,7 @@
     const postId = params.get('id');
 
     if (!postId) {
-      window.location.href = 'https://rikeshdahal.github.io/#blog';
+      window.location.href = 'https://rikeshdahal.com.np/#blog';
     } else {
       const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -68,7 +68,7 @@
         .single()
         .then(({ data, error }) => {
           if (error || !data) {
-            window.location.href = 'https://rikeshdahal.github.io/#blog';
+            window.location.href = 'https://rikeshdahal.com.np/#blog';
             return;
           }
 
@@ -76,7 +76,7 @@
           const title = data.title || 'Blog Post';
           const desc = data.excerpt || 'Read this post by Rikesh Dahal.';
           const img = data.image_url || 'https://i.postimg.cc/MZhwPc85/rikesh.png';
-          const url = `https://rikeshdahal.github.io/blog.html?id=${data.id}`;
+          const url = `https://rikeshdahal.com.np/blog.html?id=${data.id}`;
 
           document.title = `${title} — Rikesh Dahal`;
           setMeta('og:title', title);
@@ -92,7 +92,7 @@
           // (so crawlers that render JS can read the updated meta)
           setTimeout(() => {
             window.location.replace(
-              `https://rikeshdahal.github.io/#blog-post-${data.id}`
+              `https://rikeshdahal.com.np/#blog-post-${data.id}`
             );
           }, 300);
         });
