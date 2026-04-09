@@ -1105,10 +1105,11 @@ document.getElementById('m-dl-btn').addEventListener('click', async () => {
 });
 
 /* ══════════════════════════════════════════
-   GUESTBOOK MODAL
+   GUESTBOOK MODAL — with Likes & Replies
 ══════════════════════════════════════════ */
 const GB_CFG = {
     table: 'guestbook',
+    likes_table: 'guestbook_likes',
     bucket: 'guestbook-images',
     adminIds: ['5be465b2-450b-477f-bf9a-3396ee50435c'],
 };
@@ -1118,6 +1119,8 @@ let gbAllEntries = [];
 let gbFilter = 'all';
 let gbPendingImage = null;
 let gbRealtime = null;
+let gbUserLikes = new Set(); // set of entry IDs the current user has liked
+let gbReplyingTo = null; // { id, name } of entry being replied to
 
 function openGuestbookModal() {
     const modal = document.getElementById('guestbook-modal');
@@ -1138,7 +1141,6 @@ document.getElementById('guestbook-modal').addEventListener('click', function (e
     if (e.target === this) closeGuestbookModal();
 });
 
-// Close on Escape (extend existing keydown listener)
 document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeGuestbookModal();
 });
@@ -1161,7 +1163,7 @@ function gbEsc(s) {
     return String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-/* render auth card */
+/* ── render auth card ── */
 function gbRenderAuth() {
     const card = document.getElementById('gb-auth-card');
     if (!card) return;
@@ -1178,6 +1180,10 @@ function gbRenderAuth() {
       <span class="gb-signed-label">Signed in as <strong>${gbEsc(name)}</strong></span>
     </div>
     <button class="gb-signout-btn" id="gb-signout-btn">Sign out</button>
+  </div>
+  <div id="gb-reply-banner" style="display:none;" class="gb-reply-banner">
+    <span id="gb-reply-banner-text"></span>
+    <button onclick="gbCancelReply()" class="gb-reply-cancel-btn">✕ Cancel</button>
   </div>
   <div class="gb-compose-row">
     <input type="text" class="gb-msg-input" id="gb-msg-input" placeholder="Leave a message or some kudos!" maxlength="500">
@@ -1201,6 +1207,7 @@ function gbRenderAuth() {
         document.getElementById('gb-img-input').addEventListener('change', gbHandleImage);
         document.getElementById('gb-remove-img-btn').addEventListener('click', gbClearImage);
     } else {
+        gbReplyingTo = null;
         card.innerHTML = `
   <p class="gb-signin-title">Sign the Guestbook</p>
   <p class="gb-signin-sub">Log in to leave a message — it only takes a second.</p>
@@ -1233,6 +1240,7 @@ async function gbSignOut() {
     await _sb.auth.signOut();
     gbUser = null;
     gbPendingImage = null;
+    gbReplyingTo = null;
     gbRenderAuth();
     showToast('Signed out from Guestbook.', 'info');
 }
@@ -1269,6 +1277,33 @@ async function gbUploadImage(file) {
     return data.publicUrl;
 }
 
+/* ── Reply system ── */
+function gbStartReply(entryId, name) {
+    if (!gbUser) { openAuthModal(); return; }
+    gbReplyingTo = { id: entryId, name };
+    const banner = document.getElementById('gb-reply-banner');
+    const bannerText = document.getElementById('gb-reply-banner-text');
+    if (banner && bannerText) {
+        bannerText.textContent = `↩ Replying to ${name}`;
+        banner.style.display = 'flex';
+    }
+    const input = document.getElementById('gb-msg-input');
+    if (input) {
+        input.placeholder = `Reply to ${name}…`;
+        input.focus();
+    }
+    // Scroll compose area into view
+    document.getElementById('gb-auth-card')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function gbCancelReply() {
+    gbReplyingTo = null;
+    const banner = document.getElementById('gb-reply-banner');
+    if (banner) banner.style.display = 'none';
+    const input = document.getElementById('gb-msg-input');
+    if (input) input.placeholder = 'Leave a message or some kudos!';
+}
+
 async function gbSubmit() {
     const input = document.getElementById('gb-msg-input');
     const btn = document.getElementById('gb-send-btn');
@@ -1293,21 +1328,88 @@ async function gbSubmit() {
     const name = meta.full_name || meta.name || meta.user_name || gbUser.email || 'Anonymous';
     const avatar = meta.avatar_url || meta.picture || null;
 
-    const { error } = await _sb.from(GB_CFG.table).insert({
+    const payload = {
         user_id: gbUser.id,
         name,
         avatar_url: avatar,
         message: msg || null,
         image_url,
-    });
+        parent_id: gbReplyingTo ? gbReplyingTo.id : null,
+        like_count: 0,
+    };
+
+    const { error } = await _sb.from(GB_CFG.table).insert(payload);
 
     if (btn) btn.disabled = false;
     if (error) { showToast(error.message, 'error'); return; }
 
     if (input) input.value = '';
     gbClearImage();
+    gbCancelReply();
     showToast('✓ Message posted!', 'success');
     gbLoadEntries();
+}
+
+/* ── Like / Unlike ── */
+async function gbToggleLike(entryId, btn) {
+    if (!gbUser) { openAuthModal(); return; }
+    if (!_sb) return;
+
+    const isLiked = gbUserLikes.has(entryId);
+    const countEl = btn.querySelector('.gb-like-count');
+
+    // Optimistic UI
+    if (isLiked) {
+        gbUserLikes.delete(entryId);
+        btn.classList.remove('liked');
+        if (countEl) countEl.textContent = Math.max(0, parseInt(countEl.textContent || '0') - 1);
+    } else {
+        gbUserLikes.add(entryId);
+        btn.classList.add('liked');
+        // Heart pop animation
+        btn.classList.remove('like-pop');
+        void btn.offsetWidth;
+        btn.classList.add('like-pop');
+        if (countEl) countEl.textContent = parseInt(countEl.textContent || '0') + 1;
+    }
+
+    if (isLiked) {
+        // Unlike: delete from likes table
+        await _sb.from(GB_CFG.likes_table)
+            .delete()
+            .eq('user_id', gbUser.id)
+            .eq('entry_id', entryId);
+        // Decrement like_count on entry
+        const current = gbAllEntries.find(e => e.id === entryId);
+        if (current) {
+            await _sb.from(GB_CFG.table)
+                .update({ like_count: Math.max(0, (current.like_count || 0) - 1) })
+                .eq('id', entryId);
+        }
+    } else {
+        // Like: insert into likes table
+        await _sb.from(GB_CFG.likes_table)
+            .insert({ user_id: gbUser.id, entry_id: entryId });
+        // Increment like_count
+        const current = gbAllEntries.find(e => e.id === entryId);
+        if (current) {
+            await _sb.from(GB_CFG.table)
+                .update({ like_count: (current.like_count || 0) + 1 })
+                .eq('id', entryId);
+        }
+    }
+}
+
+/* ── Load user's liked entries ── */
+async function gbLoadUserLikes() {
+    gbUserLikes = new Set();
+    if (!_sb || !gbUser) return;
+    try {
+        const { data } = await _sb.from(GB_CFG.likes_table)
+            .select('entry_id')
+            .eq('user_id', gbUser.id);
+        if (data) data.forEach(r => gbUserLikes.add(r.entry_id));
+    } catch (e) { /* likes table might not exist yet */ }
 }
 
 function gbSetFilter(filter, el) {
@@ -1321,47 +1423,93 @@ function gbSetFilter(filter, el) {
     gbRenderEntries();
 }
 
-function gbRenderEntries() {
-    const el = document.getElementById('gb-entries');
-    const lbl = document.getElementById('gb-count-label');
-    if (!el) return;
-    const list = gbFilter === 'with-image'
-        ? gbAllEntries.filter(e => e.image_url)
-        : gbAllEntries;
+/* ── Build a single entry element (recursive for replies) ── */
+function gbBuildEntry(entry, allEntries, depth) {
+    depth = depth || 0;
+    const isAdmin = GB_CFG.adminIds.includes(entry.user_id);
+    const isMine = gbUser && gbUser.id === entry.user_id;
+    const isLiked = gbUserLikes.has(entry.id);
+    const likeCount = entry.like_count || 0;
+    const replies = allEntries.filter(e => e.parent_id === entry.id);
 
-    if (lbl) lbl.textContent = `${list.length} ${list.length === 1 ? 'entry' : 'entries'}`;
-    el.innerHTML = '';
+    const li = document.createElement('li');
+    li.className = 'gb-entry' + (depth > 0 ? ' gb-entry-reply' : '');
+    li.id = 'gb-entry-' + entry.id;
+    if (depth > 0) li.style.marginLeft = Math.min(depth * 40, 80) + 'px';
 
-    if (!list.length) {
-        el.innerHTML = `<div class="gb-empty">${gbFilter === 'with-image' ? 'No entries with images yet.' : 'No entries yet. Be the first to sign!'}</div>`;
-        return;
-    }
-
-    list.forEach(entry => {
-        const li = document.createElement('li');
-        li.className = 'gb-entry';
-        const isAdmin = GB_CFG.adminIds.includes(entry.user_id);
-        const isMine = gbUser && gbUser.id === entry.user_id;
-        li.innerHTML = `
+    li.innerHTML = `
   <div class="gb-entry-avatar">
     ${entry.avatar_url
-                ? `<img src="${gbEsc(entry.avatar_url)}" alt="${gbEsc(entry.name)}" onerror="this.remove()">`
-                : gbInitials(entry.name)}
+        ? `<img src="${gbEsc(entry.avatar_url)}" alt="${gbEsc(entry.name)}" onerror="this.remove()">`
+        : gbInitials(entry.name)}
   </div>
   <div class="gb-entry-body">
     <div class="gb-entry-meta">
       <span class="gb-entry-name">${gbEsc(entry.name)}</span>
       ${isAdmin ? `<span class="gb-admin-badge">Admin</span>` : ''}
-      <span class="gb-entry-action">signed the guestbook</span>
+      ${depth > 0 ? `<span class="gb-reply-tag">replied</span>` : `<span class="gb-entry-action">signed the guestbook</span>`}
       <span class="gb-entry-time">${gbTimeAgo(entry.created_at)}</span>
     </div>
     ${entry.message ? `<p class="gb-entry-message">${gbEsc(entry.message)}</p>` : ''}
     ${entry.image_url ? `<img class="gb-entry-img" src="${gbEsc(entry.image_url)}" alt="attachment" loading="lazy">` : ''}
-    ${isMine ? `<button class="gb-entry-delete" data-id="${gbEsc(entry.id)}">delete</button>` : ''}
+    <div class="gb-entry-actions">
+      <button class="gb-like-btn${isLiked ? ' liked' : ''}" data-id="${gbEsc(entry.id)}" onclick="gbToggleLike('${gbEsc(entry.id)}', this)" title="${isLiked ? 'Unlike' : 'Like'}">
+        <svg class="gb-heart-icon" viewBox="0 0 24 24" fill="${isLiked ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+        <span class="gb-like-count">${likeCount > 0 ? likeCount : ''}</span>
+      </button>
+      <button class="gb-reply-btn" onclick="gbStartReply('${gbEsc(entry.id)}', '${gbEsc(entry.name).replace(/'/g, "\\'")}')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 0 0-4-4H4"/></svg>
+        Reply
+      </button>
+      ${isMine ? `<button class="gb-entry-delete" data-id="${gbEsc(entry.id)}">delete</button>` : ''}
+    </div>
+    ${replies.length > 0 ? `<ul class="gb-replies-list" id="gb-replies-${gbEsc(entry.id)}"></ul>` : ''}
   </div>`;
-        el.appendChild(li);
+
+    // Append replies recursively
+    if (replies.length > 0) {
+        const repliesList = li.querySelector(`#gb-replies-${entry.id}`);
+        if (repliesList) {
+            replies.forEach(reply => {
+                repliesList.appendChild(gbBuildEntry(reply, allEntries, depth + 1));
+            });
+        }
+    }
+
+    return li;
+}
+
+function gbRenderEntries() {
+    const el = document.getElementById('gb-entries');
+    const lbl = document.getElementById('gb-count-label');
+    if (!el) return;
+
+    // Top-level entries only (no parent_id)
+    let topLevel = gbAllEntries.filter(e => !e.parent_id);
+
+    if (gbFilter === 'with-image') {
+        topLevel = topLevel.filter(e => e.image_url);
+    }
+
+    const total = gbFilter === 'with-image'
+        ? gbAllEntries.filter(e => e.image_url).length
+        : gbAllEntries.length;
+
+    if (lbl) lbl.textContent = `${total} ${total === 1 ? 'entry' : 'entries'}`;
+    el.innerHTML = '';
+
+    if (!topLevel.length) {
+        el.innerHTML = `<div class="gb-empty">${gbFilter === 'with-image' ? 'No entries with images yet.' : 'No entries yet. Be the first to sign!'}</div>`;
+        return;
+    }
+
+    topLevel.forEach(entry => {
+        el.appendChild(gbBuildEntry(entry, gbAllEntries, 0));
     });
 
+    // Bind delete buttons
     el.querySelectorAll('.gb-entry-delete').forEach(btn => {
         btn.addEventListener('click', () => gbDelete(btn.dataset.id));
     });
@@ -1375,8 +1523,8 @@ async function gbLoadEntries() {
     }
     const { data, error } = await _sb
         .from(GB_CFG.table)
-        .select('id, user_id, name, avatar_url, message, image_url, created_at')
-        .order('created_at', { ascending: false });
+        .select('id, user_id, name, avatar_url, message, image_url, created_at, parent_id, like_count')
+        .order('created_at', { ascending: true });
     if (error) { showToast(error.message, 'error'); return; }
     gbAllEntries = data || [];
     gbRenderEntries();
@@ -1385,6 +1533,8 @@ async function gbLoadEntries() {
 async function gbDelete(id) {
     if (!_sb || !gbUser) return;
     if (!confirm('Delete this entry?')) return;
+    // Delete replies first
+    await _sb.from(GB_CFG.table).delete().eq('parent_id', id);
     const { error } = await _sb.from(GB_CFG.table).delete().eq('id', id).eq('user_id', gbUser.id);
     if (error) showToast(error.message, 'error');
     else { showToast('Entry deleted.', 'info'); gbLoadEntries(); }
@@ -1398,23 +1548,28 @@ async function gbBoot() {
     }
     const { data: { session } } = await _sb.auth.getSession();
     gbUser = session?.user ?? null;
+    await gbLoadUserLikes();
     gbRenderAuth();
     await gbLoadEntries();
 
-    // Auth state changes
-    _sb.auth.onAuthStateChange((_event, session) => {
+    _sb.auth.onAuthStateChange(async (_event, session) => {
         gbUser = session?.user ?? null;
         gbPendingImage = null;
+        gbReplyingTo = null;
+        await gbLoadUserLikes();
         gbRenderAuth();
+        gbRenderEntries(); // re-render so like states update
     });
 
-    // Realtime
     if (!gbRealtime) {
         gbRealtime = _sb.channel('guestbook-changes')
-            .on('postgres_changes', { event: '*', schema: 'public', table: GB_CFG.table }, () => gbLoadEntries())
+            .on('postgres_changes', { event: '*', schema: 'public', table: GB_CFG.table }, () => {
+                gbLoadEntries();
+            })
             .subscribe();
     }
 }
+
 /* ══════════════════════════════════════════
    GEAR MODAL
 ══════════════════════════════════════════ */
