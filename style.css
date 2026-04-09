@@ -6808,3 +6808,177 @@ html.light #bhajan-standalone {
 @media (max-width: 480px) {
     #hire-me-cta { left: 12px; right: 12px; width: auto; bottom: 80px; }
 }
+
+/* ── GUESTBOOK LIKES & REPLIES ── */
+.gb-entry-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+}
+
+.gb-like-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    color: var(--muted);
+    font-size: .72rem;
+    font-weight: 600;
+    font-family: 'Cabinet Grotesk', sans-serif;
+    padding: 4px 11px 4px 8px;
+    cursor: pointer;
+    transition: all .22s cubic-bezier(.34, 1.56, .64, 1);
+    position: relative;
+}
+
+.gb-like-btn:hover {
+    border-color: rgba(239, 68, 68, .4);
+    color: #f87171;
+    background: rgba(239, 68, 68, .06);
+    transform: scale(1.04);
+}
+
+.gb-like-btn.liked {
+    border-color: rgba(239, 68, 68, .5);
+    color: #ef4444;
+    background: rgba(239, 68, 68, .1);
+}
+
+.gb-like-btn.liked .gb-heart-icon {
+    fill: #ef4444;
+}
+
+.gb-like-btn.like-pop {
+    animation: gbLikePop .45s cubic-bezier(.34, 1.56, .64, 1) both;
+}
+
+@keyframes gbLikePop {
+    0% { transform: scale(1); }
+    30% { transform: scale(.85); }
+    65% { transform: scale(1.22); }
+    85% { transform: scale(.96); }
+    100% { transform: scale(1); }
+}
+
+.gb-heart-icon {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+    transition: fill .18s, transform .18s;
+}
+
+.gb-like-count {
+    min-width: 8px;
+    font-size: .7rem;
+    line-height: 1;
+}
+
+.gb-reply-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 100px;
+    color: var(--muted);
+    font-size: .72rem;
+    font-weight: 600;
+    font-family: 'Cabinet Grotesk', sans-serif;
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: all .18s;
+}
+
+.gb-reply-btn:hover {
+    border-color: rgba(109, 39, 217, .3);
+    color: var(--accent2);
+    background: rgba(109, 39, 217, .07);
+}
+
+/* ── Reply banner in compose box ── */
+.gb-reply-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 7px 12px;
+    margin-bottom: 8px;
+    background: rgba(109, 39, 217, .08);
+    border: 1px solid rgba(109, 39, 217, .22);
+    border-radius: 8px;
+    font-size: .78rem;
+    color: var(--accent2);
+    font-weight: 600;
+    animation: fadeUp .25s ease both;
+}
+
+.gb-reply-cancel-btn {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: .68rem;
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    transition: color .15s;
+    flex-shrink: 0;
+}
+
+.gb-reply-cancel-btn:hover {
+    color: #f87171;
+}
+
+/* ── Threaded reply entries ── */
+.gb-replies-list {
+    list-style: none;
+    margin-top: 10px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.gb-entry-reply {
+    border-bottom: none;
+    padding: 12px 0 0;
+    position: relative;
+}
+
+.gb-entry-reply::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 0;
+    bottom: 0;
+    width: 1.5px;
+    background: linear-gradient(to bottom, rgba(109, 39, 217, .3), transparent);
+    border-radius: 1px;
+}
+
+.gb-reply-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: .62rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    background: rgba(109, 39, 217, .1);
+    border: 1px solid rgba(109, 39, 217, .2);
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Entry replies avatar smaller */
+.gb-entry-reply .gb-entry-avatar {
+    width: 30px;
+    height: 30px;
+    font-size: .65rem;
+}
