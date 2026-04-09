@@ -2490,7 +2490,7 @@ End with a key takeaway." oninput="wpmUpdateCount();wpeAutoPreview();wpeSyncScro
 
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
-            history.replaceState(null, '', '#blog-post-' + id);
+            history.replaceState(null, '', 'blog.html?id=' + id);
         }
 
         function closeBlogReader() {
@@ -5479,11 +5479,11 @@ End with a key takeaway." oninput="wpmUpdateCount();wpeAutoPreview();wpeSyncScro
 
         // copy blog link helper
         function copyBlogLink(id) {
-            const url = window.location.origin + window.location.pathname + '#blog-post-' + id;
+            const url = 'https://rikeshdahal.github.io/blog.html?id=' + id;
             navigator.clipboard.writeText(url).then(() => {
-                showToast('✓ Link copied to clipboard!', 'success');
+                showToast('✓ Shareable link copied!', 'success');
             }).catch(() => {
-                showToast('Could not copy — try manually: ' + url, 'info');
+                showToast('Link: ' + url, 'info');
             });
         }
 
