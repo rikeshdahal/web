@@ -533,15 +533,61 @@ ${siteIsAdmin && b.approved === false ? `
             bcLoad(b.id);
         }
     }, 50);
+    // scroll progress bar
+    const _modal = document.getElementById('blog-reader-modal');
+    const _bar = document.getElementById('blog-read-progress');
+    if (_modal && _bar) {
+        _bar.style.width = '0%';
+        _bar.style.opacity = '1';                          // ← NEW: make it visible
+        if (_modal._progressHandler) {                     // ← NEW: remove stale listener
+            _modal.removeEventListener('scroll', _modal._progressHandler);
+        }
+        _modal._progressHandler = () => {
+            const pct = _modal.scrollTop / (_modal.scrollHeight - _modal.clientHeight) * 100;
+            _bar.style.width = Math.min(pct, 100) + '%';
+        };
+        _modal.addEventListener('scroll', _modal._progressHandler, { passive: true });
+        _modal.scrollTop = 0;                              // ← NEW: reset scroll so bar starts at 0
+    }
 }
 
 function closeBlogReader() {
     document.getElementById('blog-reader-modal').style.display = 'none';
     document.body.style.overflow = '';
-    if (bcRealtime) { try { _sb?.removeChannel(bcRealtime); } catch(e){} bcRealtime = null; }
-    history.replaceState(null, '', window.location.pathname + window.location.search);
+    if (bcRealtime) { try { _sb?.removeChannel(bcRealtime); } catch (e) { } bcRealtime = null; }
+
+    // reset + hide progress bar
+    const bar = document.getElementById('blog-read-progress');
+    if (bar) { bar.style.width = '0%'; bar.style.opacity = '0'; }
+
+    // remove scroll listener stored on the modal
+    const modal = document.getElementById('blog-reader-modal');
+    if (modal && modal._progressHandler) {
+        modal.removeEventListener('scroll', modal._progressHandler);
+        delete modal._progressHandler;
+    }
+
+    // restore URL to #blog
+    history.replaceState(null, '', window.location.pathname + '#blog');
+    document.getElementById('blog')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
+window.addEventListener('popstate', () => {
+    const modal = document.getElementById('blog-reader-modal');
+    // If the reader is open, close it cleanly (without pushing another history entry)
+    if (modal && modal.style.display !== 'none') {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+        if (typeof bcRealtime !== 'undefined' && bcRealtime) {
+            try { _sb?.removeChannel(bcRealtime); } catch (e) { }
+            bcRealtime = null;
+        }
+        const _bar = document.getElementById('blog-read-progress');
+        if (_bar) _bar.style.width = '0%';
+    }
+    // Scroll to #blog regardless
+    document.getElementById('blog')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
 /* ══════════════════════════════════════════
    WRITE POST MODAL
 ══════════════════════════════════════════ */
@@ -974,13 +1020,15 @@ document.addEventListener('keydown', e => {
 
 
 /* ── CONTACT FORM ── */
-document.getElementById('contact-form').addEventListener('submit', function (e) { e.preventDefault();
+document.getElementById('contact-form').addEventListener('submit', function (e) {
+    e.preventDefault();
     // Honeypot check — if this hidden field has a value, it's a bot
     if (document.getElementById('form-website').value) return;
     const self = this; const btn = self.querySelector('button[type="submit"]'), msg = document.getElementById('form-msg');
     // Debounce — prevent double-submit
     if (btn.disabled) return;
-    if (typeof emailjs === 'undefined') { msg.textContent = 'Email service unavailable. Please email: rikeshdahal0526@gmail.com'; msg.style.color = '#f87171'; return; } const origHtml = btn.innerHTML; btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation:spin .8s linear infinite"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Sending…'; btn.disabled = true; const params = { from_name: document.getElementById('form-name').value.trim(), from_email: document.getElementById('form-email').value.trim(), subject: document.getElementById('form-subject').value.trim() || 'Portfolio Contact', message: document.getElementById('form-message').value.trim(), to_email: 'rikeshdahal0526@gmail.com', reply_to: document.getElementById('form-email').value.trim() }; emailjs.send(CFG.ejSvc, CFG.ejTpl, params).then(function () { msg.textContent = "✓ Message sent! I'll reply within 24 hours."; msg.style.color = 'var(--accent2)'; self.reset(); showToast('Message sent successfully! 🎉', 'success'); }).catch(function (err) { console.error('EmailJS contact error:', err); msg.textContent = '✕ Failed to send. Please email: rikeshdahal0526@gmail.com'; msg.style.color = '#f87171'; showToast('Send failed — please email directly.', 'error'); }).finally(function () { btn.innerHTML = origHtml; btn.disabled = false; setTimeout(() => { msg.textContent = ''; }, 7000); }); });
+    if (typeof emailjs === 'undefined') { msg.textContent = 'Email service unavailable. Please email: rikeshdahal0526@gmail.com'; msg.style.color = '#f87171'; return; } const origHtml = btn.innerHTML; btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation:spin .8s linear infinite"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Sending…'; btn.disabled = true; const params = { from_name: document.getElementById('form-name').value.trim(), from_email: document.getElementById('form-email').value.trim(), subject: document.getElementById('form-subject').value.trim() || 'Portfolio Contact', message: document.getElementById('form-message').value.trim(), to_email: 'rikeshdahal0526@gmail.com', reply_to: document.getElementById('form-email').value.trim() }; emailjs.send(CFG.ejSvc, CFG.ejTpl, params).then(function () { msg.textContent = "✓ Message sent! I'll reply within 24 hours."; msg.style.color = 'var(--accent2)'; self.reset(); showToast('Message sent successfully! 🎉', 'success'); }).catch(function (err) { console.error('EmailJS contact error:', err); msg.textContent = '✕ Failed to send. Please email: rikeshdahal0526@gmail.com'; msg.style.color = '#f87171'; showToast('Send failed — please email directly.', 'error'); }).finally(function () { btn.innerHTML = origHtml; btn.disabled = false; setTimeout(() => { msg.textContent = ''; }, 7000); });
+});
 
 /* ── KIMI ── */
 function toggleKimi() { const w = document.getElementById('kimi-win'); w.style.display = w.style.display === 'block' ? 'none' : 'block'; }
@@ -1438,8 +1486,8 @@ function gbBuildEntry(entry, allEntries, depth) {
     li.innerHTML = `
   <div class="gb-entry-avatar">
     ${entry.avatar_url
-        ? `<img src="${gbEsc(entry.avatar_url)}" alt="${gbEsc(entry.name)}" onerror="this.remove()">`
-        : gbInitials(entry.name)}
+            ? `<img src="${gbEsc(entry.avatar_url)}" alt="${gbEsc(entry.name)}" onerror="this.remove()">`
+            : gbInitials(entry.name)}
   </div>
   <div class="gb-entry-body">
     <div class="gb-entry-meta">
@@ -1526,7 +1574,7 @@ async function gbLoadEntries() {
         `)
         .order('created_at', { ascending: true });
     if (error) { showToast(error.message, 'error'); return; }
-    
+
     // Supabase returns count as [{count: N}], normalize it
     gbAllEntries = (data || []).map(e => ({
         ...e,
@@ -2835,7 +2883,7 @@ async function adminSaveWriting() {
     var isHovering = false;
 
     function resizeCanvas() {
-        canvas.width  = (b.offsetWidth  || 80) + 16;
+        canvas.width = (b.offsetWidth || 80) + 16;
         canvas.height = (b.offsetHeight || 30) + 16;
     }
 
@@ -2875,7 +2923,7 @@ async function adminSaveWriting() {
         /* always restart — so every hover gets a fresh burst cycle */
         clearInterval(sparkInterval);
         spawnBurst(10); /* immediate burst on hover */
-        sparkInterval = setInterval(function() {
+        sparkInterval = setInterval(function () {
             if (isHovering) spawnBurst(3);
         }, 55);
     }
@@ -2887,8 +2935,8 @@ async function adminSaveWriting() {
 
     (function tick() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        sparks = sparks.filter(function(s) { return s.life > 0; });
-        sparks.forEach(function(s) {
+        sparks = sparks.filter(function (s) { return s.life > 0; });
+        sparks.forEach(function (s) {
             s.x += s.vx;
             s.y += s.vy;
             s.vy += 0.06; /* gravity */
@@ -2905,8 +2953,8 @@ async function adminSaveWriting() {
     function move(el) {
         var nr = nav.getBoundingClientRect();
         var er = el.getBoundingClientRect();
-        b.style.left    = (er.left - nr.left) + 'px';
-        b.style.width   = er.width + 'px';
+        b.style.left = (er.left - nr.left) + 'px';
+        b.style.width = er.width + 'px';
         b.style.opacity = '1';
         setTimeout(resizeCanvas, 30);
         startSparks(); /* always fires fresh burst */
@@ -2918,8 +2966,8 @@ async function adminSaveWriting() {
         b.style.opacity = '0';
     }
 
-    nav.querySelectorAll('.c-link,.c-book').forEach(function(l) {
-        l.addEventListener('mouseenter', function() {
+    nav.querySelectorAll('.c-link,.c-book').forEach(function (l) {
+        l.addEventListener('mouseenter', function () {
             isHovering = true;
             move(l);
         });
@@ -3533,7 +3581,7 @@ function renderCerts() {
             adminBar.style.cssText = 'position:absolute;bottom:0;left:0;right:0;display:none;gap:6px;padding:8px 12px;background:rgba(2,6,17,.92);border-top:1px solid var(--border);border-radius:0 0 16px 16px;z-index:10;justify-content:flex-end;';
             adminBar.innerHTML = `
               <button onclick="event.stopPropagation();adminCertsEdit('${c.id}')" style="padding:4px 10px;border-radius:6px;font-size:.67rem;font-weight:600;font-family:'JetBrains Mono',monospace;background:rgba(109,39,217,.1);color:var(--accent2);border:1px solid rgba(109,39,217,.25);cursor:pointer;">✎ Edit</button>
-              <button onclick="event.stopPropagation();adminDeleteCert('${c.id}','${(c.title||'').replace(/'/g,"\\'")}')" style="padding:4px 10px;border-radius:6px;font-size:.67rem;font-weight:600;font-family:'JetBrains Mono',monospace;background:rgba(248,113,113,.08);color:#f87171;border:1px solid rgba(248,113,113,.2);cursor:pointer;">✕ Delete</button>`;
+              <button onclick="event.stopPropagation();adminDeleteCert('${c.id}','${(c.title || '').replace(/'/g, "\\'")}')" style="padding:4px 10px;border-radius:6px;font-size:.67rem;font-weight:600;font-family:'JetBrains Mono',monospace;background:rgba(248,113,113,.08);color:#f87171;border:1px solid rgba(248,113,113,.2);cursor:pointer;">✕ Delete</button>`;
             const card = el.querySelector('.card') || el;
             card.style.position = 'relative';
             card.appendChild(adminBar);
@@ -3593,7 +3641,7 @@ function buildCertCard(c, i) {
           ${tags.map(t => `<span class="tag" style="font-size:.58rem;">${escHtml(t)}</span>`).join('')}
         </div>
         <div style="display:flex;align-items:center;gap:8px;">
-          ${c.image_url ? `<button onclick="openCertViewer(${JSON.stringify(c.image_url)},${JSON.stringify(c.title||'')})"
+          ${c.image_url ? `<button onclick="openCertViewer(${JSON.stringify(c.image_url)},${JSON.stringify(c.title || '')})"
             style="flex:1;padding:8px;border-radius:8px;background:rgba(109,39,217,.1);
             border:1px solid rgba(109,39,217,.25);color:var(--accent2);
             font-family:\'Cabinet Grotesk\',sans-serif;font-size:.76rem;font-weight:700;
@@ -3719,8 +3767,8 @@ async function adminLoadCertificates() {
             </div>
           </div>
           ${!rows.length
-            ? '<div class="admin-empty">No certificates yet — click "Add Certificate" to get started.</div>'
-            : `<div class="admin-table-wrap"><table class="admin-table">
+                ? '<div class="admin-empty">No certificates yet — click "Add Certificate" to get started.</div>'
+                : `<div class="admin-table-wrap"><table class="admin-table">
               <thead><tr><th>#</th><th>Title</th><th>Issuer</th><th>Date</th><th>Tags</th><th>Actions</th></tr></thead>
               <tbody>${rows.map(r => `<tr id="crow-${escHtml(r.id)}">
                 <td style="font-family:\'JetBrains Mono\',monospace;font-size:.7rem;color:var(--muted);">${r.sort_order ?? '—'}</td>
@@ -3746,7 +3794,7 @@ function adminCertsToggleForm() {
     form.classList.toggle('open', !isOpen);
     if (!isOpen) {
         document.getElementById('certs-form-title').textContent = 'Add Certificate';
-        ['cf-title','cf-issuer','cf-date','cf-image','cf-verify','cf-tags','cf-icon'].forEach(id => {
+        ['cf-title', 'cf-issuer', 'cf-date', 'cf-image', 'cf-verify', 'cf-tags', 'cf-icon'].forEach(id => {
             const el = document.getElementById(id); if (el) el.value = '';
         });
         document.getElementById('cf-sort').value = '99';
@@ -3966,6 +4014,34 @@ function copyBlogLink(id) {
 /* ══════════════════════════════════════════════════════════
    HIRE ME FLOATING CTA — appears 30s after page load
 ══════════════════════════════════════════════════════════ */
+function isAnyModalOpen() {
+    // Modals that show/hide via the `.open` CSS class
+    const classModals = [
+        'manifest-modal',
+        'guestbook-modal',
+        'gear-modal',
+        'auth-modal',
+        'admin-panel',
+        'music-modal',
+    ];
+    for (const id of classModals) {
+        const el = document.getElementById(id);
+        if (el && el.classList.contains('open')) return true;
+    }
+    // Modals that show/hide via style.display
+    const displayModals = [
+        'tmodal',
+        'blog-reader-modal',
+        'write-post-modal',
+        'wpe-post-preview',
+        'search-modal',
+    ];
+    for (const id of displayModals) {
+        const el = document.getElementById(id);
+        if (el && el.style.display && el.style.display !== 'none') return true;
+    }
+    return false;
+}
 (function () {
     const DISMISS_KEY = 'rd_hireme_dismissed';
     const COPY_VARIANTS = [
@@ -3975,7 +4051,11 @@ function copyBlogLink(id) {
         { headline: "Hire me before someone else does.", sub: "I'm kidding. (I'm not kidding.)" },
         { headline: "Your project called.", sub: "It said it needs a Data Engineer ASAP." },
     ];
+
     function inject() {
+        // ── NEW: don't interrupt the user while any modal is open ──
+        if (isAnyModalOpen()) return;
+
         if (document.getElementById('hire-me-cta')) return;
         const copy = COPY_VARIANTS[Math.floor(Math.random() * COPY_VARIANTS.length)];
         const el = document.createElement('div');
@@ -4014,12 +4094,13 @@ function copyBlogLink(id) {
             el.classList.remove('hmc-visible');
             el.classList.add('hmc-hiding');
             setTimeout(() => el.remove(), 500);
-            if (permanent) { try { sessionStorage.setItem(DISMISS_KEY, '1'); } catch (e) {} }
+            if (permanent) { try { sessionStorage.setItem(DISMISS_KEY, '1'); } catch (e) { } }
         }
         document.getElementById('hmc-close').addEventListener('click', () => { clearInterval(iv); dismiss(true); });
         document.getElementById('hmc-btn').addEventListener('click', () => { clearInterval(iv); dismiss(true); });
     }
-    try { if (sessionStorage.getItem(DISMISS_KEY)) return; } catch (e) {}
+
+    try { if (sessionStorage.getItem(DISMISS_KEY)) return; } catch (e) { }
     setTimeout(inject, 30000);
 })();
 /* ══════════════════════════════════════════
@@ -4054,7 +4135,7 @@ async function bcLoadUserLikes() {
     try {
         const { data } = await _sb.from(BC.likes_table).select('comment_id').eq('user_id', siteUser.id);
         if (data) data.forEach(r => bcUserLikes.add(r.comment_id));
-    } catch (e) {}
+    } catch (e) { }
 }
 
 async function bcLoad(postId) {
@@ -4065,7 +4146,7 @@ async function bcLoad(postId) {
     const { data } = await _sb.from(BC.table).select('*').eq('post_id', postId).order('created_at', { ascending: true });
     if (data) bcAllComments = data;
     bcRender();
-    if (bcRealtime) { try { _sb.removeChannel(bcRealtime); } catch(e){} bcRealtime = null; }
+    if (bcRealtime) { try { _sb.removeChannel(bcRealtime); } catch (e) { } bcRealtime = null; }
     bcRealtime = _sb.channel('bc-' + postId)
         .on('postgres_changes', { event: '*', schema: 'public', table: BC.table, filter: `post_id=eq.${postId}` }, () => {
             bcLoad(postId);
@@ -4099,7 +4180,7 @@ function bcBuildEntry(c, all, depth) {
       <svg width="12" height="12" viewBox="0 0 24 24" fill="${isLiked ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       <span class="bc-like-n">${c.like_count > 0 ? c.like_count : ''}</span>
     </button>
-    <button onclick="bcStartReply('${c.id}','${escHtml(c.name).replace(/'/g,"\\'")}' )" style="display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:100px;border:1px solid transparent;background:transparent;color:var(--muted);font-size:.72rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Cabinet Grotesk',sans-serif;" onmouseover="this.style.borderColor='rgba(109,39,217,.3)';this.style.color='var(--accent2)'" onmouseout="this.style.borderColor='transparent';this.style.color='var(--muted)'">
+    <button onclick="bcStartReply('${c.id}','${escHtml(c.name).replace(/'/g, "\\'")}' )" style="display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:100px;border:1px solid transparent;background:transparent;color:var(--muted);font-size:.72rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Cabinet Grotesk',sans-serif;" onmouseover="this.style.borderColor='rgba(109,39,217,.3)';this.style.color='var(--accent2)'" onmouseout="this.style.borderColor='transparent';this.style.color='var(--muted)'">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 0 0-4-4H4"/></svg> Reply
     </button>
     ${isMine ? `<button onclick="bcDelete('${c.id}')" style="font-size:.65rem;color:var(--muted);background:none;border:none;cursor:pointer;font-family:'JetBrains Mono',monospace;padding:2px 5px;border-radius:3px;transition:color .2s;" onmouseover="this.style.color='#f87171'" onmouseout="this.style.color='var(--muted)'">delete</button>` : ''}
