@@ -3575,8 +3575,9 @@ html.light #mob-sheet-panel {
     border-radius: 12px;
     overflow: hidden;
     border: 1px solid var(--border);
-    background: #0d1117;
+    background: var(--color-background-secondary) ;
 }
+html.light .md-code-block { background: #f6f8fa; }
 
 .md-code-header {
     display: flex;
@@ -7016,3 +7017,18 @@ html.light #bhajan-standalone {
     100%{ transform: scale(1); }
 }
 .bc-pop { animation: bcPop .42s cubic-bezier(.34,1.56,.64,1) both; }
+
+/* ── BLOG reader progress── */
+
+#blog-read-progress {
+    position: sticky;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 0 3px 3px 0;
+    z-index: 10;
+    transition: width .08s linear;
+    pointer-events: none;
+}
