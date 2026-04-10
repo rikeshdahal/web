@@ -2822,31 +2822,111 @@ async function adminSaveWriting() {
 (function () {
     var nav = document.getElementById('nav-center');
     if (!nav) return;
-
     var b = document.getElementById('nav-goo-blob');
+    if (!b) return;
 
+    /* ── spark canvas ── */
+    var canvas = document.createElement('canvas');
+    canvas.style.cssText = 'position:absolute;inset:-8px;pointer-events:none;overflow:visible;';
+    b.appendChild(canvas);
+    var ctx = canvas.getContext('2d');
+    var sparks = [];
+    var sparkInterval = null;
+    var isHovering = false;
+
+    function resizeCanvas() {
+        canvas.width  = (b.offsetWidth  || 80) + 16;
+        canvas.height = (b.offsetHeight || 30) + 16;
+    }
+
+    function spawnBurst(count) {
+        var w = b.offsetWidth || 80, h = b.offsetHeight || 30;
+        for (var i = 0; i < count; i++) {
+            /* sparks from both edges + random along top/bottom rim */
+            var type = Math.random();
+            var x, y;
+            if (type < 0.4) {
+                /* left edge burst */
+                x = Math.random() * 14 + 4;
+                y = h / 2 + (Math.random() - 0.5) * h * 0.7;
+            } else if (type < 0.8) {
+                /* right edge burst */
+                x = w - Math.random() * 14 - 4;
+                y = h / 2 + (Math.random() - 0.5) * h * 0.7;
+            } else {
+                /* top/bottom rim */
+                x = Math.random() * w;
+                y = Math.random() < 0.5 ? Math.random() * 5 : h - Math.random() * 5;
+            }
+            sparks.push({
+                x: x + 8,
+                y: y + 8,
+                vx: (Math.random() - 0.5) * 2.8,
+                vy: (Math.random() - 0.72) * 3.2,
+                life: 1,
+                decay: 0.028 + Math.random() * 0.03,
+                size: 1.0 + Math.random() * 1.8,
+                col: Math.random() < 0.5 ? '143,92,223' : '180,142,245'
+            });
+        }
+    }
+
+    function startSparks() {
+        /* always restart — so every hover gets a fresh burst cycle */
+        clearInterval(sparkInterval);
+        spawnBurst(10); /* immediate burst on hover */
+        sparkInterval = setInterval(function() {
+            if (isHovering) spawnBurst(3);
+        }, 55);
+    }
+
+    function stopSparks() {
+        clearInterval(sparkInterval);
+        sparkInterval = null;
+    }
+
+    (function tick() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        sparks = sparks.filter(function(s) { return s.life > 0; });
+        sparks.forEach(function(s) {
+            s.x += s.vx;
+            s.y += s.vy;
+            s.vy += 0.06; /* gravity */
+            s.life -= s.decay;
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, Math.max(0.1, s.size * s.life), 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(' + s.col + ',' + (s.life * 0.9) + ')';
+            ctx.fill();
+        });
+        requestAnimationFrame(tick);
+    })();
+
+    /* ── blob movement ── */
     function move(el) {
         var nr = nav.getBoundingClientRect();
         var er = el.getBoundingClientRect();
-        b.style.left = (er.left - nr.left) + 'px';
-        b.style.width = er.width + 'px';
+        b.style.left    = (er.left - nr.left) + 'px';
+        b.style.width   = er.width + 'px';
         b.style.opacity = '1';
+        setTimeout(resizeCanvas, 30);
+        startSparks(); /* always fires fresh burst */
     }
 
-    function hide() { b.style.opacity = '0'; }
+    function hide() {
+        isHovering = false;
+        stopSparks();
+        b.style.opacity = '0';
+    }
 
-    nav.querySelectorAll('.c-link,.c-book').forEach(l => {
-        l.addEventListener('mouseenter', () => move(l));
+    nav.querySelectorAll('.c-link,.c-book').forEach(function(l) {
+        l.addEventListener('mouseenter', function() {
+            isHovering = true;
+            move(l);
+        });
     });
 
     nav.addEventListener('mouseleave', hide);
-
-    function snap() {
-        var a = nav.querySelector('.c-link.active');
-        if (a) move(a); else hide();
-    }
-
-    window.addEventListener('scroll', () => requestAnimationFrame(snap), { passive: true });
+    window.addEventListener('scroll', hide, { passive: true });
 })();
 
 /* FOOTER LIKE JS */
