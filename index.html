@@ -476,7 +476,8 @@
                         </h3>
 
                         <p style="color:var(--muted);line-height:1.85;margin-bottom:13px;font-size:.93rem;">
-                            Hey! I'm from <strong ><a href="https://www.google.com/maps/place/Sinamangal,+Kathmandu+44600/@27.6842479,85.3738163,11.96z/data=!4m6!3m5!1s0x39eb19869793bff7:0xf2f77266b222365a!8m2!3d27.6991378!4d85.3510904!16s%2Fg%2F11g1t_x7gz?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D"
+                            Hey! I'm from <strong><a
+                                    href="https://www.google.com/maps/place/Sinamangal,+Kathmandu+44600/@27.6842479,85.3738163,11.96z/data=!4m6!3m5!1s0x39eb19869793bff7:0xf2f77266b222365a!8m2!3d27.6991378!4d85.3510904!16s%2Fg%2F11g1t_x7gz?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D"
                                     target="_blank" rel="noopener" style="color:var(--text);text-decoration:none;">
                                     Sinamangal, Kathmandu
                                 </a></strong> and a
@@ -805,6 +806,21 @@
                 </div>
                 <div class="carousel-track" id="carousel-track"></div>
             </div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-top:18px;">
+                <button class="t-nav-btn" id="cprev"><i class="fas fa-chevron-left"></i></button>
+                <div id="cdots" style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;justify-content:center;">
+                </div>
+                <button class="t-nav-btn" id="cnext"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div style="text-align:center;margin-top:12px;">
+                <button id="cpause-btn"
+                    style="padding:5px 16px;border-radius:100px;background:var(--pipe-bg);border:1px solid var(--border);color:var(--muted);font-family:'Cabinet Grotesk',sans-serif;font-size:.76rem;font-weight:600;cursor:pointer;transition:all .3s;"
+                    onmouseover="this.style.borderColor='var(--accent2)';this.style.color='var(--accent2)'"
+                    onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">
+                    <i class="fas fa-play" style="font-size:.62rem;margin-right:4px;"></i>Manual
+                </button>
+            </div>
+
         </section>
 
         <!-- ═══ EXPERIENCE ═══ -->
