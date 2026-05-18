@@ -129,6 +129,126 @@ async function loadProjectsFromDB() {
     renderProjects();
 }
 loadProjectsFromDB();
+/* ── CAROUSEL MANUAL CONTROLS ── */
+(function () {
+    var CARD_W = 285 + 20; // card width + margin
+    var cManual = false;   // false = auto-scroll (CSS anim), true = manual mode
+    var cIdx = 0;
+    var cAutoTimer = null;
+
+    function getCount() {
+        // half the track children (track is doubled for seamless loop)
+        var ct = document.getElementById('carousel-track');
+        return ct ? Math.floor(ct.children.length / 2) : 0;
+    }
+
+    function getVis() {
+        return window.innerWidth <= 580 ? 1 : window.innerWidth <= 900 ? 2 : 3;
+    }
+
+    function getMax() { return Math.max(0, getCount() - getVis()); }
+
+    function enterManual() {
+        cManual = true;
+        var ct = document.getElementById('carousel-track');
+        if (!ct) return;
+        // freeze the CSS animation exactly where it is
+        var computed = window.getComputedStyle(ct);
+        var mat = new DOMMatrix(computed.transform);
+        var currentX = mat.m41; // current translateX in px
+        ct.style.animation = 'none';
+        ct.style.transition = 'transform .5s cubic-bezier(.4,0,.2,1)';
+        ct.style.transform = 'translateX(' + currentX + 'px)';
+        // figure out which dot index we're at
+        cIdx = Math.round(-currentX / CARD_W);
+        cIdx = Math.max(0, Math.min(cIdx, getMax()));
+        updateDots();
+        updateBtns();
+        var pb = document.getElementById('cpause-btn');
+        if (pb) pb.innerHTML = '<i class="fas fa-redo" style="font-size:.62rem;margin-right:4px;"></i>Auto scroll';
+    }
+
+    function exitManual() {
+        cManual = false;
+        var ct = document.getElementById('carousel-track');
+        if (!ct) return;
+        ct.style.animation = '';
+        ct.style.transform = '';
+        ct.style.transition = '';
+        updateDots();
+        updateBtns();
+        var pb = document.getElementById('cpause-btn');
+        if (pb) pb.innerHTML = '<i class="fas fa-play" style="font-size:.62rem;margin-right:4px;"></i>Manual';
+    }
+
+    function goTo(idx) {
+        if (!cManual) enterManual();
+        cIdx = Math.max(0, Math.min(idx, getMax()));
+        var ct = document.getElementById('carousel-track');
+        if (ct) ct.style.transform = 'translateX(-' + (cIdx * CARD_W) + 'px)';
+        updateDots();
+        updateBtns();
+        // auto-return to scroll after 8s of inactivity
+        clearTimeout(cAutoTimer);
+        cAutoTimer = setTimeout(exitManual, 8000);
+    }
+
+    function buildDots() {
+        var wrap = document.getElementById('cdots');
+        if (!wrap) return;
+        wrap.innerHTML = '';
+        var max = getMax();
+        for (var i = 0; i <= max; i++) {
+            (function (i) {
+                var d = document.createElement('button');
+                d.className = 't-dot';
+                d.addEventListener('click', function () { goTo(i); });
+                wrap.appendChild(d);
+            })(i);
+        }
+        updateDots();
+    }
+
+    function updateDots() {
+        var dots = document.querySelectorAll('#cdots .t-dot');
+        dots.forEach(function (d, i) {
+            d.classList.toggle('active', cManual && i === cIdx);
+        });
+    }
+
+    function updateBtns() {
+        var p = document.getElementById('cprev');
+        var n = document.getElementById('cnext');
+        if (p) p.disabled = cManual && cIdx === 0;
+        if (n) n.disabled = cManual && cIdx >= getMax();
+    }
+
+    // wire up after DOM ready / projects loaded
+    function init() {
+        buildDots();
+        updateBtns();
+
+        document.getElementById('cprev')?.addEventListener('click', function () {
+            goTo(cManual ? cIdx - 1 : 0);
+        });
+        document.getElementById('cnext')?.addEventListener('click', function () {
+            goTo(cManual ? cIdx + 1 : 1);
+        });
+        document.getElementById('cpause-btn')?.addEventListener('click', function () {
+            cManual ? exitManual() : enterManual();
+        });
+
+        // rebuild dots on resize
+        window.addEventListener('resize', function () { buildDots(); updateBtns(); }, { passive: true });
+    }
+
+    // wait for projects to render
+    var orig = window.renderProjects;
+    window.renderProjects = function () {
+        if (orig) orig.apply(this, arguments);
+        setTimeout(init, 60);
+    };
+})();
 
 /* ── EXPERIENCE ── */
 const EXP = [
