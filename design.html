@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rikesh Dahal — Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@500;700&family=Archivo:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --paper: #EDEAE3;
+            --paper-dark: #E2DED3;
+            --ink: #141414;
+            --violet: #5B3A8C;
+            --cyan: #3FCDDA;
+            --clip: #8B877E;
+            --clip-dark: #5A5751;
+            --maxw: 1200px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--paper);
+            color: var(--ink);
+            font-family: 'Archivo', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* grain texture overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: .05;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            mix-blend-mode: multiply;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ---------- NAV ---------- */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 6vw;
+            background: rgba(237, 234, 227, 0.82);
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid rgba(20, 20, 20, 0.08);
+        }
+
+        .nav__mark {
+            font-family: 'Anton', sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 0.5px;
+            color: var(--ink);
+        }
+
+        .nav__mark span {
+            color: var(--violet);
+        }
+
+        .nav__links {
+            display: flex;
+            gap: clamp(16px, 3vw, 40px);
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .nav__links a {
+            position: relative;
+            padding: 4px 2px;
+        }
+
+        .nav__links a::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 2px;
+            top: 4px;
+            color: var(--cyan);
+            opacity: 0;
+            transform: translate(0, 0);
+            z-index: -1;
+            transition: opacity .12s steps(2);
+        }
+
+        .nav__links a:hover {
+            color: var(--violet);
+        }
+
+        .nav__links a:hover::after {
+            opacity: 0.8;
+            transform: translate(2px, -2px);
+        }
+
+        /* ---------- HERO ---------- */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 6vw 60px;
+            overflow: hidden;
+        }
+
+        .hero__board {
+            position: relative;
+            width: 100%;
+            max-width: var(--maxw);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero__sheet {
+            position: relative;
+            width: 100%;
+            background: #f5f3ee;
+            box-shadow: 0 30px 60px -20px rgba(20, 20, 20, 0.35), 0 2px 0 rgba(20, 20, 20, 0.05);
+            clip-path: polygon(0% 1%, 3% 0%, 9% 1.2%, 17% 0.2%, 25% 1%, 33% 0.1%, 42% 0.9%, 50% 0%, 58% 1.1%, 67% 0.2%, 75% 1%, 83% 0.3%, 91% 1.1%, 97% 0.2%, 100% 1%, 100% 99%, 94% 100%, 87% 99.1%, 79% 100%, 71% 99.2%, 63% 100%, 55% 99%, 47% 100%, 39% 99.2%, 31% 100%, 23% 99%, 15% 100%, 7% 99.2%, 0% 100%);
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .hero__sheet img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .clip {
+            position: absolute;
+            top: -26px;
+            width: 54px;
+            z-index: 5;
+            filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.3));
+        }
+
+        .clip--left {
+            left: 8%;
+            transform: rotate(-6deg);
+        }
+
+        .clip--right {
+            right: 10%;
+            transform: rotate(5deg);
+        }
+
+        .hero__caption {
+            position: absolute;
+            bottom: -18px;
+            right: 4%;
+            font-family: 'Caveat', cursive;
+            font-size: 1.4rem;
+            color: var(--violet);
+            transform: rotate(-3deg);
+            background: var(--paper);
+            padding: 2px 14px;
+            z-index: 6;
+        }
+
+        .scroll-cue {
+            position: absolute;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--clip-dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .scroll-cue__line {
+            width: 1px;
+            height: 34px;
+            background: var(--clip-dark);
+            animation: scrolldrop 1.8s ease-in-out infinite;
+        }
+
+        @keyframes scrolldrop {
+            0% {
+                transform: scaleY(0);
+                transform-origin: top;
+            }
+
+            50% {
+                transform: scaleY(1);
+                transform-origin: top;
+            }
+
+            51% {
+                transform: scaleY(1);
+                transform-origin: bottom;
+            }
+
+            100% {
+                transform: scaleY(0);
+                transform-origin: bottom;
+            }
+        }
+
+        /* ---------- SECTION SCAFFOLD ---------- */
+        .section {
+            position: relative;
+            padding: 100px 6vw 120px;
+            max-width: var(--maxw);
+            margin: 0 auto;
+        }
+
+        .section__eyebrow {
+            font-family: 'Caveat', cursive;
+            font-size: 1.6rem;
+            color: var(--violet);
+            margin-bottom: -6px;
+        }
+
+        .section__title {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(2.4rem, 6vw, 4.2rem);
+            letter-spacing: 0.5px;
+            line-height: 0.95;
+            margin-bottom: 28px;
+            text-transform: uppercase;
+        }
+
+        .section__title .accent {
+            color: var(--violet);
+        }
+
+        .section__lede {
+            max-width: 560px;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #3a3a3a;
+            margin-bottom: 50px;
+        }
+
+        /* pinned sheet wrapper reused per section */
+        .pinned {
+            position: relative;
+            width: 100%;
+        }
+
+        .pinned__sheet {
+            position: relative;
+            background: #f7f5f0;
+            box-shadow: 0 24px 50px -18px rgba(20, 20, 20, 0.3), 0 1px 0 rgba(20, 20, 20, 0.05);
+            border: 1px solid rgba(20, 20, 20, 0.06);
+        }
+
+        .pinned__sheet img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .pinned .clip {
+            top: -24px;
+        }
+
+        /* tape corner alt for variety */
+        .tape {
+            position: absolute;
+            width: 90px;
+            height: 34px;
+            background: rgba(255, 255, 200, 0.45);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            z-index: 5;
+        }
+
+        /* ---------- ABOUT (image-led, two col on desktop) ---------- */
+        .about__grid {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .about__text {
+            flex: 0 0 38%;
+        }
+
+        .about__art {
+            flex: 1;
+        }
+
+        .about__art .pinned__sheet {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .tagline-list {
+            margin-top: 34px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .tagline-list li {
+            list-style: none;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .tagline-list li::before {
+            content: "—";
+            color: var(--violet);
+            font-weight: 700;
+        }
+
+        /* ---------- SPECIALTY SECTION ---------- */
+        .specialty {
+            position: relative;
+            padding: 0 6vw 100px;
+            max-width: var(--maxw);
+            margin: 0 auto;
+        }
+
+        .specialty__inner {
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+            background: #f7f5f0;
+            box-shadow: 0 24px 50px -18px rgba(20, 20, 20, 0.3), 0 1px 0 rgba(20, 20, 20, 0.05);
+            border: 1px solid rgba(20, 20, 20, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* torn edge between left and right panels */
+        .specialty__inner::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 48%;
+            width: 4px;
+            height: 100%;
+            background: repeating-linear-gradient(180deg,
+                    transparent 0px,
+                    transparent 6px,
+                    rgba(20, 20, 20, 0.08) 6px,
+                    rgba(20, 20, 20, 0.08) 7px);
+            z-index: 2;
+        }
+
+        .specialty__left {
+            flex: 0 0 48%;
+            background: #f0ede6;
+            padding: 52px 48px 52px 52px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .specialty__eyebrow {
+            font-family: 'Caveat', cursive;
+            font-size: 1.4rem;
+            color: var(--clip-dark);
+            margin-bottom: 8px;
+        }
+
+        .specialty__heading {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(2rem, 4vw, 3.4rem);
+            line-height: 0.92;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .specialty__heading .accent-ps {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(2.6rem, 5vw, 4.2rem);
+            color: var(--violet);
+            text-transform: none;
+            display: block;
+            line-height: 1.1;
+            font-weight: 700;
+            letter-spacing: 0;
+            border-bottom: 3px solid var(--violet);
+            padding-bottom: 4px;
+            margin-bottom: 36px;
+        }
+
+        .specialty__toolkit-label {
+            font-size: 0.72rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--clip-dark);
+            font-weight: 700;
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+
+        .specialty__tools {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tool-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 46px;
+            height: 46px;
+            border-radius: 10px;
+            border: 1.5px solid rgba(20, 20, 20, 0.15);
+            background: var(--paper);
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: var(--ink);
+            transition: border-color .2s, color .2s, background .2s;
+            cursor: default;
+        }
+
+        .tool-badge:hover {
+            border-color: var(--violet);
+            color: var(--violet);
+            background: #f0eaf8;
+        }
+
+        .tool-badge--ps {
+            color: #31A8FF;
+            border-color: rgba(49, 168, 255, 0.35);
+        }
+
+        .tool-badge--ai {
+            color: #FF7C00;
+            border-color: rgba(255, 124, 0, 0.35);
+        }
+
+        .tool-badge--ae {
+            color: #9999FF;
+            border-color: rgba(153, 153, 255, 0.35);
+        }
+
+        .tool-badge--pr {
+            color: #EA77FF;
+            border-color: rgba(234, 119, 255, 0.35);
+        }
+
+        .specialty__right {
+            flex: 1;
+            min-height: 380px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .specialty__right img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* sticky note on specialty */
+        .specialty__note {
+            position: absolute;
+            bottom: 20px;
+            left: -8px;
+            font-family: 'Caveat', cursive;
+            font-size: 1.15rem;
+            color: var(--clip-dark);
+            background: rgba(255, 255, 200, 0.88);
+            padding: 8px 18px 8px 14px;
+            transform: rotate(1.5deg);
+            box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 4;
+        }
+
+        /* clip on top of specialty */
+        .specialty__clip {
+            position: absolute;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%) rotate(2deg);
+            width: 48px;
+            z-index: 5;
+            filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.25));
+        }
+
+        /* ---------- FOLIO SECTIONS (wide) ---------- */
+        .folio .pinned__sheet {
+            width: 100%;
+        }
+
+        .folio__meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 22px;
+        }
+
+        .folio__meta-note {
+            font-family: 'Caveat', cursive;
+            font-size: 1.3rem;
+            color: var(--clip-dark);
+        }
+
+        .folio__tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .folio__tags span {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border: 1px solid var(--ink);
+            border-radius: 2px;
+        }
+
+        /* ---------- CONTACT / FOOTER ---------- */
+        .footer {
+            position: relative;
+            background: var(--ink);
+            color: var(--paper);
+            padding: 90px 6vw 50px;
+            overflow: hidden;
+        }
+
+        .footer__inner {
+            max-width: var(--maxw);
+            margin: 0 auto;
+        }
+
+        .footer__title {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(2.4rem, 8vw, 5.5rem);
+            line-height: 0.95;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        .footer__title span {
+            color: var(--cyan);
+        }
+
+        .footer__row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(237, 234, 227, 0.18);
+            font-size: 0.8rem;
+            color: rgba(237, 234, 227, 0.6);
+        }
+
+        .footer__social {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            font-weight: 700;
+        }
+
+        .footer__social a {
+            border: 1px solid rgba(237, 234, 227, 0.35);
+            border-radius: 999px;
+            padding: 8px 16px;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background .2s, color .2s;
+        }
+
+        .footer__social a:hover {
+            background: var(--cyan);
+            color: var(--ink);
+            border-color: var(--cyan);
+        }
+
+        /* reveal on scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(36px);
+            transition: opacity .7s cubic-bezier(.2, .7, .3, 1), transform .7s cubic-bezier(.2, .7, .3, 1);
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width:900px) {
+            .about__grid {
+                flex-direction: column;
+            }
+
+            .about__text {
+                flex: 1;
+            }
+
+            .about__art {
+                order: -1;
+            }
+
+            .specialty__inner {
+                flex-direction: column;
+            }
+
+            .specialty__inner::after {
+                display: none;
+            }
+
+            .specialty__left {
+                flex: none;
+                padding: 40px 36px;
+            }
+
+            .specialty__right {
+                min-height: 260px;
+            }
+        }
+
+        @media (max-width:640px) {
+            .nav {
+                padding: 16px 5vw;
+            }
+
+            .nav__mark {
+                font-size: 1.05rem;
+            }
+
+            .nav__links {
+                gap: 14px;
+                font-size: 0.68rem;
+                letter-spacing: 1px;
+            }
+
+            .hero {
+                padding: 110px 5vw 60px;
+            }
+
+            .section {
+                padding: 70px 5vw 80px;
+            }
+
+            .specialty {
+                padding: 0 5vw 80px;
+            }
+
+            .specialty__left {
+                padding: 32px 24px;
+            }
+
+            .clip {
+                width: 38px;
+                top: -18px;
+            }
+
+            .clip--left {
+                left: 5%;
+            }
+
+            .clip--right {
+                right: 6%;
+            }
+
+            .section__title {
+                font-size: clamp(2rem, 9vw, 2.8rem);
+            }
+
+            .folio__tags span {
+                font-size: 0.65rem;
+                padding: 5px 9px;
+            }
+
+            .footer {
+                padding: 70px 5vw 40px;
+            }
+        }
+
+        @media (max-width:400px) {
+            .nav__links {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="nav">
+        <div class="nav__mark">RIKESH<span>.</span>DAHAL</div>
+        <div class="nav__links">
+            <a href="#about" data-text="ABOUT">ABOUT</a>
+            <a href="#logofolio" data-text="LOGOS">LOGOS</a>
+            <a href="#aifolio" data-text="AI WORK">AI WORK</a>
+            <a href="#contact" data-text="CONTACT">CONTACT</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+        <div class="hero__board">
+            <div class="hero__sheet">
+                <svg class="clip clip--left" viewBox="0 0 60 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="6" y="0" width="48" height="70" rx="6" fill="#8B877E" stroke="#5A5751" stroke-width="2" />
+                    <rect x="14" y="10" width="32" height="50" rx="4" fill="#EDEAE3" />
+                    <path d="M30 60 L30 88" stroke="#5A5751" stroke-width="3" stroke-linecap="round" />
+                </svg>
+                <svg class="clip clip--right" viewBox="0 0 60 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="6" y="0" width="48" height="70" rx="6" fill="#8B877E" stroke="#5A5751" stroke-width="2" />
+                    <rect x="14" y="10" width="32" height="50" rx="4" fill="#EDEAE3" />
+                    <path d="M30 60 L30 88" stroke="#5A5751" stroke-width="3" stroke-linecap="round" />
+                </svg>
+                <img src="home.png" alt="Rikesh Dahal — Portfolio cover, glitch type title over halftone portrait" />
+                <span class="hero__caption">scroll the board ↓</span>
+            </div>
+        </div>
+        <div class="scroll-cue"><span>scroll</span><span class="scroll-cue__line"></span></div>
+    </header>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+        <div class="about__grid">
+            <div class="about__text reveal">
+                <p class="section__eyebrow">Pinned to the board</p>
+                <h2 class="section__title">About<br><span class="accent">Me.</span></h2>
+                <p class="section__lede">
+                    A graphic designer based in Nepal, building brands with personality and stories that stick.
+                    Equal parts visual instinct and Python logic — comfortable moving between a mood board
+                    and a dataframe.
+                </p>
+                <ul class="tagline-list">
+                    <li>Brand identity &amp; logo systems</li>
+                    <li>Editorial &amp; infographic design</li>
+                    <li>AI-assisted concept art</li>
+                    <li>Python automation &amp; data handling</li>
+                </ul>
+            </div>
+            <div class="about__art reveal">
+                <div class="pinned">
+                    <svg class="clip" viewBox="0 0 60 90" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        style="left:50%;transform:translateX(-50%);">
+                        <rect x="6" y="0" width="48" height="70" rx="6" fill="#8B877E" stroke="#5A5751"
+                            stroke-width="2" />
+                        <rect x="14" y="10" width="32" height="50" rx="4" fill="#EDEAE3" />
+                        <path d="M30 60 L30 88" stroke="#5A5751" stroke-width="3" stroke-linecap="round" />
+                    </svg>
+                    <div class="pinned__sheet">
+                        <img src="about.gif"
+                            alt="About Rikesh Dahal — graphic designer from Nepal, animated note card" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MY SPECIALTY -->
+    <section class="section folio" id="specialty">
+        <p class="section__eyebrow reveal">Under the hood</p>
+        <h2 class="section__title reveal">My <span class="accent">Specialty.</span></h2>
+        <div class="pinned reveal">
+            <svg class="clip clip--left" viewBox="0 0 60 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="6" y="0" width="48" height="70" rx="6" fill="#8B877E" stroke="#5A5751" stroke-width="2" />
+                <rect x="14" y="10" width="32" height="50" rx="4" fill="#EDEAE3" />
+                <path d="M30 60 L30 88" stroke="#5A5751" stroke-width="3" stroke-linecap="round" />
+            </svg>
+            <svg class="clip clip--right" viewBox="0 0 60 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="6" y="0" width="48" height="70" rx="6" fill="#8B877E" stroke="#5A5751" stroke-width="2" />
+                <rect x="14" y="10" width="32" height="50" rx="4" fill="#EDEAE3" />
+                <path d="M30 60 L30 88" stroke="#5A5751" stroke-width="3" stroke-linecap="round" />
+            </svg>
+            <div class="pinned__sheet">
+                <img src="MY SPECIALTY.png"
+                    alt="My Specialty — Photoshop tools showcase with Dabur Honey Nature's Gold ad campaign composite" />
+            </div>
+        </div>
+    </section>
+
+    <!-- AI FOLIO -->
+    <section class="section folio" id="aifolio">
+        <p class="section__eyebrow reveal">Selected work</p>
+        <h2 class="section__title reveal">AI<span class="accent">Folio</span></h2>
+        <p class="section__lede reveal">
+            Concept posters, infographics and ad mockups built with AI-assisted workflows —
+            from a Kathmandu travel guide to an energy-drink campaign.
+        </p>
+        <div class="pinned reveal">
+            <svg class="clip clip--left" viewBox="0 0 60 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="6" y="0" width="48" height="70" rx="6" fill="#8B877E" stroke="#5A5751" stroke-width="2" />
+                <rect x="14" y="10" width="32" height="50" rx="4" fill="#EDEAE3" />
+                <path d="M30 60 L30 88" stroke="#5A5751" stroke-width="3" stroke-linecap="round" />
+            </svg>
+            <svg class="clip clip--right" viewBox="0 0 60 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="6" y="0" width="48" height="70" rx="6" fill="#8B877E" stroke="#5A5751" stroke-width="2" />
+                <rect x="14" y="10" width="32" height="50" rx="4" fill="#EDEAE3" />
+                <path d="M30 60 L30 88" stroke="#5A5751" stroke-width="3" stroke-linecap="round" />
+            </svg>
+            <div class="pinned__sheet">
+                <img src="Aifolio.png"
+                    alt="AIfolio — collage of AI-assisted posters: Dharahara tower, Kathmandu travel guide, elephant infographic, energy drink and mango juice ads" />
+            </div>
+        </div>
+        <div class="folio__meta reveal">
+            <span class="folio__meta-note">six pieces, one workflow</span>
+            <div class="folio__tags">
+                <span>Infographic</span>
+                <span>Ad Concept</span>
+                <span>Travel Guide</span>
+                <span>AI-Assisted</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOGOFOLIO -->
+    <section class="section folio" id="logofolio">
+        <p class="section__eyebrow reveal">Selected work</p>
+        <h2 class="section__title reveal">Logo<span class="accent">Folio</span></h2>
+        <p class="section__lede reveal">
+            Marks built for cafés, tech tools and media brands — each one designed
+            to hold up at favicon size and on a storefront sign.
+        </p>
+        <div class="pinned reveal">
+            <svg class="clip clip--left" viewBox="0 0 60 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="6" y="0" width="48" height="70" rx="6" fill="#8B877E" stroke="#5A5751" stroke-width="2" />
+                <rect x="14" y="10" width="32" height="50" rx="4" fill="#EDEAE3" />
+                <path d="M30 60 L30 88" stroke="#5A5751" stroke-width="3" stroke-linecap="round" />
+            </svg>
+            <svg class="clip clip--right" viewBox="0 0 60 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="6" y="0" width="48" height="70" rx="6" fill="#8B877E" stroke="#5A5751" stroke-width="2" />
+                <rect x="14" y="10" width="32" height="50" rx="4" fill="#EDEAE3" />
+                <path d="M30 60 L30 88" stroke="#5A5751" stroke-width="3" stroke-linecap="round" />
+            </svg>
+            <div class="pinned__sheet">
+                <img src="Logofolio.png"
+                    alt="LogoFolio — collection of logo marks: RD monogram, Prompt Vault, Fulkumari, Tathyapardi fact-check, Hacker Nitro, Brewfee Coffee Co. in two colour variants" />
+            </div>
+        </div>
+        <div class="folio__meta reveal">
+            <span class="folio__meta-note">seven marks, seven moods</span>
+            <div class="folio__tags">
+                <span>Wordmark</span>
+                <span>Monogram</span>
+                <span>Brand System</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <footer class="footer" id="contact">
+        <div class="footer__inner">
+            <p class="section__eyebrow reveal" style="color:var(--cyan);">Let's work together</p>
+            <h2 class="footer__title reveal">Got a brand<br>that needs a <span>story?</span></h2>
+            <p class="reveal" style="max-width:480px;color:rgba(237,234,227,0.75);font-size:1rem;line-height:1.6;">
+                Open to freelance design work, brand identity projects, and anything that needs
+                a designer who also speaks Python.
+            </p>
+            <div class="footer__row">
+                <span>© 2026 Rikesh Dahal. Built on paper, shipped on the web.</span>
+                <div class="footer__social">
+                    <a href="https://instagram.com/rikesh.codes" target="_blank" rel="noopener">@rikesh.codes</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // scroll reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('is-visible');
+                    io.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        reveals.forEach(el => io.observe(el));
+    </script>
+
+</body>
+
+</html>
