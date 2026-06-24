@@ -7032,3 +7032,43 @@ html.light #bhajan-standalone {
     transition: width .08s linear;
     pointer-events: none;
 }
+
+/* ── DESIGN PORTFOLIO BUTTON GLOW & SHIMMER ── */
+#design-portfolio-btn {
+    animation: btnGlowPulse 2.8s ease-in-out infinite;
+}
+
+#design-portfolio-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+    transform: skewX(-25deg);
+    animation: shineEffect 3.2s infinite ease-in-out;
+}
+
+#design-portfolio-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(63, 205, 218, 0.6) !important;
+}
+
+@keyframes btnGlowPulse {
+    0% {
+        box-shadow: 0 4px 14px rgba(91, 58, 140, 0.35), 0 0 0 0px rgba(91, 58, 140, 0);
+    }
+    50% {
+        box-shadow: 0 4px 28px rgba(63, 205, 218, 0.65), 0 0 0 4px rgba(63, 205, 218, 0.25);
+    }
+    100% {
+        box-shadow: 0 4px 14px rgba(91, 58, 140, 0.35), 0 0 0 0px rgba(91, 58, 140, 0);
+    }
+}
+
+@keyframes shineEffect {
+    0% { left: -100%; }
+    18% { left: 180%; }
+    100% { left: 180%; }
+}
