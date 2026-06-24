@@ -560,6 +560,37 @@
             border-radius: 2px;
         }
 
+        /* ---------- SOCIAL MEDIA ---------- */
+        .social__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 60px;
+            margin-top: 10px;
+        }
+
+        .social__card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .social__frame {
+            overflow: hidden;
+            background: transparent;
+        }
+
+        .social__frame img {
+            display: block;
+            width: 100%;
+            height: auto;
+            background: transparent;
+        }
+
+        @media (max-width: 640px) {
+            .social__grid {
+                gap: 40px;
+            }
+        }
+
         /* ---------- CONTACT / FOOTER ---------- */
         .footer {
             position: relative;
@@ -889,6 +920,55 @@
                 <span>Monogram</span>
                 <span>Brand System</span>
             </div>
+        </div>
+    </section>
+    <!-- SOCIAL MEDIA -->
+    <section class="section folio" id="social">
+        <p class="section__eyebrow reveal">On the feed</p>
+        <h2 class="section__title reveal">Social <span class="accent">Media.</span></h2>
+        <p class="section__lede reveal">
+            Visual content I crafted for social networks such as Instagram and Facebook —
+            from Nepali New Year greetings to hiring campaigns.
+        </p>
+
+        <div class="social__grid reveal">
+
+            <div class="social__card">
+                <div class="pinned">
+                    <svg class="clip" viewBox="0 0 60 90" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        style="left:50%;transform:translateX(-50%) rotate(-3deg);">
+                        <rect x="6" y="0" width="48" height="70" rx="6" fill="#8B877E" stroke="#5A5751"
+                            stroke-width="2" />
+                        <rect x="14" y="10" width="32" height="50" rx="4" fill="#EDEAE3" />
+                        <path d="M30 60 L30 88" stroke="#5A5751" stroke-width="3" stroke-linecap="round" />
+                    </svg>
+                    <div class="social__frame">
+                        <img src="social-media-1.png" alt="Happy New Year 2083 — Nepali New Year Instagram post" />
+                    </div>
+                </div>
+                <div class="folio__meta" style="margin-top:18px;justify-content:center;">
+                    <span class="folio__meta-note" style="text-align:center">Nepali New Year 2083</span>
+                </div>
+            </div>
+
+            <div class="social__card">
+                <div class="pinned">
+                    <svg class="clip" viewBox="0 0 60 90" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        style="left:50%;transform:translateX(-50%) rotate(2deg);">
+                        <rect x="6" y="0" width="48" height="70" rx="6" fill="#8B877E" stroke="#5A5751"
+                            stroke-width="2" />
+                        <rect x="14" y="10" width="32" height="50" rx="4" fill="#EDEAE3" />
+                        <path d="M30 60 L30 88" stroke="#5A5751" stroke-width="3" stroke-linecap="round" />
+                    </svg>
+                    <div class="social__frame">
+                        <img src="social-media-2.png" alt="Insight Workshop — We Are Hiring Graphic Designer post" />
+                    </div>
+                </div>
+                <div class="folio__meta" style="margin-top:18px;justify-content:center;">
+                    <span class="folio__meta-note" style="text-align:center">Insight Workshop Hiring</span>
+                </div>
+            </div>
+
         </div>
     </section>
 
