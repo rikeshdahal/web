@@ -2244,6 +2244,7 @@ async function adminLoadTab(tab) {
     else if (tab === 'manifest') await adminLoadManifest();
     else if (tab === 'gear') await adminLoadGear();
     else if (tab === 'certificates') await adminLoadCertificates();
+    else if (tab === 'design') await adminLoadDesign();
 }
 
 function adminFmt(iso) {
@@ -4008,7 +4009,259 @@ async function adminDeleteCert(id, title) {
     loadCertsFromDB();
 }
 
+/* ══════════════════════════════════════════
+   ADMIN — DESIGN PORTFOLIO (design.html)
+══════════════════════════════════════════ */
+let designSocialEditingId = null;
+let _designSocialRowMap = {};
 
+async function adminLoadDesign() {
+    const el = document.getElementById('ap-design-content');
+    _designSocialRowMap = {};
+    el.innerHTML = '<div class="admin-loading"><i class="fas fa-spinner" style="animation:spin .8s linear infinite;margin-right:7px;"></i>Loading design settings…</div>';
+    
+    try {
+        const [socialRes, imagesRes] = await Promise.all([
+            _sb.from('design_social').select('*').order('created_at', { ascending: true }),
+            _sb.from('design_images').select('*')
+        ]);
+        
+        if (socialRes.error) throw socialRes.error;
+        if (imagesRes.error) throw imagesRes.error;
+        
+        const socialRows = socialRes.data || [];
+        socialRows.forEach(r => { _designSocialRowMap[r.id] = r; });
+        
+        const imgData = imagesRes.data || [];
+        
+        const DESIGN_IMGS = [
+            { key: 'hero',      label: 'Hero Banner',   src: 'home.png' },
+            { key: 'about',     label: 'About GIF',     src: 'about.gif' },
+            { key: 'specialty', label: 'Specialty',     src: 'MY SPECIALTY.png' },
+            { key: 'aifolio',   label: 'AI Folio',      src: 'Aifolio.png' },
+            { key: 'logofolio', label: 'Logo Folio',    src: 'Logofolio.png' },
+        ];
+        
+        let imgsHtml = DESIGN_IMGS.map(img => {
+            const dbRow = imgData.find(r => r.key === img.key);
+            const currentSrc = dbRow ? dbRow.image_url : img.src;
+            return `
+            <div class="admin-design-img-card" style="background:rgba(255,255,255,.02); border:1px solid var(--border); border-radius:10px; padding:12px; display:flex; flex-direction:column; gap:10px;">
+                <div style="font-weight:600; font-size:.8rem; color:var(--text);">${escHtml(img.label)}</div>
+                <div style="height:90px; border-radius:6px; overflow:hidden; background:rgba(0,0,0,.2); display:flex; align-items:center; justify-content:center;">
+                    <img src="${escHtml(currentSrc)}" style="max-width:100%; max-height:100%; object-fit:contain;" onerror="this.src='https://via.placeholder.com/150x80?text=No+Image'">
+                </div>
+                <div style="display:flex; gap:6px;">
+                    <input class="admin-form-input" id="dimg-${img.key}" placeholder="https://..." value="${dbRow ? escHtml(dbRow.image_url) : ''}" style="height:32px; font-size:.75rem; padding:0 8px; flex:1;">
+                    <button class="btn-admin-save" onclick="adminSaveDesignImage('${img.key}')" style="height:32px; padding:0 12px; font-size:.72rem; display:inline-flex; align-items:center; gap:4px; font-weight:700;">
+                        Save
+                    </button>
+                </div>
+            </div>
+            `;
+        }).join('');
+        
+        let socialTableHtml = '';
+        if (socialRows.length === 0) {
+            socialTableHtml = '<div class="admin-empty">No social posts yet — click "Add Social Post" to add one.</div>';
+        } else {
+            socialTableHtml = `
+            <div class="admin-table-wrap">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Caption</th>
+                            <th>Platform</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${socialRows.map(r => `
+                        <tr id="dsrow-${escHtml(r.id)}">
+                            <td>
+                                <img src="${escHtml(r.image_url)}" style="width:40px; height:40px; border-radius:4px; object-fit:cover;" onerror="this.src='https://via.placeholder.com/40px?text=?'">
+                            </td>
+                            <td style="font-weight:600; font-size:.8rem; max-width:200px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                                ${escHtml(r.caption || '')}
+                            </td>
+                            <td style="font-family:'JetBrains Mono',monospace; font-size:.68rem; color:var(--muted);">
+                                ${escHtml(r.platform || '—')}
+                            </td>
+                            <td>
+                                <div style="display:flex; gap:5px;">
+                                    <button class="btn-edit-row" onclick="adminDesignSocialEdit('${escHtml(r.id)}')">Edit</button>
+                                    <button class="admin-action-btn btn-del-row" onclick="adminDeleteDesignSocial('${escHtml(r.id)}','${escHtml(r.caption || '')}')">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+            `;
+        }
+        
+        el.innerHTML = `
+        <div class="admin-design-container" style="display:flex; flex-direction:column; gap:30px;">
+            <!-- Section 1: Design Images -->
+            <div class="admin-section" style="border-bottom:1px solid var(--border); padding-bottom:20px;">
+                <h3 style="font-family:'Cabinet Grotesk',sans-serif; font-size:1.05rem; font-weight:700; margin-bottom:15px; color:var(--text); display:flex; align-items:center; gap:8px;">
+                    <i class="fas fa-images" style="color:var(--accent2);"></i> Main Design Portfolio Images
+                </h3>
+                <div class="admin-design-imgs-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:15px;">
+                    ${imgsHtml}
+                </div>
+            </div>
+
+            <!-- Section 2: Social Media Posts -->
+            <div class="admin-section">
+                <div class="admin-add-bar">
+                    <span class="admin-add-bar-title" id="design-social-count-title">${socialRows.length} social post${socialRows.length !== 1 ? 's' : ''}</span>
+                    <button class="btn-admin-add" onclick="adminDesignSocialToggleForm()">
+                        <i class="fas fa-plus" style="font-size:.62rem;"></i> Add Social Post
+                    </button>
+                </div>
+                
+                <!-- Inline Form for Social Media Post -->
+                <div class="admin-inline-form" id="design-social-form">
+                    <div class="admin-form-title">
+                        <i class="fas fa-share-nodes" style="color:var(--accent2); font-size:.9rem;"></i> 
+                        <span id="design-social-form-title">Add Social Post</span>
+                    </div>
+                    <div class="admin-form-grid">
+                        <div class="admin-form-group full">
+                            <label class="admin-form-label">Image URL *</label>
+                            <input class="admin-form-input" id="dsf-image" placeholder="https://i.postimg.cc/...">
+                        </div>
+                        <div class="admin-form-group">
+                            <label class="admin-form-label">Caption *</label>
+                            <input class="admin-form-input" id="dsf-caption" placeholder="e.g. Nepali New Year greeting">
+                        </div>
+                        <div class="admin-form-group">
+                            <label class="admin-form-label">Platform (optional)</label>
+                            <input class="admin-form-input" id="dsf-platform" placeholder="e.g. Instagram, Facebook, LinkedIn">
+                        </div>
+                    </div>
+                    <div class="admin-form-actions">
+                        <button class="btn-admin-cancel" onclick="adminDesignSocialCancelForm()">Cancel</button>
+                        <button class="btn-admin-save" id="design-social-save-btn" onclick="adminSaveDesignSocial()">
+                            <i class="fas fa-check" style="font-size:.72rem;"></i> Save Post
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Table / List of Social Posts -->
+                <div id="design-social-list-wrap">
+                    ${socialTableHtml}
+                </div>
+            </div>
+        </div>
+        `;
+        
+    } catch (e) {
+        el.innerHTML = `<div class="admin-empty" style="color:#f87171;">⚠ ${escHtml(e.message)}<br><small style="opacity:.6;margin-top:6px;display:block;">Make sure you have run the Supabase SQL setup from <code>supabase_setup.md</code>.</small></div>`;
+    }
+}
+
+async function adminSaveDesignImage(key) {
+    const url = document.getElementById(`dimg-${key}`)?.value?.trim();
+    if (!url) { showToast('Please enter an image URL.', 'error'); return; }
+    
+    const { error } = await _sb.from('design_images').upsert([
+        { key, image_url: url }
+    ], { onConflict: 'key' });
+    
+    if (error) {
+        showToast('DB Error: ' + error.message, 'error');
+    } else {
+        showToast('✓ Image URL saved successfully!', 'success');
+        adminLoadDesign();
+    }
+}
+
+function adminDesignSocialToggleForm() {
+    designSocialEditingId = null;
+    const form = document.getElementById('design-social-form');
+    const isOpen = form.classList.contains('open');
+    form.classList.toggle('open', !isOpen);
+    if (!isOpen) {
+        document.getElementById('design-social-form-title').textContent = 'Add Social Post';
+        ['dsf-image', 'dsf-caption', 'dsf-platform'].forEach(id => {
+            const el = document.getElementById(id); if (el) el.value = '';
+        });
+        document.getElementById('design-social-save-btn').innerHTML = '<i class="fas fa-check" style="font-size:.72rem;"></i> Save Post';
+        document.getElementById('dsf-image').focus();
+    }
+}
+
+function adminDesignSocialCancelForm() {
+    designSocialEditingId = null;
+    document.getElementById('design-social-form')?.classList.remove('open');
+}
+
+function adminDesignSocialEdit(id) {
+    const r = _designSocialRowMap[id];
+    if (!r) return;
+    designSocialEditingId = id;
+    const form = document.getElementById('design-social-form');
+    if (!form) return;
+    form.classList.add('open');
+    document.getElementById('design-social-form-title').textContent = 'Edit Social Post';
+    document.getElementById('dsf-image').value = r.image_url || '';
+    document.getElementById('dsf-caption').value = r.caption || '';
+    document.getElementById('dsf-platform').value = r.platform || '';
+    document.getElementById('design-social-save-btn').innerHTML = '<i class="fas fa-pen" style="font-size:.72rem;"></i> Update Post';
+    form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    document.getElementById('dsf-image').focus();
+}
+
+async function adminSaveDesignSocial() {
+    const imgUrl = document.getElementById('dsf-image')?.value?.trim();
+    const caption = document.getElementById('dsf-caption')?.value?.trim();
+    const platform = document.getElementById('dsf-platform')?.value?.trim() || null;
+    
+    if (!imgUrl) { showToast('Image URL is required.', 'error'); return; }
+    if (!caption) { showToast('Caption is required.', 'error'); return; }
+    
+    const payload = {
+        image_url: imgUrl,
+        caption,
+        platform
+    };
+    
+    const btn = document.getElementById('design-social-save-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation:spin .8s linear infinite"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Saving…';
+    
+    let error;
+    if (designSocialEditingId) {
+        ({ error } = await _sb.from('design_social').update(payload).eq('id', designSocialEditingId));
+    } else {
+        ({ error } = await _sb.from('design_social').insert(payload));
+    }
+    
+    btn.disabled = false;
+    if (error) {
+        showToast(error.message, 'error');
+        btn.innerHTML = designSocialEditingId 
+            ? '<i class="fas fa-pen" style="font-size:.72rem;"></i> Update Post' 
+            : '<i class="fas fa-check" style="font-size:.72rem;"></i> Save Post';
+        return;
+    }
+    
+    showToast(designSocialEditingId ? '✓ Social post updated!' : '✓ Social post added!', 'success');
+    adminDesignSocialCancelForm();
+    adminLoadDesign();
+}
+
+async function adminDeleteDesignSocial(id, caption) {
+    if (!confirm(`Delete social post "${caption}"?`)) return;
+    const { error } = await _sb.from('design_social').delete().eq('id', id);
+    if (error) { showToast(error.message, 'error'); return; }
+    showToast('Social post deleted.', 'info');
+    adminLoadDesign();
+}
 
 
 // <!-- ═══ REAL-TIME ADMIN NOTIFICATIONS ═══ -->

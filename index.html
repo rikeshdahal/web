@@ -313,6 +313,13 @@
                                     class="fas fa-download"></i>Download CV</a>
                             <a href="https://rikeshdahal.github.io/Terminal-Portfolio/" class="btn-outline"><i
                                     class="fas fa-terminal"></i>Dev Mode</a>
+                            <a href="design.html" id="design-portfolio-btn"
+                                style="display:inline-flex;align-items:center;gap:7px;padding:10px 20px;border-radius:10px;background:linear-gradient(135deg,#5B3A8C,#3FCDDA);color:#fff;font-family:'Cabinet Grotesk',sans-serif;font-weight:700;font-size:.82rem;text-decoration:none;letter-spacing:.04em;transition:all .25s;box-shadow:0 4px 18px rgba(91,58,140,.35);position:relative;overflow:hidden;"
+                                onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 28px rgba(91,58,140,.5)'"
+                                onmouseout="this.style.transform='';this.style.boxShadow='0 4px 18px rgba(91,58,140,.35)'">
+                                <i class="fas fa-palette"></i>Design Portfolio
+                                <span style="font-size:.65rem;opacity:.8;margin-left:2px;">→</span>
+                            </a>
                         </div>
                         <div class="fu4 h-stats-wrap">
                             <div class="stat-box">
@@ -1610,6 +1617,8 @@ End with a key takeaway." oninput="wpmUpdateCount();wpeAutoPreview();wpeSyncScro
                     <button class="admin-tab" onclick="adminSwitchTab('certificates',this)"><i
                             class="fas fa-certificate"
                             style="margin-right:5px;font-size:.72rem;"></i>Certificates</button>
+                    <button class="admin-tab" onclick="adminSwitchTab('design',this)"><i class="fas fa-palette"
+                            style="margin-right:5px;font-size:.72rem;"></i>Design</button>
                 </div>
                 <!-- Users -->
                 <div class="admin-tab-panel active" id="ap-users">
@@ -1667,6 +1676,14 @@ End with a key takeaway." oninput="wpmUpdateCount();wpeAutoPreview();wpeSyncScro
                     <div id="ap-certs-content">
                         <div class="admin-loading"><i class="fas fa-spinner"
                                 style="animation:spin .8s linear infinite;margin-right:7px;"></i>Loading certificates…
+                        </div>
+                    </div>
+                </div>
+                <!-- Design Portfolio -->
+                <div class="admin-tab-panel" id="ap-design">
+                    <div id="ap-design-content">
+                        <div class="admin-loading"><i class="fas fa-spinner"
+                                style="animation:spin .8s linear infinite;margin-right:7px;"></i>Loading design data…
                         </div>
                     </div>
                 </div>
