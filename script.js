@@ -78,7 +78,7 @@ document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el => revObs.ob
 function tryPlayFlute() { document.getElementById('flute-audio').play().catch(() => { }); }
 
 /* ── SKILLS ── */
-const SKILLS = [
+const STATIC_SKILLS = [
     { ico: 'https://www.vectorlogo.zone/logos/w3_html5/w3_html5-icon.svg', n: 'HTML', cat: 'web', p: 92, clr: '#8f5cdf', tag: 'Frontend' },
     { ico: 'https://upload.wikimedia.org/wikipedia/commons/6/62/CSS3_logo.svg', n: 'CSS', cat: 'web', p: 88, clr: '#8f5cdf', tag: 'Frontend' },
     { ico: 'https://www.vectorlogo.zone/logos/javascript/javascript-icon.svg', n: 'JavaScript', cat: 'web', p: 65, clr: '#8f5cdf', tag: 'Frontend' },
@@ -93,11 +93,53 @@ const SKILLS = [
     { ico: 'https://www.vectorlogo.zone/logos/linux/linux-icon.svg', n: 'Ethical Hacking', cat: 'other', p: 75, clr: '#6d27d9', tag: 'Cybersecurity' },
     { ico: 'https://www.vectorlogo.zone/logos/adobe_illustrator/adobe_illustrator-icon.svg', n: 'Graphic Design', cat: 'other', p: 80, clr: '#8f5cdf', tag: 'Adobe Suite' },
 ];
-function buildSkillCard(s, i) { const d = document.createElement('div'); d.className = 'card'; d.dataset.cat = s.cat; d.style.cssText = `padding:20px;transition-delay:${i * .05}s;`; d.innerHTML = `<div style="position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0;background:linear-gradient(90deg,${s.clr},var(--accent2));opacity:.7;"></div><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;"><span style="font-family:'JetBrains Mono',monospace;font-size:.54rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);">${s.tag}</span><div style="width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s ease infinite;"></div></div><div style="display:flex;align-items:center;gap:11px;margin-bottom:12px;"><div style="width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(109,39,217,.1);border:1px solid rgba(109,39,217,.22);"><img src="${s.ico}" alt="${s.n}" width="22" height="22" style="object-fit:contain;${s.inv ? 'filter:invert(1) brightness(1.8);' : ''}"></div><div style="flex:1;min-width:0;"><div style="font-weight:800;font-size:.88rem;color:var(--text);">${s.n}</div><div style="font-weight:900;font-size:1rem;letter-spacing:-.02em;color:var(--accent2);margin-top:1px;">${s.p}%</div></div></div><div style="border-radius:100px;height:4px;overflow:hidden;background:rgba(109,39,217,.14);"><div class="skill-bar-fill" data-w="${s.p}%" style="background:linear-gradient(90deg,var(--accent),var(--accent2));"></div></div>`; return d; }
+
+let skillsData = [];
+
+function buildSkillCard(s, i) {
+    const d = document.createElement('div');
+    d.className = 'card';
+    d.dataset.cat = s.cat;
+    d.style.cssText = `padding:20px;transition-delay:${i * .05}s;`;
+    d.innerHTML = `<div style="position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0;background:linear-gradient(90deg,${s.clr},var(--accent2));opacity:.7;"></div><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;"><span style="font-family:'JetBrains Mono',monospace;font-size:.54rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);">${s.tag}</span><div style="width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s ease infinite;"></div></div><div style="display:flex;align-items:center;gap:11px;margin-bottom:12px;"><div style="width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(109,39,217,.1);border:1px solid rgba(109,39,217,.22);"><img src="${s.ico}" alt="${s.n}" width="22" height="22" style="object-fit:contain;${s.inv ? 'filter:invert(1) brightness(1.8);' : ''}"></div><div style="flex:1;min-width:0;"><div style="font-weight:800;font-size:.88rem;color:var(--text);">${s.n}</div><div style="font-weight:900;font-size:1rem;letter-spacing:-.02em;color:var(--accent2);margin-top:1px;">${s.p}%</div></div></div><div style="border-radius:100px;height:4px;overflow:hidden;background:rgba(109,39,217,.14);"><div class="skill-bar-fill" data-w="${s.p}%" style="background:linear-gradient(90deg,var(--accent),var(--accent2));"></div></div>`;
+    return d;
+}
+
+async function loadSkillsFromDB() {
+    const sg = document.getElementById('skills-grid');
+    if (!sg) return;
+    sg.innerHTML = '';
+    try {
+        if (_sb) {
+            const { data, error } = await _sb.from('skills').select('*').order('sort_order', { ascending: true });
+            if (!error && data && data.length > 0) {
+                skillsData = data.map(s => ({
+                    id: s.id,
+                    ico: s.icon_url,
+                    n: s.name,
+                    cat: s.category,
+                    p: s.percentage,
+                    clr: s.color || '#8f5cdf',
+                    tag: s.tag || '',
+                    inv: s.invert_icon
+                }));
+            } else {
+                skillsData = STATIC_SKILLS;
+            }
+        } else {
+            skillsData = STATIC_SKILLS;
+        }
+    } catch (e) {
+        skillsData = STATIC_SKILLS;
+    }
+    skillsData.forEach((s, i) => sg.appendChild(buildSkillCard(s, i)));
+}
+
 const sg = document.getElementById('skills-grid');
-SKILLS.forEach((s, i) => sg.appendChild(buildSkillCard(s, i)));
+loadSkillsFromDB();
 new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.querySelectorAll('.skill-bar-fill').forEach(b => setTimeout(() => { b.style.width = b.dataset.w; }, 200)); }); }, { threshold: .15 }).observe(sg);
 document.getElementById('sk-tabs').addEventListener('click', e => { const btn = e.target.closest('.sk-tab'); if (!btn) return; document.querySelectorAll('.sk-tab').forEach(t => t.classList.remove('active')); btn.classList.add('active'); const cat = btn.dataset.cat; document.querySelectorAll('#skills-grid .card').forEach(c => { const show = cat === 'all' || c.dataset.cat === cat; c.style.display = show ? '' : 'none'; if (show) { const b = c.querySelector('.skill-bar-fill'); if (b) { b.style.width = '0'; setTimeout(() => { b.style.width = b.dataset.w; }, 80); } } }); });
+
 
 /* ── PROJECTS (Supabase-first, seed fallback) ── */
 let projectsData = [];
@@ -2245,6 +2287,7 @@ async function adminLoadTab(tab) {
     else if (tab === 'gear') await adminLoadGear();
     else if (tab === 'certificates') await adminLoadCertificates();
     else if (tab === 'design') await adminLoadDesign();
+    else if (tab === 'skills') await adminLoadSkills();
 }
 
 function adminFmt(iso) {
@@ -4261,6 +4304,229 @@ async function adminDeleteDesignSocial(id, caption) {
     if (error) { showToast(error.message, 'error'); return; }
     showToast('Social post deleted.', 'info');
     adminLoadDesign();
+}
+
+/* ══════════════════════════════════════════
+   ADMIN — SKILLS (index.html)
+══════════════════════════════════════════ */
+let skillsEditingId = null;
+let _skillsRowMap = {};
+
+async function adminLoadSkills() {
+    const el = document.getElementById('ap-skills-content');
+    _skillsRowMap = {};
+    el.innerHTML = '<div class="admin-loading"><i class="fas fa-spinner" style="animation:spin .8s linear infinite;margin-right:7px;"></i>Loading skills…</div>';
+    
+    try {
+        const { data, error } = await _sb.from('skills').select('*').order('sort_order', { ascending: true });
+        if (error) throw error;
+        
+        const rows = data || [];
+        rows.forEach(r => { _skillsRowMap[r.id] = r; });
+        
+        let tableRows = rows.map(r => `
+            <tr id="skrow-${escHtml(r.id)}">
+                <td>
+                    <div style="width:28px; height:28px; border-radius:6px; background:rgba(109,39,217,.08); display:flex; align-items:center; justify-content:center;">
+                        <img src="${escHtml(r.icon_url)}" style="max-width:18px; max-height:18px; object-fit:contain; ${r.invert_icon ? 'filter:invert(1) brightness(1.8);' : ''}" onerror="this.src='https://via.placeholder.com/18?text=?'">
+                    </div>
+                </td>
+                <td style="font-weight:600; font-size:.82rem;">${escHtml(r.name || '')}</td>
+                <td style="font-family:'JetBrains Mono',monospace; font-size:.7rem; color:var(--muted);">${escHtml(r.category || '—')}</td>
+                <td style="font-size:.75rem; color:var(--muted);">${escHtml(r.tag || '—')}</td>
+                <td style="font-weight:700; font-size:.8rem; color:var(--accent2);">${r.percentage}%</td>
+                <td style="font-family:'JetBrains Mono',monospace; font-size:.7rem; color:var(--muted);">${r.sort_order ?? 99}</td>
+                <td>
+                    <div style="display:flex; gap:5px;">
+                        <button class="btn-edit-row" onclick="adminSkillsEdit('${escHtml(r.id)}')">Edit</button>
+                        <button class="admin-action-btn btn-del-row" onclick="adminDeleteSkill('${escHtml(r.id)}','${escHtml(r.name || '')}')">Delete</button>
+                    </div>
+                </td>
+            </tr>
+        `).join('');
+
+        el.innerHTML = `
+            <div class="admin-add-bar">
+                <span class="admin-add-bar-title">${rows.length} skill${rows.length !== 1 ? 's' : ''}</span>
+                <button class="btn-admin-add" onclick="adminSkillsToggleForm()">
+                    <i class="fas fa-plus" style="font-size:.62rem;"></i> Add Skill
+                </button>
+            </div>
+            
+            <div class="admin-inline-form" id="skills-form">
+                <div class="admin-form-title"><i class="fas fa-screwdriver-wrench" style="color:var(--accent2); font-size:.9rem;"></i> <span id="skills-form-title">Add Skill</span></div>
+                <div class="admin-form-grid">
+                    <div class="admin-form-group">
+                        <label class="admin-form-label">Name *</label>
+                        <input class="admin-form-input" id="skf-name" placeholder="e.g. PySpark">
+                    </div>
+                    <div class="admin-form-group">
+                        <label class="admin-form-label">Category *</label>
+                        <select class="admin-form-input" id="skf-category" style="background:var(--input-bg); color:var(--text); cursor:pointer;">
+                            <option value="web">Web</option>
+                            <option value="data">Data</option>
+                            <option value="dev">Dev</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="admin-form-group">
+                        <label class="admin-form-label">Percentage (0-100) *</label>
+                        <input class="admin-form-input" id="skf-percentage" type="number" min="0" max="100" placeholder="e.g. 75">
+                    </div>
+                    <div class="admin-form-group">
+                        <label class="admin-form-label">Tag / Label</label>
+                        <input class="admin-form-input" id="skf-tag" placeholder="e.g. Big Data, Backend">
+                    </div>
+                    <div class="admin-form-group full">
+                        <label class="admin-form-label">Icon URL *</label>
+                        <input class="admin-form-input" id="skf-icon" placeholder="https://www.vectorlogo.zone/logos/...">
+                    </div>
+                    <div class="admin-form-group">
+                        <label class="admin-form-label">Sort Order</label>
+                        <input class="admin-form-input" id="skf-sort" type="number" value="99">
+                    </div>
+                    <div class="admin-form-group">
+                        <label class="admin-form-label">Color Picker</label>
+                        <input class="admin-form-input" id="skf-color" type="color" value="#8f5cdf" style="height:38px; padding:4px 8px; cursor:pointer;">
+                    </div>
+                    <div class="admin-form-group full" style="display:flex; align-items:center; gap:8px;">
+                        <input type="checkbox" id="skf-invert" style="cursor:pointer; width:16px; height:16px;">
+                        <label for="skf-invert" class="admin-form-label" style="margin-bottom:0; cursor:pointer;">Invert Icon Color (useful for dark logos on dark backgrounds)</label>
+                    </div>
+                </div>
+                <div class="admin-form-actions">
+                    <button class="btn-admin-cancel" onclick="adminSkillsCancelForm()">Cancel</button>
+                    <button class="btn-admin-save" id="skills-save-btn" onclick="adminSaveSkill()">
+                        <i class="fas fa-check" style="font-size:.72rem;"></i> Save Skill
+                    </button>
+                </div>
+            </div>
+            
+            ${!rows.length 
+                ? '<div class="admin-empty">No skills yet — click "Add Skill" to get started.</div>'
+                : `<div class="admin-table-wrap">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Icon</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Tag</th>
+                                <th>%</th>
+                                <th>Order</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>${tableRows}</tbody>
+                    </table>
+                   </div>`
+            }
+        `;
+    } catch (e) {
+        el.innerHTML = `<div class="admin-empty" style="color:#f87171;">⚠ ${escHtml(e.message)}<br><small style="opacity:.6;margin-top:6px;display:block;">Make sure you have run the Supabase SQL setup from <code>supabase_setup.md</code>.</small></div>`;
+    }
+}
+
+function adminSkillsToggleForm() {
+    skillsEditingId = null;
+    const form = document.getElementById('skills-form');
+    const isOpen = form.classList.contains('open');
+    form.classList.toggle('open', !isOpen);
+    if (!isOpen) {
+        document.getElementById('skills-form-title').textContent = 'Add Skill';
+        ['skf-name', 'skf-icon', 'skf-tag'].forEach(id => {
+            const el = document.getElementById(id); if (el) el.value = '';
+        });
+        document.getElementById('skf-category').value = 'web';
+        document.getElementById('skf-percentage').value = '70';
+        document.getElementById('skf-sort').value = '99';
+        document.getElementById('skf-color').value = '#8f5cdf';
+        document.getElementById('skf-invert').checked = false;
+        document.getElementById('skills-save-btn').innerHTML = '<i class="fas fa-check" style="font-size:.72rem;"></i> Save Skill';
+        document.getElementById('skf-name').focus();
+    }
+}
+
+function adminSkillsCancelForm() {
+    skillsEditingId = null;
+    document.getElementById('skills-form')?.classList.remove('open');
+}
+
+function adminSkillsEdit(id) {
+    const r = _skillsRowMap[id];
+    if (!r) return;
+    skillsEditingId = id;
+    const form = document.getElementById('skills-form');
+    if (!form) return;
+    form.classList.add('open');
+    document.getElementById('skills-form-title').textContent = 'Edit Skill';
+    document.getElementById('skf-name').value = r.name || '';
+    document.getElementById('skf-category').value = r.category || 'web';
+    document.getElementById('skf-percentage').value = r.percentage ?? 50;
+    document.getElementById('skf-tag').value = r.tag || '';
+    document.getElementById('skf-icon').value = r.icon_url || '';
+    document.getElementById('skf-sort').value = r.sort_order ?? 99;
+    document.getElementById('skf-color').value = r.color || '#8f5cdf';
+    document.getElementById('skf-invert').checked = !!r.invert_icon;
+    document.getElementById('skills-save-btn').innerHTML = '<i class="fas fa-pen" style="font-size:.72rem;"></i> Update Skill';
+    form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    document.getElementById('skf-name').focus();
+}
+
+async function adminSaveSkill() {
+    const name = document.getElementById('skf-name')?.value?.trim();
+    const category = document.getElementById('skf-category')?.value;
+    const percentage = parseInt(document.getElementById('skf-percentage')?.value);
+    const iconUrl = document.getElementById('skf-icon')?.value?.trim();
+    
+    if (!name) { showToast('Name is required.', 'error'); return; }
+    if (isNaN(percentage) || percentage < 0 || percentage > 100) { showToast('Percentage must be between 0 and 100.', 'error'); return; }
+    if (!iconUrl) { showToast('Icon URL is required.', 'error'); return; }
+    
+    const payload = {
+        name,
+        category,
+        percentage,
+        icon_url: iconUrl,
+        tag: document.getElementById('skf-tag')?.value?.trim() || '',
+        color: document.getElementById('skf-color')?.value || '#8f5cdf',
+        invert_icon: !!document.getElementById('skf-invert')?.checked,
+        sort_order: parseInt(document.getElementById('skf-sort')?.value) || 99
+    };
+    
+    const btn = document.getElementById('skills-save-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation:spin .8s linear infinite"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Saving…';
+    
+    let error;
+    if (skillsEditingId) {
+        ({ error } = await _sb.from('skills').update(payload).eq('id', skillsEditingId));
+    } else {
+        ({ error } = await _sb.from('skills').insert(payload));
+    }
+    
+    btn.disabled = false;
+    if (error) {
+        showToast(error.message, 'error');
+        btn.innerHTML = skillsEditingId 
+            ? '<i class="fas fa-pen" style="font-size:.72rem;"></i> Update Skill' 
+            : '<i class="fas fa-check" style="font-size:.72rem;"></i> Save Skill';
+        return;
+    }
+    
+    showToast(skillsEditingId ? '✓ Skill updated!' : '✓ Skill added!', 'success');
+    adminSkillsCancelForm();
+    adminLoadSkills();
+    loadSkillsFromDB();
+}
+
+async function adminDeleteSkill(id, name) {
+    if (!confirm(`Delete skill "${name}" permanently?`)) return;
+    const { error } = await _sb.from('skills').delete().eq('id', id);
+    if (error) { showToast(error.message, 'error'); return; }
+    showToast('Skill deleted.', 'info');
+    adminLoadSkills();
+    loadSkillsFromDB();
 }
 
 
