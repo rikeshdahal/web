@@ -4057,6 +4057,8 @@ async function adminDeleteCert(id, title) {
 ══════════════════════════════════════════ */
 let designSocialEditingId = null;
 let _designSocialRowMap = {};
+let designVideoEditingId = null;
+let _designVideoRowMap = {};
 
 async function adminLoadDesign() {
     const el = document.getElementById('ap-design-content');
@@ -4064,16 +4066,22 @@ async function adminLoadDesign() {
     el.innerHTML = '<div class="admin-loading"><i class="fas fa-spinner" style="animation:spin .8s linear infinite;margin-right:7px;"></i>Loading design settings…</div>';
     
     try {
-        const [socialRes, imagesRes] = await Promise.all([
+        const [socialRes, imagesRes, videosRes] = await Promise.all([
             _sb.from('design_social').select('*').order('created_at', { ascending: true }),
-            _sb.from('design_images').select('*')
+            _sb.from('design_images').select('*'),
+            _sb.from('design_videos').select('*').order('created_at', { ascending: false })
         ]);
         
         if (socialRes.error) throw socialRes.error;
         if (imagesRes.error) throw imagesRes.error;
+        if (videosRes.error) throw videosRes.error;
         
         const socialRows = socialRes.data || [];
         socialRows.forEach(r => { _designSocialRowMap[r.id] = r; });
+        
+        const videoRows = videosRes.data || [];
+        _designVideoRowMap = {};
+        videoRows.forEach(v => { _designVideoRowMap[v.id] = v; });
         
         const imgData = imagesRes.data || [];
         
@@ -4145,6 +4153,47 @@ async function adminLoadDesign() {
             `;
         }
         
+        let videoTableHtml = '';
+        if (videoRows.length === 0) {
+            videoTableHtml = '<div class="admin-empty">No videos yet — click "Add Video" to add one.</div>';
+        } else {
+            videoTableHtml = `
+            <div class="admin-table-wrap">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Type</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${videoRows.map(v => `
+                        <tr id="dvrow-${escHtml(v.id)}">
+                            <td style="font-weight:600; font-size:.8rem; max-width:200px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                                ${escHtml(v.title || '')}
+                            </td>
+                            <td>
+                                <span style="display:inline-block;padding:2px 8px;border-radius:4px;font-weight:700;font-size:.68rem;text-transform:uppercase;background:${v.category === 'typography' ? 'rgba(91,58,140,.15)' : 'rgba(63,205,218,.18)'};color:${v.category === 'typography' ? 'var(--violet)' : 'var(--cyan)'};">${escHtml(v.category || '')}</span>
+                            </td>
+                            <td style="font-family:'JetBrains Mono',monospace; font-size:.68rem; color:var(--muted);">
+                                ${escHtml(v.type || '—')}
+                            </td>
+                            <td>
+                                <div style="display:flex; gap:5px;">
+                                    <button class="btn-edit-row" onclick="adminDesignVideoEdit('${escHtml(v.id)}')">Edit</button>
+                                    <button class="admin-action-btn btn-del-row" onclick="adminDeleteDesignVideo('${escHtml(v.id)}','${escHtml(v.title || '')}')">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+            `;
+        }
+
         el.innerHTML = `
         <div class="admin-design-container" style="display:flex; flex-direction:column; gap:30px;">
             <!-- Section 1: Design Images -->
@@ -4197,6 +4246,62 @@ async function adminLoadDesign() {
                 <!-- Table / List of Social Posts -->
                 <div id="design-social-list-wrap">
                     ${socialTableHtml}
+                </div>
+            </div>
+
+            <!-- Section 3: Motion & Typography Videos -->
+            <div class="admin-section" style="border-top:1px solid var(--border); padding-top:20px; margin-top:10px;">
+                <h3 style="font-family:'Cabinet Grotesk',sans-serif; font-size:1.05rem; font-weight:700; margin-bottom:15px; color:var(--text); display:flex; align-items:center; gap:8px;">
+                    <i class="fas fa-film" style="color:var(--accent2);"></i> Motion &amp; Typography Videos
+                </h3>
+                <div class="admin-add-bar">
+                    <span class="admin-add-bar-title" id="design-video-count-title">${videoRows.length} video${videoRows.length !== 1 ? 's' : ''}</span>
+                    <button class="btn-admin-add" onclick="adminDesignVideoToggleForm()">
+                        <i class="fas fa-plus" style="font-size:.62rem;"></i> Add Video
+                    </button>
+                </div>
+                
+                <!-- Inline Form for Video -->
+                <div class="admin-inline-form" id="design-video-form">
+                    <div class="admin-form-title">
+                        <i class="fas fa-film" style="color:var(--accent2); font-size:.9rem;"></i> 
+                        <span id="design-video-form-title">Add Video</span>
+                    </div>
+                    <div class="admin-form-grid">
+                        <div class="admin-form-group full">
+                            <label class="admin-form-label">YouTube URL *</label>
+                            <input class="admin-form-input" id="dvf-url" placeholder="https://youtube.com/shorts/xxxx or https://youtu.be/xxxx">
+                        </div>
+                        <div class="admin-form-group">
+                            <label class="admin-form-label">Title *</label>
+                            <input class="admin-form-input" id="dvf-title" placeholder="e.g. Nepali Typography Loop">
+                        </div>
+                        <div class="admin-form-group">
+                            <label class="admin-form-label">Category *</label>
+                            <select class="admin-form-input" id="dvf-category">
+                                <option value="motion">Motion Design</option>
+                                <option value="typography">Typography</option>
+                            </select>
+                        </div>
+                        <div class="admin-form-group">
+                            <label class="admin-form-label">Type</label>
+                            <select class="admin-form-input" id="dvf-type">
+                                <option value="shorts">YouTube Shorts (9:16)</option>
+                                <option value="regular">Regular Video (16:9)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="admin-form-actions">
+                        <button class="btn-admin-cancel" onclick="adminDesignVideoCancelForm()">Cancel</button>
+                        <button class="btn-admin-save" id="design-video-save-btn" onclick="adminSaveDesignVideo()">
+                            <i class="fas fa-check" style="font-size:.72rem;"></i> Save Video
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Table / List of Videos -->
+                <div id="design-video-list-wrap">
+                    ${videoTableHtml}
                 </div>
             </div>
         </div>
@@ -4303,6 +4408,111 @@ async function adminDeleteDesignSocial(id, caption) {
     const { error } = await _sb.from('design_social').delete().eq('id', id);
     if (error) { showToast(error.message, 'error'); return; }
     showToast('Social post deleted.', 'info');
+    adminLoadDesign();
+}
+
+/* ══════════════════════════════════════════
+   ADMIN — DESIGN VIDEOS (index.html)
+══════════════════════════════════════════ */
+
+function parseYouTubeEmbed(rawUrl) {
+    let id = null;
+    try {
+        const u = new URL(rawUrl);
+        if (u.hostname.includes('youtu.be')) {
+            id = u.pathname.replace('/', '');
+        } else if (u.pathname.includes('/shorts/')) {
+            id = u.pathname.split('/shorts/')[1].split('/')[0];
+        } else if (u.pathname.includes('/embed/')) {
+            id = u.pathname.split('/embed/')[1].split('/')[0];
+        } else {
+            id = u.searchParams.get('v');
+        }
+    } catch (e) { }
+    return id ? `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1` : null;
+}
+
+function adminDesignVideoToggleForm() {
+    designVideoEditingId = null;
+    const form = document.getElementById('design-video-form');
+    const isOpen = form.classList.contains('open');
+    form.classList.toggle('open', !isOpen);
+    if (!isOpen) {
+        document.getElementById('design-video-form-title').textContent = 'Add Video';
+        ['dvf-url', 'dvf-title', 'dvf-category', 'dvf-type'].forEach(id => {
+            const el = document.getElementById(id); if (el) el.value = '';
+        });
+        document.getElementById('dvf-category').value = 'motion';
+        document.getElementById('dvf-type').value = 'shorts';
+        document.getElementById('design-video-save-btn').innerHTML = '<i class="fas fa-check" style="font-size:.72rem;"></i> Save Video';
+        document.getElementById('dvf-url').focus();
+    }
+}
+
+function adminDesignVideoCancelForm() {
+    designVideoEditingId = null;
+    document.getElementById('design-video-form')?.classList.remove('open');
+}
+
+function adminDesignVideoEdit(id) {
+    const v = _designVideoRowMap[id];
+    if (!v) return;
+    designVideoEditingId = id;
+    const form = document.getElementById('design-video-form');
+    if (!form) return;
+    form.classList.add('open');
+    document.getElementById('design-video-form-title').textContent = 'Edit Video';
+    document.getElementById('dvf-url').value = v.video_url || '';
+    document.getElementById('dvf-title').value = v.title || '';
+    document.getElementById('dvf-category').value = v.category || 'motion';
+    document.getElementById('dvf-type').value = v.type || 'shorts';
+    document.getElementById('design-video-save-btn').innerHTML = '<i class="fas fa-pen" style="font-size:.72rem;"></i> Update Video';
+    form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    document.getElementById('dvf-url').focus();
+}
+
+async function adminSaveDesignVideo() {
+    const url = document.getElementById('dvf-url')?.value?.trim();
+    const title = document.getElementById('dvf-title')?.value?.trim();
+    const category = document.getElementById('dvf-category')?.value;
+    const type = document.getElementById('dvf-type')?.value;
+
+    if (!url) { showToast('YouTube URL is required.', 'error'); return; }
+    if (!title) { showToast('Title is required.', 'error'); return; }
+    if (!parseYouTubeEmbed(url)) { showToast('Not a valid YouTube URL.', 'error'); return; }
+
+    const payload = { video_url: url, title, category, type };
+
+    const btn = document.getElementById('design-video-save-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation:spin .8s linear infinite"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Saving…';
+
+    let error;
+    if (designVideoEditingId) {
+        ({ error } = await _sb.from('design_videos').update(payload).eq('id', designVideoEditingId));
+    } else {
+        ({ error } = await _sb.from('design_videos').insert(payload));
+    }
+
+    btn.disabled = false;
+    if (error) {
+        showToast(error.message, 'error');
+        btn.innerHTML = designVideoEditingId
+            ? '<i class="fas fa-pen" style="font-size:.72rem;"></i> Update Video'
+            : '<i class="fas fa-check" style="font-size:.72rem;"></i> Save Video';
+        return;
+    }
+
+    showToast(designVideoEditingId ? '✓ Video updated!' : '✓ Video added!', 'success');
+    adminDesignVideoCancelForm();
+    adminLoadDesign();
+}
+
+async function adminDeleteDesignVideo(id, title) {
+    if (!confirm(`Delete video "${title}"?`)) return;
+    const { error } = await _sb.from('design_videos').delete().eq('id', id);
+    if (error) { showToast(error.message, 'error'); return; }
+    showToast('Video deleted.', 'info');
     adminLoadDesign();
 }
 
