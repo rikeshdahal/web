@@ -66,7 +66,6 @@
             overflow-x: hidden;
         }
 
-        /* grain texture overlay */
         body::before {
             content: "";
             position: fixed;
@@ -188,7 +187,6 @@
             color: var(--violet);
         }
 
-        /* Back to main site button */
         .nav__back {
             display: inline-flex;
             align-items: center;
@@ -235,7 +233,7 @@
             position: relative;
             width: 100%;
             background: var(--paper);
-            box-shadow: 0 30px 60px -20px rgba(20, 20, 20, 0.35), 0 2px 0 rgba(20, 20, 20, 0.05);
+            box-shadow: 0 30px 60px -20px rgba(20, 20, 20, .35), 0 2px 0 rgba(20, 20, 20, .05);
             clip-path: polygon(0% 1%, 3% 0%, 9% 1.2%, 17% 0.2%, 25% 1%, 33% 0.1%, 42% 0.9%, 50% 0%, 58% 1.1%, 67% 0.2%, 75% 1%, 83% 0.3%, 91% 1.1%, 97% 0.2%, 100% 1%, 100% 99%, 94% 100%, 87% 99.1%, 79% 100%, 71% 99.2%, 63% 100%, 55% 99%, 47% 100%, 39% 99.2%, 31% 100%, 23% 99%, 15% 100%, 7% 99.2%, 0% 100%);
             padding: 0;
             overflow: hidden;
@@ -252,7 +250,7 @@
             top: -26px;
             width: 54px;
             z-index: 5;
-            filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.3));
+            filter: drop-shadow(0 8px 10px rgba(0, 0, 0, .3));
         }
 
         .clip--left {
@@ -358,7 +356,6 @@
             margin-bottom: 50px;
         }
 
-        /* pinned sheet */
         .pinned {
             position: relative;
             width: 100%;
@@ -367,8 +364,8 @@
         .pinned__sheet {
             position: relative;
             background: var(--paper-dark);
-            box-shadow: 0 24px 50px -18px rgba(20, 20, 20, 0.3), 0 1px 0 rgba(20, 20, 20, 0.05);
-            border: 1px solid rgba(20, 20, 20, 0.06);
+            box-shadow: 0 24px 50px -18px rgba(20, 20, 20, .3), 0 1px 0 rgba(20, 20, 20, .05);
+            border: 1px solid rgba(20, 20, 20, .06);
         }
 
         .pinned__sheet img {
@@ -385,9 +382,9 @@
             position: absolute;
             width: 90px;
             height: 34px;
-            background: rgba(255, 255, 200, 0.45);
-            border: 1px solid rgba(0, 0, 0, 0.04);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 200, .45);
+            border: 1px solid rgba(0, 0, 0, .04);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, .15);
             z-index: 5;
         }
 
@@ -432,7 +429,7 @@
             font-weight: 700;
         }
 
-        /* ---------- SPECIALTY SECTION ---------- */
+        /* ---------- SPECIALTY ---------- */
         .specialty {
             position: relative;
             padding: 0 6vw 100px;
@@ -445,8 +442,8 @@
             align-items: stretch;
             gap: 0;
             background: var(--paper-dark);
-            box-shadow: 0 24px 50px -18px rgba(20, 20, 20, 0.3), 0 1px 0 rgba(20, 20, 20, 0.05);
-            border: 1px solid rgba(20, 20, 20, 0.06);
+            box-shadow: 0 24px 50px -18px rgba(20, 20, 20, .3), 0 1px 0 rgba(20, 20, 20, .05);
+            border: 1px solid rgba(20, 20, 20, .06);
             position: relative;
             overflow: hidden;
         }
@@ -458,7 +455,7 @@
             left: 48%;
             width: 4px;
             height: 100%;
-            background: repeating-linear-gradient(180deg, transparent 0px, transparent 6px, rgba(20, 20, 20, 0.08) 6px, rgba(20, 20, 20, 0.08) 7px);
+            background: repeating-linear-gradient(180deg, transparent 0px, transparent 6px, rgba(20, 20, 20, .08) 6px, rgba(20, 20, 20, .08) 7px);
             z-index: 2;
         }
 
@@ -525,7 +522,7 @@
             width: 46px;
             height: 46px;
             border-radius: 10px;
-            border: 1.5px solid rgba(20, 20, 20, 0.15);
+            border: 1.5px solid rgba(20, 20, 20, .15);
             background: var(--paper);
             font-size: 0.78rem;
             font-weight: 800;
@@ -543,22 +540,22 @@
 
         .tool-badge--ps {
             color: #31A8FF;
-            border-color: rgba(49, 168, 255, 0.35);
+            border-color: rgba(49, 168, 255, .35);
         }
 
         .tool-badge--ai {
             color: #FF7C00;
-            border-color: rgba(255, 124, 0, 0.35);
+            border-color: rgba(255, 124, 0, .35);
         }
 
         .tool-badge--ae {
             color: #9999FF;
-            border-color: rgba(153, 153, 255, 0.35);
+            border-color: rgba(153, 153, 255, .35);
         }
 
         .tool-badge--pr {
             color: #EA77FF;
-            border-color: rgba(234, 119, 255, 0.35);
+            border-color: rgba(234, 119, 255, .35);
         }
 
         .specialty__right {
@@ -583,10 +580,10 @@
             font-family: 'Caveat', cursive;
             font-size: 1.15rem;
             color: var(--clip-dark);
-            background: rgba(255, 255, 200, 0.88);
+            background: rgba(255, 255, 200, .88);
             padding: 8px 18px 8px 14px;
             transform: rotate(1.5deg);
-            box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+            box-shadow: 2px 4px 10px rgba(0, 0, 0, .15);
             z-index: 4;
         }
 
@@ -597,10 +594,10 @@
             transform: translateX(-50%) rotate(2deg);
             width: 48px;
             z-index: 5;
-            filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.25));
+            filter: drop-shadow(0 6px 8px rgba(0, 0, 0, .25));
         }
 
-        /* ---------- FOLIO SECTIONS ---------- */
+        /* ---------- FOLIO ---------- */
         .folio .pinned__sheet {
             width: 100%;
         }
@@ -662,7 +659,6 @@
             background: transparent;
         }
 
-        /* Social card admin overlay */
         .social__card-actions {
             position: absolute;
             top: 8px;
@@ -712,6 +708,429 @@
         @media (max-width: 640px) {
             .social__grid {
                 gap: 40px;
+            }
+        }
+
+        /* ═══════════════════════════════════════
+           MODERN VIDEO CARDS — hover to play
+        ═══════════════════════════════════════ */
+
+        .videos-filter-bar {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .vfilter-btn {
+            padding: 9px 22px;
+            border-radius: 999px;
+            border: 1.5px solid var(--clip);
+            background: transparent;
+            color: var(--ink);
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.74rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: all .22s;
+        }
+
+        .vfilter-btn.active,
+        .vfilter-btn:hover {
+            background: var(--violet);
+            border-color: var(--violet);
+            color: #fff;
+        }
+
+        .videos__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 32px;
+            margin-top: 10px;
+            align-items: start;
+        }
+
+        /* ═══ CARD ENTRY ANIMATION ═══ */
+        @keyframes cardRise {
+            0% { opacity: 0; transform: translateY(44px) scale(0.94); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .video__card {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            cursor: pointer;
+            animation: cardRise 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        /* ═══ SHELL — deep shadow + gradient border ═══ */
+        .video__shell {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #0d0d0d;
+            box-shadow:
+                0 2px 4px rgba(0, 0, 0, .06),
+                0 8px 24px rgba(0, 0, 0, .10),
+                0 24px 48px rgba(0, 0, 0, .15);
+            transition:
+                transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Gradient border glow */
+        .video__shell::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 1.5px;
+            border-radius: 16px;
+            background: linear-gradient(135deg,
+                    rgba(255, 255, 255, .12) 0%,
+                    rgba(255, 255, 255, .04) 40%,
+                    rgba(255, 255, 255, .01) 60%,
+                    rgba(255, 255, 255, .08) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            transition: opacity .4s;
+            z-index: 1;
+        }
+
+        .video__card:hover .video__shell {
+            transform: translateY(-8px);
+            box-shadow:
+                0 4px 12px rgba(0, 0, 0, .10),
+                0 16px 40px rgba(0, 0, 0, .18),
+                0 40px 80px rgba(0, 0, 0, .28);
+        }
+
+        .video__card:hover .video__shell::before {
+            background: linear-gradient(135deg,
+                    rgba(255, 255, 255, .25) 0%,
+                    rgba(91, 58, 140, .15) 50%,
+                    rgba(63, 205, 218, .15) 100%);
+        }
+
+        .video__shell--shorts {
+            aspect-ratio: 9 / 16;
+            max-height: 480px;
+        }
+
+        .video__shell--regular {
+            aspect-ratio: 16 / 9;
+        }
+
+        /* ═══ THUMBNAIL ═══ */
+        .video__thumb {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition:
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.4s ease;
+            pointer-events: none;
+            will-change: transform;
+        }
+
+        .video__card:hover .video__thumb {
+            transform: scale(1.08);
+            opacity: 0;
+        }
+
+        /* ═══ IFRAME LAYER ═══ */
+        .video__iframe-wrap {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.35s ease 0.05s;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .video__iframe-wrap iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        .video__card:hover .video__iframe-wrap {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* ═══ GRADIENT OVERLAY — multi-layer mesh ═══ */
+        .video__overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to top, rgba(0, 0, 0, .92) 0%, rgba(0, 0, 0, .35) 40%, rgba(0, 0, 0, .08) 65%, transparent 85%);
+            pointer-events: none;
+            transition: opacity .35s ease;
+            z-index: 3;
+        }
+
+        .video__card:hover .video__overlay {
+            opacity: 0;
+        }
+
+        /* ═══ CATEGORY PILL — glass + glow ═══ */
+        .video__cat-pill {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            z-index: 5;
+            padding: 5px 14px;
+            border-radius: 999px;
+            font-size: 0.6rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, .18);
+            transition:
+                transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.3s,
+                box-shadow 0.3s;
+            transform-origin: left center;
+        }
+
+        .video__card:hover .video__cat-pill {
+            opacity: 0;
+            transform: translateX(-8px) scale(0.92);
+        }
+
+        .video__cat-pill--motion {
+            background: rgba(63, 205, 218, .85);
+            color: #0d0d0d;
+            box-shadow: 0 0 24px rgba(63, 205, 218, .18);
+        }
+
+        .video__cat-pill--typography {
+            background: rgba(91, 58, 140, .85);
+            color: #fff;
+            box-shadow: 0 0 24px rgba(91, 58, 140, .18);
+        }
+
+        /* ═══ PLAY BUTTON — sophisticated SVG ═══ */
+        .video__play-btn {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            transition: opacity .3s ease;
+            z-index: 4;
+        }
+
+        .video__play-btn svg {
+            width: 64px;
+            height: 64px;
+            filter: drop-shadow(0 8px 32px rgba(0, 0, 0, .5));
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .video__card:hover .video__play-btn svg {
+            transform: scale(1.12);
+        }
+
+        .video__card:hover .video__play-btn {
+            opacity: 0;
+        }
+
+        /* ═══ UNMUTE BUTTON — glass ═══ */
+        .video__unmute-btn {
+            position: absolute;
+            bottom: 14px;
+            right: 14px;
+            z-index: 10;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(0, 0, 0, .55);
+            color: #fff;
+            font-size: .82rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, .12);
+            opacity: 0;
+            transform: translateY(8px) scale(0.85);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+
+        .video__card:hover .video__unmute-btn {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
+        .video__unmute-btn:hover {
+            background: var(--violet);
+            border-color: var(--violet);
+            transform: scale(1.12) !important;
+            box-shadow: 0 0 24px rgba(91, 58, 140, .4);
+        }
+
+        /* ═══ INFO BAR — slides up on hover ═══ */
+        .video__info-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 44px 16px 14px;
+            background: linear-gradient(to top, rgba(0, 0, 0, .88) 0%, transparent 100%);
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 10px;
+            pointer-events: none;
+            transition:
+                opacity 0.3s ease,
+                transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(0);
+            z-index: 4;
+        }
+
+        .video__card:hover .video__info-bar {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .video__info-title {
+            font-family: 'Archivo', sans-serif;
+            font-size: .85rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.3;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, .5);
+        }
+
+        .video__type-tag {
+            flex-shrink: 0;
+            font-size: .54rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1.5px solid rgba(255, 255, 255, .30);
+            color: rgba(255, 255, 255, .92);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, .06);
+        }
+
+        /* ═══ ADMIN BUTTONS ═══ */
+        .video__admin-btns {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            display: none;
+            gap: 6px;
+            z-index: 20;
+        }
+
+        body.admin-mode .video__admin-btns {
+            display: flex;
+        }
+
+        .video__admin-btns button {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-size: .75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .2s;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .btn-edit-video {
+            background: rgba(91, 58, 140, .9);
+            color: #fff;
+        }
+
+        .btn-edit-video:hover {
+            background: var(--violet);
+            transform: scale(1.12);
+        }
+
+        .btn-delete-video {
+            background: rgba(239, 68, 68, .9);
+            color: #fff;
+        }
+
+        .btn-delete-video:hover {
+            background: #ef4444;
+            transform: scale(1.12);
+        }
+
+        /* ═══ SKELETON — premium shimmer ═══ */
+        .video-skeleton {
+            border-radius: 16px;
+            background: var(--paper-dark);
+            aspect-ratio: 9/16;
+            max-height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-skeleton::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg,
+                    transparent 0%,
+                    rgba(255, 255, 255, .06) 50%,
+                    transparent 100%);
+            animation: skeletonSweep 1.8s ease-in-out infinite;
+        }
+
+        @keyframes skeletonSweep {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @media (max-width: 900px) {
+            .videos__grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 24px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .social__grid {
+                gap: 40px;
+            }
+
+            .videos__grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .videos__grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -777,7 +1196,7 @@
             border-color: var(--cyan);
         }
 
-        /* reveal on scroll */
+        /* reveal */
         .reveal {
             opacity: 0;
             transform: translateY(36px);
@@ -789,11 +1208,22 @@
             transform: translateY(0);
         }
 
+        /* shimmer */
+        @keyframes shimmer {
+
+            0%,
+            100% {
+                opacity: .5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
         /* ═══════════════════════════════
            ADMIN PANEL
         ═══════════════════════════════ */
-
-        /* Floating admin toggle */
         #admin-fab {
             position: fixed;
             bottom: 28px;
@@ -808,7 +1238,6 @@
             cursor: pointer;
             font-size: 1.15rem;
             display: none;
-            /* shown via JS when admin */
             align-items: center;
             justify-content: center;
             box-shadow: 0 6px 24px rgba(91, 58, 140, .5);
@@ -820,7 +1249,6 @@
             box-shadow: 0 10px 36px rgba(91, 58, 140, .7);
         }
 
-        /* Admin modal overlay */
         #admin-modal {
             display: none;
             position: fixed;
@@ -900,7 +1328,6 @@
             background: rgba(255, 255, 255, .35);
         }
 
-        /* Tabs */
         .admin-tabs {
             display: flex;
             border-bottom: 2px solid rgba(20, 20, 20, .08);
@@ -933,7 +1360,6 @@
             color: var(--violet);
         }
 
-        /* Tab content */
         .admin-body {
             padding: 28px 24px;
         }
@@ -946,7 +1372,6 @@
             display: block;
         }
 
-        /* Form elements */
         .admin-label {
             display: block;
             font-size: .72rem;
@@ -1014,7 +1439,6 @@
             color: #fff;
         }
 
-        /* Toast notification */
         #admin-toast {
             position: fixed;
             bottom: 90px;
@@ -1050,7 +1474,6 @@
             border-left: 3px solid #ef4444;
         }
 
-        /* Social posts list in admin */
         .admin-social-list {
             margin-top: 16px;
             display: flex;
@@ -1135,7 +1558,6 @@
             color: #fff;
         }
 
-        /* Image section admin */
         .admin-img-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1188,7 +1610,6 @@
             opacity: .82;
         }
 
-        /* Loading skeleton */
         .social-skeleton {
             background: var(--paper-dark);
             border-radius: 4px;
@@ -1196,19 +1617,6 @@
             animation: shimmer 1.5s infinite;
         }
 
-        @keyframes shimmer {
-
-            0%,
-            100% {
-                opacity: .5;
-            }
-
-            50% {
-                opacity: 1;
-            }
-        }
-
-        /* Login prompt in admin */
         .admin-login-prompt {
             text-align: center;
             padding: 40px 20px;
@@ -1225,6 +1633,63 @@
             font-size: .92rem;
             color: var(--clip-dark);
             margin-bottom: 18px;
+        }
+
+        .admin-video-list {
+            margin-top: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .admin-video-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            background: var(--paper-dark);
+            border-radius: 10px;
+            border: 1px solid rgba(20, 20, 20, .08);
+        }
+
+        .admin-video-thumb {
+            width: 52px;
+            height: 52px;
+            object-fit: cover;
+            border-radius: 8px;
+            flex-shrink: 0;
+            background: var(--clip);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: #fff;
+        }
+
+        .admin-video-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .admin-video-item-title {
+            font-size: .82rem;
+            font-weight: 700;
+            color: var(--ink);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .admin-video-item-meta {
+            font-size: .68rem;
+            color: var(--clip-dark);
+            margin-top: 2px;
+        }
+
+        .admin-video-item-btns {
+            display: flex;
+            gap: 6px;
+            flex-shrink: 0;
         }
 
         /* ---------- RESPONSIVE ---------- */
@@ -1270,12 +1735,6 @@
 
             .nav__mark {
                 font-size: 1.05rem;
-            }
-
-            .nav__links {
-                gap: 14px;
-                font-size: 0.68rem;
-                letter-spacing: 1px;
             }
 
             .nav__links {
@@ -1333,10 +1792,8 @@
 
 <body>
 
-    <!-- ═══ TOAST ═══ -->
     <div id="admin-toast"></div>
 
-    <!-- ═══ ADMIN FAB ═══ -->
     <button id="admin-fab" title="Admin Panel" onclick="openAdminPanel()">
         <i class="fas fa-screwdriver-wrench"></i>
     </button>
@@ -1351,76 +1808,101 @@
                 </div>
                 <button class="admin-close" onclick="closeAdminPanel()"><i class="fas fa-xmark"></i></button>
             </div>
-
-            <!-- Tabs -->
             <div class="admin-tabs">
-                <button class="admin-tab active" data-tab="social" onclick="switchTab('social',this)">
-                    <i class="fas fa-images" style="margin-right:5px;"></i>Social Media
-                </button>
-                <button class="admin-tab" data-tab="images" onclick="switchTab('images',this)">
-                    <i class="fas fa-image" style="margin-right:5px;"></i>Design Images
-                </button>
-                <button class="admin-tab" data-tab="add" onclick="switchTab('add',this)">
-                    <i class="fas fa-plus" style="margin-right:5px;"></i>Add New
-                </button>
+                <button class="admin-tab active" data-tab="social" onclick="switchTab('social',this)"><i
+                        class="fas fa-images" style="margin-right:5px;"></i>Social</button>
+                <button class="admin-tab" data-tab="images" onclick="switchTab('images',this)"><i class="fas fa-image"
+                        style="margin-right:5px;"></i>Images</button>
+                <button class="admin-tab" data-tab="videos" onclick="switchTab('videos',this)"><i class="fas fa-film"
+                        style="margin-right:5px;"></i>Videos</button>
+                <button class="admin-tab" data-tab="add" onclick="switchTab('add',this)"><i class="fas fa-plus"
+                        style="margin-right:5px;"></i>Add New</button>
             </div>
-
             <div class="admin-body">
-
-                <!-- TAB: Social Media List -->
                 <div class="tab-pane active" id="tab-social">
                     <p style="font-size:.82rem;color:var(--clip-dark);margin-bottom:4px;">Manage social media posts
                         displayed on the portfolio.</p>
                     <div id="admin-social-list" class="admin-social-list">
-                        <div style="text-align:center;padding:30px;color:var(--clip-dark);font-size:.82rem;">
-                            <i class="fas fa-spinner fa-spin"
-                                style="font-size:1.5rem;margin-bottom:10px;display:block;"></i>
-                            Loading posts...
-                        </div>
+                        <div style="text-align:center;padding:30px;color:var(--clip-dark);font-size:.82rem;"><i
+                                class="fas fa-spinner fa-spin"
+                                style="font-size:1.5rem;margin-bottom:10px;display:block;"></i>Loading posts...</div>
                     </div>
                 </div>
-
-                <!-- TAB: Main Design Images -->
                 <div class="tab-pane" id="tab-images">
                     <p style="font-size:.82rem;color:var(--clip-dark);margin-bottom:14px;">Replace main design section
                         images by providing a new URL.</p>
-                    <div class="admin-img-grid" id="admin-img-grid">
-                        <!-- Filled by JS -->
-                    </div>
+                    <div class="admin-img-grid" id="admin-img-grid"></div>
                 </div>
-
-                <!-- TAB: Add New Social Post -->
+                <div class="tab-pane" id="tab-videos">
+                    <p style="font-size:.82rem;color:var(--clip-dark);margin-bottom:4px;">Manage Motion &amp; Typography
+                        videos.</p>
+                    <div id="admin-video-list" class="admin-video-list">
+                        <div style="text-align:center;padding:30px;color:var(--clip-dark);font-size:.82rem;"><i
+                                class="fas fa-spinner fa-spin"
+                                style="font-size:1.5rem;margin-bottom:10px;display:block;"></i>Loading videos...</div>
+                    </div>
+                    <button class="admin-btn" style="margin-top:18px;"
+                        onclick="switchTab('add',document.querySelector('[data-tab=add]'));scrollToVideoForm()"><i
+                            class="fas fa-plus"></i> Add New Video</button>
+                </div>
                 <div class="tab-pane" id="tab-add">
+                    <p
+                        style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--violet);margin-bottom:10px;">
+                        <i class="fas fa-images" style="margin-right:6px;"></i>Add Social Media Post
+                    </p>
                     <p style="font-size:.82rem;color:var(--clip-dark);">Add a new social media post to the design
                         portfolio.</p>
-
                     <label class="admin-label">Image URL <span style="color:var(--violet)">*</span></label>
                     <input type="url" id="new-social-url" class="admin-input"
                         placeholder="https://example.com/image.jpg">
-
                     <label class="admin-label">Caption <span style="color:var(--violet)">*</span></label>
                     <input type="text" id="new-social-caption" class="admin-input"
                         placeholder="e.g. Nepali New Year 2083">
-
                     <label class="admin-label">Platform / Context</label>
                     <input type="text" id="new-social-platform" class="admin-input"
                         placeholder="e.g. Instagram, Facebook">
-
                     <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                        <button class="admin-btn" onclick="addSocialPost()">
-                            <i class="fas fa-plus"></i> Add Post
-                        </button>
-                        <button class="admin-btn secondary" onclick="clearAddForm()">
-                            <i class="fas fa-rotate-right"></i> Clear
-                        </button>
+                        <button class="admin-btn" onclick="addSocialPost()"><i class="fas fa-plus"></i> Add
+                            Post</button>
+                        <button class="admin-btn secondary" onclick="clearAddForm()"><i class="fas fa-rotate-right"></i>
+                            Clear</button>
+                    </div>
+                    <div style="border-top:1.5px dashed rgba(20,20,20,.12);margin:28px 0;"></div>
+                    <p id="video-form-anchor"
+                        style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--violet);margin-bottom:10px;">
+                        <i class="fas fa-film" style="margin-right:6px;"></i>Add Motion / Typography Video
+                    </p>
+                    <p style="font-size:.82rem;color:var(--clip-dark);">Paste a YouTube Shorts or regular video URL — it
+                        will be embedded in the Videos section.</p>
+                    <label class="admin-label">YouTube URL <span style="color:var(--violet)">*</span></label>
+                    <input type="url" id="new-video-url" class="admin-input"
+                        placeholder="https://youtube.com/shorts/xxxxxxx or https://youtu.be/xxxxx">
+                    <label class="admin-label">Title <span style="color:var(--violet)">*</span></label>
+                    <input type="text" id="new-video-title" class="admin-input"
+                        placeholder="e.g. Nepali Typography Loop">
+                    <label class="admin-label">Category <span style="color:var(--violet)">*</span></label>
+                    <select id="new-video-category" class="admin-select">
+                        <option value="motion">Motion Design</option>
+                        <option value="typography">Typography</option>
+                    </select>
+                    <label class="admin-label">Type</label>
+                    <select id="new-video-type" class="admin-select">
+                        <option value="shorts">YouTube Shorts (9:16)</option>
+                        <option value="regular">Regular Video (16:9)</option>
+                    </select>
+                    <input type="hidden" id="edit-video-id" value="">
+                    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                        <button class="admin-btn" id="btn-save-video" onclick="saveVideo()"><i class="fas fa-plus"></i>
+                            Add Video</button>
+                        <button class="admin-btn secondary" onclick="clearVideoForm()"><i
+                                class="fas fa-rotate-right"></i> Clear</button>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 
-    <!-- ═══ REPLACE IMAGE INLINE MODAL ═══ -->
+    <!-- ═══ REPLACE IMAGE MODAL ═══ -->
     <div id="replace-img-modal"
         style="display:none;position:fixed;inset:0;z-index:11000;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);align-items:center;justify-content:center;">
         <div
@@ -1446,11 +1928,10 @@
                 <a href="#logofolio" data-text="LOGOS">LOGOS</a>
                 <a href="#aifolio" data-text="AI WORK">AI WORK</a>
                 <a href="#social" data-text="SOCIAL">SOCIAL</a>
+                <a href="#videos" data-text="VIDEOS">VIDEOS</a>
                 <a href="#contact" data-text="CONTACT">CONTACT</a>
             </div>
-            <a href="index.html" class="nav__back">
-                <i class="fas fa-arrow-left"></i> Main Site
-            </a>
+            <a href="index.html" class="nav__back"><i class="fas fa-arrow-left"></i> Main Site</a>
             <button class="nav__toggle" id="themeToggle" aria-label="Toggle theme">
                 <svg id="moonIcon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1499,11 +1980,9 @@
             <div class="about__text reveal">
                 <p class="section__eyebrow">Pinned to the board</p>
                 <h2 class="section__title">About<br><span class="accent">Me.</span></h2>
-                <p class="section__lede">
-                    A graphic designer based in Nepal, building brands with personality and stories that stick.
-                    Equal parts visual instinct and Python logic — comfortable moving between a mood board
-                    and a dataframe.
-                </p>
+                <p class="section__lede">A graphic designer based in Nepal, building brands with personality and stories
+                    that stick. Equal parts visual instinct and Python logic — comfortable moving between a mood board
+                    and a dataframe.</p>
                 <ul class="tagline-list">
                     <li>Brand identity &amp; logo systems</li>
                     <li>Editorial &amp; infographic design</li>
@@ -1520,10 +1999,8 @@
                         <rect x="14" y="10" width="32" height="50" rx="4" fill="#EDEAE3" />
                         <path d="M30 60 L30 88" stroke="#5A5751" stroke-width="3" stroke-linecap="round" />
                     </svg>
-                    <div class="pinned__sheet">
-                        <img id="about-img" src="about.gif"
-                            alt="About Rikesh Dahal — graphic designer from Nepal, animated note card" />
-                    </div>
+                    <div class="pinned__sheet"><img id="about-img" src="about.gif"
+                            alt="About Rikesh Dahal — graphic designer from Nepal, animated note card" /></div>
                 </div>
             </div>
         </div>
@@ -1544,9 +2021,8 @@
                 <rect x="14" y="10" width="32" height="50" rx="4" fill="#EDEAE3" />
                 <path d="M30 60 L30 88" stroke="#5A5751" stroke-width="3" stroke-linecap="round" />
             </svg>
-            <div class="pinned__sheet">
-                <img id="specialty-img" src="MY SPECIALTY.png" alt="My Specialty — Photoshop tools showcase" />
-            </div>
+            <div class="pinned__sheet"><img id="specialty-img" src="MY SPECIALTY.png"
+                    alt="My Specialty — Photoshop tools showcase" /></div>
         </div>
     </section>
 
@@ -1554,10 +2030,8 @@
     <section class="section folio" id="aifolio">
         <p class="section__eyebrow reveal">Selected work</p>
         <h2 class="section__title reveal">AI<span class="accent">Folio</span></h2>
-        <p class="section__lede reveal">
-            Concept posters, infographics and ad mockups built with AI-assisted workflows —
-            from a Kathmandu travel guide to an energy-drink campaign.
-        </p>
+        <p class="section__lede reveal">Concept posters, infographics and ad mockups built with AI-assisted workflows —
+            from a Kathmandu travel guide to an energy-drink campaign.</p>
         <div class="pinned reveal">
             <svg class="clip clip--left" viewBox="0 0 60 90" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="6" y="0" width="48" height="70" rx="6" fill="#8B877E" stroke="#5A5751" stroke-width="2" />
@@ -1569,18 +2043,13 @@
                 <rect x="14" y="10" width="32" height="50" rx="4" fill="#EDEAE3" />
                 <path d="M30 60 L30 88" stroke="#5A5751" stroke-width="3" stroke-linecap="round" />
             </svg>
-            <div class="pinned__sheet">
-                <img id="aifolio-img" src="Aifolio.png" alt="AIfolio — AI-assisted poster collection" />
-            </div>
+            <div class="pinned__sheet"><img id="aifolio-img" src="Aifolio.png"
+                    alt="AIfolio — AI-assisted poster collection" /></div>
         </div>
         <div class="folio__meta reveal">
             <span class="folio__meta-note">six pieces, one workflow</span>
-            <div class="folio__tags">
-                <span>Infographic</span>
-                <span>Ad Concept</span>
-                <span>Travel Guide</span>
-                <span>AI-Assisted</span>
-            </div>
+            <div class="folio__tags"><span>Infographic</span><span>Ad Concept</span><span>Travel
+                    Guide</span><span>AI-Assisted</span></div>
         </div>
     </section>
 
@@ -1588,10 +2057,8 @@
     <section class="section folio" id="logofolio">
         <p class="section__eyebrow reveal">Selected work</p>
         <h2 class="section__title reveal">Logo<span class="accent">Folio</span></h2>
-        <p class="section__lede reveal">
-            Marks built for cafés, tech tools and media brands — each one designed
-            to hold up at favicon size and on a storefront sign.
-        </p>
+        <p class="section__lede reveal">Marks built for cafés, tech tools and media brands — each one designed to hold
+            up at favicon size and on a storefront sign.</p>
         <div class="pinned reveal">
             <svg class="clip clip--left" viewBox="0 0 60 90" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="6" y="0" width="48" height="70" rx="6" fill="#8B877E" stroke="#5A5751" stroke-width="2" />
@@ -1603,17 +2070,12 @@
                 <rect x="14" y="10" width="32" height="50" rx="4" fill="#EDEAE3" />
                 <path d="M30 60 L30 88" stroke="#5A5751" stroke-width="3" stroke-linecap="round" />
             </svg>
-            <div class="pinned__sheet">
-                <img id="logofolio-img" src="Logofolio.png" alt="LogoFolio — logo mark collection" />
-            </div>
+            <div class="pinned__sheet"><img id="logofolio-img" src="Logofolio.png"
+                    alt="LogoFolio — logo mark collection" /></div>
         </div>
         <div class="folio__meta reveal">
             <span class="folio__meta-note">seven marks, seven moods</span>
-            <div class="folio__tags">
-                <span>Wordmark</span>
-                <span>Monogram</span>
-                <span>Brand System</span>
-            </div>
+            <div class="folio__tags"><span>Wordmark</span><span>Monogram</span><span>Brand System</span></div>
         </div>
     </section>
 
@@ -1621,18 +2083,35 @@
     <section class="section folio" id="social">
         <p class="section__eyebrow reveal">On the feed</p>
         <h2 class="section__title reveal">Social <span class="accent">Media.</span></h2>
-        <p class="section__lede reveal">
-            Visual content I crafted for social networks such as Instagram and Facebook —
-            from Nepali New Year greetings to hiring campaigns.
-        </p>
-
-        <!-- Dynamic grid loaded from Supabase, falls back to static -->
+        <p class="section__lede reveal">Visual content I crafted for social networks such as Instagram and Facebook —
+            from Nepali New Year greetings to hiring campaigns.</p>
         <div class="social__grid reveal" id="social-grid">
-            <!-- Skeleton loading state -->
             <div class="social-skeleton"></div>
             <div class="social-skeleton"></div>
             <div class="social-skeleton"></div>
             <div class="social-skeleton"></div>
+        </div>
+    </section>
+
+    <!-- ═══ MOTION / TYPOGRAPHY VIDEOS ═══ -->
+    <section class="section folio" id="videos">
+        <p class="section__eyebrow reveal">In motion</p>
+        <h2 class="section__title reveal">Motion &amp; <span class="accent">Typography.</span></h2>
+        <p class="section__lede reveal">Short-form motion design and kinetic typography — crafted for YouTube Shorts and
+            reels. Hover any card to play. Each clip blends precise timing with bold visual language.</p>
+
+        <div class="videos-filter-bar reveal" id="videos-filter">
+            <button class="vfilter-btn active" data-filter="all" onclick="filterVideos('all', this)">All</button>
+            <button class="vfilter-btn" data-filter="motion" onclick="filterVideos('motion', this)">Motion</button>
+            <button class="vfilter-btn" data-filter="typography"
+                onclick="filterVideos('typography', this)">Typography</button>
+            <button class="vfilter-btn" data-filter="shorts" onclick="filterVideos('shorts', this)">Shorts</button>
+        </div>
+
+        <div class="videos__grid reveal" id="videos-grid">
+            <div class="video-skeleton"></div>
+            <div class="video-skeleton"></div>
+            <div class="video-skeleton"></div>
         </div>
     </section>
 
@@ -1642,10 +2121,9 @@
             <p class="section__eyebrow reveal" style="color:var(--cyan);">Let's work together</p>
             <h2 class="footer__title reveal">Got a brand<br>that needs a <span>story?</span></h2>
             <p class="reveal"
-                style="max-width:480px;color:var(--footer-text);opacity:0.75;font-size:1rem;line-height:1.6;">
-                Open to freelance design work, brand identity projects, and anything that needs
-                a designer who also speaks Python.
-            </p>
+                style="max-width:480px;color:var(--footer-text);opacity:0.75;font-size:1rem;line-height:1.6;">Open to
+                freelance design work, brand identity projects, and anything that needs a designer who also speaks
+                Python.</p>
             <div class="footer__row">
                 <span>© 2026 Rikesh Dahal. Built on paper, shipped on the web.</span>
                 <div class="footer__social">
@@ -1657,18 +2135,15 @@
     </footer>
 
     <script>
-        // ═══════════════════════════════════════════════
-        //  CONFIG — same Supabase as index.html
-        // ═══════════════════════════════════════════════
+        // ═══ CONFIG ═══
         const DS_CFG = {
             sbUrl: 'https://ylfadchxihawbhgciket.supabase.co',
             sbKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlsZmFkY2h4aWhhd2JoZ2Npa2V0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1NjAyNTcsImV4cCI6MjA4OTEzNjI1N30.PiKAxYxkv9H5ejaZ8o_-2dHVhZT4oHG9dsLYE6m34aI',
             SOCIAL_TABLE: 'design_social',
             IMAGES_TABLE: 'design_images',
-            ADMIN_EMAIL: '', // filled after auth check
+            VIDEOS_TABLE: 'design_videos',
         };
 
-        // Static fallback social posts (used if Supabase table is empty)
         const STATIC_SOCIAL = [
             { id: 'static-1', image_url: 'social-media-1.png', caption: 'Nepali New Year 2083', platform: 'Instagram' },
             { id: 'static-2', image_url: 'social-media-2.png', caption: 'Insight Workshop Hiring', platform: 'LinkedIn' },
@@ -1676,7 +2151,6 @@
             { id: 'static-4', image_url: 'social-media-4.png', caption: 'Happy Tihar', platform: 'Facebook' },
         ];
 
-        // Design images config
         const DESIGN_IMGS = [
             { key: 'hero', label: 'Hero Banner', elemId: 'hero-img', src: 'home.png' },
             { key: 'about', label: 'About GIF', elemId: 'about-img', src: 'about.gif' },
@@ -1685,15 +2159,16 @@
             { key: 'logofolio', label: 'Logo Folio', elemId: 'logofolio-img', src: 'Logofolio.png' },
         ];
 
-        // ═══ Supabase init ═══
         const _dsb = (typeof supabase !== 'undefined')
             ? supabase.createClient(DS_CFG.sbUrl, DS_CFG.sbKey)
             : null;
 
         let dsIsAdmin = false;
         let currentReplaceKey = null;
-        let currentReplaceType = null; // 'image' | 'social'
+        let currentReplaceType = null;
         let currentReplaceSocialId = null;
+        let activeVideoFilter = 'all';
+        let allVideos = [];
 
         // ═══ THEME ═══
         const html = document.documentElement;
@@ -1707,11 +2182,8 @@
             sunIcon.style.display = dark ? 'block' : 'none';
             localStorage.setItem('theme', dark ? 'dark' : '');
         }
-
-        // Sync with main site theme
         const initDark = stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
         applyDesignTheme(initDark);
-
         document.getElementById('themeToggle').addEventListener('click', () => {
             applyDesignTheme(html.getAttribute('data-theme') !== 'dark');
         });
@@ -1731,23 +2203,14 @@
             try {
                 const { data: { session } } = await _dsb.auth.getSession();
                 if (session && session.user) {
-                    // Check admin in profiles table (same as index.html)
-                    const { data: profile } = await _dsb
-                        .from('profiles')
-                        .select('is_admin')
-                        .eq('id', session.user.id)
-                        .single();
-
+                    const { data: profile } = await _dsb.from('profiles').select('is_admin').eq('id', session.user.id).single();
                     if (profile && profile.is_admin) {
                         dsIsAdmin = true;
                         document.body.classList.add('admin-mode');
-                        const fab = document.getElementById('admin-fab');
-                        fab.style.display = 'flex';
+                        document.getElementById('admin-fab').style.display = 'flex';
                     }
                 }
-            } catch (e) {
-                console.log('Auth check:', e.message);
-            }
+            } catch (e) { console.log('Auth check:', e.message); }
         }
 
         // ═══ TOAST ═══
@@ -1764,12 +2227,9 @@
             document.getElementById('admin-modal').classList.add('open');
             loadAdminSocialList();
             renderAdminImgGrid();
+            loadAdminVideoList();
         }
-
-        function closeAdminPanel() {
-            document.getElementById('admin-modal').classList.remove('open');
-        }
-
+        function closeAdminPanel() { document.getElementById('admin-modal').classList.remove('open'); }
         function switchTab(name, btn) {
             document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
@@ -1777,39 +2237,32 @@
             document.getElementById('tab-' + name).classList.add('active');
             if (name === 'social') loadAdminSocialList();
             if (name === 'images') renderAdminImgGrid();
+            if (name === 'videos') loadAdminVideoList();
+        }
+        function scrollToVideoForm() {
+            setTimeout(() => {
+                const anchor = document.getElementById('video-form-anchor');
+                if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 80);
         }
 
-        // ═══ SOCIAL MEDIA — Load (Dynamic) ═══
+        // ═══ SOCIAL MEDIA ═══
         async function loadSocialGrid() {
             const grid = document.getElementById('social-grid');
-            grid.innerHTML = ''; // clear skeletons
-
+            grid.innerHTML = '';
             let posts = [];
-
             if (_dsb) {
                 try {
-                    const { data, error } = await _dsb
-                        .from(DS_CFG.SOCIAL_TABLE)
-                        .select('*')
-                        .order('created_at', { ascending: true });
-
-                    if (!error && data && data.length > 0) {
-                        posts = data;
-                    } else {
-                        posts = STATIC_SOCIAL;
-                    }
-                } catch (e) {
-                    posts = STATIC_SOCIAL;
-                }
+                    const { data, error } = await _dsb.from(DS_CFG.SOCIAL_TABLE).select('*').order('created_at', { ascending: true });
+                    posts = (!error && data && data.length > 0) ? data : STATIC_SOCIAL;
+                } catch (e) { posts = STATIC_SOCIAL; }
             } else {
                 posts = STATIC_SOCIAL;
             }
-
             if (posts.length === 0) {
-                grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--clip-dark);font-size:.9rem;">No social posts yet. Add some via the Admin Panel.</p>';
+                grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--clip-dark);font-size:.9rem;">No social posts yet.</p>';
                 return;
             }
-
             const rotations = [-3, 2, -1.5, 2.5, -2, 1.8, -0.8, 3];
             posts.forEach((post, i) => {
                 const rot = rotations[i % rotations.length];
@@ -1820,22 +2273,20 @@
                 <div class="pinned" style="position:relative;">
                     <svg class="clip" viewBox="0 0 60 90" fill="none" xmlns="http://www.w3.org/2000/svg"
                         style="left:50%;transform:translateX(-50%) rotate(${rot}deg);">
-                        <rect x="6" y="0" width="48" height="70" rx="6" fill="#8B877E" stroke="#5A5751" stroke-width="2" />
-                        <rect x="14" y="10" width="32" height="50" rx="4" fill="#EDEAE3" />
-                        <path d="M30 60 L30 88" stroke="#5A5751" stroke-width="3" stroke-linecap="round" />
+                        <rect x="6" y="0" width="48" height="70" rx="6" fill="#8B877E" stroke="#5A5751" stroke-width="2"/>
+                        <rect x="14" y="10" width="32" height="50" rx="4" fill="#EDEAE3"/>
+                        <path d="M30 60 L30 88" stroke="#5A5751" stroke-width="3" stroke-linecap="round"/>
                     </svg>
                     <div class="social__frame" style="position:relative;">
                         <img src="${escHtml(post.image_url)}" alt="${escHtml(post.caption || '')}" loading="lazy"
                             onerror="this.src='https://via.placeholder.com/400x400?text=Image+Error'">
                         <div class="social__card-actions" style="position:absolute;top:8px;right:8px;display:none;gap:6px;z-index:10;">
-                            <button class="social__card-actions btn-replace-social"
-                                title="Replace image"
+                            <button class="social__card-actions btn-replace-social" title="Replace image"
                                 onclick="openReplaceModal('social','${post.id}')"
                                 style="width:30px;height:30px;border-radius:50%;border:none;cursor:pointer;font-size:.75rem;display:flex;align-items:center;justify-content:center;background:rgba(91,58,140,.9);color:#fff;transition:all .2s;">
                                 <i class="fas fa-pen"></i>
                             </button>
-                            <button class="btn-delete-social"
-                                title="Delete post"
+                            <button class="btn-delete-social" title="Delete post"
                                 onclick="deleteSocialPost('${post.id}', this)"
                                 style="width:30px;height:30px;border-radius:50%;border:none;cursor:pointer;font-size:.75rem;display:flex;align-items:center;justify-content:center;background:rgba(239,68,68,.9);color:#fff;transition:all .2s;">
                                 <i class="fas fa-trash"></i>
@@ -1845,75 +2296,43 @@
                 </div>
                 <div class="folio__meta" style="margin-top:18px;justify-content:center;">
                     <span class="folio__meta-note" style="text-align:center">${escHtml(post.caption || '')}</span>
-                </div>
-            `;
+                </div>`;
                 grid.appendChild(card);
-
-                // Show action buttons if admin
-                if (dsIsAdmin) {
-                    card.querySelector('.social__card-actions').style.display = 'flex';
-                }
+                if (dsIsAdmin) card.querySelector('.social__card-actions').style.display = 'flex';
             });
         }
 
-        // ═══ SOCIAL MEDIA — Admin List ═══
         async function loadAdminSocialList() {
             const list = document.getElementById('admin-social-list');
             list.innerHTML = '<div style="text-align:center;padding:20px;color:var(--clip-dark);"><i class="fas fa-spinner fa-spin"></i> Loading...</div>';
-
             let posts = [];
             if (_dsb) {
                 const { data, error } = await _dsb.from(DS_CFG.SOCIAL_TABLE).select('*').order('created_at', { ascending: true });
                 posts = (data && !error) ? data : STATIC_SOCIAL;
-            } else {
-                posts = STATIC_SOCIAL;
-            }
-
-            if (posts.length === 0) {
-                list.innerHTML = '<p style="text-align:center;color:var(--clip-dark);font-size:.82rem;padding:20px;">No posts yet. Use the \'Add New\' tab to add some!</p>';
-                return;
-            }
-
+            } else { posts = STATIC_SOCIAL; }
+            if (posts.length === 0) { list.innerHTML = '<p style="text-align:center;color:var(--clip-dark);font-size:.82rem;padding:20px;">No posts yet.</p>'; return; }
             list.innerHTML = posts.map(p => `
             <div class="admin-social-item" data-id="${p.id}">
-                <img src="${escHtml(p.image_url)}" alt="${escHtml(p.caption || '')}"
-                    onerror="this.src='https://via.placeholder.com/52x52?text=?'">
+                <img src="${escHtml(p.image_url)}" alt="${escHtml(p.caption || '')}" onerror="this.src='https://via.placeholder.com/52x52?text=?'">
                 <div class="admin-social-item-info">
                     <div class="admin-social-item-caption">${escHtml(p.caption || 'No caption')}</div>
                     <div class="admin-social-item-meta">${escHtml(p.platform || '')} ${p.created_at ? '· ' + new Date(p.created_at).toLocaleDateString() : ''}</div>
                 </div>
                 <div class="admin-social-item-btns">
-                    <button class="admin-img-mini-btn edit" title="Replace image" onclick="openReplaceModal('social','${p.id}')">
-                        <i class="fas fa-pen"></i>
-                    </button>
-                    <button class="admin-img-mini-btn del" title="Delete" onclick="deleteSocialPost('${p.id}')">
-                        <i class="fas fa-trash"></i>
-                    </button>
+                    <button class="admin-img-mini-btn edit" title="Replace image" onclick="openReplaceModal('social','${p.id}')"><i class="fas fa-pen"></i></button>
+                    <button class="admin-img-mini-btn del" title="Delete" onclick="deleteSocialPost('${p.id}')"><i class="fas fa-trash"></i></button>
                 </div>
-            </div>
-        `).join('');
+            </div>`).join('');
         }
 
-        // ═══ ADD SOCIAL POST ═══
         async function addSocialPost() {
             const url = document.getElementById('new-social-url').value.trim();
             const caption = document.getElementById('new-social-caption').value.trim();
             const platform = document.getElementById('new-social-platform').value.trim();
-
             if (!url || !caption) { showToast('Image URL and Caption are required!', 'error'); return; }
-
             if (!_dsb) { showToast('Supabase not connected', 'error'); return; }
-
             const { error } = await _dsb.from(DS_CFG.SOCIAL_TABLE).insert([{ image_url: url, caption, platform }]);
-
-            if (error) {
-                showToast('Error: ' + error.message, 'error');
-            } else {
-                showToast('Social post added!', 'success');
-                clearAddForm();
-                loadSocialGrid();
-                loadAdminSocialList();
-            }
+            if (error) { showToast('Error: ' + error.message, 'error'); } else { showToast('Social post added!'); clearAddForm(); loadSocialGrid(); loadAdminSocialList(); }
         }
 
         function clearAddForm() {
@@ -1922,125 +2341,67 @@
             document.getElementById('new-social-platform').value = '';
         }
 
-        // ═══ DELETE SOCIAL POST ═══
-        async function deleteSocialPost(id, btn) {
+        async function deleteSocialPost(id) {
             if (!confirm('Delete this social post?')) return;
             if (!_dsb) return;
-
-            // Static posts can't be deleted from DB
-            if (String(id).startsWith('static-')) {
-                showToast('Cannot delete static posts. Add posts via Supabase to manage them.', 'error');
-                return;
-            }
-
+            if (String(id).startsWith('static-')) { showToast('Cannot delete static posts.', 'error'); return; }
             const { error } = await _dsb.from(DS_CFG.SOCIAL_TABLE).delete().eq('id', id);
-            if (error) {
-                showToast('Error: ' + error.message, 'error');
-            } else {
-                showToast('Post deleted!', 'success');
-                loadSocialGrid();
-                loadAdminSocialList();
-            }
+            if (error) { showToast('Error: ' + error.message, 'error'); } else { showToast('Post deleted!'); loadSocialGrid(); loadAdminSocialList(); }
         }
 
         // ═══ REPLACE IMAGE MODAL ═══
         function openReplaceModal(type, idOrKey) {
             currentReplaceType = type;
             if (type === 'social') {
-                currentReplaceSocialId = idOrKey;
-                currentReplaceKey = null;
+                currentReplaceSocialId = idOrKey; currentReplaceKey = null;
                 document.getElementById('replace-modal-title').textContent = 'Replace Social Post Image';
             } else {
-                currentReplaceKey = idOrKey;
-                currentReplaceSocialId = null;
+                currentReplaceKey = idOrKey; currentReplaceSocialId = null;
                 const img = DESIGN_IMGS.find(i => i.key === idOrKey);
                 document.getElementById('replace-modal-title').textContent = 'Replace ' + (img ? img.label : 'Image');
             }
             document.getElementById('replace-img-url').value = '';
             document.getElementById('replace-img-modal').style.display = 'flex';
         }
-
         function closeReplaceModal() {
             document.getElementById('replace-img-modal').style.display = 'none';
-            currentReplaceType = null;
-            currentReplaceKey = null;
-            currentReplaceSocialId = null;
+            currentReplaceType = null; currentReplaceKey = null; currentReplaceSocialId = null;
         }
-
         async function confirmReplaceImg() {
             const newUrl = document.getElementById('replace-img-url').value.trim();
             if (!newUrl) { showToast('Please enter a URL', 'error'); return; }
-
             if (currentReplaceType === 'image') {
-                // Update local image element immediately
                 const imgCfg = DESIGN_IMGS.find(i => i.key === currentReplaceKey);
-                if (imgCfg) {
-                    const el = document.getElementById(imgCfg.elemId);
-                    if (el) el.src = newUrl;
-                }
-
-                // Save to Supabase design_images table
+                if (imgCfg) { const el = document.getElementById(imgCfg.elemId); if (el) el.src = newUrl; }
                 if (_dsb) {
-                    const { error } = await _dsb.from(DS_CFG.IMAGES_TABLE).upsert([
-                        { key: currentReplaceKey, image_url: newUrl }
-                    ], { onConflict: 'key' });
-
-                    if (error) {
-                        showToast('Saved locally (DB error: ' + error.message + ')', 'error');
-                    } else {
-                        showToast('Image replaced & saved!', 'success');
-                    }
-                } else {
-                    showToast('Image replaced locally!', 'success');
-                }
+                    const { error } = await _dsb.from(DS_CFG.IMAGES_TABLE).upsert([{ key: currentReplaceKey, image_url: newUrl }], { onConflict: 'key' });
+                    showToast(error ? 'Saved locally (DB error)' : 'Image replaced & saved!', error ? 'error' : 'success');
+                } else { showToast('Image replaced locally!'); }
                 renderAdminImgGrid();
-
             } else if (currentReplaceType === 'social') {
                 if (!_dsb) { showToast('Supabase not connected', 'error'); return; }
-                if (String(currentReplaceSocialId).startsWith('static-')) {
-                    showToast('Cannot edit static posts. Add new posts via the Add tab.', 'error');
-                    closeReplaceModal();
-                    return;
-                }
-                const { error } = await _dsb
-                    .from(DS_CFG.SOCIAL_TABLE)
-                    .update({ image_url: newUrl })
-                    .eq('id', currentReplaceSocialId);
-
-                if (error) {
-                    showToast('Error: ' + error.message, 'error');
-                } else {
-                    showToast('Post image updated!', 'success');
-                    loadSocialGrid();
-                    loadAdminSocialList();
-                }
+                if (String(currentReplaceSocialId).startsWith('static-')) { showToast('Cannot edit static posts.', 'error'); closeReplaceModal(); return; }
+                const { error } = await _dsb.from(DS_CFG.SOCIAL_TABLE).update({ image_url: newUrl }).eq('id', currentReplaceSocialId);
+                if (error) { showToast('Error: ' + error.message, 'error'); } else { showToast('Post image updated!'); loadSocialGrid(); loadAdminSocialList(); }
             }
-
             closeReplaceModal();
         }
 
-        // ═══ ADMIN IMAGE GRID ═══
         function renderAdminImgGrid() {
             const grid = document.getElementById('admin-img-grid');
             grid.innerHTML = DESIGN_IMGS.map(img => {
                 const el = document.getElementById(img.elemId);
                 const currentSrc = el ? el.src : img.src;
-                return `
-                <div class="admin-img-card">
-                    <img class="admin-img-card-thumb" src="${currentSrc}" alt="${img.label}"
-                        onerror="this.src='https://via.placeholder.com/200x100?text=${encodeURIComponent(img.label)}'">
+                return `<div class="admin-img-card">
+                    <img class="admin-img-card-thumb" src="${currentSrc}" alt="${img.label}" onerror="this.src='https://via.placeholder.com/200x100?text=${encodeURIComponent(img.label)}'">
                     <div class="admin-img-card-footer">
                         <span class="admin-img-card-name">${img.label}</span>
-                        <button class="admin-img-card-btn" onclick="openReplaceModal('image','${img.key}')">
-                            <i class="fas fa-pen"></i> Replace
-                        </button>
+                        <button class="admin-img-card-btn" onclick="openReplaceModal('image','${img.key}')"><i class="fas fa-pen"></i> Replace</button>
                     </div>
-                </div>
-            `;
+                </div>`;
             }).join('');
         }
 
-        // ═══ LOAD DESIGN IMAGES FROM DB ═══
         async function loadDesignImages() {
             if (!_dsb) return;
             try {
@@ -2048,36 +2409,259 @@
                 if (!error && data) {
                     data.forEach(row => {
                         const imgCfg = DESIGN_IMGS.find(i => i.key === row.key);
-                        if (imgCfg && row.image_url) {
-                            const el = document.getElementById(imgCfg.elemId);
-                            if (el) el.src = row.image_url;
-                        }
+                        if (imgCfg && row.image_url) { const el = document.getElementById(imgCfg.elemId); if (el) el.src = row.image_url; }
                     });
                 }
             } catch (e) { /* silently fail */ }
         }
 
-        // ═══ ESC key to close modal ═══
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') {
-                closeAdminPanel();
-                closeReplaceModal();
+        // ═══ VIDEOS ═══
+        function parseYouTubeEmbed(rawUrl) {
+            let id = null;
+            try {
+                const u = new URL(rawUrl);
+                if (u.hostname.includes('youtu.be')) { id = u.pathname.replace('/', ''); }
+                else if (u.pathname.includes('/shorts/')) { id = u.pathname.split('/shorts/')[1].split('/')[0]; }
+                else if (u.pathname.includes('/embed/')) { id = u.pathname.split('/embed/')[1].split('/')[0]; }
+                else { id = u.searchParams.get('v'); }
+            } catch (e) { /* bad URL */ }
+            return id ? `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1` : null;
+        }
+
+        function filterVideos(filter, btn) {
+            activeVideoFilter = filter;
+            document.querySelectorAll('.vfilter-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            renderVideoGrid(allVideos);
+        }
+
+        async function loadVideosGrid() {
+            const grid = document.getElementById('videos-grid');
+            grid.innerHTML = '';
+            allVideos = [];
+            if (_dsb) {
+                try {
+                    const { data, error } = await _dsb.from(DS_CFG.VIDEOS_TABLE).select('*').order('created_at', { ascending: false });
+                    if (!error && data) allVideos = data;
+                } catch (e) { /* silently fail */ }
             }
+            renderVideoGrid(allVideos);
+        }
+
+        function renderVideoGrid(videos) {
+            const grid = document.getElementById('videos-grid');
+            const filter = activeVideoFilter;
+
+            let filtered = videos.filter(v => {
+                if (filter === 'all') return true;
+                if (filter === 'shorts') return v.type === 'shorts';
+                return v.category === filter;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:var(--clip-dark);font-size:.9rem;padding:40px 0;">${videos.length === 0 ? 'No videos yet. Add some via the Admin Panel.' : 'No videos match this filter.'}</p>`;
+                return;
+            }
+
+            grid.innerHTML = filtered.map((v) => {
+                const embedUrl = parseYouTubeEmbed(v.video_url);
+                const isShorts = v.type === 'shorts';
+                const catClass = v.category === 'typography' ? 'video__cat-pill--typography' : 'video__cat-pill--motion';
+                const catLabel = v.category === 'typography' ? 'Typography' : 'Motion';
+                const typeLabel = isShorts ? 'Shorts' : 'Video';
+
+                let thumbUrl = '';
+                if (embedUrl) {
+                    const ytId = embedUrl.split('/embed/')[1]?.split('?')[0];
+                    if (ytId) thumbUrl = `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg`;
+                }
+                const autoplayEmbed = embedUrl ? embedUrl + '&autoplay=1&mute=1&controls=0' : null;
+
+                return `<div class="video__card reveal" data-id="${escHtml(String(v.id))}" data-type="${escHtml(v.type || 'regular')}" data-category="${escHtml(v.category || 'motion')}">
+                    <div class="video__shell video__shell--${isShorts ? 'shorts' : 'regular'}">
+
+                        ${thumbUrl ? `<img class="video__thumb" src="${thumbUrl}" alt="${escHtml(v.title || '')}" loading="lazy">` : ''}
+
+                        <div class="video__iframe-wrap">
+                            ${autoplayEmbed
+                        ? `<iframe data-src="${autoplayEmbed}" data-muted="true" title="${escHtml(v.title || '')}" allowfullscreen allow="autoplay; encrypted-media"></iframe>`
+                        : `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:rgba(255,255,255,.5);font-size:.8rem;padding:20px;text-align:center;"><i class='fas fa-exclamation-triangle' style='margin-right:6px;color:#ef4444'></i>Invalid URL</div>`
+                    }
+                        </div>
+
+                        <div class="video__overlay"></div>
+
+                        <span class="video__cat-pill ${catClass}">${catLabel}</span>
+
+                        <div class="video__play-btn">
+                            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="32" cy="32" r="32" fill="rgba(255,255,255,0.12)"/>
+                                <circle cx="32" cy="32" r="31" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+                                <circle cx="32" cy="32" r="22" fill="rgba(255,255,255,0.08)"/>
+                                <polygon points="26,20 26,44 46,32" fill="white"/>
+                            </svg>
+                        </div>
+
+                        <div class="video__info-bar">
+                            <span class="video__info-title">${escHtml(v.title || 'Untitled')}</span>
+                            <span class="video__type-tag">${typeLabel}</span>
+                        </div>
+
+                        <button class="video__unmute-btn" data-id="${escHtml(String(v.id))}" title="Click to unmute">
+                            <i class="fa-solid fa-volume-xmark"></i>
+                        </button>
+
+                        <div class="video__admin-btns">
+                            <button class="btn-edit-video" title="Edit" onclick="editVideo('${escHtml(String(v.id))}')"><i class="fas fa-pen"></i></button>
+                            <button class="btn-delete-video" title="Delete" onclick="deleteVideo('${escHtml(String(v.id))}')"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>`;
+            }).join('');
+
+            // Stagger entrance animation
+            grid.querySelectorAll('.video__card').forEach((card, i) => {
+                card.style.animationDelay = `${i * 0.06}s`;
+            });
+
+            // Hover-to-play + unmute
+            grid.querySelectorAll('.video__card').forEach(card => {
+                const iframe = card.querySelector('iframe[data-src]');
+                const unmuteBtn = card.querySelector('.video__unmute-btn');
+                if (!iframe || !unmuteBtn) return;
+                let loaded = false;
+
+                card.addEventListener('mouseenter', () => {
+                    if (!loaded) {
+                        iframe.src = iframe.dataset.src;
+                        loaded = true;
+                    }
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    if (loaded && iframe.src) {
+                        iframe.src = '';
+                        loaded = false;
+                    }
+                });
+
+                unmuteBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isMuted = iframe.dataset.muted !== 'false';
+                    let baseSrc = iframe.dataset.src;
+                    if (isMuted) {
+                        baseSrc = baseSrc.replace('mute=1', 'mute=0');
+                        iframe.dataset.muted = 'false';
+                        unmuteBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+                        unmuteBtn.title = 'Click to mute';
+                    } else {
+                        baseSrc = baseSrc.replace('mute=0', 'mute=1');
+                        iframe.dataset.muted = 'true';
+                        unmuteBtn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+                        unmuteBtn.title = 'Click to unmute';
+                    }
+                    iframe.dataset.src = baseSrc;
+                    if (loaded && iframe.src) {
+                        iframe.src = baseSrc;
+                    }
+                });
+            });
+
+            // Trigger reveal for new cards
+            grid.querySelectorAll('.reveal').forEach(el => {
+                if (!el.classList.contains('is-visible')) io.observe(el);
+            });
+        }
+
+        async function loadAdminVideoList() {
+            const list = document.getElementById('admin-video-list');
+            list.innerHTML = '<div style="text-align:center;padding:20px;color:var(--clip-dark);"><i class="fas fa-spinner fa-spin"></i> Loading...</div>';
+            let videos = [];
+            if (_dsb) {
+                const { data, error } = await _dsb.from(DS_CFG.VIDEOS_TABLE).select('*').order('created_at', { ascending: false });
+                videos = (data && !error) ? data : [];
+            }
+            if (videos.length === 0) { list.innerHTML = '<p style="text-align:center;color:var(--clip-dark);font-size:.82rem;padding:20px;">No videos yet. Use the \'Add New\' tab!</p>'; return; }
+            list.innerHTML = videos.map(v => `
+                <div class="admin-video-item" data-id="${escHtml(String(v.id))}">
+                    <div class="admin-video-thumb" style="background:${v.category === 'typography' ? 'rgba(91,58,140,.2)' : 'rgba(63,205,218,.18)'};">
+                        <i class="fas fa-${v.category === 'typography' ? 'font' : 'play-circle'}" style="color:${v.category === 'typography' ? 'var(--violet)' : 'var(--cyan)'};"></i>
+                    </div>
+                    <div class="admin-video-item-info">
+                        <div class="admin-video-item-title">${escHtml(v.title || 'Untitled')}</div>
+                        <div class="admin-video-item-meta">${escHtml(v.category || '')} · ${escHtml(v.type || '')} ${v.created_at ? '· ' + new Date(v.created_at).toLocaleDateString() : ''}</div>
+                    </div>
+                    <div class="admin-video-item-btns">
+                        <button class="admin-img-mini-btn edit" title="Edit" onclick="editVideo('${escHtml(String(v.id))}')"><i class="fas fa-pen"></i></button>
+                        <button class="admin-img-mini-btn del" title="Delete" onclick="deleteVideo('${escHtml(String(v.id))}')"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>`).join('');
+        }
+
+        async function saveVideo() {
+            const url = document.getElementById('new-video-url').value.trim();
+            const title = document.getElementById('new-video-title').value.trim();
+            const cat = document.getElementById('new-video-category').value;
+            const type = document.getElementById('new-video-type').value;
+            const editId = document.getElementById('edit-video-id').value.trim();
+            if (!url || !title) { showToast('YouTube URL and Title are required!', 'error'); return; }
+            if (!parseYouTubeEmbed(url)) { showToast('Not a valid YouTube URL', 'error'); return; }
+            if (!_dsb) { showToast('Supabase not connected', 'error'); return; }
+            let error;
+            if (editId) {
+                ({ error } = await _dsb.from(DS_CFG.VIDEOS_TABLE).update({ video_url: url, title, category: cat, type }).eq('id', editId));
+            } else {
+                ({ error } = await _dsb.from(DS_CFG.VIDEOS_TABLE).insert([{ video_url: url, title, category: cat, type }]));
+            }
+            if (error) { showToast('Error: ' + error.message, 'error'); } else { showToast(editId ? 'Video updated!' : 'Video added!'); clearVideoForm(); await loadVideosGrid(); await loadAdminVideoList(); }
+        }
+
+        async function editVideo(id) {
+            let v = allVideos.find(x => String(x.id) === String(id));
+            if (!v && _dsb) { const { data } = await _dsb.from(DS_CFG.VIDEOS_TABLE).select('*').eq('id', id).single(); v = data; }
+            if (!v) { showToast('Video not found', 'error'); return; }
+            document.getElementById('new-video-url').value = v.video_url || '';
+            document.getElementById('new-video-title').value = v.title || '';
+            document.getElementById('new-video-category').value = v.category || 'motion';
+            document.getElementById('new-video-type').value = v.type || 'shorts';
+            document.getElementById('edit-video-id').value = id;
+            const addBtn = document.querySelector('[data-tab="add"]');
+            if (addBtn) switchTab('add', addBtn);
+            document.getElementById('btn-save-video').innerHTML = '<i class="fas fa-check"></i> Update Video';
+            scrollToVideoForm();
+        }
+
+        function clearVideoForm() {
+            document.getElementById('new-video-url').value = '';
+            document.getElementById('new-video-title').value = '';
+            document.getElementById('new-video-category').value = 'motion';
+            document.getElementById('new-video-type').value = 'shorts';
+            document.getElementById('edit-video-id').value = '';
+            document.getElementById('btn-save-video').innerHTML = '<i class="fas fa-plus"></i> Add Video';
+        }
+
+        async function deleteVideo(id) {
+            if (!confirm('Delete this video?')) return;
+            if (!_dsb) return;
+            const { error } = await _dsb.from(DS_CFG.VIDEOS_TABLE).delete().eq('id', id);
+            if (error) { showToast('Error: ' + error.message, 'error'); } else { showToast('Video deleted!'); await loadVideosGrid(); await loadAdminVideoList(); }
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') { closeAdminPanel(); closeReplaceModal(); }
         });
 
-        // ═══ UTIL ═══
         function escHtml(str) {
             return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
         }
 
-        // ═══ INIT ═══
         (async function init() {
             await checkAdminAuth();
             await loadDesignImages();
             await loadSocialGrid();
+            await loadVideosGrid();
         })();
     </script>
-
 </body>
 
 </html>
